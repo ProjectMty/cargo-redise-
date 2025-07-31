@@ -2,25 +2,35 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1f2937; /* Gris oscuro para texto */
+  --primary: #004aad; /* Azul corporativo principal */
+  --primary-light: #00aeef; /* Azul claro para resaltar */
+  --secondary: #f3f4f6; /* Gris claro para bloques */
+  --highlight: #061349; /* Azul muy oscuro para fondo/header */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-secondary: var(--secondary);
+  --color-highlight: var(--highlight);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+@layer utilities {
+  .container-main {
+    @apply px-4 md:px-8;
+  }
+}
+@layer ComoFunciona{
+
+
 }

@@ -1,0 +1,70 @@
+"use client";
+
+import Image from "next/image";
+
+export default function Tarifas() {
+  return (
+    <section className="w-full font-sans bg-white py-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <h2 className="text-center text-[#061349] text-4xl md:text-5xl font-bold mb-12">
+          Tarifas
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Tarjeta 1 */}
+          <div className="bg-[#0072BC] text-white rounded-2xl shadow-lg p-6 transition-transform duration-300 hover:-translate-y-2">
+            <h3 className="text-center font-bold text-lg">COMPRAS PERSONALES</h3>
+            <p className="text-center font-semibold mb-4">(Menor a $119 USD)</p>
+            <hr className="border-white/50 mb-4" />
+            <p className="text-center font-bold text-xl mb-4">Tarifa de $300 MXN</p>
+            <p className="text-xs mb-4">Si la compra es menor a $100 USD, pero es mercancía repetitiva o para vender, adicional al servicio de honorario, se cobra el 16% IVA.</p>
+            <p className="text-xs">*Sobrepeso: Arriba de 20 kg peso volumétrico se le agrega concepto de sobrepeso.</p>
+          </div>
+
+          {/* Tarjeta 2 */}
+          <div className="bg-[#0072BC] text-white rounded-2xl shadow-lg p-6 transition-transform duration-300 hover:-translate-y-2">
+            <h3 className="text-center font-bold text-lg">COMPRAS PERSONALES</h3>
+            <p className="text-center font-semibold mb-4">($120 A $475 USD)</p>
+            <hr className="border-white/50 mb-4" />
+            <p className="text-center font-bold text-xl mb-4">14% sobre el valor de tu compra</p>
+            <p className="text-xs mb-4">Si la compra es menor a $475 USD, pero es mercancía repetitiva o para vender, adicional al servicio de honorario, se cobra el 16% IVA.</p>
+            <p className="text-xs">*Sobrepeso: Arriba de 20 kg peso volumétrico se le agrega concepto de sobrepeso.</p>
+          </div>
+
+          {/* Tarjeta 3 */}
+          <div className="bg-[#0072BC] text-white rounded-2xl shadow-lg p-6 transition-transform duration-300 hover:-translate-y-2">
+            <h3 className="text-center font-bold text-lg">COMPRAS PERSONALES</h3>
+            <p className="text-center font-semibold mb-4">($476 a $3000 USD)</p>
+            <hr className="border-white/50 mb-4" />
+            <p className="text-center font-bold text-xl mb-4">13% sobre el valor de tu compra</p>
+            <p className="text-xs mb-4">Si la compra es menor a $3,000 USD, pero es mercancía repetitiva o para vender, adicional al servicio de honorario, se cobra el 16% IVA.</p>
+            <p className="text-xs">*Sobrepeso: Arriba de 20 kg peso volumétrico se le agrega concepto de sobrepeso.</p>
+          </div>
+
+          {/* Tarjeta 4 */}
+          <div className="bg-[#0072BC] text-white rounded-2xl shadow-lg p-6 transition-transform duration-300 hover:-translate-y-2">
+            <h3 className="text-center font-bold text-lg">EMPRESARIALES</h3>
+            <p className="text-center font-semibold mb-4">A partir de $3000 USD</p>
+            <hr className="border-white/50 mb-4" />
+            <p className="text-center font-sm mb-4">Las compras empresariales se cotizan de acuerdo con la naturaleza del producto, para calcular los aranceles y los fletes, los cuales dependen del peso y volumen de la mercancía.</p>
+            <p className="text-center font-bold text-lg mb-4">12% sobre el valor de tu compra</p>
+            <p className="text-xs">*Sobrepeso: Arriba de 20 kg peso volumétrico se le agrega concepto de sobrepeso.</p>
+          </div>
+        </div>
+
+        {/* Cobros Adicionales */}
+        <div className="mt-16 text-center text-[#061349]">
+          <h3 className="text-2xl md:text-3xl font-bold mb-6">COBROS ADICIONALES</h3>
+          <ul className="text-sm space-y-3 max-w-3xl mx-auto text-left">
+            <li>• El envío al destino final en México no está incluido y será determinado por separado, según el destino y las características del paquete.</li>
+            <li className="ml-4">• $3.00 USD por cada bolsa, caja o sobre recibido.</li>
+            <li className="ml-4">• $10.00 USD por cada tarima descargada.</li>
+            <li className="ml-4">• $375.00 USD por cada tarima recibida de hasta 500 libras.</li>
+            <li className="ml-4">• $515.00 USD por cada tarima recibida que supere las 500 libras.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  );
+}
