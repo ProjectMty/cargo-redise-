@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Services/>
+      <Services />
       <ComoFunciona/>
       <Tarifas/>
       <Partnership/>

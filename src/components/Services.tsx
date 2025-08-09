@@ -1,126 +1,195 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import SideBackground from "@/components/SideBackground";
+import { AnimatePresence, motion } from "framer-motion";
+
+/**
+ * NOTAS RÁPIDAS
+ * - Cambia las rutas de imágenes según tus assets:
+ *   - bgURL: fondo del bloque grande (puede ser un degradado o imagen de /img/...).
+ *   - photo: foto del servicio (la de la persona con el pallet en tu mockup).
+ *   - icon: iconos de cada bullet (colócalos en /public/img/icons/...).
+ * - Todo el contenido se renderiza en un solo lugar; los tabs “cambian” lo visible.
+ */
+
+// Definimos los servicios (puedes editar textos y rutas sin tocar la lógica)
+const SERVICES = [
+  {
+    id: "crossborder",
+    title: "Servicios de transporte y entrega transfronteriza",
+    bgURL: "/img/services/bg-gradient.png",
+    photo: "/img/services/crossborder.jpg",
+    bullets: [
+      { icon: "/img/icons/usa-mx.svg", text: "Envíos sin problemas entre USA, Canadá y México." },
+      { icon: "/img/icons/rate.svg", text: "Tarifas competitivas en envíos dentro y fuera de Canadá y México." },
+      { icon: "/img/icons/truck.svg", text: "Nuestros camiones cruzan ambas fronteras cada día." },
+      { icon: "/img/icons/pickup.svg", text: "Podemos recoger tu mercancía en USA y entregarla en cualquier dirección en México." },
+      { icon: "/img/icons/import.svg", text: "Servicio de importación a México." },
+      { icon: "/img/icons/consolidate.svg", text: "Servicio de envíos consolidados." },
+    ],
+  },
+  {
+    id: "marketplaces",
+    title: "Entrega en marketplaces y última milla",
+    bgURL: "/img/services/bg-gradient.png",
+    photo: "/img/services/marketplaces.jpg",
+    bullets: [
+      { icon: "/img/icons/amazon.svg", text: "Cumplimiento a FBA/Mercado Libre y última milla." },
+      { icon: "/img/icons/label.svg", text: "Etiquetado y preparación conforme a guías del marketplace." },
+      { icon: "/img/icons/clock.svg", text: "Ventanas de entrega programadas y pruebas de entrega." },
+    ],
+  },
+  {
+    id: "inventory",
+    title: "Manejo de inventario y almacenamiento",
+    bgURL: "/img/services/bg-gradient.png",
+    photo: "/img/services/warehouse.jpg",
+    bullets: [
+      { icon: "/img/icons/almacenaje.svg", text: "Almacenaje seguro en nuestras bodegas." },
+      { icon: "/img/icons/scan.svg", text: "Recepción, escaneo, control por BoxID y tracking." },
+      { icon: "/img/icons/report.svg", text: "Reportes y cortes de inventario bajo demanda." },
+    ],
+  },
+  {
+    id: "special",
+    title: "Transporte especializado",
+    bgURL: "/img/services/bg-gradient.png",
+    photo: "/img/services/special.jpg",
+    bullets: [
+      { icon: "/img/icons/fragile.svg", text: "Manejo de mercancía frágil o sobredimensionada." },
+      { icon: "/img/icons/insurance.svg", text: "Coberturas de seguro a medida." },
+    ],
+  },
+  {
+    id: "returns",
+    title: "Devoluciones y retornos",
+    bgURL: "/img/services/bg-gradient.png",
+    photo: "/img/services/returns.jpg",
+    bullets: [
+      { icon: "/img/icons/rma.svg", text: "Gestión de RMA y retornos hacia USA." },
+      { icon: "/img/icons/reverse.svg", text: "Trazabilidad completa con nuevo BoxID/Tracking vinculado." },
+    ],
+  },
+] as const;
+
+type ServiceId = (typeof SERVICES)[number]["id"];
 
 export default function Services() {
+  const [active, setActive] = useState<ServiceId>("crossborder");
+
+  const service = SERVICES.find(s => s.id === active)!;
+
   return (
-    <section className="w-full font-sans bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        {/* Título principal */}
-        <div className="text-[#061349] text-center py-16">
-          <h2 className="text-3xl md:text-5xl font-bold leading-tight max-w-4xl mx-auto">
-            ¡Somos la mejor solución para envíos y fletes de USA a México!
-          </h2>
-          <p className="mt-6 max-w-2xl mx-auto text-sm md:text-base text-[#4B4B4B]">
-            <strong className="text-[#061349]">Cargo Monterrey</strong> es tu mejor aliado para todas tus compras e importaciones de USA, China o cualquier parte del mundo.
-            <br />
-            Tú te encargas de comprar nosotros nos encargamos de que lo recibas en México.
-          </p>
-          <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base text-[#4B4B4B]">
-            Además somos especialistas en logística transfronteriza lo que nos permite ayudar a vendedores mexicanos a <strong className="text-[#061349]">expandir sus negocios en USA y Canadá</strong>.
-          </p>
-          <p className="mt-6 font-bold text-lg text-[#061349]">
-            Sin trámites complicados ni costos exagerados.
-          </p>
+    <section id="servicios" className="bg-white">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-14">
+        {/* Encabezado */}
+        <h2 className="text-center text-3xl md:text-4xl font-extrabold text-[#2E86DE]">
+          Nuestros Servicios
+        </h2>
+        <p className="mt-3 text-center text-sm md:text-base text-gray-700 max-w-3xl mx-auto">
+          En <span className="font-bold">Cargo Monterrey</span>, hacemos que importar mercancía desde cualquier parte del mundo
+          sea <span className="font-semibold">fácil, rápido y seguro</span>. Conoce nuestros principales servicios:
+        </p>
+
+        {/* Botonera (tabs) */}
+        <div
+          role="tablist"
+          aria-label="Servicios"
+          className="mt-6 flex flex-wrap gap-3 justify-center"
+        >
+          {SERVICES.map(s => {
+            const isActive = s.id === active;
+            return (
+              <button
+                key={s.id}
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => setActive(s.id)}
+                className={[
+                  "px-4 py-2 rounded-full text-sm md:text-[15px] transition",
+                  "border",
+                  isActive
+                    ? "bg-[oklch(42.4%_0.199_265.638)] text-white border-transparent shadow-md"
+                    : "bg-white text-[#2E4AA6] border-[#CFE1FF] hover:bg-[#F2F6FF]"
+                ].join(" ")}
+              >
+                {s.title}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Subsección con fondo azul a la izquierda */}
-        <div className="w-full pb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            <SideBackground position="left" className="max-w-[480px] h-[540px] ml-0" />
-            <div className="pl-6 md:pl-10">
-              <h3 className="text-2xl md:text-3xl font-bold text-[#0072BC] mb-4">Impulsa tu negocio sin fronteras</h3>
-              <p className="text-sm md:text-base mb-4 text-[#4B4B4B]">
-                En <strong className="text-[#061349]">Cargo Monterrey</strong>, sabemos que el crecimiento no tiene límites. Con <strong className="text-[#061349]">más de 14 años de experiencia</strong> en comercio internacional, nos hemos convertido en el socio logístico estratégico que los sellers necesitan para expandirse a nuevos mercados.
-              </p>
-              <p className="text-sm md:text-base text-[#4B4B4B]">
-                Desde <strong className="text-[#061349]">2011</strong>, hemos sido un aliado confiable para empresas y emprendedores que venden en <strong className="text-[#061349]">Amazon, MercadoLibre, Walmart y otros marketplaces</strong>, ofreciendo soluciones de importación seguras, rápidas y eficientes.
-              </p>
-            </div>
-          </div>
-        </div>
+        {/* Panel con animación (mismo espacio para todos los servicios) */}
+        <div className="mt-8 md:mt-10">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={service.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.25 }}
+              className="relative"
+            >
+              {/* Tarjeta grande con fondo (puede ser tu PNG con bordes) */}
+              <div className="relative rounded-3xl p-4 md:p-6 lg:p-8 shadow-xl overflow-hidden">
+                {/* Fondo decorativo */}
+                {service.bgURL && (
+                  <Image
+                    src={service.bgURL}
+                    alt=""
+                    fill
+                    priority={false}
+                    className="object-cover -z-10"
+                  />
+                )}
 
-        {/* NUESTRA SECCIÓN DE SERVICIOS (TEXTO) */}
-        <div className="text-[#061349] text-center pb-12 px-4 md:px-0">
-          <h3 className="text-3xl md:text-4xl font-bold mb-6">Nuestros Servicios</h3>
-          <p className="max-w-3xl mx-auto text-sm md:text-base text-[#4B4B4B]">
-            En <strong className="text-[#061349]">Cargo Monterrey</strong>, hacemos que importar mercancía desde cualquier parte del mundo sea <strong className="text-[#061349]">fácil, rápido y seguro</strong>. Sin membresías ni trámites complicados, nos encargamos de recibir, procesar y entregar tus paquetes directamente en México.
-          </p>
-          <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base text-[#4B4B4B]">
-            Conoce nuestros principales servicios:
-          </p>
-        </div>
+                {/* Layout: imagen izquierda + bullets a la derecha (responsivo) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
+                  {/* Imagen del servicio */}
+                  <div className="order-1">
+                    <Image
+                      src={service.photo}
+                      alt={service.title}
+                      width={900}
+                      height={600}
+                      className="w-full h-auto rounded-2xl object-cover shadow-md"
+                      priority={false}
+                    />
+                  </div>
 
-        {/* Subtítulo de la sección de íconos */}
-        <div className="text-[#061349] text-left pb-6 px-4 md:px-0">
-          <h4 className="text-2xl md:text-3xl font-bold">
-            Servicios de transporte<br className="block md:hidden" /> y entrega transfronteriza
-          </h4>
-        </div>
+                  {/* Contenido (bullets) */}
+                  <div className="order-2">
+                    <h3 className="text-white text-lg md:text-xl font-extrabold drop-shadow-sm">
+                      {service.title}
+                    </h3>
 
-        {/* Subsección con fondo azul a la derecha */}
-        <div className="w-full pb-24">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-            {/* Columna izquierda */}
-            <div className="space-y-4">
-              <div className="bg-white rounded-2xl shadow-md p-4 flex items-center gap-4">
-                <div className="bg-[#0000A1] p-4 rounded-xl">
-                  <Image src="/icons/envio.svg" alt="envios" width={40} height={40} />
+                    <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {service.bullets.map((b, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-3 rounded-xl bg-white/95 backdrop-blur p-3"
+                        >
+                          {!!b.icon && (
+                            <Image
+                              src={b.icon}
+                              alt=""
+                              width={28}
+                              height={28}
+                              className="shrink-0"
+                            />
+                          )}
+                          <p className="text-[14px] leading-snug text-[#061349]">
+                            {b.text}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <p className="text-sm font-semibold text-[#0000A1]">
-                  Envíos sin problemas entre <strong>EE. UU., Canadá y México.</strong>
-                </p>
               </div>
-              <div className="bg-white rounded-2xl shadow-md p-4 flex items-center gap-4">
-                <div className="bg-[#0072BC] p-4 rounded-xl">
-                  <Image src="/icons/camion.svg" alt="camiones" width={40} height={40} />
-                </div>
-                <p className="text-sm font-semibold text-[#0072BC]">
-                  <strong>Nuestros camiones</strong> cruzan ambas fronteras <strong>cada día.</strong>
-                </p>
-              </div>
-              <div className="bg-white rounded-2xl shadow-md p-4 flex items-center gap-4">
-                <div className="bg-[#0000A1] p-4 rounded-xl">
-                  <Image src="/icons/mexico.svg" alt="mexico" width={40} height={40} />
-                </div>
-                <p className="text-sm font-semibold text-[#0000A1]">
-                  <strong>Servicio</strong> de importación a <strong>México.</strong>
-                </p>
-              </div>
-            </div>
-
-            {/* Columna central */}
-            <div className="space-y-4">
-              <div className="bg-white rounded-2xl shadow-md p-4 flex items-center gap-4">
-                <div className="bg-[#0072BC] p-4 rounded-xl">
-                  <Image src="/icons/tarifa.svg" alt="tarifas" width={40} height={40} />
-                </div>
-                <p className="text-sm font-semibold text-[#0072BC]">
-                  <strong>Tarifas competitivas</strong> en envíos dentro y fuera de <strong>Canadá y México.</strong>
-                </p>
-              </div>
-              <div className="bg-white rounded-2xl shadow-md p-4 flex items-center gap-4">
-                <div className="bg-[#0000A1] p-4 rounded-xl">
-                  <Image src="/icons/recoleccion.svg" alt="recoleccion" width={40} height={40} />
-                </div>
-                <p className="text-sm font-semibold text-[#0000A1]">
-                  Podemos <strong>recoger su mercancía</strong> en la puerta de su casa en los <strong>USA</strong> y entregarla en cualquier dirección en <strong>México.</strong>
-                </p>
-              </div>
-              <div className="bg-white rounded-2xl shadow-md p-4 flex items-center gap-4">
-                <div className="bg-[#0072BC] p-4 rounded-xl">
-                  <Image src="/icons/consolidado.svg" alt="consolidado" width={40} height={40} />
-                </div>
-                <p className="text-sm font-semibold text-[#0072BC]">
-                  <strong>Servicio</strong> de envíos <strong>consolidados.</strong>
-                </p>
-              </div>
-            </div>
-
-            {/* Fondo azul a la derecha */}
-            <SideBackground position="right" className="max-w-[480px] h-[540px] md:ml-16" />
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>
