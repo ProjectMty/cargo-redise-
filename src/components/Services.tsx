@@ -4,70 +4,64 @@ import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
-/**
- * NOTAS RÁPIDAS
- * - Cambia las rutas de imágenes según tus assets:
- *   - bgURL: fondo del bloque grande (puede ser un degradado o imagen de /img/...).
- *   - photo: foto del servicio (la de la persona con el pallet en tu mockup).
- *   - icon: iconos de cada bullet (colócalos en /public/img/icons/...).
- * - Todo el contenido se renderiza en un solo lugar; los tabs “cambian” lo visible.
- */
-
-// Definimos los servicios (puedes editar textos y rutas sin tocar la lógica)
+/* ============================
+   DATA (edita títulos, fotos e íconos aquí)
+   ============================ */
 const SERVICES = [
   {
     id: "crossborder",
     title: "Servicios de transporte y entrega transfronteriza",
-    bgURL: "/img/services/bg-gradient.png",
-    photo: "/img/services/crossborder.jpg",
+    bgURL: "/img/services/panel-bg.png",
+    photo: "/img/services/servicesfondo.png",
     bullets: [
-      { icon: "/img/icons/usa-mx.svg", text: "Envíos sin problemas entre USA, Canadá y México." },
-      { icon: "/img/icons/rate.svg", text: "Tarifas competitivas en envíos dentro y fuera de Canadá y México." },
-      { icon: "/img/icons/truck.svg", text: "Nuestros camiones cruzan ambas fronteras cada día." },
-      { icon: "/img/icons/pickup.svg", text: "Podemos recoger tu mercancía en USA y entregarla en cualquier dirección en México." },
-      { icon: "/img/icons/import.svg", text: "Servicio de importación a México." },
-      { icon: "/img/icons/consolidate.svg", text: "Servicio de envíos consolidados." },
+      { icon: "/img/services/Icono 1.1.svg", text: "Envíos sin problemas entre USA, Canadá y México." },
+      { icon: "/img/services/Icono 1.2.svg", text: "Tarifas competitivas en envíos dentro y fuera de Canadá y México." },
+      { icon: "/img/services/Icono 1.3.svg", text: "Nuestros camiones cruzan ambas fronteras cada día." },
+      { icon: "/img/services/Icono 1.4.svg", text: "Podemos recoger tu mercancía en USA y entregarla en cualquier dirección en México." },
+      { icon: "/img/services/Icono 1.5.svg", text: "Servicio de importación a México." },
+      { icon: "/img/services/Icono 1.6.svg", text: "Servicio de envíos consolidados." },
     ],
   },
+  // Puedes completar los otros tabs cuando tengas assets listos
   {
     id: "marketplaces",
     title: "Entrega en marketplaces y última milla",
-    bgURL: "/img/services/bg-gradient.png",
+    bgURL: "/img/services/panel-bg.png",
     photo: "/img/services/marketplaces.jpg",
     bullets: [
       { icon: "/img/icons/amazon.svg", text: "Cumplimiento a FBA/Mercado Libre y última milla." },
-      { icon: "/img/icons/label.svg", text: "Etiquetado y preparación conforme a guías del marketplace." },
-      { icon: "/img/icons/clock.svg", text: "Ventanas de entrega programadas y pruebas de entrega." },
+      { icon: "/img/icons/label.svg",  text: "Etiquetado y preparación conforme a guías del marketplace." },
+      { icon: "/img/icons/clock.svg",  text: "Ventanas de entrega programadas y pruebas de entrega." },
     ],
   },
   {
     id: "inventory",
     title: "Manejo de inventario y almacenamiento",
-    bgURL: "/img/services/bg-gradient.png",
+    bgURL: "/img/services/panel-bg.png",
     photo: "/img/services/warehouse.jpg",
     bullets: [
       { icon: "/img/icons/almacenaje.svg", text: "Almacenaje seguro en nuestras bodegas." },
-      { icon: "/img/icons/scan.svg", text: "Recepción, escaneo, control por BoxID y tracking." },
-      { icon: "/img/icons/report.svg", text: "Reportes y cortes de inventario bajo demanda." },
+      { icon: "/img/icons/scan.svg",       text: "Recepción, escaneo, control por BoxID y tracking." },
+      { icon: "/img/icons/report.svg",     text: "Reportes y cortes de inventario bajo demanda." },
     ],
   },
   {
     id: "special",
     title: "Transporte especializado",
-    bgURL: "/img/services/bg-gradient.png",
+    bgURL: "/img/services/panel-bg.png",
     photo: "/img/services/special.jpg",
     bullets: [
-      { icon: "/img/icons/fragile.svg", text: "Manejo de mercancía frágil o sobredimensionada." },
+      { icon: "/img/icons/fragile.svg",   text: "Manejo de mercancía frágil o sobredimensionada." },
       { icon: "/img/icons/insurance.svg", text: "Coberturas de seguro a medida." },
     ],
   },
   {
     id: "returns",
     title: "Devoluciones y retornos",
-    bgURL: "/img/services/bg-gradient.png",
+    bgURL: "/img/services/panel-bg.png",
     photo: "/img/services/returns.jpg",
     bullets: [
-      { icon: "/img/icons/rma.svg", text: "Gestión de RMA y retornos hacia USA." },
+      { icon: "/img/icons/rma.svg",     text: "Gestión de RMA y retornos hacia USA." },
       { icon: "/img/icons/reverse.svg", text: "Trazabilidad completa con nuevo BoxID/Tracking vinculado." },
     ],
   },
@@ -75,14 +69,47 @@ const SERVICES = [
 
 type ServiceId = (typeof SERVICES)[number]["id"];
 
+/* ============================
+   Tarjetita (usa tu PNG de marco + icono encima)
+   ============================ */
+function BulletCard({ icon, children }: { icon: string; children: React.ReactNode }) {
+  return (
+    <li
+      className="
+        relative rounded-[20px] min-h-[84px]
+        pl-[62px] pr-4 py-4
+        shadow-[0_6px_18px_rgba(0,0,0,0.12)]
+        border border-white/40
+        overflow-hidden
+      "
+      style={{
+        backgroundImage: "url('/img/services/Cuadro1.1.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Icono alineado al recuadro izquierdo */}
+      <div className="absolute left-4 top-1/2 -translate-y-1/2">
+        <Image src={icon} alt="" width={30} height={30} />
+      </div>
+      <p className="relative z-10 text-[15px] leading-snug text-[#061349]">
+        {children}
+      </p>
+    </li>
+  );
+}
+
+/* ============================
+   Componente principal
+   ============================ */
 export default function Services() {
   const [active, setActive] = useState<ServiceId>("crossborder");
-
-  const service = SERVICES.find(s => s.id === active)!;
+  const service = SERVICES.find((s) => s.id === active)!;
 
   return (
     <section id="servicios" className="bg-white">
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-14">
+
         {/* Encabezado */}
         <h2 className="text-center text-3xl md:text-4xl font-extrabold text-[#2E86DE]">
           Nuestros Servicios
@@ -92,13 +119,9 @@ export default function Services() {
           sea <span className="font-semibold">fácil, rápido y seguro</span>. Conoce nuestros principales servicios:
         </p>
 
-        {/* Botonera (tabs) */}
-        <div
-          role="tablist"
-          aria-label="Servicios"
-          className="mt-6 flex flex-wrap gap-3 justify-center"
-        >
-          {SERVICES.map(s => {
+        {/* Tabs */}
+        <div role="tablist" aria-label="Servicios" className="mt-6 flex flex-wrap gap-3 justify-center">
+          {SERVICES.map((s) => {
             const isActive = s.id === active;
             return (
               <button
@@ -107,8 +130,7 @@ export default function Services() {
                 aria-selected={isActive}
                 onClick={() => setActive(s.id)}
                 className={[
-                  "px-4 py-2 rounded-full text-sm md:text-[15px] transition",
-                  "border",
+                  "px-4 py-2 rounded-full text-sm md:text-[15px] transition border",
                   isActive
                     ? "bg-[oklch(42.4%_0.199_265.638)] text-white border-transparent shadow-md"
                     : "bg-white text-[#2E4AA6] border-[#CFE1FF] hover:bg-[#F2F6FF]"
@@ -120,8 +142,8 @@ export default function Services() {
           })}
         </div>
 
-        {/* Panel con animación (mismo espacio para todos los servicios) */}
-        <div className="mt-8 md:mt-10">
+        {/* Panel (más aire desde los tabs) */}
+        <div className="mt-12 md:mt-16">
           <AnimatePresence mode="wait">
             <motion.div
               key={service.id}
@@ -129,62 +151,49 @@ export default function Services() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25 }}
-              className="relative"
             >
-              {/* Tarjeta grande con fondo (puede ser tu PNG con bordes) */}
-              <div className="relative rounded-3xl p-4 md:p-6 lg:p-8 shadow-xl overflow-hidden">
-                {/* Fondo decorativo */}
-                {service.bgURL && (
-                  <Image
-                    src={service.bgURL}
-                    alt=""
-                    fill
-                    priority={false}
-                    className="object-cover -z-10"
-                  />
-                )}
+              {/* Fondo degradado PNG, esquinas grandes */}
+              <div className="relative rounded-[28px] overflow-hidden shadow-2xl">
+                <Image
+                  src={service.bgURL}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  priority={false}
+                />
 
-                {/* Layout: imagen izquierda + bullets a la derecha (responsivo) */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
-                  {/* Imagen del servicio */}
-                  <div className="order-1">
-                    <Image
-                      src={service.photo}
-                      alt={service.title}
-                      width={900}
-                      height={600}
-                      className="w-full h-auto rounded-2xl object-cover shadow-md"
-                      priority={false}
-                    />
-                  </div>
+                {/* Contenido encima: texto IZQ + foto DER, como tu mockup */}
+                <div className="relative z-10 px-5 md:px-8 lg:px-10 py-6 md:py-8">
+                  <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1.2fr)_minmax(0,.8fr)] items-start gap-5 md:gap-8">
 
-                  {/* Contenido (bullets) */}
-                  <div className="order-2">
-                    <h3 className="text-white text-lg md:text-xl font-extrabold drop-shadow-sm">
-                      {service.title}
-                    </h3>
+                    {/* IZQUIERDA: título + 6 tarjetitas */}
+                    <div className="order-2 md:order-1">
+                      <h3 className="text-white font-extrabold text-[22px] md:text-[24px] leading-tight mb-4 md:mb-5">
+                        {service.title}
+                      </h3>
 
-                    <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {service.bullets.map((b, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-3 rounded-xl bg-white/95 backdrop-blur p-3"
-                        >
-                          {!!b.icon && (
-                            <Image
-                              src={b.icon}
-                              alt=""
-                              width={28}
-                              height={28}
-                              className="shrink-0"
-                            />
-                          )}
-                          <p className="text-[14px] leading-snug text-[#061349]">
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+                        {service.bullets.map((b, i) => (
+                          <BulletCard key={i} icon={b.icon}>
                             {b.text}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
+                          </BulletCard>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* DERECHA: foto con marco interno y radio grande */}
+                    <div className="order-1 md:order-2 flex justify-center md:justify-end">
+                      <div className="rounded-[22px] bg-white/10 backdrop-blur-[1px] p-3 shadow-[0_10px_28px_rgba(0,0,0,0.18)]">
+                        <Image
+                          src={service.photo}
+                          alt={service.title}
+                          width={640}
+                          height={430}
+                          className="w-[320px] sm:w-[360px] md:w-[420px] lg:w-[460px] h-auto rounded-[20px] object-cover"
+                        />
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
