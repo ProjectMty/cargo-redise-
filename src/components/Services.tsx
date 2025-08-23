@@ -1,83 +1,216 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 
+/* ================== CONTROLES RÁPIDOS ================== */
+const PANEL_MAX_W = 1120;       // ancho máx del panel (px) ~ como tus maquetas
+const PHOTO_W = 560;            // ancho visible de la foto (px)
+const PHOTO_H = 260;            // alto visible de la foto (px)
+const PHOTO_RADIUS = 18;        // radio del marco de la foto (px)
+
+/* ================== TIPOS ================== */
 type Bullet = { icon: string; text: string };
+type ServiceId =
+  | "crossborder"
+  | "marketplaces"
+  | "inventory"
+  | "returns"
+  | "special";
 
-export default function ServicesCard() {
-  // ⚠️ Cambia estos assets por los tuyos
-  const title =
-    "Servicios de transporte y entrega transfronteriza";
+/* ================== DATA ================== */
+const SERVICES: Record<
+  ServiceId,
+  {
+    title: string;
+    photo: string;
+    bullets: Bullet[];
+    photoLeft?: boolean; // <— true = foto a la izquierda
+  }
+> = {
+  crossborder: {
+    title: "Servicios de transporte y entrega transfronteriza",
+    photo: "/img/services/servicesfondo.png",
+    bullets: [
+      { icon: "/img/icons/Icono 1.1.svg", text: "Envíos sin problemas entre USA, Canadá y México." },
+      { icon: "/img/icons/Icono 1.2.svg", text: "Tarifas competitivas en envíos dentro y fuera de Canadá y México." },
+      { icon: "/img/icons/Icono 1.3.svg", text: "Nuestros camiones cruzan ambas fronteras cada día." },
+      { icon: "/img/icons/Icono 1.4.svg", text: "Podemos recoger su mercancía en la puerta de su casa en los USA y entregarla en cualquier dirección en México." },
+      { icon: "/img/icons/Icono 1.5.svg", text: "Servicio de importación a México." },
+      { icon: "/img/icons/Icono 1.6.svg", text: "Servicio de consolidados." },
+    ],
+    photoLeft: false,
+  },
+  marketplaces: {
+    title: "Entrega en marketplaces y última milla",
+    photo: "/img/services/marketplaces.png",
+    bullets: [
+      { icon: "/img/icons/Icono 2.1.svg", text: "Entregas programadas a almacenes de Amazon FBA y Mercado Libre." },
+      { icon: "/img/icons/Icono 2.2.svg", text: "Entregas de última milla hasta la puerta de tu comprador en México." },
+      { icon: "/img/icons/Icono 2.3.svg", text: "Despachos de mercancía para ventas e‑commerce." },
+      { icon: "/img/icons/Icono 2.4.svg", text: "Envíos a todo México." },
+    ],
+    photoLeft: true,
+  },
+  inventory: {
+    title: "Manejo de inventario y almacenamiento",
+    photo: "/img/services/warehouse.png",
+    bullets: [
+      { icon: "/img/icons/Icono 3.1.svg", text: "Almacenaje — Recibimos tu mercancía en nuestras bodegas y te entregamos como vayas necesitando unidades." },
+      { icon: "/img/icons/Icono 3.2.svg", text: "Usa nuestra bodega como si fuera tuya." },
+    ],
+    photoLeft: false,
+  },
+  returns: {
+    title: "Devoluciones y retornos",
+    photo: "/img/services/returns.png",
+    bullets: [
+      { icon: "/img/icons/Icono 4.1.svg", text: "Realiza devoluciones de tus compras sin problema." },
+      { icon: "/img/icons/Icono 4.2.svg", text: "Envía a nuestra bodega en México y nosotros lo llevamos a USA para devolver a tu proveedor." },
+    ],
+    photoLeft: true,
+  },
+  special: {
+    title: "Transporte especializado",
+    photo: "/img/services/special.png",
+    bullets: [
+      { icon: "/img/icons/Icono 5.1.svg", text: "Entregas LTL." },
+      { icon: "/img/icons/Icono 5.2.svg", text: "Flete aéreo nocturno de 2 días y diferido." },
+      { icon: "/img/icons/Icono 5.3.svg", text: "Vuelos internacionales (prioritarios y diferidos)." },
+    ],
+    photoLeft: false,
+  },
+};
 
-  const bullets: Bullet[] = [
-    { icon: "/img/services/Icono 1.1.svg", text: "Envíos sin problemas entre USA, Canadá y México." },
-    { icon: "/img/services/Icono 1.2.svg", text: "Tarifas competitivas en envíos dentro y fuera de Canadá y México." },
-    { icon: "/img/services/Icono 1.3.svg", text: "Nuestros camiones cruzan ambas fronteras cada día." },
-    { icon: "/img/services/Icono 1.4.svg", text: "Podemos recoger su mercancía en la puerta de su casa en los USA y entregarla en cualquier dirección en México." },
-    { icon: "/img/services/Icono 1.5.svg", text: "Servicio de importación a México." },
-    { icon: "/img/services/Icono 1.6.svg", text: "Servicio de consolidados." },
-  ];
+/* ================== SUBCOMPONENTES ================== */
+function Tab({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={[
+        "rounded-[17pt] border px-4 md:px-5 py-2 font-[Montserrat] text-[14px] md:text-[15px] font-medium transition",
+        active
+          ? "bg-sky-600 text-[#F3F7FE] border-sky-600 shadow-sm"
+          : "bg-transparent text-sky-600 border-sky-600 hover:bg-sky-50",
+      ].join(" ")}
+    >
+      {label}
+    </button>
+  );
+}
 
-  const photo = "/img/services/servicesfondo.png";
+function BulletCard({ icon, text }: Bullet) {
+  return (
+    <div className="flex items-start gap-3 rounded-[18px] bg-white shadow-[0_10px_24px_rgba(0,0,0,0.12)] px-4 py-3">
+      <Image src={icon} alt="" width={32} height={32} className="shrink-0" />
+      <p className="text-[#0B2D63] text-[14px] md:text-[15px] leading-snug font-[Montserrat]">
+        {text}
+      </p>
+    </div>
+  );
+}
+
+/* ================== PRINCIPAL ================== */
+export default function Services() {
+  const [active, setActive] = useState<ServiceId>("crossborder");
+  const service = SERVICES[active];
+
+  // Config de layout por cantidad de bullets (como en tus capturas)
+  const manyBullets = service.bullets.length >= 4; // 2 columnas cuando hay 4+
+  const bulletsCols = manyBullets ? "sm:grid-cols-2" : "sm:grid-cols-1";
+
+  // Grid para foto/texto: 12 columnas; damos más ancho al texto (7) y 5 a la foto
+  const leftSpan = service.photoLeft ? "md:order-2 md:col-span-7" : "md:col-span-7";
+  const rightSpan = service.photoLeft ? "md:order-1 md:col-span-5" : "md:col-span-5";
+
+  // Alineación del recorte de la foto (si va a la izq, mostramos más izquierda; si va a la der, más derecha)
+  const photoObjectPos = service.photoLeft ? "object-[left_center]" : "object-[center_right]";
 
   return (
-    <div className="w-full flex justify-center">
-      {/* Contenedor compacto como tu mock */}
-      <div className="relative w-full max-w-5xl px-2">
-        {/* Tarjeta trasera (offset) */}
-        <div className="hidden md:block absolute inset-0 translate-x-[14px] translate-y-[14px] rounded-[22px] bg-gradient-to-r from-[#1B59E1] to-[#05C2F2] shadow-[0_14px_40px_rgba(0,0,0,0.18)]" />
+    <section id="servicios" className="bg-[#F2F2F2] py-14">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-8">
+        {/* Header y tabs */}
+        <h2 className="text-center font-[Montserrat] font-bold text-sky-600 text-[36px] md:text-[42px]">
+          Nuestros Servicios
+        </h2>
 
-        {/* Tarjeta principal */}
-        <div className="relative rounded-[22px] bg-gradient-to-r from-[#1E51D2] to-[#2CD0F6] shadow-[0_10px_30px_rgba(0,0,0,0.2)]">
-          {/* Padding interior para aire */}
-          <div className="p-4 sm:p-5 md:p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-start">
-              {/* Columna izquierda: título + chips */}
-              <div>
-                <h3 className="text-white font-[Montserrat] font-extrabold text-[15px] sm:text-[16px] leading-tight mb-3">
-                  {title}
-                </h3>
+        <p className="mt-3 text-center text-[#333333] font-[Montserrat] text-[16px] md:text-[18px] max-w-4xl mx-auto">
+          En <span className="font-bold">Cargo Monterrey</span> hacemos que importar mercancía sea{" "}
+          <span className="font-bold">fácil, rápido y seguro</span>. Sin membresías ni trámites complicados,
+          recibimos, procesamos y entregamos tus paquetes directamente en México.
+        </p>
 
-                {/* Chips (tarjetitas blancas) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {bullets.map((b, i) => (
+        <p className="mt-2 text-center text-[#333333] font-[Montserrat] text-[16px] md:text-[18px]">
+          Conoce nuestros principales servicios:
+        </p>
+
+        <div className="mt-6 flex flex-wrap gap-3 justify-center">
+          {(Object.entries(SERVICES) as [ServiceId, (typeof SERVICES)[ServiceId]][]).map(
+            ([id, s]) => (
+              <Tab
+                key={id}
+                label={s.title}
+                active={active === id}
+                onClick={() => setActive(id)}
+              />
+            )
+          )}
+        </div>
+
+        {/* =============== Panel doble con degradado + sombra (estilo maqueta) =============== */}
+        <div className="mt-12 md:mt-16 flex justify-center">
+          <div className="relative w-full" style={{ maxWidth: `${PANEL_MAX_W}px` }}>
+            {/* Tarjeta trasera con offset */}
+            <div className="hidden md:block absolute inset-0 translate-x-6 translate-y-6 rounded-[26px] bg-gradient-to-r from-[#1B59E1] to-[#05C2F2] shadow-[0_24px_60px_rgba(0,0,0,0.22)]" />
+
+            {/* Tarjeta frontal */}
+            <div className="relative rounded-[26px] bg-gradient-to-r from-[#1E51D2] to-[#2CD0F6] shadow-[0_18px_48px_rgba(0,0,0,0.2)]">
+              <div className="p-5 md:p-6">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-start">
+                  {/* Columna de texto/bullets */}
+                  <div className={leftSpan}>
+                    <h3 className="text-white font-[Montserrat] font-extrabold text-[18px] md:text-[20px] leading-tight mb-4">
+                      {service.title}
+                    </h3>
+
+                    <div className={["grid gap-4", bulletsCols].join(" ")}>
+                      {service.bullets.map((b, i) => (
+                        <BulletCard key={i} icon={b.icon} text={b.text} />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Columna de FOTO */}
+                  <div className={["flex justify-center", rightSpan, service.photoLeft ? "md:justify-start" : "md:justify-end"].join(" ")}>
                     <div
-                      key={i}
-                      className="flex items-start gap-3 rounded-2xl bg-white shadow-[0_6px_18px_rgba(0,0,0,0.12)] px-4 py-3"
+                      className="overflow-hidden ring-1 ring-white/45 bg-white/10 backdrop-blur-[1px] shadow-[0_14px_34px_rgba(0,0,0,0.18)]"
+                      style={{ borderRadius: `${PHOTO_RADIUS}px` }}
                     >
                       <Image
-                        src={b.icon}
-                        alt=""
-                        width={30}
-                        height={30}
-                        className="shrink-0"
+                        src={service.photo}
+                        alt={service.title}
+                        width={PHOTO_W}
+                        height={PHOTO_H}
+                        className={["object-cover", photoObjectPos].join(" ")}
+                        priority={active === "crossborder"}
                       />
-                      <p className="text-[12px] sm:text-[13px] leading-snug text-[#0B2D63] font-[Montserrat]">
-                        {b.text}
-                      </p>
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Columna derecha: imagen */}
-              <div className="flex justify-center md:justify-end">
-                <div className="rounded-[18px] overflow-hidden bg-white/15 backdrop-blur-[1px] ring-1 ring-white/40 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
-                  <Image
-                    src={photo}
-                    alt={title}
-                    width={420}
-                    height={260}
-                    className="object-cover w-[420px] h-[260px]"
-                    priority
-                  />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
+        {/* ========================================================= */}
       </div>
-    </div>
+    </section>
   );
 }
