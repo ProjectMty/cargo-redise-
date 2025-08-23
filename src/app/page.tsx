@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Partnership from "@/components/Partnership"; 
 import Services from "@/components/Services";
 import Tarifas from "@/components/Tarifas";
+import BuyAndShip from "@/components/buyandship";
 export default function Home() {
   return (
     <main>
@@ -11,6 +12,7 @@ export default function Home() {
       <ComoFunciona/>
       <Tarifas/>
       <Partnership/>
+      <BuyAndShip />
     </main>
   );
 }

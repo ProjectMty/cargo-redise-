@@ -51,20 +51,38 @@ export default function Tarifas() {
             <p className="text-xs">*Sobrepeso: Arriba de 20 kg peso volumétrico se le agrega concepto de sobrepeso.</p>
           </div>
         </div>
-
-        {/* Cobros Adicionales */}
-        <div className="mt-16 text-center text-[#061349]">
-          <h3 className="text-2xl md:text-3xl font-bold mb-6">COBROS ADICIONALES</h3>
-          <ul className="text-sm space-y-3 max-w-3xl mx-auto text-left">
-            <li>• El envío al destino final en México no está incluido y será determinado por separado, según el destino y las características del paquete.</li>
-            <li className="ml-4">• $3.00 USD por cada bolsa, caja o sobre recibido.</li>
-            <li className="ml-4">• $10.00 USD por cada tarima descargada.</li>
-            <li className="ml-4">• $375.00 USD por cada tarima recibida de hasta 500 libras.</li>
-            <li className="ml-4">• $515.00 USD por cada tarima recibida que supere las 500 libras.</li>
-          </ul>
-        </div>
-
       </div>
+        {/* Cobros Adicionales */}
+<div className="mt-16 flex justify-center " >
+  <div className="bg-[#ffffff] rounded-xl shadow-md p-6 md:p-8 max-w-4xl w-full">
+    <h3 className="text-xl md:text-2xl font-bold text-color text-blue-800 mb-4 text-center">
+      Cobros adicionales
+    </h3>
+    <ul className="space-y-3 text-sm md:text-base text-[#333333]">
+      <li>
+        • El envío al destino final en México no está incluido y será
+        determinado por separado, según el destino y las características
+        del paquete.
+      </li>
+      <li>
+        <span className="font-bold">$3.00 USD</span> por cada bolsa, caja o
+        sobre recibido.
+      </li>
+      <li>
+        <span className="font-bold">$10.00 USD</span> por cada tarima descargada.
+      </li>
+      <li>
+        <span className="font-bold">$375.00 USD</span> por cada tarima recibida
+        de hasta 500 libras.
+      </li>
+      <li>
+        <span className="font-bold">$515.00 USD</span> por cada tarima recibida
+        que supere las 500 libras.
+      </li>
+    </ul>
+  </div>
+</div>
+
     </section>
   );
 }
