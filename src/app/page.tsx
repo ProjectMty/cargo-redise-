@@ -1,3 +1,4 @@
+import BuyAndShipCTA from "@/components/BuyAndShipCTA";
 import ComoFunciona from "@/components/ComoFunciona";
 import Hero from "@/components/Hero";
 import Partnership from "@/components/Partnership"; 
@@ -12,7 +13,7 @@ export default function Home() {
       <ComoFunciona/>
       <Tarifas/>
       <Partnership/>
-      <BuyAndShip />
+      <BuyAndShipCTA/>
     </main>
   );
 }
