@@ -5,15 +5,16 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navigation = [
   { name: "Inicio", href: "/" },
-  { name: "Nosotros", href: "#nosotros" },
-  { name: "¿Cómo funciona?", href: "#funciona" },
-  { name: "Buy & Ship", href: "#buy" },
-  { name: "México a USA", href: "#mxusa" },
-  { name: "Tarifas", href: "#tarifas" },
-  { name: "Contáctanos", href: "#contacto" },
+  { name: "Nosotros", href: "/#nosotros" },
+  { name: "¿Cómo funciona?", href: "/#funciona" },
+  { name: "Buy & Ship", href: "/#buyandship" },      // ← ancla en home
+  { name: "México a USA", href: "/mexico-a-usa" },   // ← página aparte
+  { name: "Tarifas", href: "/#tarifas" },
+  { name: "Contáctanos", href: "/#contacto" },
 ];
 
 export default function Hero() {

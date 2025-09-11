@@ -8,16 +8,14 @@
 
 // poner una seleccion de pallets , sobres y cajas 
  
-// si selecciona una pallet se le suuma el valor ya establecido mas $10USD descargada + $375USD permitido hasta 500lb
+// si selecciona una pallet se le suma el valor ya establecido mas $10USD descargada + $375USD permitido hasta 500lb
 
-// si supera las 500lb es el porcentaje los diez y $515 USD 
+// si supera las 500lb es el porcentaje ya calculado + los diez USD y el precio cambia de $375 a $515 USD 
 
-// sui es mercancia repetitiva mas de 20 articulos se cobra el 16% de IVA 
+// sui es mercancia repetitiva mas de 20 articulos se cobra el 16% de IVA / Si selecciona pallet agregar text box tienes mercancía repetitiva if yes que aparezca cantidad mayo a 20 aumentar el 16%.
 
-// si selecciono una caja, sobre o bolsa se le suma el percentaje con la compra mas $3UUSD y si son mas de 20 productos de la misma naturaleza 
+// si selecciono una caja, sobre o bolsa se le suma el porcentaje con la compra mas $3UUSD y si son mas de 20 productos de la misma naturaleza 
 //se le suma el 16% de IVA
  // el precio largoxanchoxalto/6000*3 
 
- //determinar si el peso columetrico es menor o mayor y tommar como base
-
-
+ //determinar si el peso volumétrico es menor o mayor y tomar como base.
