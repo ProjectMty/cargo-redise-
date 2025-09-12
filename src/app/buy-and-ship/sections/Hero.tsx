@@ -1,5 +1,4 @@
 
-
 export default function BuyAndShipHero() {
   return (
    // Dentro de tu componente HeroBuyAndShip (sólo el bloque visual del hero)

@@ -10,13 +10,10 @@ const navigation = [
   { name: "Inicio", href: "/" },
   { name: "Nosotros", href: "#nosotros" },
   { name: "¿Cómo funciona?", href: "#funciona" },
- { name: "Buy & Ship", href: "/#buyandship" },
-
-
+  { name: "Buy & Ship", href: "/#buyandship" },
   { name: "México a USA", href: "/mexico-a-usa" },
   { name: "Tarifas", href: "#tarifas" },
   { name: "Contáctanos", href: "#contacto" },
-
 ];
 
 export default function Navbar() {

@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "./sections/Hero";
 import Services from "./sections/Servicios";
-
 import Contactanos from "./sections/Contactanos";
 import Intro from "./sections/Intro";
 import Pasos from "./sections/Pasos";
