@@ -29,25 +29,45 @@ export default function Hero() {
           className="object-cover object-center"
           priority
         />
-
-        {/* Overlay degradado */}
         
+{/* Texto alineado con la navbar y 2 renglones */}
+<div className="absolute bottom-10 inset-x-0 z-30">
+  {/* MISMO contenedor que la navbar para que alinee igual */}
+  <div className="max-w-7xl mx-auto px-6 md:px-8">
+    <h1
+      className="
+        text-white font-[Montserrat] font-extrabold
+        text-[30px] md:text-[46px] leading-[1.1]
+        max-w-[58ch]   /* controla salto de línea */
+      "
+    >
+      ¡Lleva tu marca al mercado más grande del mundo!
+    </h1>
 
-        {/* Texto alineado arriba a la izquierda */}
-        <div className="absolute top-24 left-8 md:top-32 md:left-16 z-10 max-w-xl">
-          <h1 className="text-white font-extrabold text-2xl md:text-4xl lg:text-5xl leading-tight drop-shadow-lg">
-            ¿Vives en México?
-          </h1>
-          <p className="mt-3 text-white font-semibold text-lg md:text-2xl lg:text-3xl drop-shadow-lg">
-            ¡Coloca tus productos en Estados Unidos!
-          </p>
-        </div>
+    <p
+      className="
+        mt-2 text-white font-[Montserrat] font-medium
+        text-[22px] md:text-[30px] leading-snug
+        max-w-[42ch]   /* controla ancho del segundo renglón */
+      "
+    >
+      ¡Coloca tus productos en Estados Unidos!
+    </p>
+  </div>
+</div>
+
+
+
+
+
+
       </div>
 
       {/* Navbar */}
       <header className="absolute top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md">
         <nav className="w-full bg-transparent">
           <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between py-6">
+            
             <Link href="/" className="flex items-center">
               <Image
                 src="/img/logob.svg"
