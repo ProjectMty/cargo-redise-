@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import Partnership from "@/components/Partnership";
 import Services from "@/components/Services";
 import Tarifas from "@/components/Tarifas";
+import Ubicaciones from "@/components/Ubicaciones";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Tarifas />
       <Partnership />
       <BuyAndShipCTA /> {/* <-- sólo en Home */}
+      <Ubicaciones />
     </main>
   );
 }
