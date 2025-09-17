@@ -1,11 +1,13 @@
 // src/app/page.tsx
 import BuyAndShipCTA from "@/components/BuyAndShipCTA";
 import ComoFunciona from "@/components/ComoFunciona";
+import Contacto from "@/components/Contacto";
 import Hero from "@/components/Hero";
 import Partnership from "@/components/Partnership";
 import Services from "@/components/Services";
 import Tarifas from "@/components/Tarifas";
 import Ubicaciones from "@/components/Ubicaciones";
+
 
 export default function Home() {
   return (
@@ -17,6 +19,7 @@ export default function Home() {
       <Partnership />
       <BuyAndShipCTA /> {/* <-- sólo en Home */}
       <Ubicaciones />
+      <Contacto />
     </main>
   );
 }
