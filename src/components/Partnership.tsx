@@ -17,7 +17,7 @@ export default function Partnership() {
   const isLg = useMediaQuery("(min-width: 1024px)");
 
   return (
-    <section id="partners" className="w-full bg-white py-16 font-sans">
+    <section id="partners" className="w-full bg-white py-16 font-sans scroll-smooth">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <h2 className="text-center text-3xl md:text-5xl font-bold text-color text-blue-800 mb-12">
           Partnerships

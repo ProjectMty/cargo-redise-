@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
     { name: "México", href: "/img/ubicacion/Mexico.svg" },
@@ -15,6 +16,7 @@ export default function Ubicaciones() {
     const [seleccion, setSeleccion] = useState("México");
     const [imagen, setImagen] = useState("/img/ubicacion/Mexico.svg");
     const [fade, setFade] = useState(true);
+    const [mobileNav, setMobileNav] = useState(false);
 
     function changeSeleccion(name: string) {
         switch (name) {
@@ -50,8 +52,8 @@ export default function Ubicaciones() {
 
 
     return (
-        <section id="ubicacion" className=" w-full bg-white relative flex justify-center  py-20 font-[Montserrat]">
-            <h1 className="font-extrabold text-[55px] text-blue-950 text-center absolute top-5 ">
+        <section id="ubicacion" className=" w-full bg-white relative flex justify-center  py-20 font-[Montserrat] scroll-smooth">
+            <h1 className="font-extrabold text-[40px] lg:text-[55px] text-blue-950 text-center absolute top-5 ">
                 Ubicaciones
             </h1>
             <div className="max-w-4xl rounded-[28px] object-cover mt-5">
@@ -63,10 +65,9 @@ export default function Ubicaciones() {
                     className="w-full h-auto rounded-[28px] object-cover"
                     priority
                 />
-
-                <div className="absolute left-1/2 top-50 -translate-x-1/2 -translate-y-[15%] items-center">
-                    {/* Navbar de paises */}
-                    <div className="justify-center lg:flex space-x-10 ">
+                {/* Navbar de paises */}
+                <div className="absolute left-1/2 top-36 -translate-x-1/2 items-center">
+                    <div className="hidden justify-center lg:flex space-x-10 ">
                         {navigation.map((item) => (
                             <a
                                 key={item.name}
@@ -79,10 +80,10 @@ export default function Ubicaciones() {
                                         <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
                                         {item.name}</p>
                                 ) : <p className=" relative font-medium ">
-                                     <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
+                                    <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
 
                                     {item.name}
-                                   
+
                                 </p>}
 
 
@@ -90,9 +91,12 @@ export default function Ubicaciones() {
                         ))}
 
                     </div>
-                    {/* imagen de mapa */}
-                    <div className="left-1/2 -translate-x-3.5 mt-10 max-w-xl max-h-100 md:max-w-md md:max-h-60 md:mt-6">
-                        <img src={imagen} alt="mapa" className={`w-xl h-100 transition-opacity duration-500 ${fade ? 'opacity-100' : 'opacity-0'}`} />
+                </div>
+                {/* Mapa de paises */}
+                <div className="absolute left-1/2 top-28 lg:top-52 -translate-x-1/2 items-center">
+                    {/* imagen de mapa -mx-10*/}
+                    <div className="relative max-h-[200px] lg:max-h-[500px] overflow-hidden w-xs lg:w-lg ">
+                        <img src={imagen} alt="mapa" className={`w-full h-full object-cover transition-opacity duration-500 ${fade ? 'opacity-100' : 'opacity-0'}`} />
                     </div>
                 </div>
 

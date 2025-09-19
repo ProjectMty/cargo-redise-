@@ -11,7 +11,7 @@ import Ubicaciones from "@/components/Ubicaciones";
 
 export default function Home() {
   return (
-    <main>
+    <main >
       <Hero />
       <Services />
       <ComoFunciona />

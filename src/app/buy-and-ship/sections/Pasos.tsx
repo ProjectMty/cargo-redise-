@@ -64,8 +64,7 @@ export default function Pasos() {
           {/* Línea horizontal */}
           <motion.div 
           variants={StepsAnimationRight}
-
-          className="absolute top-1/3 left-50 w-3xl h-[6px] bg-sky-600 transform  z-0"></motion.div>
+          className="hidden lg:block absolute top-1/3 left-50 w-3xl h-[6px] bg-sky-600 transform  z-0"></motion.div>
 
           {/* Grid de pasos */}
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 z-10">
@@ -143,7 +142,7 @@ export default function Pasos() {
           {/* Línea horizontal */}
           <motion.div 
           variants={StepsAnimationRight}
-          className="absolute top-1/3 left-50 w-3xl h-[6px] bg-sky-600 transform  z-0"></motion.div>
+          className=" hidden lg:block absolute top-1/3 left-50 w-3xl h-[6px] bg-sky-600 transform  z-0"></motion.div>
 
           {/* Grid de pasos */}
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 z-10">
@@ -214,7 +213,7 @@ export default function Pasos() {
           {/* Línea horizontal */}
           <motion.div 
           variants={StepsAnimationRight}
-          className="absolute top-1/3 left-50 w-3xl h-[6px] bg-sky-600 transform  z-0"></motion.div>
+          className="hidden lg:block absolute top-1/3 left-50 w-3xl h-[6px] bg-sky-600 transform  z-0"></motion.div>
 
           {/* Grid de pasos */}
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 z-10">

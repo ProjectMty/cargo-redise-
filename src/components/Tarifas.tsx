@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Tarifas() {
   return (
-    <section className="w-full font-sans bg-white py-16">
+    <section className="w-full font-sans bg-white py-16 scroll-mt-15" id="tarifas">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <h2 className="text-center text-[#061349] text-4xl md:text-5xl font-bold mb-12">
           Tarifas

@@ -2,7 +2,7 @@
 export default function BuyAndShipHero() {
   return (
     // Dentro de tu componente HeroBuyAndShip (sólo el bloque visual del hero)
-    <section className="relative w-full min-h-[420px] md:min-h-[520px] lg:min-h-[500px] rounded-b-[40px] overflow-hidden bg-[#F2F2F2]">
+    <section  className="relative w-full min-h-[420px] md:min-h-[520px] lg:min-h-[500px] rounded-b-[40px] overflow-hidden bg-[#F2F2F2]">
 
       {/* Fondo: imagen principal */}
       <div className="absolute inset-0">
@@ -18,8 +18,8 @@ export default function BuyAndShipHero() {
 
       {/* Overlay letras: centrado y dimensionado estable */}
       <div
-        className="pointer-events-none absolute left-1/3 top-1/2 -translate-x-10 -translate-y-[45%]
-      w-[88vw] max-w-[1100px] md:w-[80vw] md:max-w-[1200px] lg:w-[74vw] lg:max-w-[1280px]"
+        className="pointer-events-none absolute px-10 lg:px-14 left-3 lg:left-1/3 top-1/2 -translate-y-[45%]
+      w-[96vw] max-w-[1100px]  lg:w-[74vw] lg:max-w-[1280px]"
         aria-hidden="true"
       >
         <img

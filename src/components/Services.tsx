@@ -135,7 +135,7 @@ export default function Services() {
   const photoObjectPos = service.photoLeft ? "object-[left_center]" : "object-[center_right]";
 
   return (
-    <section id="servicios" className="bg-[#F2F2F2] py-14">
+    <section id="servicios" className="bg-[#F2F2F2] py-14 scroll-mt-20">
       <div className="max-w-[1200px] mx-auto px-4 md:px-8">
         {/* Header y tabs */}
         <h2 className="text-center font-[Montserrat] font-bold text-sky-600 text-[36px] md:text-[42px]">
