@@ -91,7 +91,7 @@ export default function Ubicaciones() {
 
                     </div>
                     {/* imagen de mapa */}
-                    <div className="left-1/2 -translate-x-3.5 mt-10 max-w-xl max-h-100">
+                    <div className="left-1/2 -translate-x-3.5 mt-10 max-w-xl max-h-100 md:max-w-md md:max-h-60 md:mt-6">
                         <img src={imagen} alt="mapa" className={`w-xl h-100 transition-opacity duration-500 ${fade ? 'opacity-100' : 'opacity-0'}`} />
                     </div>
                 </div>
