@@ -2,6 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import DivZoom from "@/animate/DivZoom";
+import TextDownAnimate from "@/animate/TextDownAnimate";
+import AnimatedText from "@/animate/TextAnimate";
+import FadeInFromLeft from "@/animate/FadeInFromLeft";
+import { AnimatePresence, delay } from "framer-motion";
 
 /* ================== CONTROLES RÁPIDOS ================== */
 const PANEL_MAX_W = 1120;       // ancho máx del panel (px) ~ como tus maquetas
@@ -93,7 +98,9 @@ function Tab({
   onClick: () => void;
 }) {
   return (
-    <button
+    <DivZoom
+    scale={1.05}>
+      <button
       onClick={onClick}
       className={[
         "rounded-[17pt] border px-4 md:px-5 py-2 font-[Montserrat] text-[14px] md:text-[15px] font-medium transition",
@@ -104,17 +111,23 @@ function Tab({
     >
       {label}
     </button>
+    </DivZoom>
+    
   );
 }
 
 function BulletCard({ icon, text }: Bullet) {
   return (
-    <div className="flex items-start gap-3 rounded-[18px] bg-white shadow-[0_10px_24px_rgba(0,0,0,0.12)] px-4 py-3">
-      <Image src={icon} alt="" width={32} height={32} className="shrink-0" />
-      <p className="text-[#0B2D63] text-[14px] md:text-[15px] leading-snug font-[Montserrat]">
-        {text}
-      </p>
-    </div>
+    <DivZoom scale={1.03}>
+      <div className="flex items-start gap-3 rounded-[18px] bg-white shadow-[0_10px_24px_rgba(0,0,0,0.12)] px-4 py-3 trasnsition-all duration-300 ease-in-out hover:bg-blue-50">
+
+        <Image src={icon} alt="" width={32} height={32} className="shrink-0" />
+        <p className="text-[#0B2D63] text-[14px] md:text-[15px] leading-snug font-[Montserrat]">
+          {text}
+        </p>
+
+      </div>
+    </DivZoom>
   );
 }
 
@@ -134,14 +147,21 @@ export default function Services() {
   // Alineación del recorte de la foto (si va a la izq, mostramos más izquierda; si va a la der, más derecha)
   const photoObjectPos = service.photoLeft ? "object-[left_center]" : "object-[center_right]";
 
+
+
   return (
     <section id="servicios" className="bg-[#F2F2F2] py-14 scroll-mt-20">
       <div className="max-w-[1200px] mx-auto px-4 md:px-8">
         {/* Header y tabs */}
-        <h2 className="text-center font-[Montserrat] font-bold text-sky-600 text-[36px] md:text-[42px]">
-          Nuestros Servicios
-        </h2>
+        <TextDownAnimate
+          delay={0.2}
+          lines={[
+            <h2 className="text-center font-[Montserrat] font-bold text-sky-600 text-[36px] md:text-[42px]">
+              Nuestros Servicios
+            </h2>
+          ]}>
 
+        </TextDownAnimate>
         <p className="mt-3 text-center text-[#333333] font-[Montserrat] text-[16px] md:text-[18px] max-w-4xl mx-auto">
           En <span className="font-bold">Cargo Monterrey</span> hacemos que importar mercancía sea{" "}
           <span className="font-bold">fácil, rápido y seguro</span>. Sin membresías ni trámites complicados,
@@ -159,14 +179,20 @@ export default function Services() {
                 key={id}
                 label={s.title}
                 active={active === id}
-                onClick={() => setActive(id)}
+                onClick={() => 
+                  setActive(id)
+                }
               />
             )
           )}
         </div>
 
         {/* =============== Panel doble con degradado + sombra (estilo maqueta) =============== */}
-        <div className="mt-12 md:mt-16 flex justify-center">
+      <AnimatePresence mode="wait">
+
+      
+         <FadeInFromLeft keyId={active} delay={0.2}>
+        <div className="mt-12 md:mt-16 flex justify-center ">
           <div className="relative w-full" style={{ maxWidth: `${PANEL_MAX_W}px` }}>
             {/* Tarjeta trasera con offset */}
             <div className="hidden md:block absolute inset-0 translate-x-6 translate-y-6 rounded-[26px] bg-gradient-to-r from-[#1B59E1] to-[#05C2F2] shadow-[0_24px_60px_rgba(0,0,0,0.22)]" />
@@ -176,39 +202,57 @@ export default function Services() {
               <div className="p-5 md:p-6">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-start">
                   {/* Columna de texto/bullets */}
+
                   <div className={leftSpan}>
-                    <h3 className="text-white font-[Montserrat] font-extrabold text-[18px] md:text-[20px] leading-tight mb-4">
-                      {service.title}
-                    </h3>
+                    <AnimatedText
+                      delay={0.2}
+                      lines={[
+
+                        <h3 className="text-white font-[Montserrat] font-extrabold text-[18px] md:text-[20px] leading-tight mb-4">
+                          {service.title}
+                        </h3>
+                      ]}></AnimatedText>
 
                     <div className={["grid gap-4", bulletsCols].join(" ")}>
                       {service.bullets.map((b, i) => (
+
                         <BulletCard key={i} icon={b.icon} text={b.text} />
                       ))}
                     </div>
+
                   </div>
 
                   {/* Columna de FOTO */}
+
                   <div className={["flex justify-center", rightSpan, service.photoLeft ? "md:justify-start" : "md:justify-end"].join(" ")}>
-                    <div
-                      className="overflow-hidden ring-1 ring-white/45 bg-white/10 backdrop-blur-[1px] shadow-[0_14px_34px_rgba(0,0,0,0.18)]"
-                      style={{ borderRadius: `${PHOTO_RADIUS}px` }}
-                    >
-                      <Image
-                        src={service.photo}
-                        alt={service.title}
-                        width={PHOTO_W}
-                        height={PHOTO_H}
-                        className={["object-cover", photoObjectPos].join(" ")}
-                        priority={active === "crossborder"}
-                      />
-                    </div>
+                    <DivZoom scale={1.05}>
+                      <div
+                        className="overflow-hidden ring-1 ring-white/45 bg-white/10 backdrop-blur-[1px] shadow-[0_14px_34px_rgba(0,0,0,0.18)]"
+                        style={{ borderRadius: `${PHOTO_RADIUS}px` }}
+                      >
+
+                        <Image
+                          src={service.photo}
+                          alt={service.title}
+                          width={PHOTO_W}
+                          height={PHOTO_H}
+                          className={["object-cover", photoObjectPos].join(" ")}
+                          priority={active === "crossborder"}
+                        />
+
+                      </div>
+                    </DivZoom>
                   </div>
+
+
+
                 </div>
               </div>
             </div>
           </div>
         </div>
+        </FadeInFromLeft>
+        </AnimatePresence>
         {/* ========================================================= */}
       </div>
     </section>

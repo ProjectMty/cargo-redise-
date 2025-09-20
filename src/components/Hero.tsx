@@ -7,6 +7,9 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionDefault from "@/animate/SectionDefault"
 import AnimatedText from "@/animate/TextAnimate";
+import DivZoom from "@/animate/DivZoom";
+import TextDownAnimate from "@/animate/TextDownAnimate";
+
 
 const navigation = [
   { name: "Inicio", href: "/#hero" },
@@ -23,7 +26,7 @@ export default function Hero() {
 
   return (
 
-    <section className="relative w-full font-sans overflow-hidden rounded-b-[60px]" id="hero">
+    <section className="relative w-full font-sans overflow-hidden rounded-b-[60px]" id="hero font-[Montserrat]">
 
       {/* Imagen de fondo */}
       <div className="relative w-full h-[400px] md:h-[520px] lg:h-[577px]">
@@ -35,19 +38,28 @@ export default function Hero() {
         />
 
         {/* Texto sobrepuesto centrado */}
-        
-        <div className="absolute inset-0 flex items-center justify-center text-center px-4 md:px-6 z-10">
-          <h1 className="text-white font-bold leading-tight drop-shadow-lg  text-[28px] sm:text-3xl md:text-4xl lg:text-5xl max-w-3xl mx-auto">
-            
 
-            
-            <span className="block">Importa <span className="text-white font-extrabold">fácil y rápido</span> desde</span>
-            <span className="block">cualquier parte del mundo con</span>
-            <span className="block">Cargo Monterrey!</span>
-            
+        <div className="absolute inset-0 flex items-center justify-center text-center px-4 md:px-6 z-10">
+          <h1 className="text-white font-normal leading-tight drop-shadow-lg  text-[28px] sm:text-3xl md:text-4xl lg:text-5xl max-w-3xl mx-auto">
+
+            <AnimatedText
+              delay={0.25}
+              lines={[
+                <span className="block font-bold">Importa <span className="">fácil y rápido </span> <span className="font-normal">desde</span></span>,
+                <span className="block">cualquier parte del mundo con</span>,
+                <span className="font-bold">Cargo Monterrey!</span>
+                // <span className="block">Importa <span className="text-white font-extrabold">fácil y rápido</span> desde</span>,
+                // <span className="block">cualquier parte del mundo con</span>,
+
+                // <span className="block">Cargo Monterrey!</span>
+              ]}>
+
+
+
+            </AnimatedText>
           </h1>
         </div>
-        
+
       </div>
 
       {/* Navbar */}
@@ -251,12 +263,19 @@ export default function Hero() {
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-16 md:py-20">
 
           {/* Título principal */}
-          <h2 className="text-center font-extrabold leading-tight text-[26px] md:text-4xl">
-            ¡Somos la mejor solución <span className="font-bold">para</span>
-            <br className="hidden md:block" />
-            envíos y fletes de <span className="text-white">USA a México!</span>
-          </h2>
+          <TextDownAnimate
+            delay={0.2}
+            lines={[
+              <h2 className="text-center font-extrabold leading-tight text-[26px] md:text-4xl">
+                ¡Somos la mejor solución <span className="font-bold">para</span>,
+                <br className="hidden md:block" />
+                envíos y fletes de <span className="text-white">USA a México!</span>
+              </h2>
+            ]}>
 
+
+
+          </TextDownAnimate>
           {/* Párrafos descriptivos */}
           <div className="mt-6 space-y-4 text-center">
             <p className="text-white/90 text-sm md:text-base">
@@ -275,6 +294,7 @@ export default function Hero() {
           {/* Imagen izquierda + Tarjeta derecha */}
           {/* Imagen izquierda + Tarjeta derecha con superposición */}
           {/* Imagen izquierda + Tarjeta derecha con superposición y texto alineado a la derecha */}
+
           <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-8">
 
             {/* Columna: Imagen (queda debajo) */}
@@ -288,30 +308,34 @@ export default function Hero() {
             </div>
 
             {/* Columna: Tarjeta (encima y montada hacia la izquierda, con texto alineado a la derecha) */}
-            <div
-              className="
+            <DivZoom scale={1.1}>
+
+              <div
+                className="
       bg-white text-[#061349] rounded-3xl shadow-xl
       p-6 md:p-8
       relative z-10
       md:-ml-16 lg:-ml-24     /* <-- superposición hacia la izquierda */
       text-right              /* <-- alineación del texto */
     "
-            >
-              <h3 className="font-extrabold text-lg md:text-xl">
-                Impulsa tu negocio sin fronteras
-              </h3>
-              <p className="mt-3 text-sm md:text-base text-gray-700 leading-relaxed">
-                En Cargo Monterrey, sabemos que el crecimiento no tiene límites.
-                Con <span className="font-bold">más de 14 años de experiencia</span> en comercio internacional,
-                nos hemos convertido en el <span className="font-bold">socio logístico estratégico</span> que los sellers necesitan
-                para expandirse a nuevos mercados.
-              </p>
-              <p className="mt-3 text-sm md:text-base text-gray-700 leading-relaxed">
-                Desde <span className="font-bold">2011</span>, hemos sido un aliado confiable para empresas y emprendedores
-                que venden en <span className="font-bold">Amazon, MercadoLibre, Walmart y otros marketplaces</span>,
-                ofreciendo soluciones de importación seguras, rápidas y eficientes.
-              </p>
-            </div>
+              >
+                <h3 className="font-extrabold text-lg md:text-xl">
+                  Impulsa tu negocio sin fronteras
+                </h3>
+                <p className="mt-3 text-sm md:text-base text-gray-700 leading-relaxed">
+                  En Cargo Monterrey, sabemos que el crecimiento no tiene límites.
+                  Con <span className="font-bold">más de 14 años de experiencia</span> en comercio internacional,
+                  nos hemos convertido en el <span className="font-bold">socio logístico estratégico</span> que los sellers necesitan
+                  para expandirse a nuevos mercados.
+                </p>
+                <p className="mt-3 text-sm md:text-base text-gray-700 leading-relaxed">
+                  Desde <span className="font-bold">2011</span>, hemos sido un aliado confiable para empresas y emprendedores
+                  que venden en <span className="font-bold">Amazon, MercadoLibre, Walmart y otros marketplaces</span>,
+                  ofreciendo soluciones de importación seguras, rápidas y eficientes.
+                </p>
+              </div>
+            </DivZoom>
+
           </div>
 
 

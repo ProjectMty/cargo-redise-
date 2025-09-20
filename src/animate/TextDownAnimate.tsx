@@ -1,14 +1,22 @@
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
+import type { ReactNode } from "react";
 
-export default function AnimatedText({ lines = [], delay = 0 }) {
+interface AnimatedTextProps{
+  lines?: ReactNode[];
+  delay?: number;
+}
+
+export default function TextDownAnimate({ lines = [], delay = 0 }: AnimatedTextProps) {
   const ref = useRef(null);
   const controls = useAnimation();
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref, { amount: 0.3 });
 
   useEffect(() => {
     if (isInView) {
       controls.start("visible");
+    } else {
+      controls.start("hidden")
     }
   }, [isInView, controls]);
 
@@ -23,11 +31,11 @@ export default function AnimatedText({ lines = [], delay = 0 }) {
   };
 
   const lineVariant = {
-    hidden: { opacity: 0, x: -30 },
+    hidden: { opacity: 0, y: -30 },
     visible: {
       opacity: 1,
-      x: 0,
-      transition: { type: "tween", duration: 0.6 },
+      y: 0,
+      transition: { type: "tween" as const, duration: 0.9 },
     },
   };
 
@@ -37,6 +45,8 @@ export default function AnimatedText({ lines = [], delay = 0 }) {
       variants={container}
       initial="hidden"
       animate={controls}
+         // cambiar para hacer animacion una vez o cada vez que se hace scroll en la pagina
+      viewport={{ once: false, amount: 0.3 }}
     >
       {lines.map((line, index) => (
         <motion.span

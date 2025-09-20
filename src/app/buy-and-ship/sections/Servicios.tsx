@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import DivZoom from "@/animate/DivZoom";
 
 const services = [
   { icon: "/img/icons/buyandship/Icono 1.svg", title: "Verificación de proveedor", desc: "Podemos realizar visita a fábricas y oficinas para asegurarnos que sí existe." },
@@ -42,6 +43,7 @@ export default function ServiciosBuyAndShip() {
           "
         >
           {/* Pila de tarjetas en una sola columna */}
+          
           <div className="flex flex-col gap-4 md:gap-4">
             {services.map((s, i) => (
               <div
@@ -55,6 +57,7 @@ export default function ServiciosBuyAndShip() {
                 "
               >
                 {/* Icono en pill */}
+
                 <div
                   className="
                     shrink-0
@@ -86,6 +89,8 @@ export default function ServiciosBuyAndShip() {
               </div>
             ))}
           </div>
+
+
         </div>
         {/* Fin contenedor azul */}
       </div>

@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 import { useEffect, useState } from "react";
-import { motion, easeOut } from "framer-motion";
+import { motion, easeOut, delay, easeIn } from "framer-motion";
 import { Container } from "lucide-react";
 
 export default function Pasos() {
@@ -11,18 +11,18 @@ export default function Pasos() {
     show: {
 
       transition: {
-        staggerChildren: 0.3
+        staggerChildren: 0.5
       },
     },
   };
 
   const StepsAnimationUp = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0.1, y: 40 },
     show: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 1,
+        duration: 0.9,
         ease: easeOut,
       },
     },
@@ -31,12 +31,14 @@ export default function Pasos() {
   const StepsAnimationRight = {
     hidden: { opacity: 0, width: 0 },
   show: {
-    width: "60%",
-    opacity: 1,
+    opacity: [0,0, 0.8, 1, 1],
+    width: ["0%","0","30%", "60%", "60%"],
+    
   
     transition: {
-      duration: 2,
-      ease: easeOut
+      duration: 3,
+      ease: easeIn,
+      times: [0, 0.1, 0.4, 0.7, 1]
     },
     },
   };
