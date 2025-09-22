@@ -1,14 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import AnimatedText from "@/animate/TextAnimate";
+import DivZoom from "@/animate/DivZoom";
 
 export default function Tarifas() {
   return (
     <section className="w-full font-sans bg-white py-16 scroll-mt-15" id="tarifas">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <h2 className="text-center text-[#061349] text-4xl md:text-5xl font-bold mb-12">
-          Tarifas
-        </h2>
+
+        <AnimatedText
+          delay={0.2}
+          lines={[
+            < h2 className="text-center text-blue-800 text-4xl md:text-5xl font-bold mb-12">
+              Tarifas
+            </h2>
+          ]}>
+        </AnimatedText>
+
+
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Tarjeta 1 */}
@@ -52,37 +62,39 @@ export default function Tarifas() {
           </div>
         </div>
       </div>
-        {/* Cobros Adicionales */}
-<div className="mt-16 flex justify-center " >
-  <div className="bg-[#ffffff] rounded-xl shadow-md p-6 md:p-8 max-w-4xl w-full">
-    <h3 className="text-xl md:text-2xl font-bold text-color text-blue-800 mb-4 text-center">
-      Cobros adicionales
-    </h3>
-    <ul className="space-y-3 text-sm md:text-base text-[#333333]">
-      <li>
-        • El envío al destino final en México no está incluido y será
-        determinado por separado, según el destino y las características
-        del paquete.
-      </li>
-      <li>
-        <span className="font-bold">$3.00 USD</span> por cada bolsa, caja o
-        sobre recibido.
-      </li>
-      <li>
-        <span className="font-bold">$10.00 USD</span> por cada tarima descargada.
-      </li>
-      <li>
-        <span className="font-bold">$375.00 USD</span> por cada tarima recibida
-        de hasta 500 libras.
-      </li>
-      <li>
-        <span className="font-bold">$515.00 USD</span> por cada tarima recibida
-        que supere las 500 libras.
-      </li>
-    </ul>
-  </div>
-</div>
+      {/* Cobros Adicionales */}
 
+          <DivZoom scale={1.02}>
+      <div className="mt-16 flex justify-center " >
+        <div className="bg-[#ffffff] rounded-xl shadow-md p-6 md:p-8 max-w-4xl w-full">
+          <h3 className="text-xl md:text-2xl font-bold text-color text-blue-800 mb-4 text-center">
+            Cobros adicionales
+          </h3>
+          <ul className="space-y-3 text-sm md:text-base text-[#333333]">
+            <li>
+              • El envío al destino final en México no está incluido y será
+              determinado por separado, según el destino y las características
+              del paquete.
+            </li>
+            <li>
+              <span className="font-bold">$3.00 USD</span> por cada bolsa, caja o
+              sobre recibido.
+            </li>
+            <li>
+              <span className="font-bold">$10.00 USD</span> por cada tarima descargada.
+            </li>
+            <li>
+              <span className="font-bold">$375.00 USD</span> por cada tarima recibida
+              de hasta 500 libras.
+            </li>
+            <li>
+              <span className="font-bold">$515.00 USD</span> por cada tarima recibida
+              que supere las 500 libras.
+            </li>
+          </ul>
+        </div>
+      </div>
+</DivZoom>
     </section>
   );
 }

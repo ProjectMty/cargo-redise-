@@ -210,7 +210,7 @@ export default function ComoFunciona() {
           </div>
 
           {/* Nota final */}
-          <p className="text-center text-sm text-gray-500 font-[Montserrat] mt-8 italic">
+          <p className="text-center text-sm font-bold text-black font-[Montserrat] mt-8 italic">
             *Realizamos tu factura por servicios o por productos comercializados.
           </p>
         </div>

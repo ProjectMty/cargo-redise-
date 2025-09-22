@@ -1,6 +1,10 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import AnimatedText from "@/animate/TextAnimate";
+import { AnimatePresence, delay } from "framer-motion";
+import FadeInFromLeft from "@/animate/FadeInFromLeft";
+import DivZoom from "@/animate/DivZoom";
 
 // === TUS DATOS (rutas respetadas) ===
 const services = [
@@ -63,6 +67,7 @@ centros de distribución de Amazon.`,
 export default function ServiciosMxUsa() {
   const [activeId, setActiveId] = useState<number>(1);
   const active = services.find((s) => s.id === activeId)!;
+  const [showComponent, setShowComponent] = useState(true); // <-- Aquí defines 'showComponent'
 
   // estilos de botones
   const baseBtn =
@@ -73,13 +78,17 @@ export default function ServiciosMxUsa() {
     "border border-[#F2F2F2] text-[#F2F2F2] bg-transparent hover:bg-white/10";
 
   return (
-    <section className="w-full bg-[#2E47A1] text-white">
+    <section className="w-full bg-[#2E47A1] text-white" id="serviciosUSA">
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-10">
 
         {/* Título */}
-        <h2 className="text-center text-white font-[Montserrat] font-extrabold text-[34px] md:text-[44px] leading-tight mb-6">
-          Nuestros Servicios
-        </h2>
+        <AnimatedText delay={0.2} lines={[
+          <h2 className="text-center text-white font-[Montserrat] font-extrabold text-[34px] md:text-[44px] leading-tight mb-6">
+            Nuestros Servicios
+          </h2>
+        ]}></AnimatedText>
+
+
 
         {/* FILA 1: Botones 1–4 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
@@ -87,9 +96,8 @@ export default function ServiciosMxUsa() {
             <button
               key={s.id}
               onClick={() => setActiveId(s.id)}
-              className={`${baseBtn} ${
-                activeId === s.id ? selectedBtn : unselectedBtn
-              } w-full max-w-[320px] text-center`}
+              className={`${baseBtn} ${activeId === s.id ? selectedBtn : unselectedBtn
+                } w-full max-w-[320px] text-center`}
             >
               {s.title}
             </button>
@@ -102,9 +110,8 @@ export default function ServiciosMxUsa() {
             <button
               key={s.id}
               onClick={() => setActiveId(s.id)}
-              className={`${baseBtn} ${
-                activeId === s.id ? selectedBtn : unselectedBtn
-              } w-full text-center`}
+              className={`${baseBtn} ${activeId === s.id ? selectedBtn : unselectedBtn
+                } w-full text-center`}
             >
               {s.title}
             </button>
@@ -121,37 +128,47 @@ export default function ServiciosMxUsa() {
             <div className="flex flex-col lg:flex-row items-center gap-8">
 
               {/* Imagen a la medida original (no forzar) */}
-              <div className="shrink-0">
-                <img
-                  src={active.image}
-                  alt={active.title}
-                  className="block rounded-[22px] shadow-[0_12px_30px_rgba(0,0,0,0.18)] max-w-full h-auto"
-                />
-              </div>
 
-              {/* Texto + Icono */}
-              <div className="w-full">
-                {/* Icono */}
-                <div className="mb-4">
-                  <Image
-                    src={active.icon}
-                    alt=""
-                    width={96}
-                    height={96}
-                    className="w-[84px] h-[84px]"
+              <DivZoom scale={1.1}>
+                <div className="shrink-0">
+                  <img
+                    src={active.image}
+                    alt={active.title}
+                    className="block rounded-[22px] shadow-[0_12px_30px_rgba(0,0,0,0.18)] max-w-full h-auto"
                   />
                 </div>
+              </DivZoom>
+              {/* Texto + Icono */}
+              <AnimatePresence mode="wait">
+                {showComponent && (
+                  <FadeInFromLeft keyId={`${active.id}`} delay={0.2}>
+                    <div className="w-full">
+                      {/* Icono */}
+                      <div className="mb-4">
+                        <Image
+                          src={active.icon}
+                          alt=""
+                          width={96}
+                          height={96}
+                          className="w-[84px] h-[84px]"
+                        />
+                      </div>
 
-                {/* Título (30px) */}
-                <h3 className="font-[Montserrat] font-extrabold text-[30px] leading-tight mb-4 text-[#1E3A8A]">
-                  {active.title}
-                </h3>
+                      {/* Título (30px) */}
+                      <h3 className="font-[Montserrat] font-extrabold text-[30px] leading-tight mb-4 text-[#1E3A8A]">
+                        {active.title}
+                      </h3>
 
-                {/* Párrafo (25px, #333333) */}
-                <p className="whitespace-pre-line font-[Montserrat] text-[25px] leading-[1.35]">
-                  {active.description}
-                </p>
-              </div>
+                      {/* Párrafo (25px, #333333) */}
+                      <p className="whitespace-pre-line font-[Montserrat] text-[25px] leading-[1.35]">
+                        {active.description}
+                      </p>
+                    </div>
+                  </FadeInFromLeft>
+                )}
+
+
+              </AnimatePresence>
             </div>
           </div>
         </div>

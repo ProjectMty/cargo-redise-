@@ -5,6 +5,7 @@ import Link from "next/link";
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import AnimatedText from "@/animate/TextAnimate";
 
 import EnviaLogo from "@/assets/partnership/envia-com.png";
 import FedexLogo from "@/assets/partnership/fedex.png";
@@ -19,10 +20,14 @@ export default function Partnership() {
   return (
     <section id="partners" className="w-full bg-white py-16 font-sans scroll-smooth">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <h2 className="text-center text-3xl md:text-5xl font-bold text-color text-blue-800 mb-12">
+<AnimatedText delay={0.2}
+lines={[
+ <h2 className="text-center text-3xl md:text-5xl font-bold text-color text-blue-800 mb-12">
           Partnerships
         </h2>
-
+]}>
+       
+</AnimatedText>
         <Carousel
           centerMode={isLg}
           centerSlidePercentage={17}

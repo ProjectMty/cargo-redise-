@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
 import DivZoom from "@/animate/DivZoom";
+import AnimatedText from "@/animate/TextAnimate";
+import TimeZoom from "@/animate/TimeZoom";
 
 const services = [
   { icon: "/img/icons/buyandship/Icono 1.svg", title: "Verificación de proveedor", desc: "Podemos realizar visita a fábricas y oficinas para asegurarnos que sí existe." },
@@ -18,6 +20,7 @@ export default function ServiciosBuyAndShip() {
     <section className="relative w-full py-16">
       {/* Fondo de sección con imagen */}
       <div className="absolute inset-0 z-0">
+
         <Image
           src="/img/buyandship/Fondo1Div3.png"
           alt="Fondo servicios"
@@ -29,9 +32,12 @@ export default function ServiciosBuyAndShip() {
 
       <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
         {/* Título */}
-        <h2 className="text-center font-[Montserrat] font-extrabold text-[40px] md:text-[50px] text-white mb-8">
-          Nuestros servicios
-        </h2>
+        <AnimatedText delay={0.2} lines={[
+          <h2 className="text-center font-[Montserrat] font-extrabold text-[40px] md:text-[50px] text-white mb-8">
+            Nuestros servicios
+          </h2>
+        ]}></AnimatedText>
+
 
         {/* CONTENEDOR AZUL (marco) que envuelve TODAS las tarjetas */}
         <div
@@ -43,23 +49,25 @@ export default function ServiciosBuyAndShip() {
           "
         >
           {/* Pila de tarjetas en una sola columna */}
-          
+
           <div className="flex flex-col gap-4 md:gap-4">
             {services.map((s, i) => (
-              <div
-                key={i}
-                className="
+              <DivZoom scale={1.1}>
+                <div
+                  key={i}
+                  className="
                   flex items-start gap-3 md:gap-4
                   bg-white
                   rounded-[14px] md:rounded-[16px]
                   shadow-[0_10px_20px_rgba(0,0,0,0.10)]
                   px-4 py-3 md:px-5 md:py-4
+                  trasnsition-all duration-300 ease-in-out hover:bg-blue-50
                 "
-              >
-                {/* Icono en pill */}
+                >
+                  {/* Icono en pill */}
 
-                <div
-                  className="
+                  <div
+                    className="
                     shrink-0
                     w-[56px] h-[56px] md:w-[64px] md:h-[64px]
                     rounded-2xl
@@ -67,26 +75,27 @@ export default function ServiciosBuyAndShip() {
                     shadow-[0_8px_18px_rgba(15,23,42,0.08)]
                     flex items-center justify-center
                   "
-                >
-                  <Image
-                    src={s.icon}
-                    alt={s.title}
-                    width={34}
-                    height={34}
-                    className="md:w-[38px] md:h-[38px]"
-                  />
-                </div>
+                  >
+                    <Image
+                      src={s.icon}
+                      alt={s.title}
+                      width={34}
+                      height={34}
+                      className="md:w-[38px] md:h-[38px]"
+                    />
+                  </div>
 
-                {/* Texto */}
-                <div className="leading-snug">
-                  <h3 className="font-[Montserrat] font-extrabold text-sky-600 text-[18px] md:text-[20px]">
-                    {s.title}
-                  </h3>
-                  <p className="text-[#333] text-[14px] md:text-[15px] mt-1">
-                    {s.desc}
-                  </p>
+                  {/* Texto */}
+                  <div className="leading-snug">
+                    <h3 className="font-[Montserrat] font-extrabold text-sky-600 text-[18px] md:text-[20px]">
+                      {s.title}
+                    </h3>
+                    <p className="text-[#333] text-[14px] md:text-[15px] mt-1">
+                      {s.desc}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </DivZoom>
             ))}
           </div>
 

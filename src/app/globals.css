@@ -8,7 +8,7 @@
    Variables base del tema
    ========================= */
 :root {
-  --background: oklch(42.4% 0.199 265.638); /* 🔵 Fondo general del sitio con tu azul */
+  --background: oklch(100% 0.00011 271.152); /* 🔵 Fondo general del sitio con tu azul */
   --foreground: #ffffff;                    /* Texto principal en blanco para contraste */
 
   --primary: #004aad;                       /* Azul corporativo (botones/accents) */
@@ -37,7 +37,7 @@
    Estilos globales base
    ========================= */
 body {
-  background: var(--background); /* Ahora fondo global azul */
+  /* background: var(--background); Ahora fondo global azul */
   color: var(--foreground);      /* Texto global blanco para legibilidad */
   font-family: Arial, Helvetica, sans-serif;
 }

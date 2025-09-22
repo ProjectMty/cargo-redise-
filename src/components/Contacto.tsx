@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-
+import AnimatedText from "@/animate/TextAnimate";
 export default function Contacto() {
 
     return (
@@ -10,9 +10,12 @@ export default function Contacto() {
         justify-center items-center py-5 bg-gradient-to-r from-blue-400 to to-blue-900 font-[Montserrat] scroll-smooth">
 
             <div className="relative w-full z-10">
-                <h1 className="font-extrabold text-[40px] lg:text-[55px] text-white text-center relative  mt-5">
+                <AnimatedText delay={0.2} lines={[
+ <h1 className="font-extrabold text-[40px] lg:text-[55px] text-white text-center relative  mt-5">
                     Contáctanos
                 </h1>
+                ]}></AnimatedText>
+               
                 {/* inicio de formulario */}
                 <div className="bg-blue-800 z-20 mt-10 mb-40 translate-x-1/6 lg:translate-x-1/4 w-9/12 lg:w-2/3 h-1/2 grid lg:grid-cols-2 gap-7 rounded-3xl">
                     {/* contenedor izquierdo */}
@@ -63,24 +66,28 @@ export default function Contacto() {
 
                     {/* contenedor derecho */}
                     <div className="bg-blue-700 relative items-center w-full h-full text-sm rounded-3xl">
-                        <form action="/action.php" className="w-full mt-3 px-6">
+                        <form action="/action.php" className="w-full mt-3 px-6 ">
 
 
                             <label htmlFor="ContactName">Nombre: </label>
-                            <input type="text" name="name" id="ContactName" className="bg-white w-full mt-2 mb-3 h-7 rounded-md" />
+                            <input type="text" name="name" id="ContactName" className="bg-white w-full mt-2 mb-3 h-7 rounded-md
+                            outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black" />
 
                             <label htmlFor="ContactPhone">Teléfono: </label>
-                            <input type="text" name="phone" id="ContactPhone" className="bg-white w-full mt-2 mb-3 h-7 rounded-md" />
+                            <input type="text" name="phone" id="ContactPhone" className="bg-white w-full mt-2 mb-3 h-7 rounded-md
+                            outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black" />
 
                             <label htmlFor="ContactEmail">Correo: </label>
-                            <input type="text" name="email" id="ContactEmail" className="bg-white w-full mt-2 mb-3 h-7 rounded-md" />
+                            <input type="text" name="email" id="ContactEmail" className="bg-white w-full mt-2 mb-3 h-7 rounded-md
+                            outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black" />
 
                             <label htmlFor="ContactAsunto">Asunto: </label>
 
-                            <textarea name="email" id="ContactAsunto" rows={4} cols={50} className="bg-white w-full mt-2 mb-3 rounded-md" >
+                            <textarea name="email" id="ContactAsunto" rows={4} cols={50} className="bg-white w-full mt-2 mb-3 rounded-md
+                            outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black" >
 
                             </textarea>
-                            <div className="bg-blue-400 rounded-xl text-center w-1/2 h-10 font-bold translate-x-1/2 mb-5 hover:bg-blue-800 transition">
+                            <div className="bg-blue-400 rounded-xl text-center w-1/2 h-10 font-bold translate-x-1/2 mb-5 hover:bg-blue-800 transition duration-300">
                                 <input type="submit" value={"Enviar"} className="mt-3 " />
                             </div>
 

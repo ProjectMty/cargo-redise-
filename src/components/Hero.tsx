@@ -26,7 +26,7 @@ export default function Hero() {
 
   return (
 
-    <section className="relative w-full font-sans overflow-hidden rounded-b-[60px]" id="hero font-[Montserrat]">
+    <section className="relative w-full overflow-hidden rounded-b-[60px]  font-[Montserrat]" id="hero">
 
       {/* Imagen de fondo */}
       <div className="relative w-full h-[400px] md:h-[520px] lg:h-[577px]">
@@ -62,91 +62,7 @@ export default function Hero() {
 
       </div>
 
-      {/* Navbar */}
-      <header className=" top-0 left-0 right-0 z-50  backdrop-blur-md fixed">
-        <nav className="w-full bg-transparent">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between py-6">
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/img/logob.svg"
-                alt="Logo Cargo Monterrey"
-                width={140}
-                height={40}
-                priority
-              />
-            </Link>
 
-            <div className="hidden lg:flex items-center space-x-8">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="relative text-white text-sm font-medium tracking-normal group"
-                >
-                  {item.name}
-                  <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
-                </a>
-              ))}
-            </div>
-
-            <div className="hidden lg:block opacity-0">
-              <a
-                href="#calculadora"
-                className="rounded-full bg-[#1b1ba6] text-white px-6 py-2 text-sm font-semibold hover:bg-[#14149c] transition"
-              >
-                Calculadora
-              </a>
-            </div>
-
-            <div className="lg:hidden">
-              <button onClick={() => setMobileMenuOpen(true)} className="text-white">
-                <Bars3Icon className="h-6 w-6" />
-              </button>
-            </div>
-          </div>
-        </nav>
-
-        {/* Menú móvil */}
-        <Dialog
-          as="div"
-          open={mobileMenuOpen}
-          onClose={setMobileMenuOpen}
-          className="lg:hidden"
-        >
-          <Dialog.Panel className="fixed inset-0 z-50 bg-white p-6">
-            <div className="flex items-center justify-between">
-              <Image
-                src="/img/logob.svg"
-                alt="Logo Cargo Monterrey"
-                width={120}
-                height={35}
-              />
-              <button onClick={() => setMobileMenuOpen(false)} className="text-gray-700">
-                <XMarkIcon className="h-6 w-6" />
-              </button>
-            </div>
-            <div className="mt-6 space-y-4">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-base font-medium text-gray-800 hover:text-[#00AEEF]"
-                >
-                  {item.name}
-                </a>
-              ))}
-              <a
-                href="#calculadora"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block mt-4 rounded-full bg-[#1b1ba6] px-4 py-2 text-white text-center font-semibold hover:bg-[#14149c]"
-              >
-                Calculadora
-              </a>
-            </div>
-          </Dialog.Panel>
-        </Dialog>
-      </header>
       {/* Caja blanca de servicios */}
       <SectionDefault>
         <div className="relative z-20 flex justify-center -mt-20 md:-mt-32 px-4 md:px-8">
@@ -264,7 +180,7 @@ export default function Hero() {
 
           {/* Título principal */}
           <TextDownAnimate
-            delay={0.2}
+            delay={1}
             lines={[
               <h2 className="text-center font-extrabold leading-tight text-[26px] md:text-4xl">
                 ¡Somos la mejor solución <span className="font-bold">para</span>,
@@ -277,7 +193,7 @@ export default function Hero() {
 
           </TextDownAnimate>
           {/* Párrafos descriptivos */}
-          <div className="mt-6 space-y-4 text-center">
+          <div id="Descriptivo" className="mt-6 space-y-4 text-center">
             <p className="text-white/90 text-sm md:text-base">
               <span className="font-bold">Cargo Monterrey</span> es tu solución para todas tus compras e importaciones de USA y China.
               Compra en cualquier parte del mundo online y recibe en México.

@@ -1,8 +1,13 @@
+"use client";
+
+
+import TimeZoom from "@/animate/TimeZoom";
+import AnimatedText from "@/animate/TextAnimate";
 
 export default function BuyAndShipHero() {
   return (
     // Dentro de tu componente HeroBuyAndShip (sólo el bloque visual del hero)
-    <section  className="relative w-full min-h-[420px] md:min-h-[520px] lg:min-h-[500px] rounded-b-[40px] overflow-hidden bg-[#F2F2F2]">
+    <section className="relative w-full min-h-[420px] md:min-h-[520px] lg:min-h-[500px] rounded-b-[40px] overflow-hidden bg-[#F2F2F2]">
 
       {/* Fondo: imagen principal */}
       <div className="absolute inset-0">
@@ -22,13 +27,16 @@ export default function BuyAndShipHero() {
       w-[96vw] max-w-[1100px]  lg:w-[74vw] lg:max-w-[1280px]"
         aria-hidden="true"
       >
-        <img
-          src="/img/buyandship/LogoB&S.svg"
-          alt="logo"
-          className="w-lg opacity-[0.92] drop-shadow-[0_8px_26px_rgba(0,0,0,0.25)]"
-          loading="eager"
-        />
+        <AnimatedText delay={0.1} lines={[
+          <img
+            src="/img/buyandship/LogoB&S.svg"
+            alt="logo"
+            className="w-lg opacity-[0.92] drop-shadow-[0_8px_26px_rgba(0,0,0,0.25)]"
+            loading="eager"
+          />
+        ]}>
 
+        </AnimatedText>
 
       </div>
 

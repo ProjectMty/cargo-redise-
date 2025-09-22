@@ -4,10 +4,10 @@ import { useRef, useEffect } from "react";
 interface FadeProps{
   children?: React.ReactNode;
   delay?: number;
-  keyId?: string;
+
 }
 
-const FadeInFromLeft = ({ children, delay = 0, keyId}: FadeProps) => {
+const FadeInFromRight = ({ children, delay = 0}: FadeProps) => {
   const ref = useRef(null);
   const controls = useAnimation();
   const isInView = useInView(ref, { amount: 0.3 });
@@ -23,10 +23,10 @@ const FadeInFromLeft = ({ children, delay = 0, keyId}: FadeProps) => {
   return (
     <motion.div
     ref={ref}
-    key={keyId}
-      initial={{ opacity: 0, x: -50 }}
+    
+      initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
-      exit={{opacity: 0, x: 50}}
+      exit={{opacity: 0, x: -50}}
       transition={{
         duration: 0.5,
         ease: "easeOut",
@@ -39,4 +39,4 @@ const FadeInFromLeft = ({ children, delay = 0, keyId}: FadeProps) => {
   );
 };
 
-export default FadeInFromLeft;
+export default FadeInFromRight;

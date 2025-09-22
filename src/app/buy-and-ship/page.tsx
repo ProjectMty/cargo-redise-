@@ -5,6 +5,7 @@ import Contactanos from "./sections/Contactanos";
 import Intro from "./sections/Intro";
 import Pasos from "./sections/Pasos";
 import Contacto from "@/components/Contacto";
+import Footer from "@/components/Footer";
 export default function BuyAndShipPage() {
   return (
     <main className="min-h-screen bg-[#F2F2F2]">
@@ -14,7 +15,7 @@ export default function BuyAndShipPage() {
       <Services />
       <Pasos />
       <Contacto />
-      
+      <Footer />
     </main>
   );
 }

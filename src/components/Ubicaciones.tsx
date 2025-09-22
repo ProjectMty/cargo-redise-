@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-
+import DivZoom from "@/animate/DivZoom";
 const navigation = [
     { name: "México", href: "/img/ubicacion/Mexico.svg" },
     { name: "USA", href: "/img/ubicacion/Usa.svg" },
@@ -56,7 +56,7 @@ export default function Ubicaciones() {
             <h1 className="font-extrabold text-[40px] lg:text-[55px] text-blue-950 text-center absolute top-5 ">
                 Ubicaciones
             </h1>
-            <div className="max-w-4xl rounded-[28px] object-cover mt-5">
+            <div className="max-w-4xl rounded-[28px] object-cover mt-5 ">
                 <Image
                     src="/img/ubicacion/fondoUbicacion.png"
                     alt="ubicacion"
@@ -93,13 +93,18 @@ export default function Ubicaciones() {
                     </div>
                 </div>
                 {/* Mapa de paises */}
+                
                 <div className="absolute left-1/2 top-28 lg:top-52 -translate-x-1/2 items-center">
-                    {/* imagen de mapa -mx-10*/}
-                    <div className="relative max-h-[200px] lg:max-h-[500px] overflow-hidden w-xs lg:w-lg ">
-                        <img src={imagen} alt="mapa" className={`w-full h-full object-cover transition-opacity duration-500 ${fade ? 'opacity-100' : 'opacity-0'}`} />
-                    </div>
-                </div>
+                        {/* imagen de mapa -mx-10*/}
+                        
+                        <div className="relative max-h-[200px] lg:max-h-[500px] overflow-hidden w-xs lg:w-lg ">
 
+                            <img src={imagen} alt="mapa" className={`w-full h-full object-cover transition-opacity duration-500 ${fade ? 'opacity-100' : 'opacity-0'}`} />
+                        
+                        </div>
+                        
+                </div>
+                
 
             </div >
 

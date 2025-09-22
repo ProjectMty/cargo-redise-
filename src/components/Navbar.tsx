@@ -1,6 +1,5 @@
 "use client";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
@@ -18,14 +17,29 @@ const navigation = [
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Cambia valor al hacer scroll
+  useEffect(() => {
+    const handleScroll = () => {
+  
+      setScrolled(window.scrollY > 400);
+
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-sm">
+    <header className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm transition-colors duration-500
+       ${scrolled ? 'bg-white/60 shadox-md' : 'bg-transparent'
+      }`}>
+
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center ">
           <Image
-            src="/img/logob.svg"
+            src={scrolled ? "/img/logos/logo-azul.svg" : "/img/logos/logo-blanco.svg"}
             alt="Logo Cargo Monterrey"
             width={130}
             height={36}
@@ -39,7 +53,8 @@ export default function Navbar() {
             <a
               key={item.name}
               href={item.href}
-              className="relative text-white text-sm font-medium tracking-normal group"
+              className={`relative text-sm font-medium tracking-normal group transition-colors duration-300
+                 ${scrolled ? 'text-blue-900' : 'text-white'}`}
             >
               {item.name}
               <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-yellow-400 transition-all duration-300 group-hover:w-full" />
