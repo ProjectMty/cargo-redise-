@@ -55,8 +55,7 @@ export default function Servicios2() {
             {/* Segundo bloque: imagen izquierda + texto derecha */}
             <div className="mt-10 grid md:grid-cols-2 gap-8 items-center">
               <DivZoom scale={1.05}>
-                <div className="relative w-full h-[220px] md:h-[260px] rounded-2xl overflow-hidden">
-
+                <div className="hidden lg:block relative w-full h-[220px] md:h-[260px] rounded-2xl overflow-hidden">
                   <Image
                     src="/img/mexausa/servicios2/imagen 2.png" // <-- usa la ruta real de tu imagen
                     alt="Paquetes y preparación"
@@ -66,7 +65,7 @@ export default function Servicios2() {
                   />
                 </div>
               </DivZoom>
-              <div className="text-white">
+              <div className="text-white ">
                 <AnimatedText delay={0.8} lines={[
                   <h3 key={1} className="font-[Montserrat] font-extrabold text-xl md:text-2xl">
                     FBA prep
@@ -75,11 +74,23 @@ export default function Servicios2() {
 
                 </AnimatedText>
 
-                <p className="mt-3 font-[Montserrat] text-white/90 text-base md:text-lg">
+                <p className="mt-3 font-[Montserrat] text-white/90 text-base md:text-lg ">
                   Realizamos todas las etiquetas y embalaje requerido para
                   que tu mercancía ingrese a Amazon FBA en Estados Unidos.
                 </p>
               </div>
+
+               <DivZoom scale={1.05}>
+                <div className="lg:hidden block relative w-full h-[220px] md:h-[260px] rounded-2xl overflow-hidden">
+                  <Image
+                    src="/img/mexausa/servicios2/imagen 2.png" // <-- usa la ruta real de tu imagen
+                    alt="Paquetes y preparación"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+              </DivZoom>
             </div>
           </div>
         </div>

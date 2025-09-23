@@ -30,7 +30,7 @@ const industrias = [
 
 export default function Industrias() {
   return (
-    <section className="relative w-full bg-[#F2F2F2] py-20" id="industriaUSA">
+    <section className="relative w-full bg-blue-300 md:bg-white py-20" id="industriaUSA">
       {/* --------- Banda superior --------- */}
       <div className="relative w-full h-full md:h-[220px] z-10">
         <Image
@@ -52,20 +52,20 @@ export default function Industrias() {
       </div>
 
       {/* --------- Tarjetas --------- */}
-      <div className="relative max-w-6xl mx-auto px-4 md:px-6 -mt-20 z-50">
+      <div className="relative max-w-6xl mx-auto px-4 md:px-6 mt-20 lg:-mt-20 z-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {industrias.map((item) => (
             <UpAnimate key={1} move={-10}>
               <div
                 key={item.id}
-                className="bg-white rounded-[40px] shadow-[0_12px_20px_rgba(0,0,0,0.12)] overflow-hidden h-[300px]"
+                className="bg-white rounded-[40px] shadow-[0_12px_20px_rgba(0,0,0,0.12)] overflow-hidden h-[350px] lg:h-[300px]"
               >
                 <Image
                   src={item.image}
                   alt={item.title}
                   width={400}
                   height={260}
-                  className="w-full h-[180px] object-cover -mt-7"
+                  className="w-full h-[270px] lg:h-[180px] object-cover -mt-10 lg:-mt-7"
                 />
                 <p className="p-7 text-[14px] md:text-[15px] font-semibold text-[#0f172a] text-center mb-5 mt-2">
                   {item.title}
@@ -78,9 +78,9 @@ export default function Industrias() {
       </div>
 
       {/* --------- Texto inferior --------- */}
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-10">
-        <div className="shadow-[0_10px_10px_rgba(0,0,0,0.12)] px-10 rounded-3xl ">
-          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-10 ">
+        <div className="shadow-[0_10px_10px_rgba(0,0,0,0.12)] px-10 rounded-3xl bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8 py-10">
             {/* Div parte abajo */}
             <div>
               <AnimatedText delay={0.2} lines={[

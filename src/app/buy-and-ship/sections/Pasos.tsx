@@ -1,9 +1,8 @@
 "use client";
 
-import { motion, easeIn } from "framer-motion";
-
+import { motion } from "framer-motion";
 import ShowUp from "@/animate/PASOS/ShowUp";
-
+import ShowRight from "@/animate/PASOS/ShowRight";
 
 export default function Pasos() {
   const ContainerSteps = {
@@ -16,19 +15,6 @@ export default function Pasos() {
     },
   };
 
-  const StepsAnimationRight = {
-    hidden: { opacity: 0, width: 0 },
-
-    show: {
-      opacity: [0, 0, 0.8, 1, 1],
-      width: ["0%", "0", "30%", "60%", "60%"],
-      transition: {
-        duration: 4,
-        ease: easeIn,
-        times: [0, 0.1, 0.4, 0.7, 1]
-      },
-    },
-  };
 
   return (
     <motion.section
@@ -40,27 +26,29 @@ export default function Pasos() {
       // cambiar para hacer animacion una vez o cada vez que se hace scroll en la pagina
       viewport={{ once: false, amount: 0.3 }}
     >
+
       <div className="max-w-6xl mx-auto">
         {/* Título */}
-        <h2 className="text-center text-blue-400 font-[Montserrat]   font-bold text-[32px] md:text-[40px] mb-12">
+        <h2 className="text-center text-blue-400 font-[Montserrat] font-bold text-[32px] md:text-[40px] mb-12">
           ¡Sigue estos pasos para comprar hoy!
         </h2>
 
         {/* Contenedor principal con fondo blanco */}
 
         {/* pasos 1- 3 */}
-        <div className="relative rounded-3xl  md:px-20 md:py-3">
+        <div className="relative rounded-3xl md:px-20 md:py-3">
+
           {/* Línea horizontal */}
-              <motion.div
-            variants={StepsAnimationRight}
-            className="hidden lg:block absolute top-1/3 left-50 w-3xl h-[6px] bg-sky-600 transform  z-0"></motion.div>
+          <div className="hidden lg:block">
+          <ShowRight delay={0} duration={1} position="17%"></ShowRight>
+          <ShowRight delay={1} duration={1} position="47%"></ShowRight>
 
-
+          </div>
+         
           {/* Grid de pasos */}
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 z-10">
-
             {/* Paso 1 */}
-            <ShowUp delay={0} duration={0.5} >
+            <ShowUp delay={0} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
                 <div className="w-25 h-25 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
@@ -81,7 +69,7 @@ export default function Pasos() {
             </ShowUp>
 
             {/* Paso 2 */}
-            <ShowUp delay={0.5} duration={0.5} >
+            <ShowUp delay={1} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
                 <div className="w-25 h-25 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
@@ -102,7 +90,7 @@ export default function Pasos() {
             </ShowUp>
 
             {/* Paso 3 */}
-            <ShowUp delay={1} duration={0.5} >
+            <ShowUp delay={2} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
                 <div className="w-25 h-25 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
@@ -122,17 +110,20 @@ export default function Pasos() {
         </div>
 
         {/* pasos 4 - 6 */}
-        <div className="relative rounded-3xl   md:px-20 md:py-3">
+        <div className="relative rounded-3xl md:px-20 md:py-3">
+
           {/* Línea horizontal */}
-          <motion.div
-            variants={StepsAnimationRight}
-            className=" hidden lg:block absolute top-1/3 left-50 w-3xl h-[6px] bg-sky-600 transform  z-0"></motion.div>
+          <div className="-mb-3 hidden lg:block">
+            <ShowRight delay={2.5} duration={1} position="17%"></ShowRight>
+            <ShowRight delay={3.5} duration={1} position="47%"></ShowRight>
+
+          </div>
 
           {/* Grid de pasos */}
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 z-10">
 
             {/* Paso 4 */}
-            <ShowUp delay={1.5} duration={0.5} >
+            <ShowUp delay={2.5} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
                 <div className="w-25 h-25 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
@@ -147,7 +138,7 @@ export default function Pasos() {
               </div>
             </ShowUp>
             {/* Paso 5 */}
-            <ShowUp delay={2} duration={0.5} >
+            <ShowUp delay={3.5} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
                 <div className="w-25 h-25 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
@@ -162,7 +153,7 @@ export default function Pasos() {
             </ShowUp>
 
             {/* Paso 6 */}
-            <ShowUp delay={2.5} duration={0.5} >
+            <ShowUp delay={4.5} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
                 <div className="w-25 h-25 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
@@ -182,17 +173,19 @@ export default function Pasos() {
         </div>
 
         {/* pasos 7 - 9 */}
-        <div className="relative rounded-3xl   md:px-20 md:py-3">
+        <div className="relative rounded-3xl md:px-20 md:py-3">
           {/* Línea horizontal */}
-          <motion.div
-            variants={StepsAnimationRight}
-            className="hidden lg:block absolute top-1/3 left-50 w-3xl h-[6px] bg-sky-600 transform  z-0"></motion.div>
+          <div className="hidden lg:block">
+        <ShowRight delay={5} duration={1} position="17%"></ShowRight>
+          <ShowRight delay={6} duration={1} position="47%"></ShowRight>
 
+          </div>
+  
           {/* Grid de pasos */}
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 z-10">
 
             {/* Paso 7 */}
-            <ShowUp delay={3} duration={0.5} >
+            <ShowUp delay={5} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
                 <div className="w-25 h-25 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
@@ -208,7 +201,7 @@ export default function Pasos() {
             </ShowUp>
 
             {/* Paso 8 */}
-            <ShowUp delay={3.5} duration={0.5} >
+            <ShowUp delay={6} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
 
                 {/* numero de paso */}
@@ -225,7 +218,7 @@ export default function Pasos() {
             </ShowUp>
 
             {/* Paso 9 */}
-            <ShowUp delay={4} duration={0.5} >
+            <ShowUp delay={7} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
                 <div className="w-25 h-25 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
@@ -242,7 +235,6 @@ export default function Pasos() {
 
 
           </div>
-
 
         </div>
 

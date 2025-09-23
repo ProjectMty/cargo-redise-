@@ -1,5 +1,5 @@
 "use client";
-
+import { FaWhatsapp, FaAt , FaPhone, FaLocationArrow} from "react-icons/fa";
 
 import AnimatedText from "@/animate/TextAnimate";
 export default function Contacto() {
@@ -18,32 +18,32 @@ export default function Contacto() {
                 {/* inicio de formulario */}
                 <div className="bg-blue-800 z-20 mt-10 mb-40 translate-x-1/6 lg:translate-x-1/4 w-9/12 lg:w-2/3 h-1/2 grid lg:grid-cols-2 gap-7 rounded-3xl">
                     {/* contenedor izquierdo */}
-                    <div className="">
-                        <h2 className="mt-6 text-center font-bold text-lg lg:text-2xl">¡Empieza a importar ya!</h2>
+                    <div className=" mb-10">
+                        <h2 className="mt-6 text-center font-bold text-lg lg:text-2xl ">¡Empieza a importar ya!</h2>
 
                         {/* inicio de lista  */}
                         {/* Ubicacion  */}
-                        <div className="px-5 grid grid-cols-4 mt-6">
-                            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-sky-400 text-white flex items-center justify-center font-bold mt-8 lg:mt-6 text-xl -translate-x-3 lg:translate-x-8">
-                                1
+                        <div className=" px-5  grid grid-cols-4 mt-6 lg:left-20 gap-16">
+                            <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-sky-400 text-white flex items-center justify-center font-bold mt-7 lg:mt-6 text-xl  lg:translate-x-10">
+                               <FaLocationArrow className="w-5 h-5"></FaLocationArrow>
                             </div>
-                            <h2 className="text-xs lg:text-sm mt-6 -ml-2.5 col-span-3">Lazaro Cardenas 999 Local 2, Col las Brisas, 74190, Monterrey, Nuevo León</h2>
+                            <h2 className=" text-md lg:text-sm mt-9 -ml-2.5 col-span-3">Lazaro Cardenas 999 Local 2, Col las Brisas, 74190, Monterrey, Nuevo León</h2>
                         </div>
                         {/* telefono  */}
-                        <div className="px-5 grid grid-cols-4 mt-4">
-                            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-sky-400 text-white flex items-center justify-center font-bold mt-4 text-xl -translate-x-3 lg:translate-x-8">
-                                2
+                        <div className="px-5 grid grid-cols-4 mt-4 lg:left-20 gap-16">
+                            <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-sky-400 text-white flex items-center justify-center font-bold mt-3 text-xl  lg:translate-x-10">
+                                <FaWhatsapp className="w-5 h-5"></FaWhatsapp>
                             </div>
-                            <h2 className="text-xs lg:text-sm mt-6 -ml-2.5 col-span-3">+52 81 2030 3977</h2>
+                            <h2 className="text-md lg:text-sm mt-6 -ml-2.5 col-span-3">+52 81 2030 3977</h2>
                         </div>
 
                         {/* Whatsapp  */}
-                        <div className="px-5 grid grid-cols-4 mt-4">
-                            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-sky-400 text-white flex items-center justify-center font-bold mt-6 lg:mt-4 text-xl -translate-x-3 lg:translate-x-8">
-                                3
+                        <div className="px-5 grid grid-cols-4 mt-4 lg:left-20 gap-16">
+                            <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-sky-400 text-white flex items-center justify-center font-bold mt-4 lg:mt-4 text-xl lg:translate-x-10">
+                                <FaPhone className="w-5 h-5"></FaPhone>
                             </div>
                             <div className="col-span-3">
-                                <div className="grid text-sm mt-2 -ml-2.5 ">
+                                <div className="grid text-md mt-2 -ml-2.5 ">
                                     <h2 className="">+52 81 0000 0000</h2>
                                     <h2 className="">+52 81 1111 1111</h2>
                                     <h2 className="">+52 81 2222 2222</h2>
@@ -53,11 +53,11 @@ export default function Contacto() {
                         </div>
 
                         {/* gmail  */}
-                        <div className="px-5 grid grid-cols-4 mt-4 ">
-                            <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-sky-400 text-white flex items-center justify-center font-bold mt-5 lg:mt-4 text-xl -translate-x-3 lg:translate-x-8">
-                                4
+                        <div className="px-5 grid grid-cols-4 mt-4 lg:left-20 gap-16">
+                            <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-sky-400 text-white flex items-center justify-center font-bold mt-3 lg:mt-4 text-xl  lg:translate-x-10">
+                                <FaAt className="w-5 h-5"></FaAt>
                             </div>
-                            <h2 className="text-sm mt-6 -ml-2.5 col-span-3">correo@gmail.com</h2>
+                            <h2 className="text-md mt-6 -ml-2.5 col-span-3">correo@gmail.com</h2>
                         </div>
 
 

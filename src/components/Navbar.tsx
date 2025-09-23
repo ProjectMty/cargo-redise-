@@ -1,7 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Dialog } from "@headlessui/react";
+import { useEffect, useState, Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -73,62 +74,85 @@ export default function Navbar() {
         </div>
 
         {/* Mobile menu button */}
-        <div className="lg:hidden">
+        <div className="lg:hidden p-2 rounded-md">
           <button
             onClick={() => setMobileMenuOpen(true)}
             className="text-white"
             aria-label="Abrir menú"
           >
-            <Bars3Icon className="h-6 w-6" />
+            <Bars3Icon className={`h-10 w-10 ${mobileMenuOpen ? "hidden": " block"}`} ></Bars3Icon>
+             
+            
           </button>
         </div>
       </nav>
 
-      {/* Menú móvil */}
+      {/* Menu movil */}
+
+         <Transition show={mobileMenuOpen} as={Fragment}>
       <Dialog
         as="div"
-        open={mobileMenuOpen}
-        onClose={setMobileMenuOpen}
         className="lg:hidden"
+        onClose={setMobileMenuOpen}
       >
-        <Dialog.Panel className="fixed inset-0 z-50 bg-white p-6">
-          <div className="flex items-center justify-between">
-            <Image
-              src="/img/logob.svg"
-              alt="Logo Cargo Monterrey"
-              width={120}
-              height={35}
-            />
-            <button
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-gray-700"
-              aria-label="Cerrar menú"
-            >
-              <XMarkIcon className="h-6 w-6" />
-            </button>
-          </div>
+        {/* Fondo oscuro */}
+        <Transition.Child
+          as={Fragment}
+          enter="transition-opacity ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="transition-opacity ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-black/50 z-40" />
+        </Transition.Child>
 
-          <div className="mt-6 space-y-4">
-            {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
+        {/* Panel*/}
+        <Transition.Child
+          as={Fragment}
+          enter="transform transition ease-out duration-300"
+          enterFrom="translate-x-full opacity-0"
+          enterTo="translate-x-0 opacity-100"
+          leave="transform transition ease-in duration-200"
+          leaveFrom="translate-x-0 opacity-100"
+          leaveTo="translate-x-full opacity-0"
+        >
+          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-3/4 max-w-sm bg-white/80 p-6 shadow-xl">
+            <div className="flex items-center justify-end">
+            
+              <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-base font-medium text-gray-800 hover:text-[#00AEEF]"
+                className="text-blue-900"
+                aria-label="Cerrar menú"
               >
-                {item.name}
+                <XMarkIcon className="h-10 w-10" />
+              </button>
+            </div>
+
+            <div className="mt-6 space-y-4">
+              {navigation.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-base font-medium text-blue-900 hover:text-[#00AEEF]"
+                >
+                  {item.name}
+                </a>
+              ))}
+              <a
+                href="#calculadora"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block mt-4 rounded-full bg-blue-900 px-4 py-2 text-white text-center font-semibold hover:bg-[#14149c]"
+              >
+                Calculadora
               </a>
-            ))}
-            <a
-              href="#calculadora"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block mt-4 rounded-full bg-[#1b1ba6] px-4 py-2 text-white text-center font-semibold hover:bg-[#14149c]"
-            >
-              Calculadora
-            </a>
-          </div>
-        </Dialog.Panel>
+            </div>
+          </Dialog.Panel>
+        </Transition.Child>
       </Dialog>
+    </Transition>
     </header>
   );
 }

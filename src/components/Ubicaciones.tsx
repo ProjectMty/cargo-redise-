@@ -2,6 +2,11 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+
 const navigation = [
     { name: "México", href: "/img/ubicacion/Mexico.svg" },
     { name: "USA", href: "/img/ubicacion/Usa.svg" },
@@ -90,18 +95,35 @@ export default function Ubicaciones() {
                     </div>
                 </div>
                 {/* Mapa de paises */}
-                
-                <div className="absolute left-1/2 top-28 lg:top-52 -translate-x-1/2 items-center">
-                        {/* imagen de mapa -mx-10*/}
-                        
-                        <div className="relative max-h-[200px] lg:max-h-[500px] overflow-hidden w-xs lg:w-lg ">
 
-                            <img src={imagen} alt="mapa" className={`w-full h-full object-cover transition-opacity duration-500 ${fade ? 'opacity-100' : 'opacity-0'}`} />
-                        
-                        </div>
-                        
+                <div className="absolute left-1/2 top-28 lg:top-52 -translate-x-1/2 items-center">
+                    {/* Carrusel en móvil */}
+                    <div className="relative max-h-[200px] lg:hidden overflow-hidden w-xs">
+                        <Swiper
+                            modules={[Pagination]}
+                            spaceBetween={10}
+                            slidesPerView={1}
+                            pagination={{ clickable: true }}
+                            className="w-full h-full"
+                        >
+                            {navigation.map((img) => (
+                                <SwiperSlide key={img.name}>
+                                    <img
+                                        src={img.href}
+                                        alt={`slide-${img.href}`}
+                                        className="w-full h-full object-cover rounded-lg"
+                                    />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </div>
+
+                    {/* Desktop con navbar */}
+                    <div className="hidden lg:block relative max-h-[200px] lg:max-h-[500px] overflow-hidden w-xs lg:w-lg ">
+                        <img src={imagen} alt="mapa" className={`w-full h-full object-cover transition-opacity duration-500 ${fade ? 'opacity-100' : 'opacity-0'}`} />
+                    </div>
                 </div>
-                
+
 
             </div >
 
