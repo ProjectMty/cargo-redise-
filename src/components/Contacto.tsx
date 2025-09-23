@@ -1,17 +1,16 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
+
 import AnimatedText from "@/animate/TextAnimate";
 export default function Contacto() {
 
     return (
-        <section id="contacto" className=" z-0 relative w-full flex
+        <section id="contacto" className=" z-0 relative w-full flex scroll-mt-20
         justify-center items-center py-5 bg-gradient-to-r from-blue-400 to to-blue-900 font-[Montserrat] scroll-smooth">
 
             <div className="relative w-full z-10">
                 <AnimatedText delay={0.2} lines={[
- <h1 className="font-extrabold text-[40px] lg:text-[55px] text-white text-center relative  mt-5">
+                 <h1 key={1} className="font-extrabold text-[40px] lg:text-[55px] text-white text-center relative  mt-5">
                     Contáctanos
                 </h1>
                 ]}></AnimatedText>

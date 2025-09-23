@@ -3,13 +3,12 @@ import React from "react"
 
 interface DivScaleProps {
     children?: React.ReactNode;
-    className?: string;
     scale?: number;
     
 }
 
 
-const DivZoom: React.FC<DivScaleProps> = ({ children, className, scale}) => {
+const DivZoom: React.FC<DivScaleProps> = ({ children, scale}) => {
     return(
         <motion.div
             whileHover = {{ scale }}

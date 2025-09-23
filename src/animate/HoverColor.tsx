@@ -1,4 +1,4 @@
-import SideBackground from "@/components/SideBackground";
+
 import {easeInOut, motion} from "framer-motion"
 import React from "react"
 

@@ -1,6 +1,5 @@
 "use client";
 import AnimatedText from "@/animate/TextAnimate";
-import { span } from "framer-motion/client";
 
 export default function Intro() {
   return (
@@ -16,10 +15,8 @@ export default function Intro() {
         <AnimatedText delay={0.6}
           lines={[
             
-              <span> Servicio de Compras y Comercialización </span>,
-              
-              <span> y Pago a Proveedores Internacionales</span>
-           
+              <span key={1}> Servicio de Compras y Comercialización </span>,
+              <span key={2}> y Pago a Proveedores Internacionales</span>
           ]}>
 
         </AnimatedText>

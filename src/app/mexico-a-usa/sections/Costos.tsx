@@ -28,7 +28,7 @@ export default function Costos() {
   ];
 
   return (
-    <section className="w-full bg-[#F2F2F2]" id="CostosUSA">
+    <section className="w-full bg-[#F2F2F2] scroll-mt-20" id="CostosUSA">
       {/* --------- Banda de fondo delgada + título --------- */}
       <div className="relative w-full h-[270px] overflow-hidden">
         <Image
@@ -40,11 +40,11 @@ export default function Costos() {
         />
         <div className="relative z-10 h-full flex items-start justify-center mt-10">
           <AnimatedText delay={0.2} lines={[
-<h2 className="text-white drop-shadow-md text-[28px] md:text-[34px] font-extrabold font-[Montserrat]">
-            Estructura de Costos
-          </h2>
+            <h2 key={1} className="text-white drop-shadow-md text-[28px] md:text-[34px] font-extrabold font-[Montserrat]">
+              Estructura de Costos
+            </h2>
           ]}></AnimatedText>
-          
+
         </div>
       </div>
 

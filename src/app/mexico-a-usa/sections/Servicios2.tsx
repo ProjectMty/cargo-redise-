@@ -5,7 +5,7 @@ import DivZoom from "@/animate/DivZoom";
 
 export default function Servicios2() {
   return (
-    <section className="w-full bg-[#F2F2F2] py-16" id="personalizadoUSA">
+    <section className="w-full bg-[#F2F2F2] py-16 scroll-mt-10" id="personalizadoUSA">
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         {/* Tarjeta grande con doble sombra (similar a tu referencia) */}
         <div className="relative rounded-[32px] bg-gradient-to-b from-[#2C69B3] to-[#1F51A6] p-1">
@@ -13,7 +13,7 @@ export default function Servicios2() {
           <div className="rounded-[30px] bg-[#2C59A7] p-6 md:p-10">
             {/* Título */}
             <AnimatedText delay={0.2} lines={[
-              <h2 className="text-white font-[Montserrat] font-extrabold text-2xl md:text-4xl text-center">
+              <h2 key={1} className="text-white font-[Montserrat] font-extrabold text-2xl md:text-4xl text-center">
                 Servicios Personalizados
               </h2>
             ]}>
@@ -25,7 +25,7 @@ export default function Servicios2() {
             <div className="mt-8 grid md:grid-cols-2 gap-8 items-center">
               <div className="text-white">
                 <AnimatedText delay={0.6} lines={[
-                  <h3 className="font-[Montserrat] font-extrabold text-xl md:text-2xl text-center md:text-left">
+                  <h3 key={1} className="font-[Montserrat] font-extrabold text-xl md:text-2xl text-center md:text-left">
                     Recibir pagos de tus clientes extranjeros
                   </h3>
                 ]}>
@@ -68,7 +68,7 @@ export default function Servicios2() {
               </DivZoom>
               <div className="text-white">
                 <AnimatedText delay={0.8} lines={[
-                  <h3 className="font-[Montserrat] font-extrabold text-xl md:text-2xl">
+                  <h3 key={1} className="font-[Montserrat] font-extrabold text-xl md:text-2xl">
                     FBA prep
                   </h3>
                 ]}>

@@ -6,11 +6,11 @@ import DivZoom from "@/animate/DivZoom";
 
 export default function Intro() {
   return (
-    <section className="w-full bg-[#F2F2F2]" id="intro">
+    <section className="w-full bg-[#F2F2F2] scroll-mt-20" id="intro">
       {/* Título en dos renglones */}
       <div className="max-w-6xl mx-auto px-4 md:px-6 pt-10 md:pt-14">
 <TextDownAnimate delay={0.6} lines={[
-  <h2 className="text-center font-[Montserrat] font-extrabold text-[34px] md:text-[44px] leading-tight text-[#1e3a8a]">
+  <h2 key={1} className="text-center font-[Montserrat] font-extrabold text-[34px] md:text-[44px] leading-tight text-[#1e3a8a]">
           ¡Vende en <span className="text-[#1D4ED8]">Amazon USA</span>
           <br />
           <span className="font-[Montserrat] font-bold text-[#1e3a8a]">

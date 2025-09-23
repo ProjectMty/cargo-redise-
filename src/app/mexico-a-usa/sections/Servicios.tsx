@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import AnimatedText from "@/animate/TextAnimate";
-import { AnimatePresence, delay } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import FadeInFromLeft from "@/animate/FadeInFromLeft";
 import DivZoom from "@/animate/DivZoom";
 
@@ -78,12 +78,12 @@ export default function ServiciosMxUsa() {
     "border border-[#F2F2F2] text-[#F2F2F2] bg-transparent hover:bg-white/10";
 
   return (
-    <section className="w-full bg-[#2E47A1] text-white" id="serviciosUSA">
+    <section className="w-full bg-[#2E47A1] text-white scroll-mt-20" id="serviciosUSA">
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-10">
 
         {/* Título */}
         <AnimatedText delay={0.2} lines={[
-          <h2 className="text-center text-white font-[Montserrat] font-extrabold text-[34px] md:text-[44px] leading-tight mb-6">
+          <h2 key={1} className="text-center text-white font-[Montserrat] font-extrabold text-[34px] md:text-[44px] leading-tight mb-6">
             Nuestros Servicios
           </h2>
         ]}></AnimatedText>

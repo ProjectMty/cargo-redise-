@@ -3,11 +3,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import DivZoom from "@/animate/DivZoom";
-import TextDownAnimate from "@/animate/TextDownAnimate";
 import AnimatedText from "@/animate/TextAnimate";
 import FadeInFromLeft from "@/animate/FadeInFromLeft";
 import { AnimatePresence, delay } from "framer-motion";
-import { Fascinate } from "next/font/google";
+
 
 /* ================== CONTROLES RÁPIDOS ================== */
 const PANEL_MAX_W = 1120;       // ancho máx del panel (px) ~ como tus maquetas
@@ -167,7 +166,7 @@ export default function Services() {
         <AnimatedText
           delay={0.2}
           lines={[
-            <h2 className="text-center font-[Montserrat] font-bold text-sky-600 text-[36px] md:text-[42px]">
+            <h2 key={1} className="text-center font-[Montserrat] font-bold text-sky-600 text-[36px] md:text-[42px]">
               Nuestros Servicios
             </h2>
           ]}>
@@ -224,7 +223,7 @@ export default function Services() {
                               delay={0.2}
                               lines={[
 
-                                <h3 className="text-white font-[Montserrat] font-extrabold text-[18px] md:text-[30px] leading-tight mb-4">
+                                <h3 key={1} className="text-white font-[Montserrat] font-extrabold text-[18px] md:text-[30px] leading-tight mb-4">
                                   {service.title}
                                 </h3>
                               ]}></AnimatedText>

@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import { motion, easeOut } from "framer-motion";
-import { Container } from "lucide-react";
+
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const ContainerSteps = {

@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
-import { FaWhatsapp, FaInstagram, FaFacebook, FaPhoneAlt, FaYoutube } from "react-icons/fa";
+import { FaWhatsapp, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
 
 export default function Footer(){
     return(

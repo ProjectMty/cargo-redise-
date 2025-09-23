@@ -1,10 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import DivZoom from "@/animate/DivZoom";
 const navigation = [
     { name: "México", href: "/img/ubicacion/Mexico.svg" },
     { name: "USA", href: "/img/ubicacion/Usa.svg" },
@@ -16,7 +13,7 @@ export default function Ubicaciones() {
     const [seleccion, setSeleccion] = useState("México");
     const [imagen, setImagen] = useState("/img/ubicacion/Mexico.svg");
     const [fade, setFade] = useState(true);
-    const [mobileNav, setMobileNav] = useState(false);
+    // const [mobileNav, setMobileNav] = useState(false);
 
     function changeSeleccion(name: string) {
         switch (name) {

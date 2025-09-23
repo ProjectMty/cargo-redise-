@@ -1,28 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import Link from "next/link";
 import SectionDefault from "@/animate/SectionDefault"
 import AnimatedText from "@/animate/TextAnimate";
 import DivZoom from "@/animate/DivZoom";
 import TextDownAnimate from "@/animate/TextDownAnimate";
 
 
-const navigation = [
-  { name: "Inicio", href: "/#hero" },
-  { name: "Nosotros", href: "/#servicios" },
-  { name: "¿Cómo funciona?", href: "/#comofunciona" },
-  { name: "Buy & Ship", href: "/#buyandship" },      // ← ancla en home
-  { name: "México a USA", href: "/mexico-a-usa" },   // ← página aparte
-  { name: "Tarifas", href: "/#tarifas" },
-  { name: "Contáctanos", href: "/#contacto" },
-];
+// const navigation = [
+//   { name: "Inicio", href: "/#hero" },
+//   { name: "Nosotros", href: "/#servicios" },
+//   { name: "¿Cómo funciona?", href: "/#comofunciona" },
+//   { name: "Buy & Ship", href: "/#buyandship" },      // ← ancla en home
+//   { name: "México a USA", href: "/mexico-a-usa" },   // ← página aparte
+//   { name: "Tarifas", href: "/#tarifas" },
+//   { name: "Contáctanos", href: "/#contacto" },
+// ];
 
 export default function Hero() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
 
@@ -45,9 +42,9 @@ export default function Hero() {
             <AnimatedText
               delay={0.25}
               lines={[
-                <span className="block font-bold">Importa <span className="">fácil y rápido </span> <span className="font-normal">desde</span></span>,
-                <span className="block">cualquier parte del mundo con</span>,
-                <span className="font-bold">Cargo Monterrey!</span>
+                <span key={1} className="block font-bold">Importa <span className="">fácil y rápido </span> <span className="font-normal">desde</span></span>,
+                <span key={2} className="block">cualquier parte del mundo con</span>,
+                <span key={3} className="font-bold">Cargo Monterrey!</span>
                 // <span className="block">Importa <span className="text-white font-extrabold">fácil y rápido</span> desde</span>,
                 // <span className="block">cualquier parte del mundo con</span>,
 
@@ -182,7 +179,7 @@ export default function Hero() {
           <TextDownAnimate
             delay={1}
             lines={[
-              <h2 className="text-center font-extrabold leading-tight text-[26px] md:text-4xl">
+              <h2 key={1} className="text-center font-extrabold leading-tight text-[26px] md:text-4xl">
                 ¡Somos la mejor solución <span className="font-bold">para</span>,
                 <br className="hidden md:block" />
                 envíos y fletes de <span className="text-white">USA a México!</span>

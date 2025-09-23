@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+
 import AnimatedText from "@/animate/TextAnimate";
 import DivZoom from "@/animate/DivZoom";
 
@@ -12,7 +12,7 @@ export default function Tarifas() {
         <AnimatedText
           delay={0.2}
           lines={[
-            < h2 className="text-center text-blue-800 text-4xl md:text-5xl font-bold mb-12">
+            < h2 key={1} className="text-center text-blue-800 text-4xl md:text-5xl font-bold mb-12">
               Tarifas
             </h2>
           ]}>

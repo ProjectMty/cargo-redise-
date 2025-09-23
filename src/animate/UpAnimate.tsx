@@ -3,13 +3,12 @@ import React from "react"
 
 interface UpProps {
     children?: React.ReactNode;
-    className?: string;
     move?: number;
     
 }
 
 
-const UpAnimate: React.FC<UpProps> = ({ children, className = '', move}) => {
+const UpAnimate: React.FC<UpProps> = ({ children, move}) => {
     return(
    <motion.div
       whileHover={{ y: move}}

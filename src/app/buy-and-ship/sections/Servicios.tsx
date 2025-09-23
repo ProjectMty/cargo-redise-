@@ -2,7 +2,6 @@
 import Image from "next/image";
 import DivZoom from "@/animate/DivZoom";
 import AnimatedText from "@/animate/TextAnimate";
-import TimeZoom from "@/animate/TimeZoom";
 
 const services = [
   { icon: "/img/icons/buyandship/Icono 1.svg", title: "Verificación de proveedor", desc: "Podemos realizar visita a fábricas y oficinas para asegurarnos que sí existe." },
@@ -33,7 +32,7 @@ export default function ServiciosBuyAndShip() {
       <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
         {/* Título */}
         <AnimatedText delay={0.2} lines={[
-          <h2 className="text-center font-[Montserrat] font-extrabold text-[40px] md:text-[50px] text-white mb-8">
+          <h2 key={1} className="text-center font-[Montserrat] font-extrabold text-[40px] md:text-[50px] text-white mb-8">
             Nuestros servicios
           </h2>
         ]}></AnimatedText>
@@ -52,7 +51,7 @@ export default function ServiciosBuyAndShip() {
 
           <div className="flex flex-col gap-4 md:gap-4">
             {services.map((s, i) => (
-              <DivZoom scale={1.1}>
+              <DivZoom scale={1.1} >
                 <div
                   key={i}
                   className="
