@@ -51,7 +51,7 @@ export default function ServiciosBuyAndShip() {
 
           <div className="flex flex-col gap-4 md:gap-4">
             {services.map((s, i) => (
-              <DivZoom scale={1.1} >
+              <DivZoom scale={1.1} key={1}>
                 <div
                   key={i}
                   className="

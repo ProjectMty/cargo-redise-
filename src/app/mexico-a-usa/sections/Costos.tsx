@@ -52,7 +52,7 @@ export default function Costos() {
       <div className="max-w-6xl mx-auto px-4 md:px-30 -mt-30 pb-18">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
           {items.map((it, i) => (
-            <UpAnimate move={-10}>
+            <UpAnimate move={-10} key={1}>
               <div
                 key={i}
                 className="

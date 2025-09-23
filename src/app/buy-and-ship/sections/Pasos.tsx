@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, easeOut, delay, easeIn } from "framer-motion";
+import { motion, easeIn } from "framer-motion";
 
 import ShowUp from "@/animate/PASOS/ShowUp";
 

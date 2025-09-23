@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import SectionDefault from "@/animate/SectionDefault"
 import AnimatedText from "@/animate/TextAnimate";

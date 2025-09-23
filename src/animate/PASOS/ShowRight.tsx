@@ -1,6 +1,6 @@
 import { easeOut, motion, useAnimation, useInView, Variants } from "framer-motion";
 import { useRef, useEffect } from "react";
-import { circOut, easeIn } from "framer-motion";
+import { easeIn } from "framer-motion";
 
 interface ShowRightProps{
   children?: React.ReactNode;

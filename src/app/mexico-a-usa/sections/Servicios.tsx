@@ -67,7 +67,7 @@ centros de distribución de Amazon.`,
 export default function ServiciosMxUsa() {
   const [activeId, setActiveId] = useState<number>(1);
   const active = services.find((s) => s.id === activeId)!;
-  const [showComponent, setShowComponent] = useState(true); // <-- Aquí defines 'showComponent'
+  const [showComponent] = useState(true); // <-- Aquí defines 'showComponent'
 
   // estilos de botones
   const baseBtn =

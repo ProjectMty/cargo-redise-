@@ -41,7 +41,7 @@ export default function Industrias() {
         />
         <div className="absolute inset-0 flex items-center justify-center mb-20">
           <AnimatedText delay={0.2} lines={[
-            <h2 className="text-white drop-shadow-[0_3px_5px_rgba(0,0,0,0.6)] text-[26px] md:text-[45px] font-extrabold font-[Montserrat]">
+            <h2 key={1} className="text-white drop-shadow-[0_3px_5px_rgba(0,0,0,0.6)] text-[26px] md:text-[45px] font-extrabold font-[Montserrat]">
               Tipos de Industrias
             </h2>
           ]}>
@@ -55,7 +55,7 @@ export default function Industrias() {
       <div className="relative max-w-6xl mx-auto px-4 md:px-6 -mt-20 z-50">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {industrias.map((item) => (
-            <UpAnimate move={-10}>
+            <UpAnimate key={1} move={-10}>
               <div
                 key={item.id}
                 className="bg-white rounded-[40px] shadow-[0_12px_20px_rgba(0,0,0,0.12)] overflow-hidden h-[300px]"
@@ -84,7 +84,7 @@ export default function Industrias() {
             {/* Div parte abajo */}
             <div>
               <AnimatedText delay={0.2} lines={[
-                <h3 className="text-[#1D4ED8] font-extrabold text-[20px] md:text-[24px] mb-3">
+                <h3 key={1} className="text-[#1D4ED8] font-extrabold text-[20px] md:text-[24px] mb-3">
                   ¡No limites tus clientes a tu área geográfica!
                 </h3>
               ]}>

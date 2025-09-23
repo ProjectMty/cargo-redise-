@@ -5,7 +5,7 @@ import Image from "next/image";
 import DivZoom from "@/animate/DivZoom";
 import AnimatedText from "@/animate/TextAnimate";
 import FadeInFromLeft from "@/animate/FadeInFromLeft";
-import { AnimatePresence, delay } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 
 /* ================== CONTROLES RÁPIDOS ================== */
