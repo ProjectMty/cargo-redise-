@@ -6,7 +6,7 @@ export default function Contacto() {
 
     return (
         <section id="contacto" className=" z-0 relative w-full flex scroll-mt-20
-        justify-center items-center py-5 bg-gradient-to-r from-blue-400 to to-blue-900 font-[Montserrat] scroll-smooth">
+        justify-center items-center py-5 bg-gradient-to-r from-blue-400 to to-blue-900 scroll-smooth">
 
             <div className="relative w-full z-10">
                 <AnimatedText delay={0.2} lines={[

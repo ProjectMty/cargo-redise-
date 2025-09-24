@@ -9,6 +9,7 @@ import Services from "@/components/Services";
 import Tarifas from "@/components/Tarifas";
 import Ubicaciones from "@/components/Ubicaciones";
 import Footer from "@/components/Footer";
+import Calculadora from "@/components/Calculadora";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <Services />
       <ComoFunciona />
       <Tarifas />
+      <Calculadora />
       <Partnership />
       <BuyAndShipCTA /> {/* <-- sólo en Home */}
       <Ubicaciones />

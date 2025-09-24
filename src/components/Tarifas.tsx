@@ -64,8 +64,9 @@ export default function Tarifas() {
       </div>
       {/* Cobros Adicionales */}
 
-          <DivZoom scale={1.02}>
+       
       <div className="mt-16 flex justify-center " >
+        <DivZoom scale={1.05}>
         <div className="bg-[#ffffff] rounded-xl shadow-md p-6 md:p-8 max-w-4xl w-full">
           <h3 className="text-xl md:text-2xl font-bold text-color text-blue-800 mb-4 text-center">
             Cobros adicionales
@@ -93,8 +94,9 @@ export default function Tarifas() {
             </li>
           </ul>
         </div>
+        </DivZoom>
       </div>
-</DivZoom>
+
     </section>
   );
 }

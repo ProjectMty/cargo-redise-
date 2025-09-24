@@ -64,9 +64,9 @@ export default function Navbar() {
         </div>
 
         {/* CTA Calculadora */}
-        <div className="hidden lg:block opacity-0">
+        <div className="lg:block ">
           <a
-            href="#calculadora"
+            href="/#calculadora"
             className="rounded-full bg-[#1b1ba6] text-white px-5 py-1.5 text-sm font-semibold hover:bg-[#14149c] transition"
           >
             Calculadora
