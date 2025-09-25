@@ -5,7 +5,7 @@
 }
 
 .fondo-contenedor{
-    @apply bg-blue-800 rounded-3xl
+    @apply bg-blue-800 rounded-3xl p-5
 }
 
 .titulo {
@@ -14,6 +14,10 @@
 
 .tipo {
     @apply text-end text-white text-4xl md:text-5xl font-bold pr-20
+}
+
+.volumen {
+    @apply text-end text-white text-3xl font-bold 
 }
 
 .precio {
@@ -27,31 +31,34 @@
   @apply grid grid-cols-2 gap-5 mt-5;
 }
 
+.contenedor-filas-2 {
+    @apply grid grid-rows-2 gap-1
+}
+
 .select {
     @apply  text-center bg-white text-2xl text-blue-900 rounded-xl px-10 py-2
 }
-.tarjeta {
-  @apply grid grid-rows-2 gap-5 bg-blue-600 p-10 rounded-xl text-center text-white shadow-lg
+.tarjeta-input {
+  @apply grid  grid-cols-2 gap-5 bg-blue-600 px-4 py-10 rounded-xl text-center text-white shadow-lg
 }
 
-.tarjeta-envio {
-      @apply grid grid-rows-2 gap-5 bg-white p-10 rounded-xl text-center text-blue-900 shadow-lg
+.tarjeta-volumen {
+  @apply grid grid-cols-3 gap-5 bg-blue-600 p-6 rounded-xl text-center text-white shadow-lg
+}
 
+.tarjeta-valor {
+  @apply grid grid-rows-2 gap-5 bg-blue-600 p-6 rounded-xl text-center text-white shadow-lg
 }
 
 .label {
-    @apply text-xl font-medium
+    @apply text-lg font-medium justify-center text-start content-center text-white
 }
 
 .input {
-  @apply w-full rounded-[3px] p-1 bg-white text-blue-800 ;
-}
-
-.button {
-   @apply rounded-xl px-20 py-3 font-medium hover:bg-blue-900 hover:text-white
-    bg-blue-600 text-white transition duration-300
+  @apply w-full max-h-8 rounded-[3px] p-2 bg-white text-blue-800 mt-[20%];
 }
 
 .p {
     @apply text-end -mt-11
 }
+

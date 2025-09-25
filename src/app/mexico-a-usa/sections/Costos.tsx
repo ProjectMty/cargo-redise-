@@ -49,7 +49,7 @@ export default function Costos() {
       </div>
 
       {/* --------- Tarjetas (sobrepuestas a la banda) --------- */}
-      <div className="max-w-6xl mx-auto px-4 md:px-30 -mt-30 pb-18">
+      <div className="max-w-6xl mx-auto px-4 md:px-28 -mt-32 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
           {items.map((it, i) => (
             <UpAnimate move={-10} key={1}>
@@ -58,7 +58,7 @@ export default function Costos() {
                 className="
                 relative bg-white rounded-[25px]
                 shadow-[0_18px_50px_rgba(0,0,0,0.10)]
-                pt-13 pb-6 px-6 text-center h-[300px]
+                pt-12 pb-6 px-6 text-center h-[300px]
               "
               >
                 {/* Icono flotante */}

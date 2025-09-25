@@ -159,7 +159,7 @@ export default function Services() {
 
 
   return (
-    <section id="servicios" className="bg-[#F2F2F2] py-14 scroll-mt-20">
+    <section id="servicios" className="bg-[#F2F2F2] py-14 scroll-mt-20 font-[Montserrat]">
       <div className="max-w-[1200px] mx-auto px-4 md:px-8">
         {/* Header y tabs */}
 

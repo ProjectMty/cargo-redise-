@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+// import { useState } from "react";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,42 +15,42 @@ const navigation = [
 
 
 export default function Ubicaciones() {
-    const [seleccion, setSeleccion] = useState("México");
-    const [imagen, setImagen] = useState("/img/ubicacion/Mexico.svg");
-    const [fade, setFade] = useState(true);
-    // const [mobileNav, setMobileNav] = useState(false);
+    // const [seleccion, setSeleccion] = useState("México");
+    // const [imagen, setImagen] = useState("/img/ubicacion/Mexico.svg");
+    // const [fade, setFade] = useState(true);
+    // // const [mobileNav, setMobileNav] = useState(false);
 
-    function changeSeleccion(name: string) {
-        switch (name) {
-            case "México":
-                setImagen("/img/ubicacion/Mexico.svg")
-                setSeleccion("México")
+    // function changeSeleccion(name: string) {
+    //     switch (name) {
+    //         case "México":
+    //             setImagen("/img/ubicacion/Mexico.svg")
+    //             setSeleccion("México")
 
-                break;
-            case "USA":
-                setImagen("/img/ubicacion/Usa.svg")
-                setSeleccion("USA")
-                break;
-            case "Canadá":
-                setImagen("/img/ubicacion/Canada.svg")
-                setSeleccion("Canadá")
-                break;
-            default:
-                setImagen("/img/ubicacion/Mexico.svg")
-                setSeleccion("México")
-                break;
-        }
+    //             break;
+    //         case "USA":
+    //             setImagen("/img/ubicacion/Usa.svg")
+    //             setSeleccion("USA")
+    //             break;
+    //         case "Canadá":
+    //             setImagen("/img/ubicacion/Canada.svg")
+    //             setSeleccion("Canadá")
+    //             break;
+    //         default:
+    //             setImagen("/img/ubicacion/Mexico.svg")
+    //             setSeleccion("México")
+    //             break;
+    //     }
 
 
-    }
-    function changeImagen(name: string) {
-        setFade(false);
+    // }
+    // function changeImagen(name: string) {
+    //     setFade(false);
 
-        setTimeout(() => {
-            changeSeleccion(name);
-            setFade(true);
-        }, 200);
-    }
+    //     setTimeout(() => {
+    //         changeSeleccion(name);
+    //         setFade(true);
+    //     }, 200);
+    // }
 
 
     return (
@@ -69,7 +69,7 @@ export default function Ubicaciones() {
                 />
                 {/* Navbar de paises */}
                 <div className="absolute left-1/2 top-36 -translate-x-1/2 items-center">
-                    <div className="hidden justify-center lg:flex space-x-10 ">
+                    {/* <div className="hidden justify-center lg:flex space-x-10 ">
                         {navigation.map((item) => (
                             <a
                                 key={item.name}
@@ -92,7 +92,7 @@ export default function Ubicaciones() {
                             </a>
                         ))}
 
-                    </div>
+                    </div> */}
                 </div>
                 {/* Mapa de paises */}
 
@@ -119,9 +119,9 @@ export default function Ubicaciones() {
                     </div>
 
                     {/* Desktop con navbar */}
-                    <div className="hidden lg:block relative max-h-[200px] lg:max-h-[500px] overflow-hidden w-xs lg:w-lg ">
+                    {/* <div className="hidden lg:block relative max-h-[200px] lg:max-h-[500px] overflow-hidden w-xs lg:w-lg ">
                         <img src={imagen} alt="mapa" className={`w-full h-full object-cover transition-opacity duration-500 ${fade ? 'opacity-100' : 'opacity-0'}`} />
-                    </div>
+                    </div> */}
                 </div>
 
 

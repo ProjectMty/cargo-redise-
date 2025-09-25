@@ -18,7 +18,7 @@ export default function Partnership() {
   const isLg = useMediaQuery("(min-width: 1024px)");
 
   return (
-    <section id="partners" className="w-full bg-white py-16 font-sans scroll-smooth">
+    <section id="partners" className="w-full bg-white py-16 scroll-smooth font-[Montserrat]">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 <AnimatedText delay={0.2}
 lines={[

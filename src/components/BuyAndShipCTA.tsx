@@ -25,7 +25,7 @@ export default function BuyAndShipCTA() {
 
 
 
-        <div className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] lg:-translate-y-[60%] w-[88vw] max-w-[500px] text-center ">
+        <div className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] lg:-translate-y-[60%] w-[88vw] max-w-[500px] text-center text-white">
           <TextShow delay={0.2} lines={[
             <h1 key={1} className="font-extrabold lg:text-[35px] mb-3 lg:mb-10">
               ¿Buscas proveedores para surtir tu negocio?

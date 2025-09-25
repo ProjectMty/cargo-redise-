@@ -46,7 +46,7 @@ export default function ComoFunciona() {
   return (
     <motion.section
       id="comofunciona"
-      className="relative bg-gradient-to-r from-[#1B59E1] to-[#05C2F2] py-16 px-4 md:px-8 scroll-mt-10"
+      className="relative bg-gradient-to-r from-[#1B59E1] to-[#05C2F2] py-16 px-4 md:px-8 scroll-mt-10 font-[Montserrat]"
       variants={ContainerSteps}
       initial="hidden"
       whileInView="show"

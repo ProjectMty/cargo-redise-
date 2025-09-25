@@ -59,7 +59,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full font-sans overflow-hidden rounded-b-[60px] bg-[#F2F2F2]">
+    <section className="relative w-full overflow-hidden rounded-b-[60px] bg-[#F2F2F2] font-[Montserrat]">
       {/* Imagen de fondo */}
       <div className="relative w-full h-[400px] md:h-[520px] lg:h-[577px] ">
         <Image
@@ -101,7 +101,7 @@ export default function Hero() {
 
       {/* Navbar */}
       <header className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm transition-colors duration-500
-       ${scrolled ? 'bg-white/60 shadox-md' : 'bg-transparent'
+       ${scrolled ? 'bg-white/80 shadox-md' : 'bg-transparent'
         }`}>
         <nav className="w-full bg-transparent">
           <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between py-6">
@@ -122,7 +122,7 @@ export default function Hero() {
                 <button
                   key={item.name}
                   onClick={() => handleSmartNavigation(item.href)}
-                  className={`relative text-sm font-medium tracking-normal group transition-colors duration-300
+                  className={`relative text-sm font-light tracking-normal group transition-colors duration-300
       ${scrolled ? 'text-blue-900' : 'text-white'}`}
                 >
                   {item.name}
@@ -132,7 +132,7 @@ export default function Hero() {
 
             </div>
 
-          {/* calculadora */}
+            {/* calculadora */}
             <div className="hidden lg:block">
               <a
                 href="#calculadora"
@@ -148,16 +148,16 @@ export default function Hero() {
                 className="text-white"
                 aria-label="Abrir menú"
               >
-                  <Bars3Icon className={`h-10 w-10 ${mobileMenuOpen ? "hidden": " block"}`} ></Bars3Icon>
-             
+                <Bars3Icon className={`h-10 w-10 ${mobileMenuOpen ? "hidden" : " block"}`} ></Bars3Icon>
+
               </button>
             </div>
           </div>
         </nav>
 
-          {/* Menu movil */}
-    
-             <Transition show={mobileMenuOpen} as={Fragment}>
+        {/* Menu movil */}
+
+        <Transition show={mobileMenuOpen} as={Fragment}>
           <Dialog
             as="div"
             className="lg:hidden"
@@ -175,7 +175,7 @@ export default function Hero() {
             >
               <div className="fixed inset-0 bg-black/50 z-40" />
             </Transition.Child>
-    
+
             {/* Panel*/}
             <Transition.Child
               as={Fragment}
@@ -188,7 +188,7 @@ export default function Hero() {
             >
               <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-3/4 max-w-sm bg-white/80 p-6 shadow-xl">
                 <div className="flex items-center justify-end">
-                
+
                   <button
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-blue-900"
@@ -197,7 +197,7 @@ export default function Hero() {
                     <XMarkIcon className="h-10 w-10" />
                   </button>
                 </div>
-    
+
                 <div className="mt-6 space-y-4">
                   {navigation.map((item) => (
                     <a

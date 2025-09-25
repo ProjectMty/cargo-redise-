@@ -6,7 +6,7 @@ import DivZoom from "@/animate/DivZoom";
 
 export default function Tarifas() {
   return (
-    <section className="w-full font-sans bg-white py-16 scroll-mt-15" id="tarifas">
+    <section className="w-full bg-white py-16 scroll-mt-15 font-[Montserrat]" id="tarifas">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         <AnimatedText

@@ -36,18 +36,15 @@ export default function Hero() {
         {/* Texto sobrepuesto centrado */}
 
         <div className="absolute inset-0 flex items-center justify-center text-center px-4 md:px-6 z-10">
-          <h1 className="text-white font-normal leading-tight drop-shadow-lg  text-[28px] sm:text-3xl md:text-4xl lg:text-5xl max-w-3xl mx-auto">
+          <h1 className="text-white font-normal leading-tight drop-shadow-lg text-[28px] sm:text-3xl md:text-4xl lg:text-5xl max-w-3xl mx-auto">
 
             <AnimatedText
               delay={0.25}
               lines={[
-                <span key={1} className="block font-bold">Importa <span className="">fácil y rápido </span> <span className="font-normal">desde</span></span>,
-                <span key={2} className="block">cualquier parte del mundo con</span>,
-                <span key={3} className="font-bold">Cargo Monterrey!</span>
-                // <span className="block">Importa <span className="text-white font-extrabold">fácil y rápido</span> desde</span>,
-                // <span className="block">cualquier parte del mundo con</span>,
-
-                // <span className="block">Cargo Monterrey!</span>
+                <span key={1} className="block font-bold mb-3">Importa <span className="">fácil y rápido </span> <span className="font-normal">desde</span></span>,
+                <span key={2} className="block mb-3">cualquier parte del mundo con</span>,
+                <span key={3} className="font-bold ">Cargo Monterrey!</span>
+     
               ]}>
 
 
@@ -61,7 +58,7 @@ export default function Hero() {
 
       {/* Caja blanca de servicios */}
       <SectionDefault>
-        <div className="relative z-20 flex justify-center -mt-20 md:-mt-32 px-4 md:px-8">
+        <div className="relative z-20 flex justify-center -mt-20 md:-mt-32 px-4 md:px-8 mb-20">
           <div className="w-full max-w-6xl bg-white rounded-[40px] shadow-xl p-6 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-8">
 
             {/* Servicio 1 */}

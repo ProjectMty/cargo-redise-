@@ -32,7 +32,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm transition-colors duration-500
+    <header className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm transition-colors duration-500 font-[Montserrat]
        ${scrolled ? 'bg-white/60 shadox-md' : 'bg-transparent'
       }`}>
 
@@ -54,7 +54,7 @@ export default function Navbar() {
             <a
               key={item.name}
               href={item.href}
-              className={`relative text-sm font-medium tracking-normal group transition-colors duration-300
+              className={`relative text-sm font-light tracking-normal group transition-colors duration-300
                  ${scrolled ? 'text-blue-900' : 'text-white'}`}
             >
               {item.name}
@@ -65,12 +65,12 @@ export default function Navbar() {
 
         {/* CTA Calculadora */}
         <div className="lg:block ">
-          <a
+          <Link
             href="/#calculadora"
             className="rounded-full bg-[#1b1ba6] text-white px-5 py-1.5 text-sm font-semibold hover:bg-[#14149c] transition"
           >
             Calculadora
-          </a>
+          </Link>
         </div>
 
         {/* Mobile menu button */}
