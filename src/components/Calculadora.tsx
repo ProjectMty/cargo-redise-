@@ -205,7 +205,7 @@ export default function Calculadora() {
             </AnimatedText>
 
             <div className="fondo-contenedor">
-                <div className="flex gap-2 justify-end mr-16 -mb-16"> 
+                <div className="flex gap-2 justify-end mr-16 -mb-32"> 
                     <button
                             onClick={() => setOpcion("MXS")}
                             className={`px-4 py-2 rounded-lg font-semibold mt-10 w-28
@@ -252,13 +252,11 @@ export default function Calculadora() {
                        
                     </div>
 
-
-
                     <div className="contenedor-4">
                         {/* Ingreso de valor */}
                         <div className="tarjeta-input">
                             <label htmlFor="valor" className="label">Valor producto: </label>
-                            <input type="number" className="input" value={valor} onChange={handleChangeValor} placeholder="USD" />
+                            <input type="number" className="input" value={valor} onChange={handleChangeValor} placeholder={opcion === "USA" ? "USD" : "MXN"} />
                         </div>
 
                         {/* Ingreso de peso */}
@@ -267,7 +265,7 @@ export default function Calculadora() {
                             <input type="number" className="input" value={peso} onChange={(e) =>
                                 setPeso(e.target.value === "" ? "" : Number(e.target.value))
                             }
-                                onBlur={handleBlurPeso} placeholder="lb" />
+                                onBlur={handleBlurPeso} placeholder={opcion === "USA" ? "lb" : "kg"} />
                         </div>
 
                         <div className="tarjeta-input">
@@ -289,23 +287,23 @@ export default function Calculadora() {
                         {/* largo */}
                         <div className="tarjeta-input">
                             <label htmlFor="largo" className="label"> Largo:</label>
-                            <input type="number" className="input" value={largo} disabled={pallets} onChange={handleChangeLargo} placeholder="0 cm" />
+                            <input type="number" className="input" value={largo} disabled={pallets} onChange={handleChangeLargo} placeholder={opcion === "USA" ? "0 in" : "0 cm"} />
                         </div>
                         {/* ancho */}
                         <div className="tarjeta-input" >
                             <label htmlFor="ancho" className="label"> Ancho:</label>
-                            <input type="number" className="input" value={ancho} disabled={pallets} onChange={handleChangeAncho} placeholder="0 cm" />
+                            <input type="number" className="input" value={ancho} disabled={pallets} onChange={handleChangeAncho} placeholder={opcion === "USA" ? "0 in" : "0 cm"} />
                         </div>
                         {/*alto  */}
                         <div className="tarjeta-input">
                             <label htmlFor="alto" className="label"> Alto:</label>
-                            <input type="number" className="input" value={alto} onChange={handleChangeAlto} placeholder="0 cm" />
+                            <input type="number" className="input" value={alto} onChange={handleChangeAlto} placeholder={opcion === "USA" ? "0 in" : "0 cm"} />
                         </div>
                         {/* volumen */}
                         <div className="tarjeta-volumen">
                             <label className="label"> Volumen:</label>
                             <h2 className="volumen">{volumen}</h2>
-                            <p className="label"> cm3</p>
+                            <p className="label"> {opcion === "USA" ? " in3" : " cm3"}</p>
                         </div>
                     </div>
 
