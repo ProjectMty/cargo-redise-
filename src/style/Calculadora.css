@@ -5,11 +5,15 @@
 }
 
 .fondo-contenedor{
-    @apply bg-blue-800 rounded-3xl p-5
+    @apply  rounded-3xl p-5 grid grid-cols-3
 }
 
 .titulo {
-    @apply text-center text-white text-4xl md:text-7xl font-bold mb-10 
+    @apply text-center text-white text-4xl md:text-7xl font-bold 
+}
+
+.subtitulo {
+    @apply text-center text-white text-xl font-medium mt-5
 }
 
 .tipo {
@@ -17,48 +21,69 @@
 }
 
 .volumen {
-    @apply text-end text-white text-3xl font-bold mt-6
+    @apply text-end text-white text-2xl font-bold mb-1
 }
 
 .precio {
     @apply text-start text-white text-4xl md:text-3xl font-bold pr-20
 }
-.contenedor-4 {
-  @apply grid grid-cols-4 gap-5 mt-5;
-}
+
 
 .contenedor-2 {
   @apply grid grid-cols-2 gap-5 mt-5;
 }
 
 .contenedor-filas-2 {
-    @apply grid grid-rows-2 gap-1
+    @apply grid grid-rows-2 gap-1 
+}
+
+.contenedor-filas-4 {
+    @apply grid grid-rows-2 gap-4 
 }
 
 .select {
     @apply  text-center bg-white text-2xl text-blue-900 rounded-xl px-10 py-2
 }
-.tarjeta-input {
-  @apply grid  grid-cols-2 gap-5 bg-blue-600 px-4 py-10 rounded-xl text-center text-white shadow-lg
+.tarjeta-notas {
+  @apply grid  grid-rows-[1fr_auto] gap-1 bg-blue-800 rounded-xl px-3 py-2 ;
 }
 
-.tarjeta-volumen {
-  @apply grid grid-cols-3 gap-5 bg-blue-600 p-6 rounded-xl text-center text-white shadow-lg
+.tarjeta-ingreso {
+    @apply grid  grid-cols-2 gap-1 bg-blue-800 px-3 py-2.5 rounded-xl text-center
+   text-white shadow-xl items-center max-h-20;
 }
+
+.tarjeta-salida {
+    @apply grid grid-cols-2 gap-5 px-5
+   text-white place-items-center;
+}
+
 
 .tarjeta-valor {
   @apply grid grid-rows-2 gap-5 bg-blue-600 p-6 rounded-xl text-center text-white shadow-lg
 }
 
 .label {
-  @apply text-lg font-medium justify-center text-start content-center text-white
+  @apply text-base font-light justify-center text-start content-center text-white
 }
 
 .input {
-  @apply w-full max-h-8 rounded-[3px] p-2 bg-white text-blue-800 mt-[20%];
+  @apply w-full h-8 bg-white text-black rounded-lg px-5;
 }
 
 .p {
     @apply text-end -mt-11
 }
 
+.button {
+   @apply rounded-xl px-20 py-3 font-medium hover:bg-blue-900 hover:text-white
+    bg-blue-600 text-white transition duration-300
+}
+
+.envio {
+  @apply grid grid-rows-2 gap-2 mt-10
+}
+
+.notas {
+  @apply  text-xs font-light text-gray-200 text-center mt-3
+}

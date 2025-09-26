@@ -1,38 +1,13 @@
-// ranngo 1 < 119USD es cobro minimo direecto de $300MXN  *
 
-// rango 2 $120 - $475 se multiplica el precio por el 14% *
+// sE ESTA CALCULANDO EN DOLARES
 
-// rango 3 $476-$3000 se multiplica por el 13% *
-
-// rango 4 > $3000 se multiplica por el 12% *
-
-// *************************************************************************************************************************
-// poner una seleccion de pallets , sobres y cajas *
-
-// si selecciona una pallet se le suma el valor ya establecido mas $10USD descargada + $375USD permitido hasta 500lb
-
-// si supera las 500lb es el porcentaje ya calculado + los diez USD y el precio cambia de $375 a $515 USD 
-
-// si es mercancia repetitiva mas de 20 articulos se cobra el 16% de IVA / Si selecciona pallet agregar text box tienes mercancía repetitiva if yes que aparezca cantidad mayo a 20 aumentar el 16%.
-
-// si selecciono una caja o sobre se le suma el porcentaje con la compra mas $3UUSD y si son mas de 20 productos de la misma naturaleza 
-//se le suma el 16% de IVA
-//  ///para cajas y sobres
-// 
-// const volumenM3 = volumenCm3 / 1 000 000;
-// const pesoMaximoKg = volumenM3 * 140;
-// el precio (largoxanchoxalto/6000)*3  //constante de precio (3)
-
-
-//determinar si el peso volumétrico es menor o mayor y tomar como base.
-
-//pallets tiene largo y ancho /// altura max de 1.80 m (nota de maximo 1.80)
 
 "use client";
 import AnimatedText from "@/animate/TextAnimate";
 import "@/style/Calculadora.css";
 import { useState, useEffect } from "react";
-
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
 
 export default function Calculadora() {
     // inputs
@@ -54,11 +29,12 @@ export default function Calculadora() {
     const [costoIVA, setCostoIVA] = useState<number>(0);
     const [volumen, setVolumen] = useState<number>(0);
     const [opcion, setOpcion] = useState("MXS"); // valor inicial
+    const [moneda, setMoneda] = useState("pesos"); // valor inicial
 
 
     //booleanos
     const [pallets, setPallets] = useState(false);
-
+    const [caja, setCaja] = useState(false);
     // Estructruas de datos
     const tiposCajas = [
         { name: "Pallets" },
@@ -66,23 +42,43 @@ export default function Calculadora() {
         { name: "Cajas" }
     ];
 
+    const mensajes = [
+        { name: "excesoArticulos", alert: "Tu carga excede de 20 articulos, para mejor cotización contacta con un asesor" },
+        { name: "excesoAltoPallets", alert: "Tu carga excede de 180 cm para pallets, para mejor cotización contacta con un asesor" }
+    ]
+
     //cada que cambie laro, ancho o alto se calcula el vol
     useEffect(() => {
         if (largo === "" || ancho === "" || alto === "") {
             return;
         }
-        setVolumen(largo * ancho * alto);
+        let volumenCM3 = 0;
+        let volumenM3 = 0;
+        let pesoMaxKg = 0;
+        let precio = 0;
+
+        volumenCM3 = largo * ancho * alto;
+        volumenM3 = volumenCM3 / 1000000;
+        pesoMaxKg = volumenM3 * 140;
+        precio = (volumenCM3 / 6000) * 3
+
+        setVolumen(pesoMaxKg);
     }, [largo, ancho, alto]);
 
+
+    // CHECAR REPETITIVO Y CANTIDAD DE ARTICULOS
     useEffect(() => {
-        if (cantidad === "") {
+        if (cantidad === "" || cantidad < 20 || !repetitivo) {
+            setCostoIVA(costoBase);
             return;
         }
 
         // si la cantida de ariculos es mas de 20 y es repetitiva agregar IVA
         let costoFinal = costoBase;
-        if (cantidad >= 20 && repetitivo) {
+        if (pallets) {
             costoFinal = costoFinal + (costoFinal * 0.16)
+        } else if (caja) {
+            costoFinal = costoFinal + (costoFinal * 0.16) + 3
         }
 
         setCostoIVA(costoFinal);
@@ -97,17 +93,27 @@ export default function Calculadora() {
 
         if (select === "Pallets") {
             setPallets(true);
-            setLargo(120)
-            setAncho(80)
-        } else {
+            setCaja(false);
+            setLargo(120);
+            setAncho(80);
+            setAlto(180);
+        } else if (select === "Sobres" || select === "Cajas") {
+            setCaja(true);
             setPallets(false);
             setLargo("");
             setAncho("");
+            setAlto("");
+        } else {
+            setPallets(false);
+            setCaja(false);
+            setLargo("");
+            setAncho("");
+            setAlto("");
+
         }
         // resetear inputs y cálculos
         SetValor("");
         setPeso("");
-        setAlto("");
         setVolumen(0);
         setPrecioValor(0);
         setPrecioPeso(0);
@@ -119,6 +125,17 @@ export default function Calculadora() {
 
     };
 
+
+    function cotizacion(){
+         if (cantidad === "" || cantidad < 20 || !repetitivo) {
+            alert()
+            return;
+        }
+
+        if (pallets || repetitivo || cantidad > 20){
+
+        }
+    }
     // valor
     const handleChangeValor = (e: React.ChangeEvent<HTMLInputElement>) => {
         const valorIngresado = e.target.value;
@@ -200,32 +217,18 @@ export default function Calculadora() {
                 lines={[
                     < h2 key={1} className="titulo">
                         Calculadora
+                    </h2>,
+                    < h2 key={2} className="subtitulo">
+                        Esta calculadora es un aproximado, para una cotizacion completa contacte con un asesor
                     </h2>
                 ]}>
             </AnimatedText>
 
             <div className="fondo-contenedor">
-                <div className="flex gap-2 justify-end mr-16 -mb-32"> 
-                    <button
-                            onClick={() => setOpcion("MXS")}
-                            className={`px-4 py-2 rounded-lg font-semibold mt-10 w-28
-                                    ${opcion === "MXS" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
-                        >
-                            cm/kg
-                        </button>
 
-                        <button
-                            onClick={() => setOpcion("USA")}
-                            className={`px-4 py-2 rounded-lg font-semibold mt-10 w-28
-                                    ${opcion === "USA" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
-                        >
-                            in/lb
-                        </button>
-                        </div>
-
-                <form action="/action_page.php" className="p-10">
+                <form action="/action_page.php" className="p-10 col-span-2">
                     {/* Seleccion tipo de contenedor */}
-                    <div className="contenedor-4">
+                    <div className="contenedor-2">
                         <div className="contenedor-filas-2">
                             <label className="label">Tipo de Envío</label>
                             <select name="TipoContenedor" id="TipoContenedor" className="select"
@@ -248,68 +251,141 @@ export default function Calculadora() {
 
                         </div>
 
+                    </div>
+                    <div className="contenedor-2">
+                        <div className="contenedor-filas-4">
+                            {/* Ingreso de valor */}
+                            <div className="tarjeta-notas">
+                                <div className="tarjeta-salida">
 
-                       
+                                    <label htmlFor="valor" className="label">Valor producto: </label>
+                                    <input type="number" className="input" value={valor} onChange={handleChangeValor}
+                                        placeholder="USD" />
+                                </div>
+                                <label className="notas">Se utilizan valores en USD</label>
+                            </div>
+
+                            {/* Ingreso de peso */}
+                            <div className="tarjeta-notas">
+                                <div className="tarjeta-salida">
+                                    <label htmlFor="Peso" className="label">Peso: </label>
+                                    <input type="number" className="input" value={peso} onChange={(e) =>
+                                        setPeso(e.target.value === "" ? "" : Number(e.target.value))
+                                    }
+                                        onBlur={handleBlurPeso} placeholder={opcion === "USA" ? "lb" : "kg"} />
+                                </div>
+                                <label className="notas">Se cobra una comision en caso de sobrepasar el peso maximo permitido</label>
+                            </div>
+
+                            {/* producto repetitivo */}
+                            <div className="tarjeta-notas">
+                                <div className="tarjeta-salida">
+                                    <label htmlFor="repetitivo" className="label">¿Tu producto es repetitivo? </label>
+                                    <div className=" justify-end flex">
+                                        <button type="button"
+                                            onClick={() => setRepetitivo(true)}
+                                            className={`px-4 py-2 rounded-lg font-semibold  w-20
+                                    ${repetitivo ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
+                                        >
+                                            Si
+                                        </button>
+
+                                        <button type="button"
+                                            onClick={() => setRepetitivo(false)}
+                                            className={`px-4 py-2 rounded-lg font-semibold  w-20
+                                    ${!repetitivo ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
+                                        >
+                                            No
+                                        </button>
+                                    </div>
+                                </div>
+                                <label className="notas">Se cobra 2 USD por kg soprepasado del peso maximo</label>
+                           
+                            </div>
+                            {/* cantidad de articulos */}
+                            <div className="tarjeta-notas">
+                                <div className="tarjeta-salida">
+                                    <label htmlFor="cantidad" className="label"> Cantidad de articulos:</label>
+                                    <input type="number" className="input" value={cantidad} onChange={(e) =>
+                                        setCantidad(e.target.value === "" ? "" : Number(e.target.value))} placeholder="0 piezas" />
+                                </div>
+                                <label className="notas">Mas de 20 cajas, contactar a un asesor</label>
+                            </div>
+
+                        </div>
+
+                        <div className="contenedor-filas-4">
+                            {/* largo */}
+                            <div className="tarjeta-notas">
+                                <div className="tarjeta-salida">
+                                <label htmlFor="largo" className="label"> Largo:</label>
+                                <input type="number" className="input" value={largo} disabled={pallets} onChange={handleChangeLargo} placeholder={opcion === "USA" ? "0 in" : "0 cm"} />
+                            </div>
+                             <label className="notas">Si pasa 60 cm se cobra exceso de dimensiones</label>
+                           
+                            </div>
+                            {/* ancho */}
+                            <div className="tarjeta-notas" >
+                                <div className="tarjeta-salida">
+                                <label htmlFor="ancho" className="label"> Ancho:</label>
+                                <input type="number" className="input" value={ancho} disabled={pallets} onChange={handleChangeAncho} placeholder={opcion === "USA" ? "0 in" : "0 cm"} />
+                            </div>
+                              <label className="notas">Si pasa 60 cm se cobra exceso de dimensiones</label>
+                            </div>
+                            {/*alto  */}
+                            <div className="tarjeta-notas">
+                                <div className="tarjeta-salida">
+                                <label htmlFor="alto" className="label"> Alto:</label>
+                                <input type="number" className="input" value={alto} disabled={pallets} onChange={handleChangeAlto} placeholder={opcion === "USA" ? "0 in" : "0 cm"} />
+                            </div>
+                                 <label className="notas">Si pasa 60 cm se cobra exceso de dimensiones</label>
+                           
+                            </div>
+                            {/* volumen */}
+                            <div className="tarjeta-notas">
+                                <div className="tarjeta-salida">
+
+                                    <label className=""> Peso maximo: </label>
+
+                                    <div className="contenedor-2">
+                                        <h2 className="volumen">{volumen}</h2>
+                                        <p className="label"> {opcion === "USA" ? " in3" : " cm3"}</p>
+                                    </div>
+                                </div>
+                                <label className="notas"> En base al volumen proporcionado</label>
+
+                            </div>
+
+                        </div>
                     </div>
 
-                    <div className="contenedor-4">
-                        {/* Ingreso de valor */}
-                        <div className="tarjeta-input">
-                            <label htmlFor="valor" className="label">Valor producto: </label>
-                            <input type="number" className="input" value={valor} onChange={handleChangeValor} placeholder={opcion === "USA" ? "USD" : "MXN"} />
-                        </div>
-
-                        {/* Ingreso de peso */}
-                        <div className="tarjeta-input">
-                            <label htmlFor="Peso" className="label">Peso: </label>
-                            <input type="number" className="input" value={peso} onChange={(e) =>
-                                setPeso(e.target.value === "" ? "" : Number(e.target.value))
-                            }
-                                onBlur={handleBlurPeso} placeholder={opcion === "USA" ? "lb" : "kg"} />
-                        </div>
-
-                        <div className="tarjeta-input">
-
-                            <label htmlFor="repetitivo" className="label">¿Tu producto es repetitivo? </label>
-                            <input type="checkbox" className="input" onChange={(e) => setRepetitivo(e.target.checked)} />
-
-                        </div>
-                        <div className="tarjeta-input">
-                            <label htmlFor="cantidad" className="label"> Cantidad de articulos:</label>
-                            <input type="number" className="input" value={cantidad} onChange={(e) =>
-                                setCantidad(e.target.value === "" ? "" : Number(e.target.value))} placeholder="0 piezas" />
-                        </div>
-
+                    <div className="envio">
+                        <input type="button" value="Enviar" className="button" />
                     </div>
+                </form>
 
-                    <div className="contenedor-4">
-
-                        {/* largo */}
-                        <div className="tarjeta-input">
-                            <label htmlFor="largo" className="label"> Largo:</label>
-                            <input type="number" className="input" value={largo} disabled={pallets} onChange={handleChangeLargo} placeholder={opcion === "USA" ? "0 in" : "0 cm"} />
-                        </div>
-                        {/* ancho */}
-                        <div className="tarjeta-input" >
-                            <label htmlFor="ancho" className="label"> Ancho:</label>
-                            <input type="number" className="input" value={ancho} disabled={pallets} onChange={handleChangeAncho} placeholder={opcion === "USA" ? "0 in" : "0 cm"} />
-                        </div>
-                        {/*alto  */}
-                        <div className="tarjeta-input">
-                            <label htmlFor="alto" className="label"> Alto:</label>
-                            <input type="number" className="input" value={alto} onChange={handleChangeAlto} placeholder={opcion === "USA" ? "0 in" : "0 cm"} />
-                        </div>
-                        {/* volumen */}
-                        <div className="tarjeta-volumen">
-                            <label className="label"> Volumen:</label>
-                            <h2 className="volumen">{volumen}</h2>
-                            <p className="label"> {opcion === "USA" ? " in3" : " cm3"}</p>
-                        </div>
-                    </div>
+                <div className="">
 
                     {/* Precio final */}
                     <div className="mt-5">
+                        {/* seleccion de unidades */}
+                        <div className="mb-10">
+                            <button type="button"
+                                onClick={() => setOpcion("MXS")}
+                                className={`px-4 py-2 rounded-lg font-semibold mt-10 w-28
+                                    ${opcion === "MXS" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
+                            >
+                                cm/kg
+                            </button>
 
+                            <button type="button"
+                                onClick={() => setOpcion("USA")}
+                                className={`px-4 py-2 rounded-lg font-semibold mt-10 w-28
+                                    ${opcion === "USA" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
+                            >
+                                in/lb
+                            </button>
+                        </div>
                         <div className="tarjeta-valor">
                             < h2 className="precio">
                                 Precio:
@@ -318,18 +394,23 @@ export default function Calculadora() {
                                 {costoIVA}
                             </h2>
                             <p className="p">
-                                USD
+                                {moneda === "pesos" ? " MXN" : " USD"}
                             </p>
 
                         </div>
-                        {/* <div className="tarjeta-envio">
-                            <label htmlFor="valor" className="label">¿Listo para cotizar? </label>
-                            <input type="submit" value="Enviar" className="button" />
-                        </div> */}
-                    </div>
 
-                </form>
+
+                        <div className="envio">
+                            <label htmlFor="valor" className="label">Alerta por exceso </label>
+                            <input type="submit" value="Contactar" className="button" />
+                        </div>
+
+                    </div>
+                </div>
+
+
             </div>
+
 
         </section>
     );

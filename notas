@@ -1,0 +1,40 @@
+//*************************************************RANGO DE VALORES PARA TODOS LOS TIPOS */
+
+// ranngo 1 < 119USD es cobro minimo direecto de $300MXN  *
+
+// rango 2 $120 - $475 se multiplica el precio por el 14% *
+
+// rango 3 $476-$3000 se multiplica por el 13% *
+
+// rango 4 > $3000 se multiplica por el 12% *
+
+// *************************************************************************************************************************
+// poner una seleccion de pallets , sobres y cajas *
+
+
+// const volumenM3 = volumenCm3 / 1 000 000;
+// const pesoMaximoKg = volumenM3 * 140;
+// el precio (largoxanchoxalto/6000)*3  //constante de precio (3)
+
+
+//determinar si el peso volumétrico es menor o mayor y tomar como base.
+
+//pallets tiene largo y ancho /// altura max de 1.80 m (nota de maximo 1.80)
+
+//*************************************************PALLETS */
+// si selecciona una pallet se le suma el valor ya establecido mas $10USD descargada 
+// + $375USD permitido hasta 500lb
+
+// si supera las 500lb es el porcentaje ya calculado + los diez USD y 
+// el precio cambia de $375 a $515 USD 
+
+// si es mercancia repetitiva mas de 20 articulos se cobra el 16% de IVA 
+// / Si selecciona pallet agregar text box tienes mercancía repetitiva if yes 
+// que aparezca cantidad mayo a 20 aumentar el 16%.
+
+//*************************************************CAJAS O SOBRES */
+
+
+// si selecciono una caja o sobre se le suma el porcentaje con la compra 
+// mas $3UUSD y si son mas de 20 productos de la misma naturaleza 
+//se le suma el 16% de IVA
