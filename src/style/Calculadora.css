@@ -54,7 +54,7 @@
 }
 
 .tarjeta-salida {
-    @apply grid grid-cols-2 gap-5 px-5
+    @apply grid grid-cols-2 gap-5
    text-white place-items-center;
 }
 
@@ -86,4 +86,8 @@
 
 .notas {
   @apply  text-xs font-light text-gray-200 text-center mt-3
+}
+
+.error {
+  @apply text-xs font-light text-red-500 text-center mt-3
 }

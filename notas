@@ -34,7 +34,10 @@
 
 //*************************************************CAJAS O SOBRES */
 
+// no exceda de 3 metros de todos los lados
 
 // si selecciono una caja o sobre se le suma el porcentaje con la compra 
 // mas $3UUSD y si son mas de 20 productos de la misma naturaleza 
 //se le suma el 16% de IVA
+
+
