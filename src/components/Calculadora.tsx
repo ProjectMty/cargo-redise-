@@ -21,7 +21,7 @@ export default function Calculadora() {
 
     // Guardado de datos
     // const [precioValor, setPrecioValor] = useState(0);
-    const [precioPeso, setPrecioPeso] = useState(0);
+    // const [precioPeso, setPrecioPeso] = useState(0);
     // const [pesoMaximo, setPesoMaximo] = useState(0);
 
     // salidas
@@ -29,7 +29,7 @@ export default function Calculadora() {
     const [costoIVA, setCostoIVA] = useState<number>(0);
     const [volumen, setVolumen] = useState<number>(0);
     const [opcion, setOpcion] = useState("MXS"); // valor inicial
-    const [moneda, setMoneda] = useState("pesos"); // valor inicial
+    const [moneda] = useState("pesos"); // valor inicial
 
     //errores 
     const [errorValor, setErrorValor] = useState<{ error: boolean, message: string | null }>({ error: false, message: "Se utilizan valores en USD" });
@@ -43,7 +43,7 @@ export default function Calculadora() {
 
     //booleanos
     const [pallets, setPallets] = useState(false);
-    const [caja, setCaja] = useState(false);
+    // const [caja, setCaja] = useState(false);
 
 
     // Estructruas de datos
@@ -54,10 +54,10 @@ export default function Calculadora() {
     ];
 
     //mensajes de alerta
-    const mensajesSalida = [
-        { name: "excesoArticulos", alert: "Tu carga excede de 20 articulos, para mejor cotización contacta con un asesor" },
-        { name: "excesoAltoPallets", alert: "Tu carga excede de 180 cm para pallets, para mejor cotización contacta con un asesor" }
-    ]
+    // const mensajesSalida = [
+    //     { name: "excesoArticulos", alert: "Tu carga excede de 20 articulos, para mejor cotización contacta con un asesor" },
+    //     { name: "excesoAltoPallets", alert: "Tu carga excede de 180 cm para pallets, para mejor cotización contacta con un asesor" }
+    // ]
 
     //cada que cambie largo, ancho o alto se calcula el vol
     useEffect(() => {
@@ -233,16 +233,16 @@ export default function Calculadora() {
 
 
     // OnChange de inputs
-    function cotizacion() {
-        if (cantidad === "" || cantidad < 20 || !repetitivo) {
-            alert()
-            return;
-        }
+    // function cotizacion() {
+    //     if (cantidad === "" || cantidad < 20 || !repetitivo) {
+    //         alert()
+    //         return;
+    //     }
 
-        if (pallets || repetitivo || cantidad > 20) {
+    //     if (pallets || repetitivo || cantidad > 20) {
 
-        }
-    }
+    //     }
+    // }
 
     // **************************************************************************************LARGO
 
