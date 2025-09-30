@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 // import FadeInFromRight from "@/animate/FadeInFromRight";
 import FadeOut from "@/animate/ExitAnimate";
 import { AnimatePresence } from "framer-motion";
-
+import Image from "next/image";
 
 export default function BuyAndShipHero() {
   const [scrolled, setScrolled] = useState(true);
@@ -30,9 +30,12 @@ export default function BuyAndShipHero() {
 
       {/* Fondo: imagen principal */}
       <div className="absolute inset-0">
-        <img
+        
+        <Image
           src="/img/buyandship/bg1.png"
           alt="Almacén"
+          width={1920}
+          height={1080}
           className="w-full h-full object-cover object-center"
           loading="eager"
         />
@@ -50,9 +53,11 @@ export default function BuyAndShipHero() {
         <AnimatePresence mode="wait">
           {scrolled && (
             <FadeOut delay={0}>
-              <img
+              <Image
                 src="/img/buyandship/LogoB&S.svg"
                 alt="logo"
+                  width={400}
+                  height={150}
                 className="max-w-sm opacity-[0.92] drop-shadow-[0_8px_26px_rgba(0,0,0,0.25)] z-0"
                 loading="eager"
               />

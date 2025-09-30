@@ -22,8 +22,6 @@
 //pallets tiene largo y ancho /// altura max de 1.80 m (nota de maximo 1.80)
 
 //*************************************************PALLETS */
-// si selecciona una pallet se le suma el valor ya establecido mas $10USD descargada 
-// + $375USD permitido hasta 500lb
 
 // si supera las 500lb es el porcentaje ya calculado + los diez USD y 
 // el precio cambia de $375 a $515 USD 
@@ -36,8 +34,9 @@
 
 // no exceda de 3 metros de todos los lados
 
-// si selecciono una caja o sobre se le suma el porcentaje con la compra 
-// mas $3UUSD y si son mas de 20 productos de la misma naturaleza 
+// si selecciono una caja o sobre se le suma el porcentaje con la compra (honorarios)
+
+// mas $3UUSD (por caja) y si son mas de 20 productos de la misma naturaleza 
 //se le suma el 16% de IVA
 
 

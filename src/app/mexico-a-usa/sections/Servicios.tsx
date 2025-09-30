@@ -131,9 +131,11 @@ export default function ServiciosMxUsa() {
 
               <DivZoom scale={1.1}>
                 <div className="shrink-0">
-                  <img
+                  <Image
                     src={active.image}
                     alt={active.title}
+                    width={400} 
+                    height={300} 
                     className="block rounded-[22px] shadow-[0_12px_30px_rgba(0,0,0,0.18)] max-w-full h-auto"
                   />
                 </div>

@@ -10,21 +10,25 @@ import Tarifas from "@/components/Tarifas";
 import Ubicaciones from "@/components/Ubicaciones";
 import Footer from "@/components/Footer";
 import Calculadora from "@/components/Calculadora";
+import { CalculadoraVisibleProvider } from "@/context/CalculadoraVisibleContext";
 
 export default function Home() {
+
   return (
+    <CalculadoraVisibleProvider>
     <main >
       <Navbar/>
       <Hero />
       <Services />
       <ComoFunciona />
       <Tarifas />
-      <Calculadora />
+      <Calculadora/>
       <Partnership />
       <BuyAndShipCTA /> {/* <-- sólo en Home */}
       <Ubicaciones />
       <Contacto />
       <Footer />
     </main>
+    </CalculadoraVisibleProvider>
   );
 }

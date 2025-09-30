@@ -35,9 +35,11 @@ export default function BuyAndShipCTA() {
           </TextShow>
           <TimeZoom delay={0.5}>
           <DivZoom scale={1.2}>
-            <img
+            <Image
               src="/img/buyandship/buyShipLogo.svg"
               alt="logo buy and ship"
+              width={500}
+              height={200}
               className="mb-3 lg:mb-10" />
           </DivZoom>
 </TimeZoom>

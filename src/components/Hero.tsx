@@ -26,9 +26,11 @@ export default function Hero() {
 
       {/* Imagen de fondo */}
       <div className="relative w-full h-[400px] md:h-[520px] lg:h-[577px]">
-        <img
+        <Image
           src="/img/banner1.png"
           alt="Camioneta Cargo Monterrey"
+          width={1920}
+          height={600}
           className="w-full h-full object-cover object-left-top"
           loading="lazy"
         />
@@ -208,9 +210,11 @@ export default function Hero() {
 
             {/* Columna: Imagen (queda debajo) */}
             <div className="relative">
-              <img
-                src="/img/operacion.png"           // <-- tu imagen real
+              <Image
+                src="/img/operacion.png"           
                 alt="Operación de carga"
+                width={560}
+                height={400}
                 className="w-full max-w-[560px] h-auto rounded-2xl object-cover shadow-lg"
                 loading="lazy"
               />

@@ -5,6 +5,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useCalculadoraVisible } from "../context/CalculadoraVisibleContext";
 
 const navigation = [
   { name: "Inicio", href: "/#hero" },
@@ -17,6 +18,7 @@ const navigation = [
 ];
 
 export default function Navbar() {
+  const { setVisible } = useCalculadoraVisible();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -64,10 +66,14 @@ export default function Navbar() {
         </div>
 
         {/* CTA Calculadora */}
-        <div className="lg:block ">
+        <div className=" ">
           <Link
             href="/#calculadora"
             className="rounded-full bg-[#1b1ba6] text-white px-5 py-1.5 text-sm font-semibold hover:bg-[#14149c] transition"
+            onClick={() => {
+              setVisible(true);
+              setMobileMenuOpen(false);
+            }}
           >
             Calculadora
           </Link>
@@ -143,7 +149,10 @@ export default function Navbar() {
               ))}
               <a
                 href="#calculadora"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => {
+                  setVisible(true);
+                  setMobileMenuOpen(false);
+                }}
                 className="block mt-4 rounded-full bg-blue-900 px-4 py-2 text-white text-center font-semibold hover:bg-[#14149c]"
               >
                 Calculadora

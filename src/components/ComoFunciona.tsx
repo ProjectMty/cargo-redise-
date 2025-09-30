@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, easeOut } from "framer-motion";
-
+import Image from "next/image";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const ContainerSteps = {
@@ -83,7 +83,11 @@ export default function ComoFunciona() {
               </div>
               {/* Imagen */}
               <div className="  w-55 h-35 rounded-xl flex items-center justify-center mb-10 lg:mb-7">
-                <img src="/img/funciona/Forma1.svg" alt="paso 1" />
+                <Image 
+                src="/img/funciona/Forma1.svg" 
+                alt="paso 1"
+                width={250}
+                height={250} />
               </div>
               {/* Texto */}
               <p className=" text-sm  text-[#333] font-[Montserrat] mb-1">
@@ -113,7 +117,11 @@ export default function ComoFunciona() {
               </div>
               {/* imagen */}
               <div className="w-55 h-35  rounded-xl flex items-center justify-center  mb-10 lg:mb-7">
-                <img src="/img/funciona/Forma2.svg" alt="paso 2" />
+                <Image 
+                src="/img/funciona/Forma2.svg" 
+                alt="paso 2"
+                width={250}
+                height={250} />
               </div>
               {/* texto */}
               <p className="text-sm  text-[#333] font-[Montserrat] mb-1">
@@ -136,7 +144,11 @@ export default function ComoFunciona() {
 
               {/* Imagen */}
               <div className="w-55 h-35  rounded-xl  flex items-center justify-center mb-10 lg:mb-7">
-                <img src="/img/funciona/Forma3.svg" alt="paso 1" />
+                <Image 
+                src="/img/funciona/Forma3.svg" 
+                alt="paso 1"
+                width={250}
+                height={250} />
               </div>
               {/* Texto */}
               <p className=" text-sm text-[#333] font-[Montserrat] mb-1">
@@ -165,7 +177,11 @@ export default function ComoFunciona() {
               </div>
               {/* imagen */}
               <div className="w-45 h-35  rounded-xl flex items-center justify-center  mb-6 lg:mb-1">
-                <img src="/img/funciona/Forma4.svg" alt="paso 2" />
+                <Image 
+                src="/img/funciona/Forma4.svg" 
+                alt="paso 2"
+                width={250}
+                height={250} />
               </div>
               {/* texto */}
               <p className="text-sm md:text-sm text-[#333] font-[Montserrat] ">
@@ -190,7 +206,11 @@ export default function ComoFunciona() {
               </div>
               {/* Imagen */}
               <div className="w-45 h-35  rounded-xl  flex items-center justify-center mb-5">
-                <img src="/img/funciona/Forma5.svg" alt="paso 1" />
+                <Image 
+                src="/img/funciona/Forma5.svg" 
+                alt="paso 1"
+                width={250}
+                height={250} />
               </div>
               {/* Texto */}
               <p className=" text-sm  text-[#333] font-[Montserrat] mb-1">

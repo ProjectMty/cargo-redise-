@@ -108,9 +108,11 @@ export default function Ubicaciones() {
                         >
                             {navigation.map((img) => (
                                 <SwiperSlide key={img.name}>
-                                    <img
+                                    <Image
                                         src={img.href}
                                         alt={`slide-${img.href}`}
+                                        width={300}
+                                        height={200}
                                         className="w-full h-full object-cover rounded-lg"
                                     />
                                 </SwiperSlide>
