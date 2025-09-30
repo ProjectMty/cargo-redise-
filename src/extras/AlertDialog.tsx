@@ -85,7 +85,7 @@ export default function AlertDialog() {
         Selected: {selectedValue}
       </Typography>
       <br />
-      <Button variant='' onClick={handleClickOpen}>
+      <Button onClick={handleClickOpen}>
         Open simple dialog
       </Button>
       <SimpleDialog
