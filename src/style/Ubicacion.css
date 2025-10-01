@@ -1,0 +1,49 @@
+
+.fondo-seccion {
+     @apply  w-full bg-white relative flex justify-center  py-20 font-[Montserrat] scroll-smooth
+}
+
+.titulo {
+    @apply font-extrabold text-[40px] lg:text-[55px] text-blue-950 text-center absolute top-5 
+}
+
+.contenedor {
+    @apply max-w-4xl rounded-[28px] object-cover mt-5 
+}
+
+.fondo-ubicacion{
+    @apply w-full h-auto rounded-[28px] object-cover
+}
+
+.contenedor-carrusel {
+    @apply absolute left-1/2 top-28 lg:top-32 -translate-x-1/2 items-center
+}
+
+.carrusel-desktop {
+    @apply relative w-full max-w-xl mx-auto p-10
+}
+
+.img-nl {
+    @apply absolute top-[160px] translate-x-[290px] z-40 max-w-[130px]; 
+}
+
+.img-laredo {
+    @apply translate-y-[85px] translate-x-[310px] z-40 max-w-[150px] ; 
+}
+
+.img-cdmx {
+    @apply translate-y-[135px] translate-x-[300px] z-40 max-w-[30px] ; 
+}
+
+.img-texas {
+    @apply translate-y-[255px] translate-x-[110px] z-40 max-w-[210px];
+}
+
+.img-ny {
+    @apply translate-y-[1px] translate-x-[439px] z-40 max-w-[80px];
+}
+
+.img-catharines{
+    @apply translate-y-[280px] translate-x-[170px] z-40 max-w-[230px];
+}
+

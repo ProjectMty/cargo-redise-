@@ -6,6 +6,7 @@ import AnimatedText from "@/animate/TextAnimate";
 import "@/style/Calculadora.css";
 import { useState, useEffect, useCallback } from "react";
 import { useCalculadoraVisible } from "../context/CalculadoraVisibleContext";
+import PlaceholderAnimate from "@/animate/placeholderAnimate";
 
 import FadeInOutError from "@/animate/FadeInOut";
 
@@ -47,8 +48,8 @@ export default function Calculadora() {
         { name: "Cajas" }
     ];
 
-        // convertir peso max kg a peso max lb
-    const convertirInToCm = useCallback(() =>  {
+    // convertir peso max kg a peso max lb
+    const convertirInToCm = useCallback(() => {
 
         const largoCm = Number(largo) * 2.54;
         const anchoCm = Number(ancho) * 2.54;
@@ -117,17 +118,17 @@ export default function Calculadora() {
 
     };
 
-    useEffect(() => {
-        SetValor("");
-        setPeso("");
-        setVolumen(0);
-        setCostoIVA(0)
-        setCantidad("");
-        setRepetitivo(false);
-        setLargo("");
-        setAncho("");
-        setAlto("");
-    }, [opcion])
+    // useEffect(() => {
+    //     SetValor("");
+    //     setPeso("");
+    //     setVolumen(0);
+    //     setCostoIVA(0)
+    //     setCantidad("");
+    //     setRepetitivo(false);
+    //     setLargo("");
+    //     setAncho("");
+    //     setAlto("");
+    // }, [opcion])
 
 
     // **************************************************************************************VALOR 
@@ -319,6 +320,7 @@ export default function Calculadora() {
         if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "") {
             alert("Por favor llena todos los campos");
             return;
+            //alerta de campos vacios 
         }
 
         // variables
@@ -326,6 +328,7 @@ export default function Calculadora() {
         let precioConIva = 0;
         let precioBase = 0;
         let calcularPrecio = 0;
+        let precioPeso = 0;
 
         // honrararios
         if (valor <= 119) {
@@ -346,13 +349,21 @@ export default function Calculadora() {
         }
 
 
+        // convertir peso ingresado a libras
+        let pesoLb = 0;
+        if (opcion === "USA") {
+            pesoLb = Number(peso);
+        } else {
+            pesoLb = Number(peso) * 2.2046;
+        }
+
         // valor volumetrico dependiendo del tipo de envio
         switch (tipoSeleccionado) {
             case "Pallets":
-                if (peso <= 500) {
-                    calcularPrecio = 375 + (cantidad * 10);
-                } else if (peso > 500) {
-                    calcularPrecio = 515 + (cantidad * 10);
+                if (pesoLb <= 500) {
+                    precioPeso = 375 + (cantidad * 10);
+                } else if (pesoLb > 500) {
+                    precioPeso = 515 + (cantidad * 10);
                 }
                 break;
 
@@ -373,7 +384,7 @@ export default function Calculadora() {
         // precioConIva = Math.round((precioConIva + Number.EPSILON) * 100) / 100;
 
         // asignar precio final
-        precioBase = precioBase + precioConIva;
+        precioBase = precioBase + precioConIva + precioPeso;
         precioBase = Math.round((precioBase + Number.EPSILON) * 100) / 100;
         setCostoIVA(precioBase);
     }
@@ -435,11 +446,13 @@ export default function Calculadora() {
                             {/* Ingreso de valor */}
                             <div className="tarjeta-notas">
                                 <div className="tarjeta-salida">
-                                    <label htmlFor="valor" className="label">Valor producto: </label>
-                                    <input type="number" min="0" className="input" value={valor} onChange={(e) =>
+                                    <label htmlFor="valorProd" className="label">Valor producto: </label>
+                                    <input type="number" min="0" className=" input" value={valor} onChange={(e) =>
                                         SetValor(e.target.value === "" ? "" : Number(e.target.value))}
                                         onBlur={handleValor}
-                                        placeholder="USD" />
+                                        placeholder="USD"
+                                        id="valorProd" />
+                                      
                                 </div>
 
                                 <FadeInOutError
