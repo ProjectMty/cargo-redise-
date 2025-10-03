@@ -1,6 +1,6 @@
 
 .fondo-seccion {
-     @apply  w-full bg-white relative flex justify-center  py-20 font-[Montserrat] scroll-smooth
+     @apply  w-full relative flex justify-center  py-20 font-[Montserrat] scroll-smooth
 }
 
 .titulo {
@@ -23,27 +23,34 @@
     @apply relative w-full max-w-xl mx-auto p-10
 }
 
+.estado-resaltado {
+    @apply transition-transform duration-300 ease-in-out will-change-transform
+     hover:scale-125 origin-center opacity-0 hover:opacity-100;
+}
+
+
 .img-nl {
-    @apply absolute top-[160px] translate-x-[290px] z-40 max-w-[130px]; 
+    @apply absolute top-[160px] left-[290px] z-40 max-w-[130px]; 
 }
 
 .img-laredo {
-    @apply translate-y-[85px] translate-x-[310px] z-40 max-w-[150px] ; 
+    @apply absolute top-[165px] left-[310px] z-40 max-w-[150px]; 
 }
 
 .img-cdmx {
-    @apply translate-y-[135px] translate-x-[300px] z-40 max-w-[30px] ; 
+    @apply absolute top-[300px] left-[300px] z-40 max-w-[30px] hover:scale-x-150;
+    ; 
 }
 
 .img-texas {
-    @apply translate-y-[255px] translate-x-[110px] z-40 max-w-[210px];
+    @apply absolute top-[255px] translate-x-[110px] z-40 max-w-[210px];
 }
 
 .img-ny {
-    @apply translate-y-[1px] translate-x-[439px] z-40 max-w-[80px];
+    @apply absolute top-[130px] translate-x-[439px] z-40 max-w-[80px];
 }
 
 .img-catharines{
-    @apply translate-y-[280px] translate-x-[170px] z-40 max-w-[230px];
+    @apply absolute top-[280px] translate-x-[170px] z-40 max-w-[230px];
 }
 

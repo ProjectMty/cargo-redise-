@@ -1,13 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import {use, useEffect, useState } from "react";
+import { useState } from "react";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import "@/style/Ubicacion.css";
-import DivZoom from "@/animate/DivZoom";
 
 const navigation = [
     {
@@ -43,68 +42,46 @@ const navigation = [
 
 
 export default function Ubicaciones() {
-    const [seleccion, setSeleccion] = useState("México");
+
     const [currentMap, setCurrentMap] = useState(navigation[0]);
 
-    const [imagen, setImagen] = useState("/img/ubicacion/Mexico-fondo.svg");
-    const [fade, setFade] = useState(true);
+
+    const [fade, setFade] = useState(false);
     // const [mobileNav, setMobileNav] = useState(false);
 
-    function changeSeleccion(name: string) {
-        switch (name) {
-            case "México":
-                setImagen("/img/ubicacion/Mexico-fondo.svg")
-                setSeleccion("México")
-
-                break;
-            case "USA":
-                setImagen("/img/ubicacion/USA-fondo.svg")
-                setSeleccion("USA")
-                break;
-            case "Canadá":
-                setImagen("/img/ubicacion/Canada-fondo.svg")
-                setSeleccion("Canadá")
-                break;
-            default:
-                setImagen("/img/ubicacion/Mexico-fondo.svg")
-                setSeleccion("México")
-                break;
-        }
-
-
-    }
+    
 
     function handleStyle(id:string){
 
         if(id === "NL"){
-            return "img-nl"
+            return "img-nl estado-resaltado"
         } else if(id === "LAREDO"){
-            return "img-laredo"
+            return "img-laredo estado-resaltado"
         } else if(id === "CDMX"){
-            return "img-cdmx"
+            return "img-cdmx estado-resaltado"
         }
 
         if(id === "TEXAS"){
-            return "img-texas"
+            return "img-texas estado-resaltado"
         } else if(id === "NY"){
-            return "img-ny"
+            return "img-ny estado-resaltado"
         }
 
         if(id === "catharines"){
-            return "img-catharines"
+            return "img-catharines estado-resaltado"
         }
         
     }
  
 
     return (
-        <section id="ubicacion" className="fondo-seccion">
+        <section id="ubicacion" className="fondo-seccion bg-white">
             
             <h1 className="titulo">
                 Ubicaciones
             </h1>
             
-            <div className="contenedor overflow-visible">
+            <div className="contenedor overflow-visible group">
 
                 <Image
                     src="/img/ubicacion/fondoUbicacion.png"
@@ -145,7 +122,10 @@ export default function Ubicaciones() {
                     <div className="absolute mt-4 justify-center">
                         
                         {currentMap?.sucursales?.map((estado, i) => (
-                            <DivZoom key={`${currentMap.name}-${estado.id}`} scale={1.05}>
+                            <div key={i} 
+                            onMouseEnter={() => setFade(true)}
+                            onMouseLeave={() => setFade(false)}
+                                    >
                                  <Image
                                 
                                 src={estado.src}
@@ -154,7 +134,7 @@ export default function Ubicaciones() {
                                 height={350}
                                 className={handleStyle(estado.id)}
                             />
-                            </DivZoom>
+                            </div>
                            
                         ))}
                         
@@ -180,7 +160,7 @@ export default function Ubicaciones() {
                                         alt={img.name}
                                         width={300}
                                         height={300}
-                                        className="w-full h-[400px] opacity-30"
+                                        className={fade ? "opacity-30 transition-opacity duration-500 w-full h-[400px]" : "opacity-100 w-full h-[400px]"}
                                     />
                                 </SwiperSlide>
 

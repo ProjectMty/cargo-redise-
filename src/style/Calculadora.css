@@ -1,28 +1,37 @@
 
 /* formulario.css */
 .fondo-seccion {
-   @apply bg-[#0072BC] w-full h-full px-[15%] py-[5%] font-[Montserrat]
+   @apply w-full h-full px-[15%] py-[5%] font-[Montserrat] 
 }
 
+.contenedor-calculadora {
+    @apply shadow-2xl rounded-3xl p-1
+}
+/* bg-gradient-to-r from-[#05C2F2] to-[#1B59E1] */
 .fondo-contenedor{
-    @apply  rounded-3xl grid grid-cols-1 lg:grid-cols-3
+    @apply  rounded-3xl grid grid-cols-1 lg:grid-cols-4
 }
 
-.titulo {
-    @apply text-center text-white text-4xl md:text-7xl font-bold 
+.encabezado {
+    @apply font-extrabold text-[40px] lg:text-[55px] text-blue-800 text-center top-5  absolute left-1/2 -translate-x-1/2;
 }
 
 .subtitulo {
-    @apply text-center text-white text-xl font-medium mt-5
+    @apply text-center text-blue-800 text-xl font-medium mt-5
 }
 
 .tipo {
-    @apply text-center text-white text-4xl md:text-5xl font-bold pr-20
+    @apply text-center text-blue-800 text-4xl md:text-5xl font-bold pr-20
+}
+
+.precio {
+    @apply text-end text-white text-4xl md:text-5xl font-bold pr-20
 }
 
 .volumen {
     @apply text-end text-white text-2xl font-bold mb-1
 }
+
 
 .precio {
     @apply text-start text-white text-4xl md:text-3xl font-bold pr-20
@@ -32,68 +41,72 @@
   @apply grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5;
 }
 
-.contenedor-filas-2 {
-    @apply grid grid-rows-1 lg:grid-rows-2 gap-1 
+.contenedor-4 {
+  @apply grid grid-cols-1 lg:grid-cols-4 gap-5 mt-5;
 }
+
+.contenedor-filas-2 {
+    @apply grid grid-rows-1 lg:grid-rows-2 
+}
+
 
 .contenedor-filas-4 {
     @apply grid grid-rows-2 gap-4 
 }
 
 .select {
-    @apply  text-center bg-white text-2xl text-blue-900 rounded-xl lg:px-10 py-2
+    @apply  text-center bg-slate-100 text-2xl text-blue-900 rounded-xl lg:px-10 py-2
 }
 
 .tarjeta-notas {
-  @apply grid  grid-rows-[1fr_auto] gap-1 bg-blue-800 rounded-xl px-3 py-2 ;
+  @apply grid grid-rows-[1fr_auto]  bg-blue-600 rounded-xl px-2 py-1 ;
 }
 
 .tarjeta-ingreso {
-    @apply grid  grid-cols-2 gap-1 bg-blue-800 px-3 py-2.5 rounded-xl text-center
+    @apply grid  grid-cols-2 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
    text-white shadow-xl items-center max-h-20;
 }
 
 .tarjeta-salida {
-    @apply grid lg:grid-cols-2 gap-5
+    @apply grid lg:grid-cols-2 gap-1
    text-white place-items-center;
 }
 
-
-.tarjeta-valor {
-  @apply grid lg:grid-rows-2 gap-5 bg-blue-600 p-6 rounded-xl text-center text-white shadow-lg
+.tarjeta-costo {
+  @apply grid lg:grid-cols-3 gap-5 bg-blue-600 p-6 rounded-xl text-center text-white shadow-lg
 }
 
 .tarjeta-forms {
-  @apply grid grid-rows-2 gap-5 bg-transparent p-8 rounded-xl text-center text-white shadow-lg
+  @apply grid grid-rows-2 gap-5 rounded-xl text-center text-white 
 }
 
 .label {
-  @apply text-base font-light justify-center text-start content-center text-white
+  @apply text-base font-light justify-center text-center content-center text-white
 }
 
 .input {
-  @apply w-full h-8 bg-white text-black rounded-lg px-5;
+  @apply w-full h-8 bg-white text-black rounded-lg px-2;
 }
 
 .p {
-    @apply text-end -mt-16 mr-20 lg:mr-0
+    @apply text-end mt-8 mr-20 lg:mr-0
 }
 
 .button {
-   @apply rounded-xl px-20 py-3 font-medium hover:bg-white hover:text-blue-900
-    bg-blue-800 text-white transition duration-300
+   @apply rounded-xl px-20 py-3 font-medium hover:bg-blue-600 hover:text-white
+    bg-blue-400 text-white transition duration-300 text-center
 }
 
 .envio {
-  @apply grid grid-rows-2 gap-2 mt-10
+  @apply grid grid-rows-2 gap-2
 }
 
 .notas {
-  @apply  text-xs font-light text-gray-200 text-center mt-3
+  @apply  text-xs font-light text-gray-200 text-center mt-1
 }
 
 .error {
-  @apply text-xs font-light text-red-500 text-center mt-3
+  @apply text-xs font-light text-red-500 text-center mt-1
 }
 
 .input-asesor {
@@ -105,4 +118,6 @@
   @apply ring-2 ring-blue-300 outline-none transition-all duration-300
 }
 
-
+.button-repetitivo {
+  @apply px-4 py-2 rounded-lg font-semibold w-10 xl:w-20
+}

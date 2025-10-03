@@ -1,0 +1,47 @@
+
+
+.section {
+    @apply relative bg-gradient-to-r from-[#1B59E1] to-[#05C2F2] py-16 px-4 md:px-8 scroll-mt-10 font-[Montserrat]
+}
+
+.div-titulo {
+    @apply max-w-6xl mx-auto
+}
+
+.title {
+    @apply text-center text-white  font-bold text-[32px] md:text-[40px] mb-12
+}
+
+.contenedor-principal {
+    @apply relative rounded-3xl bg-white shadow-xl  md:px-20 md:py-3
+}
+
+.linea-horizontal {
+    @apply hidden absolute lg:block w-[6px] h-[90%] bg-sky-600 
+    transform left-1/2 z-0 bottom-10 top-10
+}
+
+.grid-pasos {
+    @apply relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 
+}
+
+.div-paso {
+    @apply flex flex-col items-center text-center mt-10
+}
+
+.numero-paso {
+    @apply hidden md:flex w-16 h-16 rounded-full bg-sky-600 text-white items-center justify-center font-bold mt-5 mb-2 text-3xl
+}
+
+.imagen-paso {
+    @apply w-56 h-36 rounded-xl flex items-center justify-center mb-10 lg:mb-7
+}
+
+.texto-paso {
+    @apply text-sm text-[#333] mb-1
+}
+
+.nota {
+    @apply text-center text-sm font-bold text-black mt-8 italic
+}
+
