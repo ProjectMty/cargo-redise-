@@ -24,8 +24,12 @@
     @apply text-center text-blue-800 text-4xl md:text-5xl font-bold pr-20
 }
 
-.precio {
-    @apply text-end text-white text-4xl md:text-5xl font-bold pr-20
+.precio-resultado {
+    @apply text-white text-4xl md:text-5xl font-bold text-end
+}
+
+.precio-texto{
+    @apply text-start text-white text-4xl md:text-2xl font-bold 
 }
 
 .volumen {
@@ -34,11 +38,15 @@
 
 
 .precio {
-    @apply text-start text-white text-4xl md:text-3xl font-bold pr-20
+    @apply text-start text-white text-4xl md:text-6xl font-bold pr-20
 }
 
 .contenedor-2 {
   @apply grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5;
+}
+
+.contenedor-3 {
+  @apply grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5;
 }
 
 .contenedor-4 {
@@ -73,7 +81,7 @@
 }
 
 .tarjeta-costo {
-  @apply grid lg:grid-cols-3 gap-5 bg-blue-600 p-6 rounded-xl text-center text-white shadow-lg
+  @apply grid lg:grid-cols-3 gap-5 bg-blue-600 p-6 rounded-xl text-center text-white shadow-lg 
 }
 
 .tarjeta-forms {
@@ -110,7 +118,12 @@
 }
 
 .input-asesor {
-  @apply bg-white w-full  h-7 rounded-md 
+  @apply bg-white w-full h-7 rounded-md 
+  outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black
+}
+
+.input-asunto {
+  @apply bg-white w-full max-h-16 rounded-md  col-span-3 
   outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black
 }
 
@@ -120,4 +133,13 @@
 
 .button-repetitivo {
   @apply px-4 py-2 rounded-lg font-semibold w-10 xl:w-20
+}
+
+.button-disabled{
+  @apply bg-slate-500 text-white cursor-not-allowed rounded-xl px-20 py-3
+}
+
+.tarjeta-asunto {
+    @apply grid  grid-cols-4 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
+   text-white shadow-xl items-center max-h-20 col-span-3 h-20;
 }

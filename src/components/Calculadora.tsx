@@ -10,7 +10,9 @@ import { useCalculadoraVisible } from "../context/CalculadoraVisibleContext";
 import FadeInOutError from "@/animate/FadeInOut";
 
 export default function Calculadora() {
+    // context
     const { visible } = useCalculadoraVisible();
+
 
     // inputs
     const [tipoSeleccionado, setTipoSeleccionado] = useState("");
@@ -378,6 +380,12 @@ export default function Calculadora() {
     }
 
 
+    const sendDatosContacto = () => {
+
+
+        alert("Datos enviados");
+    }
+
     if (!visible) return null;
 
     return (
@@ -585,16 +593,10 @@ export default function Calculadora() {
                                 {/* peso maximo por volumen */}
                                 <div className="tarjeta-notas">
                                     <div className="tarjeta-salida">
-
                                         <label className=""> Peso maximo: </label>
-
-
                                         <h2 className="volumen">{volumen}</h2>
-
-
                                     </div>
                                     <label className="notas"> En base al volumen proporcionado</label>
-
                                 </div>
 
                             </div>
@@ -605,23 +607,24 @@ export default function Calculadora() {
 
 
                     </form>
+
+                    {/* boton cotizar y contactar asesor */}
                     <div className="contenedor-filas-2 mx-10 items-center">
                         <div className="envio ">
-                            <input type="button" value="Cotizar" onClick={sendForms} className={asesor ? "hidden" : " button"} />
-                            <input type="submit" value="Contactar asesor" className={asesor ? "hidden" : " button"} onClick={() => setAsesor(true)} />
-
+                            <input type="button" value="Cotizar" onClick={sendForms} className=" button" />
+                            <input type="submit" value="Contactar asesor" className={asesor ? "button-disabled" : " button"} onClick={() => setAsesor(true)} />
                         </div>
 
                     </div>
 
-
-                    <div className={asesor ? "col-span-4 mr-10 ml-7 mb-10" : "col-span-3 mr-10 ml-7"}>
-
-<div className="tarjeta-costo">
-                                <h2 className="precio">
+                    {/* precio calculado */}
+                    <div className="col-span-3 mr-10 ml-7">
+                        <div className="contenedor-filas-2">
+                            <div className="tarjeta-costo">
+                                <h2 className="precio-texto">
                                     Costo:
                                 </h2>
-                                <h2 className="precio">
+                                <h2 className="precio-resultado">
                                     {costoIVA}
                                 </h2>
 
@@ -629,61 +632,73 @@ export default function Calculadora() {
                                 <p className="p">
                                     USD
                                 </p>
-                            </div>
-                        {/* tarjeta de precio cambiante depues de presionar el boton */}
-                        {asesor ? (
-                            <div className="mt-2">
-                                <AnimatedText
-                                    delay={0.2}
-                                    lines={[
-                                        < h2 key={2} className="subtitulo">
-                                            Ingrese sus datos para una cotizacion 
-                                        </h2>
-                                    ]}>
-                                </AnimatedText>
-
-                                <div className="contenedor-4 mb-5">
-                                    <div className="tarjeta-ingreso">
-                                        <label htmlFor="ContactName">Nombre: </label>
-                                        <input type="text" name="name" id="ContactName" className="input-asesor" />
-
-                                    </div>
-
-                                    <div className="tarjeta-ingreso">
-                                        <label htmlFor="ContactPhone">Teléfono: </label>
-                                        <input type="text" name="phone" id="ContactPhone" className="input-asesor" />
-
-                                    </div>
-
-                                    <div className="tarjeta-ingreso">
-
-                                        <label htmlFor="ContactEmail">Correo: </label>
-                                        <input type="text" name="email" id="ContactEmail" className="input-asesor" />
-                                    </div>
-
-                                    <div className="tarjeta-ingreso">
-                                        <label htmlFor="ContactAsunto">Asunto: </label>
-
-                                        <textarea name="email" id="ContactAsunto" rows={4} cols={50} className="input-asesor" >
-
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div className="button col-span-4">
-                                    <input type="submit" onClick={() => setAsesor(false)} value={"Enviar"} className="" />
-                                </div>
 
                             </div>
-                        ) : (
-                            <div></div>
-                        )}
-
-                        {/* boton con alerta */}
 
 
-                        {/* contenedor derecho */}
+                        </div>
+
 
                     </div>
+
+                    {/* boton de enviar forms con datos de contacto */}
+                    <div className="contenedor-filas-2 mx-10 items-center -mt-3">
+                        <div className="envio">
+                            <input type="button" value="Enviar Datos" onClick={sendDatosContacto} className={asesor ? "button" : "hidden"} />
+                            <input type="submit" value="Cerrar formulario" className={asesor ? "button" : "hidden"} onClick={() => setAsesor(false)} />
+                        </div>
+                    </div>
+
+
+                    {asesor ? (
+                        <div className=" col-span-3 -mt-20 mr-10 ml-7">
+                            <AnimatedText
+                                delay={0.2}
+                                lines={[
+                                    < h2 key={2} className="subtitulo">
+                                        Ingrese sus datos para una cotizacion
+                                    </h2>
+                                ]}>
+                            </AnimatedText>
+
+                            <div className="contenedor-3 mb-5">
+                                <div className="tarjeta-ingreso">
+                                    <label htmlFor="ContactName">Nombre: </label>
+                                    <input type="text" name="name" id="ContactName" className="input-asesor" />
+
+                                </div>
+
+                                <div className="tarjeta-ingreso">
+                                    <label htmlFor="ContactPhone">Teléfono: </label>
+                                    <input type="text" name="phone" id="ContactPhone" className="input-asesor" />
+
+                                </div>
+
+                                <div className="tarjeta-ingreso">
+
+                                    <label htmlFor="ContactEmail">Correo: </label>
+                                    <input type="text" name="email" id="ContactEmail" className="input-asesor" />
+                                </div>
+
+                                <div className="tarjeta-asunto">
+                                    <label htmlFor="ContactAsunto">Asunto: </label>
+
+                                    <textarea name="email" id="ContactAsunto" rows={4} cols={50} className="input-asunto " >
+
+                                    </textarea>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    ) : (
+                        <div></div>
+                    )}
+
+
+
                 </div>
             </div>
 
