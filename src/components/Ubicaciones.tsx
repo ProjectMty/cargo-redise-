@@ -146,11 +146,13 @@ export default function Ubicaciones() {
                             modules={[Autoplay, Pagination]}
                             spaceBetween={20}
                             slidesPerView={1}
-                            autoplay={{ delay: 3000000 }}
+                            autoplay={{ delay: 30000 }}
                             pagination={{ clickable: true }}
+                            loop={true}
                             onSlideChange={(swiper) => {
-                                setCurrentMap(navigation[swiper.activeIndex]);
+                                setCurrentMap(navigation[swiper.realIndex]);
                             }}
+                            
                             className="rounded-xl overflow-hidden"
                         >
                             {navigation.map((img) => (

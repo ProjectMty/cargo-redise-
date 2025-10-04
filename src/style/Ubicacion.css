@@ -34,23 +34,23 @@
 }
 
 .img-laredo {
-    @apply absolute top-[165px] left-[310px] z-40 max-w-[150px]; 
+    @apply absolute top-[165px] left-[320px] z-40 max-w-[150px]; 
 }
 
 .img-cdmx {
-    @apply absolute top-[300px] left-[300px] z-40 max-w-[30px] hover:scale-x-150;
+    @apply absolute top-[290px] left-[235px] z-40 max-w-[100px] hover:scale-x-150;
     ; 
 }
 
 .img-texas {
-    @apply absolute top-[255px] translate-x-[110px] z-40 max-w-[210px];
+    @apply absolute top-[255px] translate-x-[90px] z-40 max-w-[230px];
 }
 
 .img-ny {
-    @apply absolute top-[130px] translate-x-[439px] z-40 max-w-[80px];
+    @apply absolute top-[110px] translate-x-[420px] z-40 max-w-[150px];
 }
 
 .img-catharines{
-    @apply absolute top-[280px] translate-x-[170px] z-40 max-w-[230px];
+    @apply absolute top-[270px] translate-x-[150px] z-40 max-w-[250px];
 }
 

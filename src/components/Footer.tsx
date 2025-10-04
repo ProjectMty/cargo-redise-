@@ -41,7 +41,7 @@ export default function Footer(){
             </a>
             
             </div>
-        <p className="flex items-center justify-center mt-10">Copyright © 2025. Cargo Monterrey.</p>
+        <p className="flex items-center justify-center mt-10 text-white">Copyright © 2025. Cargo Monterrey.</p>
         </section>
     )
 }

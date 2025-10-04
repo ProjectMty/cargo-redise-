@@ -607,7 +607,7 @@ export default function Calculadora() {
                     </form>
                     <div className="contenedor-filas-2 mx-10 items-center">
                         <div className="envio ">
-                            <input type="button" value="Enviar formulario" onClick={sendForms} className={asesor ? "hidden" : " button"} />
+                            <input type="button" value="Cotizar" onClick={sendForms} className={asesor ? "hidden" : " button"} />
                             <input type="submit" value="Contactar asesor" className={asesor ? "hidden" : " button"} onClick={() => setAsesor(true)} />
 
                         </div>
@@ -617,9 +617,22 @@ export default function Calculadora() {
 
                     <div className={asesor ? "col-span-4 mr-10 ml-7 mb-10" : "col-span-3 mr-10 ml-7"}>
 
+<div className="tarjeta-costo">
+                                <h2 className="precio">
+                                    Costo:
+                                </h2>
+                                <h2 className="precio">
+                                    {costoIVA}
+                                </h2>
+
+                                {/* moneda  */}
+                                <p className="p">
+                                    USD
+                                </p>
+                            </div>
                         {/* tarjeta de precio cambiante depues de presionar el boton */}
                         {asesor ? (
-                            <div className="-mt-8">
+                            <div className="mt-2">
                                 <AnimatedText
                                     delay={0.2}
                                     lines={[
@@ -662,19 +675,7 @@ export default function Calculadora() {
 
                             </div>
                         ) : (
-                            <div className="tarjeta-costo">
-                                <h2 className="precio">
-                                    Costo:
-                                </h2>
-                                <h2 className="precio">
-                                    {costoIVA}
-                                </h2>
-
-                                {/* moneda  */}
-                                <p className="p">
-                                    USD
-                                </p>
-                            </div>
+                            <div></div>
                         )}
 
                         {/* boton con alerta */}
