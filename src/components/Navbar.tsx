@@ -38,7 +38,7 @@ export default function Navbar() {
        ${scrolled ? 'bg-white/60 shadox-md' : 'bg-transparent'
       }`}>
 
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+      <nav className="mx-auto flex lg:max-w-7xl items-center justify-between px-6 py-3">
         {/* Logo */}
         <Link href="/" className="flex items-center ">
           <Image
@@ -69,7 +69,7 @@ export default function Navbar() {
         <div className=" ">
           <Link
             href="/#calculadora"
-            className="rounded-full bg-[#1b1ba6] text-white px-5 py-1.5 text-sm font-semibold hover:bg-[#14149c] transition"
+            className="hidden lg:block rounded-full bg-[#1b1ba6] text-white px-5 py-1.5 text-sm font-semibold hover:bg-[#14149c] transition"
             onClick={() => {
               setVisible(true);
               setMobileMenuOpen(false);

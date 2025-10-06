@@ -27,6 +27,7 @@ export default function Calculadora() {
     // salidas
     const [costoIVA, setCostoIVA] = useState<number>(0);
     const [volumen, setVolumen] = useState<number>(0);
+    const [volumenLb, setVoluenLb] = useState<number>(0);
     const [opcion, setOpcion] = useState("MXS"); // valor inicial
 
     //errores 
@@ -66,22 +67,29 @@ export default function Calculadora() {
         if (largo === "" || ancho === "" || alto === "") {
             return;
         }
+
+        // variables
         let volumenInput = 0;
         let volumenM3 = 0;
         let pesoMaxKg = 0;
+        let pesoMaxLb = 0;
 
         if (opcion === "USA") {
             // en in
-            volumenInput = convertirInToCm();
-
+            volumenInput = largo * ancho * alto;
+            pesoMaxLb = volumenInput / 139
+            pesoMaxLb = Math.round((pesoMaxLb + Number.EPSILON) * 100) / 100;
+            setVoluenLb(pesoMaxLb);
         } else {
             // en cm
             volumenInput = largo * ancho * alto;
+            volumenM3 = volumenInput / 1000000;
+            pesoMaxKg = volumenM3 * 140;
+            pesoMaxKg = Math.round((pesoMaxKg + Number.EPSILON) * 100) / 100;
+            setVolumen(pesoMaxKg);
         }
-        volumenM3 = volumenInput / 1000000;
-        pesoMaxKg = volumenM3 * 140;
-        pesoMaxKg = Math.round((pesoMaxKg + Number.EPSILON) * 100) / 100;
-        setVolumen(pesoMaxKg);
+
+
     }, [largo, ancho, alto, opcion, convertirInToCm]);
 
 
@@ -92,22 +100,6 @@ export default function Calculadora() {
         const select = e.target.value;
         setTipoSeleccionado(select); // Actualiza el estado
 
-        if (select === "Pallets") {
-            setPallets(true);
-            setLargo(120);
-            setAncho(80);
-            setAlto(180);
-        } else if (select === "Sobres" || select === "Cajas") {
-            setPallets(false);
-            setLargo("");
-            setAncho("");
-            setAlto("");
-        } else {
-            setPallets(false);
-            setLargo("");
-            setAncho("");
-            setAlto("");
-        }
         // resetear inputs y cálculos
         SetValor("");
         setPeso("");
@@ -115,11 +107,47 @@ export default function Calculadora() {
         setCostoIVA(0)
         setCantidad("");
         setRepetitivo(false);
-
-
     };
 
+    useEffect(() => {
+        if (tipoSeleccionado === "Pallets") {
+            setPallets(true);
+            if (opcion === "USA") {
+                setLargo(47.24);
+                setAncho(31.49);
+                setAlto(70.86);
+            } else {
+                setLargo(120);
+                setAncho(80);
+                setAlto(180);
+            }
+        } else if (tipoSeleccionado === "Sobres" || tipoSeleccionado === "Cajas") {
+            setPallets(false);
+            setLargo("");
+            setAncho("");
+            setAlto("");
+            setVolumen(0);
+            setVoluenLb(0);
+            SetValor("");
+            setPeso("");
+            setCostoIVA(0)
+            setCantidad("");
+            setRepetitivo(false);
+        } else {
+            setPallets(false);
+            setLargo("");
+            setAncho("");
+            setAlto("");
+            setVolumen(0);
+            setVoluenLb(0);
+            SetValor("");
+            setPeso("");
+            setCostoIVA(0)
+            setCantidad("");
+            setRepetitivo(false);
 
+        }
+    }, [opcion, tipoSeleccionado]);
 
     // **************************************************************************************VALOR 
 
@@ -319,6 +347,7 @@ export default function Calculadora() {
         let precioBase = 0;
         let calcularPrecio = 0;
         let precioPeso = 0;
+        let pesoKg = 0;
 
         // honrararios
         if (valor <= 119) {
@@ -338,18 +367,18 @@ export default function Calculadora() {
             precioConIva = precioSinIva + (valor * 0.16)
         }
 
-
-        // convertir peso ingresado a libras
-        let pesoLb = 0;
-        if (opcion === "USA") {
-            pesoLb = Number(peso);
-        } else {
-            pesoLb = Number(peso) * 2.2046;
-        }
-
         // valor volumetrico dependiendo del tipo de envio
         switch (tipoSeleccionado) {
             case "Pallets":
+
+                // convertir peso ingresado a libras
+                let pesoLb = 0;
+                if (opcion === "USA") {
+                    pesoLb = Number(peso);
+                } else {
+                    pesoLb = Number(peso) * 2.2046;
+                }
+
                 if (pesoLb <= 500) {
                     precioPeso = 375 + (cantidad * 10);
                 } else if (pesoLb > 500) {
@@ -357,21 +386,58 @@ export default function Calculadora() {
                 }
                 break;
 
-            default:
-                if (largo <= 60 || ancho <= 60 || alto <= 60 || peso < volumen) {
-                    calcularPrecio = ((largo * ancho * alto) / 6000) * 3
-                    precioBase = calcularPrecio + (cantidad * 3)
+            case "Sobres":
+
+                // precio en lb
+                calcularPrecio = ((largo * ancho * alto) / 6000) * 3
+                precioBase = calcularPrecio + (cantidad * 3)
+
+                if (opcion === "USA") {
+                    // pesoKg = Number(peso) * 0.45359237;
+                    pesoLb = Number(peso);
+                    if (pesoLb > volumenLb) {
+                        const precioExcesoLb = (pesoLb - volumenLb) * 2
+                        precioBase = precioBase + precioExcesoLb
+                    }
+
                 } else {
-                    calcularPrecio = (peso - volumen) * 2
-                    precioBase = calcularPrecio + (cantidad * 3)
+                    pesoKg = Number(peso);
+                    if (pesoKg > volumen) {
+                        const PrecioExcesoKg = (pesoKg - volumen) * 2
+                        precioBase = precioBase + PrecioExcesoKg;
+                    }
                 }
+
+
+                break;
+            case "Cajas":
+
+                // precio en lb
+                calcularPrecio = ((largo * ancho * alto) / 6000) * 3
+                precioBase = calcularPrecio + (cantidad * 3)
+
+                if (opcion === "USA") {
+                    // pesoKg = Number(peso) * 0.45359237;
+                    pesoLb = Number(peso);
+                    if (pesoLb > volumenLb) {
+                        const precioExcesoLb = (pesoLb - volumenLb) * 2
+                        precioBase = precioBase + precioExcesoLb
+                    }
+
+                } else {
+                    pesoKg = Number(peso);
+                    if (pesoKg > volumen) {
+                        const PrecioExcesoKg = (pesoKg - volumen) * 2
+                        precioBase = precioBase + PrecioExcesoKg;
+                    }
+                }
+                break;
+            default:
+
                 break;
         }
 
 
-        // redondear a 2 decimales
-        // precioBase = Math.round((precioBase + Number.EPSILON) * 100) / 100;
-        // precioConIva = Math.round((precioConIva + Number.EPSILON) * 100) / 100;
 
         // asignar precio final
         precioBase = precioBase + precioConIva + precioPeso;
@@ -401,6 +467,7 @@ export default function Calculadora() {
                         < h2 key={2} className="subtitulo">
                             Esta calculadora es un aproximado, para una cotizacion completa contacte con un asesor
                         </h2>
+
                     ]}>
                 </AnimatedText>
 
@@ -425,25 +492,23 @@ export default function Calculadora() {
 
                             </div>
 
-                            <div className="mt-10 text-center">
+                            <div className="md:mt-28 xl:mt-10 mt-3 text-center col-span-2">
                                 < h2 className="tipo">
                                     {tipoSeleccionado}
                                 </h2>
                             </div>
-                            <div className="col-span-1">
-
-                            </div>
+                        
                             <div className="grid-cols-2 text-center ">
                                 <button type="button"
                                     onClick={() => setOpcion("MXS")}
-                                    className={`px-4 py-2 rounded-lg font-semibold mt-10 w-28 mr-1
+                                    className={`px-4 py-2 rounded-lg font-semibold md:mt-10 w-28 mr-1
                                     ${opcion === "MXS" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
                                 >
                                     cm/kg
                                 </button>
                                 <button type="button"
                                     onClick={() => setOpcion("USA")}
-                                    className={`px-4 py-2 rounded-lg font-semibold mt-10 w-28
+                                    className={`px-4 py-2 rounded-lg font-semibold md:mt-10 w-28
                                     ${opcion === "USA" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
                                 >
                                     in/lb
@@ -594,7 +659,9 @@ export default function Calculadora() {
                                 <div className="tarjeta-notas">
                                     <div className="tarjeta-salida">
                                         <label className=""> Peso maximo: </label>
-                                        <h2 className="volumen">{volumen}</h2>
+                                        <h2 className="volumen">
+                                            {opcion === "USA" ? volumenLb : volumen}
+                                        </h2>
                                     </div>
                                     <label className="notas"> En base al volumen proporcionado</label>
                                 </div>
@@ -609,7 +676,7 @@ export default function Calculadora() {
                     </form>
 
                     {/* boton cotizar y contactar asesor */}
-                    <div className="contenedor-filas-2 mx-10 items-center">
+                    <div className="lg:contenedor-filas-2 lg:mx-10 items-center ">
                         <div className="envio ">
                             <input type="button" value="Cotizar" onClick={sendForms} className=" button" />
                             <input type="submit" value="Contactar asesor" className={asesor ? "button-disabled" : " button"} onClick={() => setAsesor(true)} />
@@ -618,7 +685,7 @@ export default function Calculadora() {
                     </div>
 
                     {/* precio calculado */}
-                    <div className="col-span-3 mr-10 ml-7">
+                    <div className="col-span-4 lg:col-span-3 lg:mr-10 lg:ml-7 mt-10 md:mt-0">
                         <div className="contenedor-filas-2">
                             <div className="tarjeta-costo">
                                 <h2 className="precio-texto">
@@ -641,17 +708,8 @@ export default function Calculadora() {
 
                     </div>
 
-                    {/* boton de enviar forms con datos de contacto */}
-                    <div className="contenedor-filas-2 mx-10 items-center -mt-3">
-                        <div className="envio">
-                            <input type="button" value="Enviar Datos" onClick={sendDatosContacto} className={asesor ? "button" : "hidden"} />
-                            <input type="submit" value="Cerrar formulario" className={asesor ? "button" : "hidden"} onClick={() => setAsesor(false)} />
-                        </div>
-                    </div>
-
-
                     {asesor ? (
-                        <div className=" col-span-3 -mt-20 mr-10 ml-7">
+                        <div className="col-span-4 md:-mt-16 mt-5">
                             <AnimatedText
                                 delay={0.2}
                                 lines={[
@@ -660,8 +718,25 @@ export default function Calculadora() {
                                     </h2>
                                 ]}>
                             </AnimatedText>
+                        </div>
+                    ) : (
+                        <div></div>
+                    )}
 
-                            <div className="contenedor-3 mb-5">
+
+                    {/* boton de enviar forms con datos de contacto */}
+                    <div className="contenedor-filas-2 md:mx-10 items-center">
+                        <div className="envio">
+                            <input type="button" value="Enviar Datos" onClick={sendDatosContacto} className={asesor ? "button mb-2" : "hidden"} />
+                            <input type="submit" value="Cerrar formulario" className={asesor ? "button" : "hidden"} onClick={() => setAsesor(false)} />
+                        </div>
+                    </div>
+
+
+                    {asesor ? (
+                        <div className="col-span-4 md:col-span-3 md:mr-10 md:ml-7">
+
+                            <div className="lg:contenedor-3 mb-5">
                                 <div className="tarjeta-ingreso">
                                     <label htmlFor="ContactName">Nombre: </label>
                                     <input type="text" name="name" id="ContactName" className="input-asesor" />

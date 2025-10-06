@@ -16,7 +16,7 @@ export default function Contacto() {
                 ]}></AnimatedText>
                
                 {/* inicio de formulario */}
-                <div className="bg-blue-800 z-20 mt-10 mb-40 translate-x-1/6 lg:translate-x-1/4 w-9/12 lg:w-2/3 h-1/2 grid lg:grid-cols-2 gap-7 rounded-3xl">
+                <div className="bg-blue-800 z-20 mx-3 mt-10 mb-40 translate-x-1/6 lg:translate-x-1/4 lg:w-2/3 h-1/2 grid lg:grid-cols-2 gap-7 rounded-3xl">
                     {/* contenedor izquierdo */}
                     <div className=" mb-10">
                         <h2 className="mt-6 text-center font-bold text-lg lg:text-2xl ">¡Empieza a importar ya!</h2>

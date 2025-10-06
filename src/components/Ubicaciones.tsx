@@ -49,8 +49,6 @@ export default function Ubicaciones() {
     const [fade, setFade] = useState(false);
     // const [mobileNav, setMobileNav] = useState(false);
 
-    
-
     function handleStyle(id:string){
 
         if(id === "NL"){
@@ -73,7 +71,6 @@ export default function Ubicaciones() {
         
     }
  
-
     return (
         <section id="ubicacion" className="fondo-seccion bg-white">
             
@@ -88,7 +85,7 @@ export default function Ubicaciones() {
                     alt="ubicacion"
                     width={1200}
                     height={600}
-                    // className="fondo-ubicacion"
+                    className="fondo-ubicacion pointer-events-none z-0"
                     priority
                 />
 
@@ -96,22 +93,25 @@ export default function Ubicaciones() {
 
                 <div className="contenedor-carrusel">
                     {/* Carrusel en móvil */}
-                    <div className="relative max-h-[200px] lg:hidden overflow-hidden w-xs">
+                    <div className="carrusel-movil">
                         <Swiper
-                            modules={[Pagination]}
+                            modules={[Autoplay,Pagination]}
                             spaceBetween={10}
                             slidesPerView={1}
                             pagination={{ clickable: true }}
-                            className="w-full h-full"
+                            autoplay={{ delay: 3000}}
+                            loop={true}
+                            className=" w-[70%] h-[70%] top-9"
                         >
                             {navigation.map((img) => (
                                 <SwiperSlide key={img.name}>
                                     <Image
                                         src={img.href}
-                                        alt={`slide-${img.href}`}
+                                        alt={img.name}
                                         width={300}
                                         height={200}
-                                        className="w-full h-full object-cover rounded-lg"
+                                        className=" object-cover rounded-lg"
+                                        style={{userSelect: "none"}}
                                     />
                                 </SwiperSlide>
                             ))}
@@ -119,7 +119,7 @@ export default function Ubicaciones() {
                     </div>
 
                     {/* estados resaltados */}
-                    <div className="absolute mt-4 justify-center">
+                    <div className=" justify-center relative -left-1/3 ">
                         
                         {currentMap?.sucursales?.map((estado, i) => (
                             <div key={i} 
@@ -133,6 +133,7 @@ export default function Ubicaciones() {
                                 width={350}
                                 height={350}
                                 className={handleStyle(estado.id)}
+                                style={{userSelect: "none"}}
                             />
                             </div>
                            

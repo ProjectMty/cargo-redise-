@@ -1,6 +1,6 @@
 
 .fondo-seccion {
-     @apply  w-full relative flex justify-center  py-20 font-[Montserrat] scroll-smooth
+     @apply  w-full relative flex justify-center items-center py-20 font-[Montserrat] scroll-smooth
 }
 
 .titulo {
@@ -8,19 +8,24 @@
 }
 
 .contenedor {
-    @apply max-w-4xl rounded-[28px] object-cover mt-5 
+    @apply w-full rounded-[28px] justify-center items-center mt-5 relative max-w-5xl flex 
 }
 
 .fondo-ubicacion{
-    @apply w-full h-auto rounded-[28px] object-cover
+    @apply absolute top-0 left-0 object-cover z-0;
 }
 
 .contenedor-carrusel {
-    @apply absolute left-1/2 top-28 lg:top-32 -translate-x-1/2 items-center
+    @apply relative flex flex-col justify-center w-full 
+    left-1/2  -translate-x-1/2 items-center z-50;
 }
 
 .carrusel-desktop {
-    @apply relative w-full max-w-xl mx-auto p-10
+    @apply relative w-full max-w-xl mx-auto p-10 hidden lg:block
+}
+
+.carrusel-movil {
+    @apply relative max-h-[220px] w-full lg:hidden block overflow-hidden z-50 
 }
 
 .estado-resaltado {
@@ -30,27 +35,27 @@
 
 
 .img-nl {
-    @apply absolute top-[160px] left-[290px] z-40 max-w-[130px]; 
+    @apply absolute top-[180px] left-[270px] z-40 max-w-[130px] hidden lg:block; 
 }
 
 .img-laredo {
-    @apply absolute top-[165px] left-[320px] z-40 max-w-[150px]; 
+    @apply absolute top-[175px] left-[300px] z-40 max-w-[150px] hidden lg:block; 
 }
 
 .img-cdmx {
-    @apply absolute top-[290px] left-[235px] z-40 max-w-[100px] hover:scale-x-150;
+    @apply absolute top-[300px] left-[230px] z-40 max-w-[100px] hover:scale-x-150 hidden lg:block;
     ; 
 }
 
 .img-texas {
-    @apply absolute top-[255px] translate-x-[90px] z-40 max-w-[230px];
+    @apply absolute top-[260px] translate-x-[90px] z-40 max-w-[230px] hidden lg:block;
 }
 
 .img-ny {
-    @apply absolute top-[110px] translate-x-[420px] z-40 max-w-[150px];
+    @apply absolute top-[110px] translate-x-[410px] z-40 max-w-[150px] hidden lg:block;
 }
 
 .img-catharines{
-    @apply absolute top-[270px] translate-x-[150px] z-40 max-w-[250px];
+    @apply  absolute top-[290px] translate-x-[150px] z-40 max-w-[250px] hidden lg:block;
 }
 

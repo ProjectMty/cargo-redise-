@@ -13,19 +13,19 @@
 }
 
 .encabezado {
-    @apply font-extrabold text-[40px] lg:text-[55px] text-blue-800 text-center top-5  absolute left-1/2 -translate-x-1/2;
+    @apply font-extrabold text-4xl md:text-5xl text-blue-800 text-center mt-5;
 }
 
 .subtitulo {
-    @apply text-center text-blue-800 text-xl font-medium mt-5
+    @apply text-center text-blue-800 text-lg font-medium mt-2
 }
 
 .tipo {
-    @apply text-center text-blue-800 text-4xl md:text-5xl font-bold pr-20
+    @apply text-center text-blue-800 text-4xl md:text-5xl font-bold xl:pr-20
 }
 
 .precio-resultado {
-    @apply text-white text-4xl md:text-5xl font-bold text-end
+    @apply text-white text-4xl md:text-5xl font-bold lg:text-end mt-2 lg:mt-0
 }
 
 .precio-texto{
@@ -71,8 +71,8 @@
 }
 
 .tarjeta-ingreso {
-    @apply grid  grid-cols-2 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
-   text-white shadow-xl items-center max-h-20;
+    @apply grid grid-cols-1 md:grid-cols-2 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
+   text-white shadow-xl items-center max-h-20 mt-5;
 }
 
 .tarjeta-salida {
@@ -81,7 +81,7 @@
 }
 
 .tarjeta-costo {
-  @apply grid lg:grid-cols-3 gap-5 bg-blue-600 p-6 rounded-xl text-center text-white shadow-lg 
+  @apply grid grid-cols-1 lg:grid-cols-3 gap-5 bg-blue-600 p-6 rounded-xl text-center text-white shadow-lg 
 }
 
 .tarjeta-forms {
@@ -97,16 +97,16 @@
 }
 
 .p {
-    @apply text-end mt-8 mr-20 lg:mr-0
+    @apply text-end mt-8 lg:mr-0
 }
 
 .button {
-   @apply rounded-xl px-20 py-3 font-medium hover:bg-blue-600 hover:text-white
-    bg-blue-400 text-white transition duration-300 text-center
+   @apply rounded-xl px-5 xl:px-20 py-3 font-medium hover:bg-blue-600 hover:text-white
+    bg-blue-400 text-white transition duration-300 text-center;
 }
 
 .envio {
-  @apply grid grid-rows-2 gap-2
+  @apply grid grid-rows-2 gap-2 
 }
 
 .notas {
@@ -123,7 +123,7 @@
 }
 
 .input-asunto {
-  @apply bg-white w-full max-h-16 rounded-md  col-span-3 
+  @apply bg-white w-full max-h-16 rounded-md col-span-3 
   outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black
 }
 
@@ -136,10 +136,10 @@
 }
 
 .button-disabled{
-  @apply bg-slate-500 text-white cursor-not-allowed rounded-xl px-20 py-3
+  @apply bg-slate-500 text-white cursor-not-allowed rounded-xl xl:px-20 py-3 px-5
 }
 
 .tarjeta-asunto {
-    @apply grid  grid-cols-4 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
-   text-white shadow-xl items-center max-h-20 col-span-3 h-20;
+    @apply grid  lg:grid-cols-4 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
+   text-white shadow-xl items-center lg:max-h-20 col-span-3 lg:h-20 mt-5;
 }
