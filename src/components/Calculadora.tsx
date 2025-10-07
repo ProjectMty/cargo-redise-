@@ -8,7 +8,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useCalculadoraVisible } from "../context/CalculadoraVisibleContext";
 
 import FadeInOutError from "@/animate/FadeInOut";
-import AlertDialog from "@/extras/AlertDialog";
+// import AlertDialog from "@/extras/AlertDialog";
 
 export default function Calculadora() {
     // context
@@ -42,7 +42,7 @@ export default function Calculadora() {
     //booleanos
     const [pallets, setPallets] = useState(false);
     const [asesor, setAsesor] = useState(false);
-
+    const [ setOpen] = useState(false);
 
     // Estructruas de datos
     const tiposCajas = [
@@ -51,9 +51,7 @@ export default function Calculadora() {
         { name: "Cajas" }
     ];
 
-    // convertir peso max kg a peso max lb
     const convertirInToCm = useCallback(() => {
-
         const largoCm = Number(largo) * 2.54;
         const anchoCm = Number(ancho) * 2.54;
         const altoCm = Number(alto) * 2.54;
@@ -63,7 +61,7 @@ export default function Calculadora() {
         return volumenCm;
     }, [largo, ancho, alto])
 
-    //cada que cambie largo, ancho o alto se calcula el vol
+
     useEffect(() => {
         if (largo === "" || ancho === "" || alto === "") {
             return;
@@ -77,19 +75,20 @@ export default function Calculadora() {
 
         if (opcion === "USA") {
             // en in
-            volumenInput = largo * ancho * alto;
-            pesoMaxLb = volumenInput / 139
-            pesoMaxLb = Math.round((pesoMaxLb + Number.EPSILON) * 100) / 100;
-            setVoluenLb(pesoMaxLb);
+            volumenInput = convertirInToCm();
         } else {
             // en cm
             volumenInput = largo * ancho * alto;
-            volumenM3 = volumenInput / 1000000;
-            pesoMaxKg = volumenM3 * 140;
-            pesoMaxKg = Math.round((pesoMaxKg + Number.EPSILON) * 100) / 100;
-            setVolumen(pesoMaxKg);
         }
 
+        volumenM3 = volumenInput / 1000000;
+        pesoMaxKg = volumenM3 * 140;
+        pesoMaxKg = Math.round((pesoMaxKg + Number.EPSILON) * 100) / 100;
+        setVolumen(pesoMaxKg);
+
+        pesoMaxLb = pesoMaxKg * 2.20462
+        pesoMaxLb = Math.round((pesoMaxLb + Number.EPSILON) * 100) / 100;
+        setVoluenLb(pesoMaxLb);
 
     }, [largo, ancho, alto, opcion, convertirInToCm]);
 
@@ -208,6 +207,7 @@ export default function Calculadora() {
         }
     }, [peso])
 
+    
 
     // **************************************************************************************CANTIDAD
 
@@ -350,16 +350,17 @@ export default function Calculadora() {
         let precioPeso = 0;
         let pesoKg = 0;
         let pesoLb = 0;
+        let volumenCm = 0;
 
         // honrararios
         if (valor <= 119) {
             precioSinIva = 17;
         } else if (valor >= 120 && valor <= 475) {
-            precioSinIva = valor * 0.14;
+            precioSinIva = valor * (1 - 0.14);
         } else if (valor >= 476 && valor < 3000) {
-            precioSinIva = valor * 0.13;
+            precioSinIva = valor * (1 - 0.13);
         } else if (valor >= 3000) {
-            precioSinIva = valor * 0.12;
+            precioSinIva = valor * (1 - 0.12);
         }
 
         // agregar iva si son mas de 20 articulos
@@ -390,50 +391,43 @@ export default function Calculadora() {
 
             case "Sobres":
 
-                // precio en lb
-                calcularPrecio = ((largo * ancho * alto) / 6000) * 3
-                precioBase = calcularPrecio + (cantidad * 3)
-
                 if (opcion === "USA") {
-                    // pesoKg = Number(peso) * 0.45359237;
-                    pesoLb = Number(peso);
-                    if (pesoLb > volumenLb) {
-                        const precioExcesoLb = (pesoLb - volumenLb) * 2
-                        precioBase = precioBase + precioExcesoLb
-                    }
-
+                    volumenCm = convertirInToCm()
+                    calcularPrecio = ((volumenCm) / 6000) * 3
+                    precioBase = calcularPrecio + (cantidad * 3)
+                    pesoKg = Number(peso) * 0.45359237;
                 } else {
+                    calcularPrecio = ((largo * ancho * alto) / 6000) * 3
+                    precioBase = calcularPrecio + (cantidad * 3)
                     pesoKg = Number(peso);
-                    if (pesoKg > volumen) {
-                        const PrecioExcesoKg = (pesoKg - volumen) * 2
-                        precioBase = precioBase + PrecioExcesoKg;
-                    }
                 }
 
-
+                if (pesoKg > volumen) {
+                    const PrecioExcesoKg = (pesoKg - volumen) * 2
+                    precioBase = precioBase + PrecioExcesoKg;
+                }
                 break;
+
             case "Cajas":
 
-                // precio en lb
-                calcularPrecio = ((largo * ancho * alto) / 6000) * 3
-                precioBase = calcularPrecio + (cantidad * 3)
-
                 if (opcion === "USA") {
-                    // pesoKg = Number(peso) * 0.45359237;
-                    pesoLb = Number(peso);
-                    if (pesoLb > volumenLb) {
-                        const precioExcesoLb = (pesoLb - volumenLb) * 2
-                        precioBase = precioBase + precioExcesoLb
-                    }
-
+                    volumenCm = convertirInToCm()
+                    calcularPrecio = ((volumenCm) / 6000) * 3
+                    precioBase = calcularPrecio + (cantidad * 3)
+                    pesoKg = Number(peso) * 0.45359237;
                 } else {
+                    calcularPrecio = ((largo * ancho * alto) / 6000) * 3
+                    precioBase = calcularPrecio + (cantidad * 3)
                     pesoKg = Number(peso);
-                    if (pesoKg > volumen) {
-                        const PrecioExcesoKg = (pesoKg - volumen) * 2
-                        precioBase = precioBase + PrecioExcesoKg;
-                    }
+                }
+
+                if (pesoKg > volumen) {
+                    const PrecioExcesoKg = (pesoKg - volumen) * 2
+                    precioBase = precioBase + PrecioExcesoKg;
                 }
                 break;
+
+
             default:
 
                 break;
@@ -448,15 +442,14 @@ export default function Calculadora() {
     }
 
 
-    const sendDatosContacto = () => {
 
-        <AlertDialog/>
-    }
 
     if (!visible) return null;
 
     return (
         <section id="calculadora" className="fondo-seccion">
+
+
             <div className="contenedor-calculadora">
                 {/* texto de titulo animado */}
                 <AnimatedText
@@ -686,7 +679,7 @@ export default function Calculadora() {
                     </div>
 
                     {/* precio calculado */}
-                    <div className="col-span-4 lg:col-span-3 lg:mr-10 lg:ml-7 mt-10 md:mt-0">
+                    <div className="col-span-4 lg:col-span-3 lg:mr-10 lg:ml-7 mt-10 md:mt-5 xl:mt-0">
                         <div className="contenedor-filas-2">
                             <div className="tarjeta-costo">
                                 <h2 className="precio-texto">
@@ -728,7 +721,7 @@ export default function Calculadora() {
                     {/* boton de enviar forms con datos de contacto */}
                     <div className="contenedor-filas-2 md:mx-10 items-center">
                         <div className="envio">
-                            <input type="button" value="Enviar Datos" onClick={sendDatosContacto} className={asesor ? "button mb-2" : "hidden"} />
+                            <input type="button" value="Enviar Datos" onClick={() => setOpen(true)} className={asesor ? "button mb-2" : "hidden"} />
                             <input type="submit" value="Cerrar formulario" className={asesor ? "button" : "hidden"} onClick={() => setAsesor(false)} />
                         </div>
                     </div>
@@ -777,6 +770,7 @@ export default function Calculadora() {
 
                 </div>
             </div>
+
 
 
 
