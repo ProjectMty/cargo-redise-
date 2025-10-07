@@ -42,7 +42,6 @@ export default function Calculadora() {
     //booleanos
     const [pallets, setPallets] = useState(false);
     const [asesor, setAsesor] = useState(false);
-    const [ setOpen] = useState(false);
 
     // Estructruas de datos
     const tiposCajas = [
@@ -721,7 +720,7 @@ export default function Calculadora() {
                     {/* boton de enviar forms con datos de contacto */}
                     <div className="contenedor-filas-2 md:mx-10 items-center">
                         <div className="envio">
-                            <input type="button" value="Enviar Datos" onClick={() => setOpen(true)} className={asesor ? "button mb-2" : "hidden"} />
+                            <input type="button" value="Enviar Datos" onClick={() => setAsesor(false)} className={asesor ? "button mb-2" : "hidden"} />
                             <input type="submit" value="Cerrar formulario" className={asesor ? "button" : "hidden"} onClick={() => setAsesor(false)} />
                         </div>
                     </div>
