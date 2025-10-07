@@ -8,6 +8,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useCalculadoraVisible } from "../context/CalculadoraVisibleContext";
 
 import FadeInOutError from "@/animate/FadeInOut";
+import AlertDialog from "@/extras/AlertDialog";
 
 export default function Calculadora() {
     // context
@@ -348,6 +349,7 @@ export default function Calculadora() {
         let calcularPrecio = 0;
         let precioPeso = 0;
         let pesoKg = 0;
+        let pesoLb = 0;
 
         // honrararios
         if (valor <= 119) {
@@ -372,7 +374,7 @@ export default function Calculadora() {
             case "Pallets":
 
                 // convertir peso ingresado a libras
-                let pesoLb = 0;
+
                 if (opcion === "USA") {
                     pesoLb = Number(peso);
                 } else {
@@ -448,8 +450,7 @@ export default function Calculadora() {
 
     const sendDatosContacto = () => {
 
-
-        alert("Datos enviados");
+        <AlertDialog/>
     }
 
     if (!visible) return null;
@@ -497,7 +498,7 @@ export default function Calculadora() {
                                     {tipoSeleccionado}
                                 </h2>
                             </div>
-                        
+
                             <div className="grid-cols-2 text-center ">
                                 <button type="button"
                                     onClick={() => setOpcion("MXS")}

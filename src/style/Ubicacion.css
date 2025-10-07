@@ -17,11 +17,11 @@
 
 .contenedor-carrusel {
     @apply relative flex flex-col justify-center w-full 
-    left-1/2  -translate-x-1/2 items-center z-50;
+    left-1/2 top-12  -translate-x-1/2 items-center z-50;
 }
 
 .carrusel-desktop {
-    @apply relative w-full max-w-xl mx-auto p-10 hidden lg:block
+    @apply relative w-full max-w-xl mx-auto p-10 hidden lg:block mb-20
 }
 
 .carrusel-movil {
@@ -35,27 +35,27 @@
 
 
 .img-nl {
-    @apply absolute top-[180px] left-[270px] z-40 max-w-[130px] hidden lg:block; 
+    @apply absolute top-[180px] left-[270px] xl:left-[340px] z-40 max-w-[130px] hidden lg:block; 
 }
 
 .img-laredo {
-    @apply absolute top-[175px] left-[300px] z-40 max-w-[150px] hidden lg:block; 
+    @apply absolute top-[175px] left-[300px] xl:left-[370px] z-40 max-w-[150px] hidden lg:block; 
 }
 
 .img-cdmx {
-    @apply absolute top-[300px] left-[230px] z-40 max-w-[100px] hover:scale-x-150 hidden lg:block;
+    @apply absolute top-[300px] left-[230px] xl:left-[300px] z-40 max-w-[100px] hover:scale-x-150 hidden lg:block;
     ; 
 }
 
 .img-texas {
-    @apply absolute top-[260px] translate-x-[90px] z-40 max-w-[230px] hidden lg:block;
+    @apply absolute top-[260px]  xl:left-[140px] z-40 max-w-[230px] hidden lg:block;
 }
 
 .img-ny {
-    @apply absolute top-[110px] translate-x-[410px] z-40 max-w-[150px] hidden lg:block;
+    @apply absolute top-[110px] xl:left-[450px] z-40 max-w-[150px] hidden lg:block;
 }
 
 .img-catharines{
-    @apply  absolute top-[290px] translate-x-[150px] z-40 max-w-[250px] hidden lg:block;
+    @apply  absolute top-[290px] xl:left-[200px] z-40 max-w-[250px] hidden lg:block;
 }
 
