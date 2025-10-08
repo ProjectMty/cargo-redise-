@@ -1,19 +1,21 @@
 
 // sE ESTA CALCULANDO EN DOLARES
-
 "use client";
 import AnimatedText from "@/animate/TextAnimate";
 import "@/style/Calculadora.css";
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useCalculadoraVisible } from "../context/CalculadoraVisibleContext";
 
 import FadeInOutError from "@/animate/FadeInOut";
 // import AlertDialog from "@/extras/AlertDialog";
+import ReCAPTCHA from "react-google-recaptcha"
 
 export default function Calculadora() {
+
+    // #region Declaraciones
     // context
     const { visible } = useCalculadoraVisible();
-
+    const captcha = useRef(null);
 
     // inputs
     const [tipoSeleccionado, setTipoSeleccionado] = useState("");
@@ -24,6 +26,10 @@ export default function Calculadora() {
     const [alto, setAlto] = useState<number | "">("");
     const [cantidad, setCantidad] = useState<number | "">("");
     const [repetitivo, setRepetitivo] = useState(false);
+    const [nombre, SetNombre] = useState("");
+    const [telefono, SetTelefono] = useState("");
+    const [correo, SetCorreo] = useState("");
+    const [asunto, SetAsunto] = useState("");
 
     // salidas
     const [costoIVA, setCostoIVA] = useState<number>(0);
@@ -38,10 +44,14 @@ export default function Calculadora() {
     const [errorLargo, setErrorLargo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
     const [errorAncho, setErrorAncho] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
     const [errorAlto, setErrorAlto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
+    const [errorCosto, setErrorCosto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Costo aproximado" });
+    const [errorTelefono, setErrorTelefono] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Telefono con formato internacional" });
+    const [errorCorreo, setErrorCorreo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Correo valido" });
 
     //booleanos
     const [pallets, setPallets] = useState(false);
     const [asesor, setAsesor] = useState(false);
+    const [captchaValido, setCaptchaValido] = useState(false);
 
     // Estructruas de datos
     const tiposCajas = [
@@ -50,6 +60,10 @@ export default function Calculadora() {
         { name: "Cajas" }
     ];
 
+    // #endregion
+
+    // #region VOLUMEN
+    // convertir pulgadas a centimetros y devolver el volumen
     const convertirInToCm = useCallback(() => {
         const largoCm = Number(largo) * 2.54;
         const anchoCm = Number(ancho) * 2.54;
@@ -91,10 +105,10 @@ export default function Calculadora() {
 
     }, [largo, ancho, alto, opcion, convertirInToCm]);
 
+    // #endregion
 
-
-    // **************************************************************************************SELECCION
-    //  al elegir el tipo de envio (select)
+    // #region SELECCION
+    //al elegir el tipo de envio (select)
     const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const select = e.target.value;
         setTipoSeleccionado(select); // Actualiza el estado
@@ -106,6 +120,59 @@ export default function Calculadora() {
         setCostoIVA(0)
         setCantidad("");
         setRepetitivo(false);
+    };
+
+    useEffect(() => {
+        if (opcion === "USA") {
+            setErrorLargo({
+                error: false,
+                message: "Si pasa 23 in se cobra exceso de dimensiones"
+            });
+            setErrorAlto({
+                error: false,
+                message: "Si pasa 23 in se cobra exceso de dimensiones"
+            });
+            setErrorAncho({
+                error: false,
+                message: "Si pasa 23 in se cobra exceso de dimensiones"
+            });
+        } else {
+            setErrorLargo({
+                error: false,
+                message: "Si pasa 60 cm se cobra exceso de dimensiones"
+            });
+            setErrorAlto({
+                error: false,
+                message: "Si pasa 60 cm se cobra exceso de dimensiones"
+            });
+            setErrorAncho({
+                error: false,
+                message: "Si pasa 60 cm se cobra exceso de dimensiones"
+            });
+        }
+
+    }, [opcion]);
+
+    const LimpiarCampos = () => {
+        setPallets(false);
+        setLargo("");
+        setAncho("");
+        setAlto("");
+        setVolumen(0);
+        setVoluenLb(0);
+        SetValor("");
+        setPeso("");
+        setCostoIVA(0)
+        setCantidad("");
+        setRepetitivo(false);
+        LimpiarCamposFormulario();
+    };
+
+    const LimpiarCamposFormulario = () => {
+        SetNombre("");
+        SetTelefono("");
+        SetCorreo("");
+        SetAsunto("");
     };
 
     useEffect(() => {
@@ -121,34 +188,17 @@ export default function Calculadora() {
                 setAlto(180);
             }
         } else if (tipoSeleccionado === "Sobres" || tipoSeleccionado === "Cajas") {
-            setPallets(false);
-            setLargo("");
-            setAncho("");
-            setAlto("");
-            setVolumen(0);
-            setVoluenLb(0);
-            SetValor("");
-            setPeso("");
-            setCostoIVA(0)
-            setCantidad("");
-            setRepetitivo(false);
+            LimpiarCampos();
         } else {
-            setPallets(false);
-            setLargo("");
-            setAncho("");
-            setAlto("");
-            setVolumen(0);
-            setVoluenLb(0);
-            SetValor("");
-            setPeso("");
-            setCostoIVA(0)
-            setCantidad("");
-            setRepetitivo(false);
+            LimpiarCampos();
 
         }
-    }, [opcion, tipoSeleccionado]);
 
-    // **************************************************************************************VALOR 
+
+    }, [opcion, tipoSeleccionado]);
+    // #endregion
+
+    // #region VALOR 
 
     const handleValor = () => {
         if (valor === "" || valor === 0) {
@@ -173,9 +223,11 @@ export default function Calculadora() {
                 message: "Se utilizan valores en USD"
             })
         }
-    }, [valor])
 
-    // **************************************************************************************PESO
+    }, [valor])
+    // #endregion
+
+    // #region PESO
     // manejar el precio por peso
     const handleBlurPeso = () => {
         if (peso === "" || peso === 0) {
@@ -183,8 +235,7 @@ export default function Calculadora() {
                 error: true,
                 message: "El campo peso no puede estar vacío"
             });
-            // setPrecioPeso(0);
-            // setCostoBase(precioValor);
+
             return;
         } else {
             setErrorPeso({
@@ -206,9 +257,9 @@ export default function Calculadora() {
         }
     }, [peso])
 
-    
+    // #endregion
 
-    // **************************************************************************************CANTIDAD
+    // #region CANTIDAD
 
     const handleCantidad = () => {
 
@@ -235,8 +286,9 @@ export default function Calculadora() {
         }
     }, [cantidad])
 
+    // #endregion
 
-    // **************************************************************************************LARGO
+    // #region LARGO
 
     const handleLargo = () => {
 
@@ -246,30 +298,48 @@ export default function Calculadora() {
                 message: "El campo largo no puede estar vacío"
             });
         } else if (largo > 300) {
+
             setErrorLargo({
                 error: true,
                 message: "El largo no puede ser mayor a 300 cm"
             });
         }
         else {
+            if (opcion === "USA") {
+                setErrorLargo({
+                    error: false,
+                    message: "Si pasa 23 in se cobra exceso de dimensiones"
+                })
+            } else {
+                setErrorLargo({
+                    error: false,
+                    message: "Si pasa 60 cm se cobra exceso de dimensiones"
+                });
+            }
+
+        }
+
+
+    };
+
+    useEffect(() => {
+        if (opcion === "USA") {
+            setErrorLargo({
+                error: false,
+                message: "Si pasa 23 in se cobra exceso de dimensiones"
+            })
+        } else {
             setErrorLargo({
                 error: false,
                 message: "Si pasa 60 cm se cobra exceso de dimensiones"
             });
         }
-    };
-
-    useEffect(() => {
-        if (largo != "") {
-            setErrorLargo({
-                error: false,
-                message: "Si pasa 60 cm se cobra exceso de dimensiones"
-            })
-        }
 
     }, [largo])
 
-    // **************************************************************************************ANCHO
+    // #endregion
+
+    // #region ANCHO
     const handleAncho = () => {
 
         if (ancho === "" || ancho === 0) {
@@ -283,24 +353,37 @@ export default function Calculadora() {
                 message: "El ancho no puede ser mayor a 300 cm"
             });
         } else {
+            if (opcion === "USA") {
+                setErrorAncho({
+                    error: false,
+                    message: "Si pasa 23 in se cobra exceso de dimensiones"
+                })
+            } else {
+                setErrorAncho({
+                    error: false,
+                    message: "Si pasa 60 cm se cobra exceso de dimensiones"
+                });
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (opcion === "USA") {
+            setErrorAncho({
+                error: false,
+                message: "Si pasa 23 in se cobra exceso de dimensiones"
+            })
+        } else {
             setErrorAncho({
                 error: false,
                 message: "Si pasa 60 cm se cobra exceso de dimensiones"
             });
         }
-    };
-
-    useEffect(() => {
-        if (ancho != "") {
-            setErrorAncho({
-                error: false,
-                message: "Si pasa 60 cm se cobra exceso de dimensiones"
-            })
-        }
     }, [ancho])
 
+    // #endregion
 
-    // **************************************************************************************ALTO
+    // #region ALTO
 
     const handleAlto = () => {
 
@@ -315,30 +398,48 @@ export default function Calculadora() {
                 message: "El alto no puede ser mayor a 300 cm"
             });
         } else {
+            if (opcion === "USA") {
+                setErrorAlto({
+                    error: false,
+                    message: "Si pasa 23 in se cobra exceso de dimensiones"
+                })
+            } else {
+                setErrorAlto({
+                    error: false,
+                    message: "Si pasa 60 cm se cobra exceso de dimensiones"
+                });
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (opcion === "USA") {
+            setErrorAlto({
+                error: false,
+                message: "Si pasa 23 in se cobra exceso de dimensiones"
+            })
+        } else {
             setErrorAlto({
                 error: false,
                 message: "Si pasa 60 cm se cobra exceso de dimensiones"
             });
         }
-    };
-
-    useEffect(() => {
-        if (alto != "") {
-            setErrorAlto({
-                error: false,
-                message: "Si pasa 60 cm se cobra exceso de dimensiones"
-            })
-        }
     }, [alto])
 
-    // **************************************************************************************FORMS
+    // #endregion
+
+    // #region Cotizacion
     // manejo de errores al enviar formulario
     const sendForms = () => {
         // validar que no sea vacio
-        if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "") {
-            alert("Por favor llena todos los campos");
-            return;
+        if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "" || tipoSeleccionado === "") {
             //alerta de campos vacios 
+            setErrorCosto({
+                error: true,
+                message: "Debes ingresar todos los campos"
+            })
+            // alert("Por favor llena todos los campos");
+            return;
         }
 
         // variables
@@ -355,11 +456,11 @@ export default function Calculadora() {
         if (valor <= 119) {
             precioSinIva = 17;
         } else if (valor >= 120 && valor <= 475) {
-            precioSinIva = valor * (1 - 0.14);
+            precioSinIva = (valor / (1 - 0.14));
         } else if (valor >= 476 && valor < 3000) {
-            precioSinIva = valor * (1 - 0.13);
+            precioSinIva = (valor / (1 - 0.13));
         } else if (valor >= 3000) {
-            precioSinIva = valor * (1 - 0.12);
+            precioSinIva = (valor / (1 - 0.12));
         }
 
         // agregar iva si son mas de 20 articulos
@@ -383,8 +484,16 @@ export default function Calculadora() {
 
                 if (pesoLb <= 500) {
                     precioPeso = 375 + (cantidad * 10);
+                    setErrorCosto({
+                        error: false,
+                        message: "El peso ingresado entra en el rango"
+                    })
                 } else if (pesoLb > 500) {
                     precioPeso = 515 + (cantidad * 10);
+                    setErrorCosto({
+                        error: false,
+                        message: "El peso ingresado excede el peso maximo. Se cobrara costo de sobrepeso"
+                    })
                 }
                 break;
 
@@ -404,7 +513,13 @@ export default function Calculadora() {
                 if (pesoKg > volumen) {
                     const PrecioExcesoKg = (pesoKg - volumen) * 2
                     precioBase = precioBase + PrecioExcesoKg;
+
+                    setErrorCosto({
+                        error: false,
+                        message: "El peso ingresado excede el peso maximo. Se cobrara costo de sobrepeso"
+                    })
                 }
+
                 break;
 
             case "Cajas":
@@ -439,15 +554,71 @@ export default function Calculadora() {
         precioBase = Math.round((precioBase + Number.EPSILON) * 100) / 100;
         setCostoIVA(precioBase);
     }
+    // #endregion
+
+    // #region Formulario
+
+    const handleChangeTelefono = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // eliminar todo lo que no sea número
+        let numeros = e.target.value.replace(/\D/g, "").slice(0, 10);
 
 
+        if (numeros.length > 6) {
+            numeros = `(${numeros.slice(0, 3)}) ${numeros.slice(3, 6)}-${numeros.slice(6)}`;
+        } else if (numeros.length > 3) {
+            numeros = `(${numeros.slice(0, 3)}) ${numeros.slice(3)}`;
+        } else if (numeros.length > 0) {
+            numeros = `(${numeros}`;
+        }
 
+        SetTelefono(numeros);
+
+        const digitos = numeros.replace(/\D/g, "");
+        if (digitos.length < 10) {
+            setErrorTelefono({ error: true, message: "Ingresa un numero valido de 10 digitos" });
+        } else {
+            setErrorTelefono({ error: false, message: "Telefono con formato internacional" });
+        }
+    };
+
+    const hanleReCaptcha = () => {
+
+        if (captcha.current.getValue()) {
+            setCaptchaValido(true);
+            console.log("usuario no robot")
+        } else {
+            setCaptchaValido(false);
+        }
+    }
+
+    const sendContact = () => {
+        // validar que no sea vacio
+        // if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "" || tipoSeleccionado === "") {
+
+        //     alert("Por favor llena todos los campos de cotizacion");
+        //     return;
+        // }
+        // if (nombre === "" || telefono === "" || correo === "" || asunto === "") {
+
+        //     alert("Por favor llena todos los campos del formulario");
+        //     return;
+        // }
+        if (captcha.current.getValue()) {
+            console.log("usuario no robot")
+        } else {
+            alert("robot")
+            return;
+        }
+
+        alert("Informacion enviada")
+
+    }
+    // #endregion
 
     if (!visible) return null;
 
     return (
         <section id="calculadora" className="fondo-seccion">
-
 
             <div className="contenedor-calculadora">
                 {/* texto de titulo animado */}
@@ -694,6 +865,13 @@ export default function Calculadora() {
                                 </p>
 
                             </div>
+                            <div className="bg-red-700/60 h-7 w-1/2 mt-3 translate-x-1/2 rounded-xl">
+                                <FadeInOutError
+                                    message={errorCosto?.message ?? ""}
+                                    error={errorCosto?.error}
+                                />
+                            </div>
+
 
 
                         </div>
@@ -720,8 +898,14 @@ export default function Calculadora() {
                     {/* boton de enviar forms con datos de contacto */}
                     <div className="contenedor-filas-2 md:mx-10 items-center">
                         <div className="envio">
-                            <input type="button" value="Enviar Datos" onClick={() => setAsesor(false)} className={asesor ? "button mb-2" : "hidden"} />
-                            <input type="submit" value="Cerrar formulario" className={asesor ? "button" : "hidden"} onClick={() => setAsesor(false)} />
+                            <ReCAPTCHA
+                                ref={captcha}
+                                sitekey="6LfpVuMrAAAAAGo1ko6ww2DUpso81ur8qHRkCnfQ"
+                                onChange={hanleReCaptcha}
+                                className={asesor ? "" : "hidden"}
+                            />
+                            <input type="button" value="Enviar Datos" onClick={sendContact} className={asesor ? "button mt-1 mb-2" : "hidden"} />
+                            <input type="submit" value="Cerrar formulario" className={asesor ? "button mt-2" : "hidden"} onClick={() => setAsesor(false)} />
                         </div>
                     </div>
 
@@ -732,29 +916,49 @@ export default function Calculadora() {
                             <div className="lg:contenedor-3 mb-5">
                                 <div className="tarjeta-ingreso">
                                     <label htmlFor="ContactName">Nombre: </label>
-                                    <input type="text" name="name" id="ContactName" className="input-asesor" />
+                                    <input type="text" name="name" id="ContactName" className="input-asesor"
+                                        value={nombre}
+                                        placeholder="nombre"
+                                        onChange={(e) => SetNombre(e.target.value.trim())} />
 
                                 </div>
 
                                 <div className="tarjeta-ingreso">
                                     <label htmlFor="ContactPhone">Teléfono: </label>
-                                    <input type="text" name="phone" id="ContactPhone" className="input-asesor" />
-
+                                    <input type="tel" name="phone" id="ContactPhone" className="input-asesor"
+                                        value={telefono}
+                                        placeholder="(123) 456-7890"
+                                        onChange={handleChangeTelefono} />
+                                    <FadeInOutError
+                                        message={errorTelefono?.message ?? ""}
+                                        error={errorTelefono?.error}
+                                    />
                                 </div>
 
                                 <div className="tarjeta-ingreso">
 
                                     <label htmlFor="ContactEmail">Correo: </label>
-                                    <input type="text" name="email" id="ContactEmail" className="input-asesor" />
+                                    <input type="text" name="email" id="ContactEmail" className="input-asesor"
+                                        value={correo}
+                                        placeholder="ejemplo@correo.com"
+                                        onChange={(e) => SetCorreo(e.target.value.trim())} />
+                                    <FadeInOutError
+                                        message={errorCorreo?.message ?? ""}
+                                        error={errorCorreo?.error}
+                                    />
                                 </div>
 
                                 <div className="tarjeta-asunto">
                                     <label htmlFor="ContactAsunto">Asunto: </label>
 
-                                    <textarea name="email" id="ContactAsunto" rows={4} cols={50} className="input-asunto " >
+                                    <textarea name="email" id="ContactAsunto" rows={4} cols={50} className="input-asunto"
+                                        placeholder="Datos adicionales"
+                                        value={asunto}
+                                        onChange={(e) => SetAsunto(e.target.value.trim())} >
 
                                     </textarea>
                                 </div>
+
 
                             </div>
 

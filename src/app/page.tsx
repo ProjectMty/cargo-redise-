@@ -1,4 +1,5 @@
 // src/app/page.tsx
+"use client";
 import BuyAndShipCTA from "@/components/BuyAndShipCTA";
 import ComoFunciona from "@/components/ComoFunciona";
 import Contacto from "@/components/Contacto";
@@ -14,21 +15,22 @@ import { CalculadoraVisibleProvider } from "@/context/CalculadoraVisibleContext"
 
 export default function Home() {
 
+
   return (
     <CalculadoraVisibleProvider>
-    <main >
-      <Navbar/>
-      <Hero />
-      <Services />
-      <ComoFunciona />
-      <Tarifas />
-      <Calculadora/>
-      <Partnership />
-      <BuyAndShipCTA /> {/* <-- sólo en Home */}
-      <Ubicaciones />
-      <Contacto />
-      <Footer />
-    </main>
+      <main >
+        <Navbar />
+        <Hero />
+        <Services />
+        <ComoFunciona />
+        <Tarifas />
+        <Calculadora />
+        <Partnership />
+        <BuyAndShipCTA /> {/* <-- sólo en Home */}
+        <Ubicaciones />
+        <Contacto />
+        <Footer />
+      </main>
     </CalculadoraVisibleProvider>
   );
 }
