@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import "@/style/ComoFunciona.css";
 
-
+// #region animation
 const ContainerSteps = {
   hidden: {},
   show: {
@@ -39,6 +39,7 @@ const StepsAnimationDown = {
     },
   },
 };
+// #endregion
 
 export default function ComoFunciona() {
   const isMobile = useIsMobile();
@@ -58,168 +59,166 @@ export default function ComoFunciona() {
       <div className="div-titulo">
         {/* Título */}
         <h2 className="title">
-          ¿Cómo funciona?
+          Solo tienes que seguir estos sencillos pasos
         </h2>
 
         {/* Contenedor principal con fondo blanco */}
         <div className="contenedor-principal">
 
           {/* Línea horizontal */}
-          <div className="linea-horizontal"></div>
+          <div className="contenedor-central">
+            <div className="cuadrado"></div>
+            <div className="linea-Vertical"></div>
+            <div className="cuadrado"></div>
+            <div className="cuadrado"></div>
+            <div className="linea-Vertical"></div>
+            <div className="cuadrado"></div>
+            <div className="linea-Vertical"></div>
+            <div className="cuadrado"></div>
+            <div className="linea-Vertical"></div>
+            <div className="cuadrado"></div>
+            <div className="linea-Vertical"></div>
+            <div className="cuadrado"></div>
+            <div className="linea-Vertical"></div>
+            <div className="cuadrado"></div>
+
+          </div>
+
 
           {/* Grid de pasos */}
           <div className="grid-pasos">
 
-            {/* Paso 1 */}
+            {/* Paso 1 izquierda*/}
             <motion.div
               variants={isMobile ? StepsAnimationDown : StepsAnimationUp}
-              className="div-paso mt-10">
-
-
-              {/* Imagen */}
-              <div className="imagen-paso">
+              className="contenedor-paso">
+              <div className="imagen-paso-1">
                 <Image
-                  src="/img/funciona/Forma1.svg"
+                  src="/img/funciona/Paso-1.png"
                   alt="paso 1"
                   width={250}
                   height={250} />
               </div>
-              {/* Texto */}
-              <p className="texto-paso">
-                <span>Realiza tus compras en</span>
-                <span className="font-bold"> USA y China</span>
-                <span>  online con tu </span>
-                <span className="font-bold">proveedor</span>
-                <span> o en </span>
-                <span className="font-bold">páginas reconocidas.</span>.
-
-              </p>
-              {/* numero de paso desktop*/}
-              <div className="numero-paso">
-                1
+              <div className="contenedor-paso-titulo">
+                <h2>Realiza tus compras</h2>
               </div>
-
+              <p className="contenedor-paso-texto">
+                Compra en línea con tu proveedor o en
+                páginas reconocidas
+              </p>
             </motion.div>
 
-            {/* Paso 2 (ABAJO) */}
+            {/* separacion de grid para pasos */}
+            <div className="col-span-1"></div>
+            <div className="col-span-1"></div>
+
+            {/* Paso 2 derecha */}
             <motion.div
-              variants={StepsAnimationDown}
-              className="div-paso">
-              {/* numero de paso */}
-              <div className="numero-paso">
-                2
-              </div>
-              {/* imagen */}
-              <div className="imagen-paso">
+              variants={isMobile ? StepsAnimationDown : StepsAnimationUp}
+              className="contenedor-paso-derecho">
+              <div className="imagen-paso-2">
                 <Image
-                  src="/img/funciona/Forma2.svg"
+                  src="/img/funciona/Paso-2.png"
                   alt="paso 2"
                   width={250}
                   height={250} />
               </div>
-              {/* texto */}
-              <p className="texto-paso">
-
-                <span className="font-bold"> Asigna la dirección</span>
-                <span>  de nuesto </span>
-                <span className="font-bold">almacén en Laredo, TX</span>
-
+              <div className="contenedor-paso-titulo-derecho">
+                <h2>Dirección en Laredo, TX</h2>
+              </div>
+              <p className="contenedor-paso-texto-derecho">
+                Asigna la dirección de nuestro almacén en Estados Unidos
               </p>
+
             </motion.div>
 
-            {/* Paso 3 */}
+            {/* Paso 3 izquierda*/}
             <motion.div
               variants={isMobile ? StepsAnimationDown : StepsAnimationUp}
-              className="div-paso">
-              {/* numero de paso mobil*/}
-
-
-              {/* Imagen */}
-              <div className="imagen-paso">
+              className="contenedor-paso">
+              <div className="imagen-paso-3">
                 <Image
-                  src="/img/funciona/Forma3.svg"
-                  alt="paso 1"
+                  src="/img/funciona/Paso-3.png"
+                  alt="paso 3"
                   width={250}
                   height={250} />
               </div>
-              {/* Texto */}
-              <p className="texto-paso">
-                <span>Trabaja con tu</span>
-                <span className="font-bold"> asesor personal enviando</span>
-                <span>  tu comprobante de</span>
-                <span className="font-bold"> pago y número de rastreo</span>
-
-              </p>
-              <div className="numero-paso">
-                3
+              <div className="contenedor-paso-titulo">
+                <h2>Comparte tus comprobantes</h2>
               </div>
-
-            </motion.div>
-
-
-            {/* Paso 4 */}
-            <motion.div
-              variants={StepsAnimationDown}
-              className="div-paso">
-              {/* numero de paso */}
-              <div className="numero-paso">
-                4
-              </div>
-              {/* imagen */}
-              <div className="imagen-paso">
-                <Image
-                  src="/img/funciona/Forma4.svg"
-                  alt="paso 2"
-                  width={250}
-                  height={250} />
-              </div>
-              {/* texto */}
-              <p className="texto-paso">
-                <span>Una vez</span>
-                <span className="font-bold"> recibida la mercancia en nuestro almacén,</span>
-                <span>  nosotros haremos </span>
-                <span className="font-bold"> los trámites aduanales</span>
-                <span> para</span>
-                <span className="font-bold">cruzar a México.</span>.
-
+              <p className="contenedor-paso-texto">
+                Envía a tu asesor tu pago y número de rastreo
               </p>
             </motion.div>
 
-            {/* Paso 5 */}
+
+            {/* separacion de grid para pasos */}
+            <div className="col-span-1"></div>
+            <div className="col-span-1"></div>
+
+            {/* Paso 4 derecha */}
             <motion.div
               variants={isMobile ? StepsAnimationDown : StepsAnimationUp}
-              className="div-paso">
-
-
-              {/* Imagen */}
-              <div className="imagen-paso">
+              className="contenedor-paso-derecho">
+              <div className="imagen-paso-4">
                 <Image
-                  src="/img/funciona/Forma5.svg"
-                  alt="paso 1"
+                  src="/img/funciona/Paso-4.png"
+                  alt="paso 4"
                   width={250}
                   height={250} />
               </div>
-              {/* Texto */}
-              <p className="texto-paso">
-                <span>Ya que</span>
-                <span className="font-bold"> tu mercancía está en México</span>
-                <span>  ,pagas tus honorarios e impuestos, y realizamos el envio a tu domicilio.</span>
-
+              <div className="contenedor-paso-titulo-derecho">
+                <h2 className="px-5">Trámite aduanal</h2>
+              </div>
+              <p className="contenedor-paso-texto-derecho">
+                Nosotros nos encargamos de cruzar tu mercancía a México
               </p>
 
-              {/* numero de paso desktop*/}
-              <div className="numero-paso">
-                5
-              </div>
+            </motion.div>
 
+            {/* Paso 5 izquierda*/}
+            <motion.div
+              variants={isMobile ? StepsAnimationDown : StepsAnimationUp}
+              className="contenedor-paso">
+              <div className="imagen-paso-5">
+                <Image
+                  src="/img/funciona/Paso-5.png"
+                  alt="paso 3"
+                  width={250}
+                  height={250} />
+              </div>
+              <div className="contenedor-paso-titulo">
+                <h2>Pago y entrega</h2>
+              </div>
+              <p className="contenedor-paso-texto">
+                Pagas honorarios e impuestos, y recibes en tu domicilio
+              </p>
+            </motion.div>
+
+
+          </div>
+
+          <div className="contenedor-central">
+
+            <motion.div
+              variants={isMobile ? StepsAnimationDown : StepsAnimationUp}
+              className="contenedor-paso mt-36">
+              <div className="imagen-paso-6">
+                <Image
+                  src="/img/funciona/Paso-6.png"
+                  alt="paso 6"
+                  width={250}
+                  height={250} />
+              </div>
+              <div className="contenedor-paso-titulo">
+                <h2>Facturación</h2>
+              </div>
+              <p className="contenedor-paso-texto-central">
+                Te generamos factura por servicios o productos
+              </p>
             </motion.div>
           </div>
 
-
-          {/* Nota final */}
-          <p className="nota">
-            *Realizamos tu factura por servicios o por productos comercializados.
-          </p>
         </div>
 
       </div>

@@ -10,6 +10,10 @@ import FadeInOutError from "@/animate/FadeInOut";
 // import AlertDialog from "@/extras/AlertDialog";
 import ReCAPTCHA from "react-google-recaptcha"
 
+// cotizacion pdf
+// import CotizadorPdf from "./Cotizador/cotizadorPdf";
+
+
 export default function Calculadora() {
 
     // #region Declaraciones
@@ -46,7 +50,7 @@ export default function Calculadora() {
     const [errorAlto, setErrorAlto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
     const [errorCosto, setErrorCosto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Costo aproximado" });
     const [errorTelefono, setErrorTelefono] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Telefono con formato internacional" });
-    const [errorCorreo, setErrorCorreo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Correo valido" });
+    const [errorCorreo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Correo valido" });
 
     //booleanos
     const [pallets, setPallets] = useState(false);
@@ -603,7 +607,7 @@ export default function Calculadora() {
         //     alert("Por favor llena todos los campos del formulario");
         //     return;
         // }
-        if (captcha.current.getValue()) {
+        if (captchaValido) {
             console.log("usuario no robot")
         } else {
             alert("robot")
@@ -611,6 +615,7 @@ export default function Calculadora() {
         }
 
         alert("Informacion enviada")
+        setAsesor(false);
 
     }
     // #endregion
@@ -974,7 +979,7 @@ export default function Calculadora() {
                 </div>
             </div>
 
-
+{/* <CotizadorPdf/> */}
 
 
         </section>

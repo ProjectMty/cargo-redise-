@@ -209,7 +209,7 @@ export default function Services() {
               <div className="mt-12 md:mt-16 flex justify-center ">
                 <div className="relative w-full" style={{ maxWidth: `${PANEL_MAX_W}px` }}>
                   {/* Tarjeta trasera con offset */}
-                  <div className="hidden md:block absolute inset-0 translate-x-6 translate-y-6 rounded-[26px] bg-gradient-to-r from-[#1B59E1] to-[#05C2F2] shadow-[0_24px_60px_rgba(0,0,0,0.22)]" />
+                  <div className="hidden md:block absolute inset-0 translate-x-6 translate-y-6 rounded-[26px] bg-gradient-to-r from-[#1B59E1] to-[#05C2F2] shadow-[0_10px_15px_rgba(0,0,0,0.22)]" />
 
                   {/* Tarjeta frontal */}
                   <div className="relative rounded-[26px] bg-gradient-to-r from-[#1E51D2] to-[#2CD0F6] shadow-[0_18px_48px_rgba(0,0,0,0.2)]">
