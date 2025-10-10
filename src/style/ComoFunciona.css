@@ -2,111 +2,158 @@
     --azul: #0b4ba2;
 }
 
-.section {
-    @apply relative  bg-[#F2F2F2]  py-16 px-4 md:px-8 scroll-mt-10 font-[Montserrat]
-}
 
-.div-titulo {
-    @apply max-w-6xl mx-auto 
-}
 
-.title {
-    @apply text-center text-white  font-bold text-[32px] md:text-[40px] mb-12 bg-[var(--azul)] rounded-3xl py-3
-}
-
-.contenedor-principal {
-    @apply relative  md:py-3 mx-20 mb-56
-}
-
-.contenedor-central{
-    @apply left-1/2 -translate-x-1/2 absolute transform h-full
-    items-center justify-center flex flex-col
-}
-
+/* #region GRAFICOS */
 .linea-Vertical {
-    @apply block w-[6px] h-full bg-[var(--azul)]
-    transform z-0 top-10
+    @apply  absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-0
+    w-[6px] h-[82%] bg-[var(--azul)]
 }
 
+/* **************************************LINEA HORIZONTAL ************************************************/
 .linea-horizontal {
-    @apply block w-full h-[6px] bg-[var(--azul)]
-    transform z-0 top-10
+    @apply w-[40%] h-[6px] transform z-0  bg-[var(--azul)]
 }
 
-.cuadrado{
-    @apply w-8 h-9 bg-[var(--azul)]
+.linea-horizontal-izquierda {
+    @apply linea-horizontal  -right-1/3 -translate-y-1/3 absolute top-11 -translate-x-3
 }
 
-.grid-pasos {
-    @apply relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 -mx-36
+.linea-horizontal-derecha {
+    @apply linea-horizontal right-2/3 -translate-y-2 absolute top-1/4 translate-x-6
 }
+
+/* **************************************CUADRADO ************************************************/
+.cuadrado {
+    @apply w-8 h-8 bg-[var(--azul)] absolute
+}
+
+.cuadrado-izquierda{
+    @apply cuadrado -right-1/3 -translate-y-2/3 top-[30%] -translate-x-2.5
+}
+
+.cuadrado-derecha{
+    @apply cuadrado -left-[9%] -translate-y-2/3 top-[25%] translate-x-5
+}
+
+
+.cuadrado-arriba{
+    @apply cuadrado left-1/2 translate-y-1/2 top-10 -translate-x-4 
+}
+
+.cuadrado-abajo{
+    @apply cuadrado left-[20%] -top-[20%] translate-x-2.5 
+}
+/* #endregion */
+
+/* #region IMAGENES */
 
 .imagen-paso-1 {
     @apply w-44 h-44 absolute -left-8 top-8 -translate-y-1/2
 }
 
 .imagen-paso-2 {
-    @apply w-60 h-60 absolute -right-24 top-64 -translate-y-1/2
+    @apply w-64 h-64 absolute -right-44 top-[30%] -translate-y-1/2
 }
 
 .imagen-paso-3 {
-    @apply w-64 h-64 absolute -left-14 top-[60%] -translate-y-1/2
+    @apply w-72 h-72 absolute -left-14 top-[20%] -translate-y-1/2
 }
 
 .imagen-paso-4 {
-    @apply w-80 absolute -right-28 top-[82%] -translate-y-1/2
+    @apply w-72 h-72 absolute -right-56 top-[20%] -translate-y-1/2
 }
 
 .imagen-paso-5 {
-     @apply w-64 h-64 absolute -left-20 top-[88%] -translate-y-1/2
+     @apply w-64 h-64 absolute -left-24 top-[28%] -translate-y-1/2
 }
 
 .imagen-paso-6 {
-     @apply w-48 h-48 absolute -left-10 top-[8%]
+     @apply w-48 h-48 absolute -left-36 -top-[23%]
+}
+
+/* #endregion */
+
+/* #region CONTENEDOR */
+.section {
+    @apply relative bg-gradient-to-b from-[#F2F2F2] to-[#F2F2F2] py-28 px-4 md:px-8 scroll-mt-10 font-[Montserrat] 
+}
+
+
+.contenedor-principal {
+    @apply relative  mx-10 mb-10 flex flex-col 
+}
+
+.grid-pasos {
+    @apply relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 -mx-28
+}
+
+
+.div-titulo {
+    @apply max-w-6xl mx-auto;
 }
 
 .contenedor-paso{
-    @apply h-full w-[80%] 
+    @apply h-full relative flex flex-col
+}
+
+.contenedor-paso-izquierdo{
+    @apply contenedor-paso w-[80%] 
 }
 
 .contenedor-paso-derecho{
-    @apply h-full w-[90%]  
+    @apply contenedor-paso w-[90%]
+}
+
+.contenedor-paso-central{
+    @apply contenedor-paso w-full  mt-32 ml-[28%]
 }
 
 .contenedor-informacion{
     @apply grid grid-rows-2 
 }
 
+/* #endregion */
+
+/* #region TEXTO */
+.title {
+    @apply text-center text-white  font-bold text-[32px] md:text-[40px] mb-12 bg-[var(--azul)] rounded-3xl py-3
+}
+
+
 .contenedor-paso-titulo{
-    @apply bg-[var(--azul)] rounded-xl text-white  font-bold text-[32px] py-5 text-center px-5 w-[85%] ml-auto
+    @apply bg-[var(--azul)] rounded-xl text-white font-bold text-[32px] text-center
+}
+
+.contenedor-paso-titulo-izquierdo{
+    @apply contenedor-paso-titulo  py-5  px-5 w-[85%] ml-auto
+}
+
+.contenedor-paso-titulo-central{
+    @apply contenedor-paso-titulo py-5  px-5 pr-10 w-[45%] 
 }
 
 .contenedor-paso-titulo-derecho{
-    @apply bg-[var(--azul)] rounded-xl text-white  font-bold text-[32px] py-2 text-center px-24 w-[80%] ml-auto
+    @apply contenedor-paso-titulo  py-2  px-24 w-[80%] ml-auto
 }
 
+
+
 .contenedor-paso-texto{
-    @apply text-[18px] text-blue-600 mt-5 w-[64%] left-[25%] font-light text-center relative
+    @apply text-[18px] text-blue-600 mt-5 font-light text-center relative
+}
+
+.contenedor-paso-texto-izquierdo{
+    @apply contenedor-paso-texto w-[64%] left-[30%] 
 }
 
 .contenedor-paso-texto-derecho{
-    @apply text-[18px] text-blue-600 mt-5 w-[55%] left-[30%] font-light text-center relative
+    @apply contenedor-paso-texto  w-[55%] left-[30%] 
 }
 
 .contenedor-paso-texto-central{
-    @apply text-[18px] text-blue-600 mt-5 w-[75%] left-[20%] font-light text-center relative
+    @apply contenedor-paso-texto  w-[25%] left-[10%]
 }
 
-.div-paso {
-    @apply flex flex-col items-center text-center mt-10
-}
-
-.numero-paso {
-    @apply hidden md:flex w-16 h-16 rounded-full bg-sky-600 text-white items-center justify-center font-bold mt-5 mb-2 text-3xl
-}
-
-
-.nota {
-    @apply text-center text-sm font-bold text-black mt-8 italic
-}
+/* #endregion */
 
