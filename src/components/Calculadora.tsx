@@ -19,7 +19,7 @@ export default function Calculadora() {
     // #region Declaraciones
     // context
     const { visible } = useCalculadoraVisible();
-    const captcha = useRef(null);
+    const captcha = useRef<ReCAPTCHA | null>(null);
 
     // inputs
     const [tipoSeleccionado, setTipoSeleccionado] = useState("");
@@ -585,9 +585,16 @@ export default function Calculadora() {
         }
     };
 
-    const hanleReCaptcha = () => {
 
-        if (captcha.current.getValue()) {
+
+    const hanleReCaptcha = () => {
+       
+        if (!captcha.current) return;
+        captcha.current.reset();
+
+        const value = captcha.current.getValue();
+
+        if (value) {
             setCaptchaValido(true);
             console.log("usuario no robot")
         } else {
