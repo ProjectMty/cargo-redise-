@@ -54,64 +54,86 @@ export default function Tarifas() {
         <div className="contenedor-tarifas-informacion">
           {/* Tarjeta 1 */}
           <div className="tarjeta-tarifas">
-            <h3 className="titulo-tarifas">COMPRAS PERSONALES</h3>
-            <p className="subtitulo-tarifas">(Menor a $119 USD)</p>
+            <h3 className="titulo-tarifas mt-2">COMPRAS PERSONALES</h3>
+            <p className="subtitulo-tarifas mb-4">(Menor a $119 USD)</p>
             <p className="subtitulo-tarifas">Costo del servicio</p>
-           <p className="precio-tarifa">$300 MXN</p>
+            <p className="precio-tarifa">$300 MXN</p>
 
             <p className="texto-tarifa">Si la compra es menor a $100 USD, pero es mercancía repetitiva o para vender, adicional al servicio de honorario, se cobra el 16% IVA.</p>
-           <p className="texto-tarifa">*Sobrepeso: Arriba de 20 kg peso volumétrico se le agrega concepto de sobrepeso.</p>
+            <p className="texto-tarifa">*Sobrepeso: Arriba de 20 kg peso volumétrico se le agrega concepto de sobrepeso.</p>
 
 
           </div>
 
           {/* Tarjeta 2 */}
           <div className="tarjeta-tarifas">
-            <h3 className="titulo-tarifas">COMPRAS PERSONALES</h3>
-            <p className="subtitulo-tarifas">($120 A $475 USD)</p>
+            <h3 className="titulo-tarifas mt-2">COMPRAS PERSONALES</h3>
+            <p className="subtitulo-tarifas mb-4">($120 A $475 USD)</p>
+
+            <p className="subtitulo-tarifas">Costo del servicio</p>
+            <p className="precio-tarifa">14% </p>
+            <p className="subtitulo-resaltado-tarifas">sobre el valor de tu compra</p>
+            <p className="texto-tarifa">Si la compra es menor a $475 USD, pero es mercancía repetitiva o para vender, adicional al servicio de honorario, se cobra el 16% IVA.</p>
+            <p className="texto-tarifa">*Sobrepeso: Arriba de 20 kg peso volumétrico se le agrega concepto de sobrepeso.</p>
+
           </div>
 
           {/* Tarjeta 3 */}
           <div className="tarjeta-tarifas">
-            <h3 className="titulo-tarifas">COMPRAS PERSONALES</h3>
-            <p className="subtitulo-tarifas">($476 a $3000 USD)</p>
+            <h3 className="titulo-tarifas mt-2">COMPRAS PERSONALES</h3>
+            <p className="subtitulo-tarifas mb-4">($476 a $3000 USD)</p>
+
+            <p className="subtitulo-tarifas">Costo del servicio</p>
+            <p className="precio-tarifa">13%</p>
+            <p className="subtitulo-resaltado-tarifas">sobre el valor de tu compra</p>
+            <p className="texto-tarifa">Si la compra es menor a $3,000 USD, pero es mercancía repetitiva o para vender, adicional al servicio de honorario, se cobra el 16% IVA.</p>
+            <p className="texto-tarifa">*Sobrepeso: Arriba de 20 kg peso volumétrico se le agrega concepto de sobrepeso.</p>
+
           </div>
 
           {/* Tarjeta 4 */}
           <div className="tarjeta-tarifas">
-            <h3 className="titulo-tarifas">COMPRAS EMPRESARIALES</h3>
-            <p className="subtitulo-tarifas">(A partir de $3000 USD)</p>
+            <h3 className="titulo-tarifas -mt-3">COMPRAS EMPRESARIALES</h3>
+            <p className="subtitulo-tarifas mb-4">(Mayor a $3000 USD)</p>
+            <p className="subtitulo-tarifas">Costo del servicio</p>
+            <p className="precio-tarifa">12%</p>
+            <p className="subtitulo-resaltado-tarifas">sobre el valor de tu compra</p>
+
+            <p className="texto-tarifa">Las compras empresariales se cotizan de acuerdo con la naturaleza del producto, para calcular los aranceles y los fletes, los cuales dependen del peso y volumen de la mercancía.</p>
+
+            <p className="texto-tarifa">*Sobrepeso: Arriba de 20 kg peso volumétrico se le agrega concepto de sobrepeso.</p>
+
           </div>
         </div>
       </div>
       {/* Cobros Adicionales */}
 
 
-      <div className="mt-16 flex justify-center " >
+      <div className="mt-2 flex justify-center " >
         <DivZoom scale={1.05}>
-          <div className="bg-[#ffffff] rounded-xl shadow-md p-6 md:p-8 max-w-4xl w-full">
-            <h3 className="text-xl md:text-2xl font-bold text-color text-blue-800 mb-4 text-center">
+          <div className="contenedor-adicionales">
+            <h3 className="contenedor-titulo">
               Cobros adicionales
             </h3>
-            <ul className="space-y-3 text-sm md:text-base text-[#333333]">
+            <ul className="texto-adicionales">
               <li>
-                • El envío al destino final en México no está incluido y será
+                El envío al destino final en México no está incluido y será
                 determinado por separado, según el destino y las características
                 del paquete.
               </li>
               <li>
-                <span className="font-bold">$3.00 USD</span> por cada bolsa, caja o
+                <span className="">$3.00 USD</span> por cada bolsa, caja o
                 sobre recibido.
               </li>
               <li>
-                <span className="font-bold">$10.00 USD</span> por cada tarima descargada.
+                <span className="">$10.00 USD</span> por cada tarima descargada.
               </li>
               <li>
-                <span className="font-bold">$375.00 USD</span> por cada tarima recibida
+                <span className="">$375.00 USD</span> por cada tarima recibida
                 de hasta 500 libras.
               </li>
               <li>
-                <span className="font-bold">$515.00 USD</span> por cada tarima recibida
+                <span className="">$515.00 USD</span> por cada tarima recibida
                 que supere las 500 libras.
               </li>
             </ul>

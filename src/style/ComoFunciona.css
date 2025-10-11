@@ -16,7 +16,7 @@
 }
 
 .linea-horizontal-izquierda {
-    @apply linea-horizontal  -right-1/3 -translate-y-1/3 absolute top-11 -translate-x-3
+    @apply linea-horizontal  -right-1/3 -translate-y-1/3 absolute top-9 -translate-x-3
 }
 
 .linea-horizontal-derecha {
@@ -29,11 +29,11 @@
 }
 
 .cuadrado-izquierda{
-    @apply cuadrado -right-1/3 -translate-y-2/3 top-[30%] -translate-x-2.5
+    @apply cuadrado -right-1/3 -translate-y-2/3 top-[27%] -translate-x-2
 }
 
 .cuadrado-derecha{
-    @apply cuadrado -left-[9%] -translate-y-2/3 top-[25%] translate-x-5
+    @apply cuadrado -left-[9%] -translate-y-2/3 top-[25%] translate-x-4
 }
 
 
@@ -42,14 +42,14 @@
 }
 
 .cuadrado-abajo{
-    @apply cuadrado left-[20%] -top-[20%] translate-x-2.5 
+    @apply cuadrado left-[20%] -top-[20%] translate-x-2.5
 }
 /* #endregion */
 
 /* #region IMAGENES */
 
 .imagen-paso-1 {
-    @apply w-44 h-44 absolute -left-8 top-8 -translate-y-1/2
+    @apply w-44 h-44 absolute -left-16 top-8 -translate-y-1/2
 }
 
 .imagen-paso-2 {
@@ -57,7 +57,7 @@
 }
 
 .imagen-paso-3 {
-    @apply w-72 h-72 absolute -left-14 top-[20%] -translate-y-1/2
+    @apply w-72 h-72 absolute -left-20 top-[20%] -translate-y-1/2
 }
 
 .imagen-paso-4 {
@@ -65,11 +65,11 @@
 }
 
 .imagen-paso-5 {
-     @apply w-64 h-64 absolute -left-24 top-[28%] -translate-y-1/2
+     @apply w-64 h-64 absolute -left-32 top-[28%] -translate-y-1/2
 }
 
 .imagen-paso-6 {
-     @apply w-48 h-48 absolute -left-36 -top-[23%]
+     @apply w-48 h-48 absolute -left-16 -top-[23%]
 }
 
 /* #endregion */
@@ -85,7 +85,7 @@
 }
 
 .grid-pasos {
-    @apply relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 -mx-28
+    @apply relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 mx-auto
 }
 
 
@@ -126,11 +126,11 @@
 }
 
 .contenedor-paso-titulo-izquierdo{
-    @apply contenedor-paso-titulo  py-5  px-5 w-[85%] ml-auto
+    @apply contenedor-paso-titulo  py-5  px-10 w-[90%] ml-auto
 }
 
 .contenedor-paso-titulo-central{
-    @apply contenedor-paso-titulo py-5  px-5 pr-10 w-[45%] 
+    @apply contenedor-paso-titulo py-5  px-5 pr-10 w-[35%] ml-16
 }
 
 .contenedor-paso-titulo-derecho{

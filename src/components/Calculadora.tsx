@@ -157,7 +157,14 @@ export default function Calculadora() {
 
     }, [opcion]);
 
-    const LimpiarCampos = () => {
+    const LimpiarCamposFormulario = useCallback( () => {
+        SetNombre("");
+        SetTelefono("");
+        SetCorreo("");
+        SetAsunto("");
+    }, []);
+
+    const LimpiarCampos = useCallback(() => {
         setPallets(false);
         setLargo("");
         setAncho("");
@@ -170,14 +177,9 @@ export default function Calculadora() {
         setCantidad("");
         setRepetitivo(false);
         LimpiarCamposFormulario();
-    };
+    }, [LimpiarCamposFormulario]);
 
-    const LimpiarCamposFormulario = () => {
-        SetNombre("");
-        SetTelefono("");
-        SetCorreo("");
-        SetAsunto("");
-    };
+
 
     useEffect(() => {
         if (tipoSeleccionado === "Pallets") {
@@ -199,7 +201,7 @@ export default function Calculadora() {
         }
 
 
-    }, [opcion, tipoSeleccionado]);
+    }, [opcion, tipoSeleccionado, LimpiarCampos]);
     // #endregion
 
     // #region VALOR 
@@ -339,7 +341,7 @@ export default function Calculadora() {
             });
         }
 
-    }, [largo])
+    }, [largo, opcion])
 
     // #endregion
 
@@ -383,7 +385,7 @@ export default function Calculadora() {
                 message: "Si pasa 60 cm se cobra exceso de dimensiones"
             });
         }
-    }, [ancho])
+    }, [opcion, ancho])
 
     // #endregion
 
@@ -428,7 +430,7 @@ export default function Calculadora() {
                 message: "Si pasa 60 cm se cobra exceso de dimensiones"
             });
         }
-    }, [alto])
+    }, [opcion, alto])
 
     // #endregion
 
@@ -588,7 +590,7 @@ export default function Calculadora() {
 
 
     const hanleReCaptcha = () => {
-       
+
         if (!captcha.current) return;
         captcha.current.reset();
 
@@ -986,7 +988,7 @@ export default function Calculadora() {
                 </div>
             </div>
 
-{/* <CotizadorPdf/> */}
+            {/* <CotizadorPdf/> */}
 
 
         </section>
