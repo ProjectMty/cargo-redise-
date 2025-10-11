@@ -7,7 +7,7 @@
 /* #region GRAFICOS */
 .linea-Vertical {
     @apply  absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-0
-    w-[6px] h-[82%] bg-[var(--azul)]
+    w-[6px]  bg-[var(--azul)] h-[82%] mt-16
 }
 
 /* **************************************LINEA HORIZONTAL ************************************************/

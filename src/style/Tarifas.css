@@ -51,3 +51,7 @@
 .texto-adicionales{
     @apply space-y-3 text-sm md:text-base text-blue-800 font-semibold
 }
+
+.imagen{
+    @apply h-[90%] -mt-10 
+}

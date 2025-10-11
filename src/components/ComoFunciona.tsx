@@ -1,8 +1,7 @@
 "use client";
-
+import React from "react";
 import { motion, easeOut } from "framer-motion";
 import Image from "next/image";
-import { useIsMobile } from "@/hooks/useIsMobile";
 import "@/style/ComoFunciona.css";
 import AnimatedText from "@/animate/TextAnimate";
 
@@ -17,38 +16,32 @@ const ContainerSteps = {
   },
 };
 
-const StepsAnimationUp = {
-  hidden: { y: 40 },
-  show: {
 
-    y: 0,
-    transition: {
-      duration: 1,
-      ease: easeOut,
-    },
-  },
-};
 
-const StepsAnimationDown = {
-  hidden: { opacity: 1, y: -40 },
+const AnimationShow = {
+  hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    y: 0,
     transition: {
-      duration: 1,
+      duration: 0.5,
       ease: easeOut,
     },
   },
 };
+
+
+
+
 // #endregion
 
 export default function ComoFunciona() {
-  const isMobile = useIsMobile();
+  // const isMobile = useIsMobile();
 
-
+ 
 
   return (
     <motion.section
+    
       id="comofunciona"
       className="section"
       variants={ContainerSteps}
@@ -70,15 +63,20 @@ export default function ComoFunciona() {
       </div>
       {/* Contenedor principal con fondo blanco */}
       <div className="contenedor-principal">
-        <div className="cuadrado-arriba"></div>
-        <div className="linea-Vertical mt-16"></div>
+        <motion.div
+          variants={AnimationShow}
+          className="cuadrado-arriba" />
+
+        <motion.div
+          className="linea-Vertical" />
+
         {/* Grid de pasos */}
         <div className="grid-pasos mt-36">
 
 
           {/* Paso 1 izquierda*/}
           <motion.div
-            variants={isMobile ? StepsAnimationDown : StepsAnimationUp}
+          variants={AnimationShow}
             className="contenedor-paso-izquierdo">
 
             <div className="imagen-paso-1">
@@ -90,7 +88,7 @@ export default function ComoFunciona() {
             </div>
             <div className="contenedor-paso-titulo-izquierdo">
               <h2>Realiza tus compras</h2>
-              <div className="cuadrado-izquierda"></div>
+              <div className="cuadrado-izquierda" />
               <div className="linea-horizontal-izquierda mt-2"></div>
             </div>
             <p className="contenedor-paso-texto-izquierdo -ml-6">
@@ -106,14 +104,14 @@ export default function ComoFunciona() {
 
           {/* Paso 2 derecha */}
           <motion.div
-            variants={isMobile ? StepsAnimationDown : StepsAnimationUp}
+          variants={AnimationShow}
             className="contenedor-paso-derecho">
             <div className="imagen-paso-2">
               <Image
-                  src="/img/funciona/Paso-2.png"
-                  alt="paso 2"
-                  width={350}
-                  height={350} />
+                src="/img/funciona/Paso-2.png"
+                alt="paso 2"
+                width={350}
+                height={350} />
             </div>
             <div className="contenedor-paso-titulo-derecho">
               <h2>Dirección en Laredo, TX</h2>
@@ -128,7 +126,7 @@ export default function ComoFunciona() {
 
           {/* Paso 3 izquierda*/}
           <motion.div
-            variants={isMobile ? StepsAnimationDown : StepsAnimationUp}
+          variants={AnimationShow}
             className="contenedor-paso-izquierdo">
             <div className="imagen-paso-3">
               <Image
@@ -154,14 +152,14 @@ export default function ComoFunciona() {
 
           {/* Paso 4 derecha */}
           <motion.div
-            variants={isMobile ? StepsAnimationDown : StepsAnimationUp}
+          variants={AnimationShow}
             className="contenedor-paso-derecho">
             <div className="imagen-paso-4">
               <Image
-                  src="/img/funciona/Paso-4.png"
-                  alt="paso 4"
-                  width={400}
-                  height={400} />
+                src="/img/funciona/Paso-4.png"
+                alt="paso 4"
+                width={400}
+                height={400} />
             </div>
             <div className="contenedor-paso-titulo-derecho">
               <h2 className="px-5">Trámite aduanal</h2>
@@ -176,7 +174,7 @@ export default function ComoFunciona() {
 
           {/* Paso 5 izquierda*/}
           <motion.div
-            variants={isMobile ? StepsAnimationDown : StepsAnimationUp}
+          variants={AnimationShow}
             className="contenedor-paso-izquierdo">
             <div className="imagen-paso-5">
               <Image
@@ -197,7 +195,7 @@ export default function ComoFunciona() {
 
           {/* Paso 6 abajo-central */}
           <motion.div
-            variants={isMobile ? StepsAnimationDown : StepsAnimationUp}
+          variants={AnimationShow}
             className="contenedor-paso-central col-span-2">
             <div>
 

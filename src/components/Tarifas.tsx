@@ -4,6 +4,7 @@
 import AnimatedText from "@/animate/TextAnimate";
 import DivZoom from "@/animate/DivZoom";
 import "@/style/Tarifas.css"
+import Image from "next/image";
 
 export default function Tarifas() {
   return (
@@ -30,24 +31,39 @@ export default function Tarifas() {
             <h3 className="titulo-tarifas">COMPRAS PERSONALES</h3>
             <p className="subtitulo-tarifas">(Menor a $119 USD)</p>
 
+            <Image
+              src="/img/tarifas/tarifa-1.svg"
+              alt="Tarifa 1" className="imagen"
+              width={200}
+              height={200}
+            />
           </div>
 
           {/* Tarjeta 2 */}
           <div className="tarjeta-tarifas">
             <h3 className="titulo-tarifas">COMPRAS PERSONALES</h3>
             <p className="subtitulo-tarifas">($120 A $475 USD)</p>
+            <Image src="/img/tarifas/tarifa-2.svg" alt="Tarifa 2" className="imagen"
+              width={200}
+              height={200} />
           </div>
 
           {/* Tarjeta 3 */}
           <div className="tarjeta-tarifas">
             <h3 className="titulo-tarifas">COMPRAS PERSONALES</h3>
             <p className="subtitulo-tarifas">($476 a $3000 USD)</p>
+            <Image src="/img/tarifas/tarifa-3.svg" alt="Tarifa 3" className="imagen"
+              width={200}
+              height={200} />
           </div>
 
           {/* Tarjeta 4 */}
           <div className="tarjeta-tarifas">
             <h3 className="titulo-tarifas">COMPRAS EMPRESARIALES</h3>
             <p className="subtitulo-tarifas">(A partir de $3000 USD)</p>
+            <Image src="/img/tarifas/tarifa-4.svg" alt="Tarifa 4" className="imagen"
+              width={200}
+              height={200} />
           </div>
         </div>
 
@@ -55,10 +71,15 @@ export default function Tarifas() {
           {/* Tarjeta 1 */}
           <div className="tarjeta-tarifas">
             <h3 className="titulo-tarifas mt-2">COMPRAS PERSONALES</h3>
-            <p className="subtitulo-tarifas mb-4">(Menor a $119 USD)</p>
+            <p className="subtitulo-tarifas -mb-10">(Menor a $119 USD)</p>
+            <Image
+              src="/img/tarifas/tarifa-1.svg"
+              alt="Tarifa 1" className=""
+              width={200}
+              height={200}
+            />
             <p className="subtitulo-tarifas">Costo del servicio</p>
             <p className="precio-tarifa">$300 MXN</p>
-
             <p className="texto-tarifa">Si la compra es menor a $100 USD, pero es mercancía repetitiva o para vender, adicional al servicio de honorario, se cobra el 16% IVA.</p>
             <p className="texto-tarifa">*Sobrepeso: Arriba de 20 kg peso volumétrico se le agrega concepto de sobrepeso.</p>
 
@@ -68,8 +89,10 @@ export default function Tarifas() {
           {/* Tarjeta 2 */}
           <div className="tarjeta-tarifas">
             <h3 className="titulo-tarifas mt-2">COMPRAS PERSONALES</h3>
-            <p className="subtitulo-tarifas mb-4">($120 A $475 USD)</p>
-
+            <p className="subtitulo-tarifas -mb-10">($120 A $475 USD)</p>
+            <Image src="/img/tarifas/tarifa-2.svg" alt="Tarifa 2" className=""
+              width={200}
+              height={200} />
             <p className="subtitulo-tarifas">Costo del servicio</p>
             <p className="precio-tarifa">14% </p>
             <p className="subtitulo-resaltado-tarifas">sobre el valor de tu compra</p>
@@ -81,8 +104,10 @@ export default function Tarifas() {
           {/* Tarjeta 3 */}
           <div className="tarjeta-tarifas">
             <h3 className="titulo-tarifas mt-2">COMPRAS PERSONALES</h3>
-            <p className="subtitulo-tarifas mb-4">($476 a $3000 USD)</p>
-
+            <p className="subtitulo-tarifas -mb-10">($476 a $3000 USD)</p>
+            <Image src="/img/tarifas/tarifa-3.svg" alt="Tarifa 3" className=""
+              width={200}
+              height={200} />
             <p className="subtitulo-tarifas">Costo del servicio</p>
             <p className="precio-tarifa">13%</p>
             <p className="subtitulo-resaltado-tarifas">sobre el valor de tu compra</p>
@@ -94,7 +119,10 @@ export default function Tarifas() {
           {/* Tarjeta 4 */}
           <div className="tarjeta-tarifas">
             <h3 className="titulo-tarifas -mt-3">COMPRAS EMPRESARIALES</h3>
-            <p className="subtitulo-tarifas mb-4">(Mayor a $3000 USD)</p>
+            <p className="subtitulo-tarifas -mb-10">(Mayor a $3000 USD)</p>
+            <Image src="/img/tarifas/tarifa-4.svg" alt="Tarifa 4" className=""
+              width={200}
+              height={200} />
             <p className="subtitulo-tarifas">Costo del servicio</p>
             <p className="precio-tarifa">12%</p>
             <p className="subtitulo-resaltado-tarifas">sobre el valor de tu compra</p>

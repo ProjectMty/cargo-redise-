@@ -1,0 +1,23 @@
+.section {
+    @apply bg-[#c51515] py-14 scroll-mt-20 font-[Montserrat]
+}
+
+.texto-titulo{
+    @apply text-center font-[Montserrat] font-bold text-sky-600 text-[36px] md:text-[42px];
+}
+
+.subtitulo-texto{
+    @apply mt-3 text-center text-[#333333] font-[Montserrat] text-[16px] md:text-[18px] max-w-4xl mx-auto
+}
+
+.contenedor-tarjeta{
+    @apply relative rounded-[26px] bg-gradient-to-r from-[#1E51D2] to-[#2CD0F6] shadow-[0_18px_48px_rgba(0,0,0,0.2)]
+}
+
+.titulo-tarjeta{
+    @apply text-white font-[Montserrat] font-extrabold text-[18px] md:text-[30px] leading-tight mb-4
+}
+
+.div-tarjeta{
+    @apply grid grid-cols-1 md:grid-cols-2 gap-5 items-start
+}
