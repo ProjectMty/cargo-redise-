@@ -1,23 +1,20 @@
 .section {
-    @apply w-full  scroll-mt-16 font-[Montserrat]
+    @apply w-full h-full scroll-mt-16 font-[Montserrat] 
 }
 
-.contenedor {
-    @apply max-w-7xl mx-auto flex flex-col
-}
 
 .contenedor-titulo {
-    @apply text-center text-blue-800 text-4xl md:text-5xl font-bold mb-12 -mt-10
+    @apply text-center text-blue-800 text-4xl md:text-5xl font-bold mb-12
 }
 
 
 .contenedor-tarifas {
-    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 max-w-7xl mx-auto
 }
 
 .tarjeta-tarifas{
     @apply bg-[#0b4ba2] text-white rounded-2xl shadow-lg p-6 transition-transform duration-300 hover:-translate-y-2
-    text-center
+    text-center w-full 
 }
 
 .titulo-tarifas {
@@ -32,9 +29,7 @@
     @apply text-center font-bold mb-4 text-xs;
 }
 
-.contenedor-tarifas-informacion{
-    @apply contenedor-tarifas mt-5
-}
+
 
 .precio-tarifa{
     @apply  font-bold text-[30px] 
@@ -53,5 +48,5 @@
 }
 
 .imagen{
-    @apply h-[90%] -mt-10 
+    @apply w-52 mx-auto
 }

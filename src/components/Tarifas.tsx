@@ -9,7 +9,7 @@ import Image from "next/image";
 export default function Tarifas() {
   return (
     <section className="section" id="tarifas">
-      <div className="contenedor">
+      <div className="">
 
         <div className="contenedor-titulo ">
 
@@ -26,14 +26,14 @@ export default function Tarifas() {
         </div>
 
 
-        <div className="contenedor-tarifas-informacion">
+        <div className="contenedor-tarifas">
           {/* Tarjeta 1 */}
           <div className="tarjeta-tarifas">
             <h3 className="titulo-tarifas mt-2">COMPRAS PERSONALES</h3>
             <p className="subtitulo-tarifas -mb-10">(Menor a $119 USD)</p>
             <Image
               src="/img/tarifas/tarifa-1.svg"
-              alt="Tarifa 1" className=""
+              alt="Tarifa 1" className="imagen"
               width={200}
               height={200}
             />
@@ -49,7 +49,7 @@ export default function Tarifas() {
           <div className="tarjeta-tarifas">
             <h3 className="titulo-tarifas mt-2">COMPRAS PERSONALES</h3>
             <p className="subtitulo-tarifas -mb-10">($120 A $475 USD)</p>
-            <Image src="/img/tarifas/tarifa-2.svg" alt="Tarifa 2" className=""
+            <Image src="/img/tarifas/tarifa-2.svg" alt="Tarifa 2" className="imagen"
               width={200}
               height={200} />
             <p className="subtitulo-tarifas">Costo del servicio</p>
@@ -64,7 +64,7 @@ export default function Tarifas() {
           <div className="tarjeta-tarifas">
             <h3 className="titulo-tarifas mt-2">COMPRAS PERSONALES</h3>
             <p className="subtitulo-tarifas -mb-10">($476 a $3000 USD)</p>
-            <Image src="/img/tarifas/tarifa-3.svg" alt="Tarifa 3" className=""
+            <Image src="/img/tarifas/tarifa-3.svg" alt="Tarifa 3" className="imagen"
               width={200}
               height={200} />
             <p className="subtitulo-tarifas">Costo del servicio</p>
@@ -77,9 +77,9 @@ export default function Tarifas() {
 
           {/* Tarjeta 4 */}
           <div className="tarjeta-tarifas">
-            <h3 className="titulo-tarifas -mt-3">COMPRAS EMPRESARIALES</h3>
+            <h3 className="titulo-tarifas mt-1">COMPRAS EMPRESARIALES</h3>
             <p className="subtitulo-tarifas -mb-10">(Mayor a $3000 USD)</p>
-            <Image src="/img/tarifas/tarifa-4.svg" alt="Tarifa 4" className=""
+            <Image src="/img/tarifas/tarifa-4.svg" alt="Tarifa 4" className="imagen"
               width={200}
               height={200} />
             <p className="subtitulo-tarifas">Costo del servicio</p>

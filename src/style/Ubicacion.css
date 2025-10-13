@@ -1,6 +1,6 @@
 
 .fondo-seccion {
-     @apply  w-full relative flex justify-center items-center py-20 font-[Montserrat] scroll-smooth
+     @apply h-full w-full relative flex justify-center items-center  font-[Montserrat] scroll-smooth
 }
 
 .titulo-texto {
@@ -8,7 +8,7 @@
 }
 
 .contenedor {
-    @apply w-full rounded-[28px] justify-center items-center mt-5 relative max-w-5xl flex 
+    @apply w-full h-[600px] rounded-[28px] justify-center items-center mt-5 relative max-w-5xl flex 
 }
 
 .fondo-ubicacion{
@@ -16,12 +16,12 @@
 }
 
 .contenedor-carrusel {
-    @apply relative flex flex-col justify-center w-full 
-    left-1/2  -translate-x-1/2 items-center z-50 -mt-10;
+    @apply relative flex flex-col justify-center w-full h-full
+    left-1/2  -translate-x-1/2 items-center z-50 mt-20;
 }
 
 .carrusel-desktop {
-    @apply relative w-full max-w-xl mx-auto p-10 hidden lg:block mb-20
+    @apply relative w-full max-w-xl mx-auto p-10 hidden lg:block mb-10
 }
 
 .carrusel-movil {
