@@ -914,9 +914,10 @@ export default function Calculadora() {
                         <div className="envio">
                             <ReCAPTCHA
                                 ref={captcha}
-                                sitekey="6LfpVuMrAAAAAGo1ko6ww2DUpso81ur8qHRkCnfQ"
+                                sitekey="6LdS7eYrAAAAAJpMS-V4PIciaJvjv5XWuIaxE9vX"
+                                size="invisible"
                                 onChange={hanleReCaptcha}
-                                className={asesor ? "" : "hidden"}
+                                // className={asesor ? "" : "hidden"}
                             />
                             <input type="button" value="Enviar Datos" onClick={sendContact} className={asesor ? "button mt-1 mb-2" : "hidden"} />
                             <input type="submit" value="Cerrar formulario" className={asesor ? "button mt-2" : "hidden"} onClick={() => setAsesor(false)} />

@@ -2,17 +2,23 @@
     --azul: #0b4ba2;
 }
 
+.oculto{
+    @apply md:block hidden
+}
 
+.espacio{
+   @apply col-span-1 oculto
+}
 
 /* #region GRAFICOS */
 .linea-Vertical {
     @apply  absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-0
-    w-[6px]  bg-[var(--azul)] h-[82%] 
+    w-[6px]  bg-[var(--azul)] h-[82%] oculto
 }
 
 /* **************************************LINEA HORIZONTAL ************************************************/
 .linea-horizontal {
-    @apply w-[40%] h-[6px] transform z-0  bg-[var(--azul)]
+    @apply w-[40%] h-[6px] transform z-0  bg-[var(--azul)] oculto
 }
 
 .linea-horizontal-izquierda {
@@ -25,7 +31,7 @@
 
 /* **************************************CUADRADO ************************************************/
 .cuadrado {
-    @apply w-5 h-5 bg-[var(--azul)] absolute
+    @apply w-5 h-5 bg-[var(--azul)] absolute oculto
 }
 
 .cuadrado-izquierda{
@@ -49,27 +55,27 @@
 /* #region IMAGENES */
 
 .imagen-paso-1 {
-    @apply w-32 h-32 absolute -left-12 top-4 -translate-y-1/2
+    @apply w-32 h-32 absolute -left-12 top-4 -translate-y-1/2 oculto
 }
 
 .imagen-paso-2 {
-    @apply w-40 h-40 absolute -right-36 top-[30%] -translate-y-1/2
+    @apply w-40 h-40 absolute -right-36 top-[30%] -translate-y-1/2 oculto
 }
 
 .imagen-paso-3 {
-    @apply w-40 h-40 absolute -left-20 top-[20%] -translate-y-1/2
+    @apply w-40 h-40 absolute -left-20 top-[20%] -translate-y-1/2 oculto
 }
 
 .imagen-paso-4 {
-    @apply w-36 h-36 absolute -right-32 top-[20%] -translate-y-1/2
+    @apply w-36 h-36 absolute -right-32 top-[20%] -translate-y-1/2 oculto
 }
 
-.imagen-paso-5 {
-     @apply w-40 h-40 absolute -left-20 top-[20%] -translate-y-1/2
+.imagen-paso-5 { 
+     @apply w-40 h-40 absolute -left-20 top-[20%] -translate-y-1/2 oculto
 }
 
 .imagen-paso-6 {
-     @apply w-40 h-40 absolute -left-2 -top-[35%]
+     @apply w-40 h-40 absolute -left-2 -top-[35%] oculto
 }
 
 /* #endregion */
@@ -81,15 +87,15 @@
 }
 
 .contenedor-principal {
-    @apply relative  mx-10 mb-10 flex flex-col 
+    @apply relative  md:mx-10 mb-10 flex flex-col mt-10
 }
 
 .grid-pasos {
-    @apply relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 mx-[18%]
+    @apply md:relative z-10 md:grid grid-cols-1  lg:grid-cols-2 md:mx-[18%]
 }
 
 .div-titulo {
-    @apply max-w-6xl mx-auto;
+    @apply max-w-6xl md:mx-auto mb-10;
 }
 
 .contenedor-paso{
@@ -97,15 +103,15 @@
 }
 
 .contenedor-paso-izquierdo{
-    @apply contenedor-paso w-[80%] max-h-20
+    @apply contenedor-paso md:w-[80%] md:max-h-20
 }
 
 .contenedor-paso-derecho{
-    @apply contenedor-paso w-[90%] max-h-20
+    @apply contenedor-paso md:w-[90%] md:max-h-20
 }
 
 .contenedor-paso-central{
-    @apply contenedor-paso w-full  mt-20 ml-[23%]
+    @apply contenedor-paso w-full  md:mt-20 md:ml-[23%]
 }
 
 .contenedor-informacion{
@@ -116,41 +122,46 @@
 
 /* #region TEXTO */
 .title {
-    @apply text-center text-white  font-semibold text-[30px] md:text-[36px] mb-12 bg-[var(--azul)] rounded-3xl py-3
+    @apply text-center text-blue-800  font-semibold text-4xl md:text-5xl mb-5 rounded-3xl py-1
 }
+
+.subtitulo-texto{
+    @apply text-center text-[#333333]  text-[16px] md:text-[18px] max-w-4xl mx-auto mb-10
+}
+
 
 .contenedor-paso-titulo{
     @apply bg-[var(--azul)] rounded-xl text-white font-bold text-[20px] text-center
 }
 
 .contenedor-paso-titulo-izquierdo{
-    @apply contenedor-paso-titulo py-2 px-5 w-[90%] 
+    @apply contenedor-paso-titulo py-2 px-5 md:w-[90%] 
 }
 
 .contenedor-paso-titulo-central{
-    @apply contenedor-paso-titulo py-2  px-5 pr-10 w-[40%] ml-20
+    @apply contenedor-paso-titulo py-2  px-5 md:pr-10 md:w-[40%] md:ml-20
 }
 
 .contenedor-paso-titulo-derecho{
-    @apply contenedor-paso-titulo  py-2  px-5 w-[90%] ml-28
+    @apply contenedor-paso-titulo  py-2  px-5 md:w-[90%] md:ml-28
 }
 
 
 
 .contenedor-paso-texto{
-    @apply text-[14px] text-blue-600 mt-2 font-light text-center relative
+    @apply text-[14px] text-[#333333] mt-5 md:mt-2 font-light text-center relative mb-5 md:mb-0
 }
 
 .contenedor-paso-texto-izquierdo{
-    @apply contenedor-paso-texto w-[70%] left-[10%] ml-3
+    @apply contenedor-paso-texto md:w-[70%] md:left-[10%] md:ml-3
 }
 
 .contenedor-paso-texto-derecho{
-    @apply contenedor-paso-texto  w-[65%] left-[35%] 
+    @apply contenedor-paso-texto  md:w-[65%] md:left-[35%] 
 }
 
 .contenedor-paso-texto-central{
-    @apply contenedor-paso-texto  w-[25%] left-[15%]
+    @apply contenedor-paso-texto  md:w-[25%] md:left-[15%]
 }
 
 /* #endregion */

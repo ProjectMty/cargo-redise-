@@ -55,11 +55,15 @@ export default function ComoFunciona() {
         <h2 className="title">
           <AnimatedText
             delay={0.2}
-            lines={["Solo tienes que seguir estos sencillos pasos"]}
+            lines={["¿Como funciona?"]}
           >
           </AnimatedText>
 
         </h2>
+        <p className="subtitulo-texto">
+          Solo tienes que seguir estos sencillos <span className="font-bold">pasos </span>
+          
+        </p>
       </div>
       {/* Contenedor principal con fondo blanco */}
       <div className="contenedor-principal">
@@ -99,8 +103,8 @@ export default function ComoFunciona() {
           </motion.div>
 
           {/* separacion de grid para pasos */}
-          <div className="col-span-1"></div>
-          <div className="col-span-1"></div>
+          <div className="espacio"></div>
+          <div className="espacio"></div>
 
           {/* Paso 2 derecha */}
           <motion.div
@@ -147,8 +151,8 @@ export default function ComoFunciona() {
 
 
           {/* separacion de grid para pasos */}
-          <div className="col-span-1"></div>
-          <div className="col-span-1"></div>
+          <div className="espacio"></div>
+          <div className="espacio"></div>
 
           {/* Paso 4 derecha */}
           <motion.div

@@ -130,7 +130,7 @@ export default function Services() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.2 }}
                         className="px-6 pb-4 text-sm "
                       ><ul className="contenedor-descripcion-tarjeta">
                           {service.bullets.map((bullet, index) => (
