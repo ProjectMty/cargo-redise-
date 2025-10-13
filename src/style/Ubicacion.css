@@ -3,8 +3,8 @@
      @apply  w-full relative flex justify-center items-center py-20 font-[Montserrat] scroll-smooth
 }
 
-.titulo {
-    @apply font-extrabold text-[40px] lg:text-[55px] text-blue-950 text-center absolute top-5 
+.titulo-texto {
+    @apply font-extrabold text-[40px] lg:text-[55px] text-blue-950 text-center absolute top-10 
 }
 
 .contenedor {
@@ -17,7 +17,7 @@
 
 .contenedor-carrusel {
     @apply relative flex flex-col justify-center w-full 
-    left-1/2 top-12  -translate-x-1/2 items-center z-50;
+    left-1/2  -translate-x-1/2 items-center z-50 -mt-10;
 }
 
 .carrusel-desktop {

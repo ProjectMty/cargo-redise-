@@ -74,7 +74,7 @@ export default function Ubicaciones() {
     return (
         <section id="ubicacion" className="fondo-seccion bg-white">
             
-            <h1 className="titulo">
+            <h1 className="titulo-texto">
                 Ubicaciones
             </h1>
             
