@@ -15,7 +15,7 @@ type ServiceIdSup =
 
 
 
-  type ServiceIdInf =
+type ServiceIdInf =
   | "returns"
   | "special";
 
@@ -56,7 +56,7 @@ const ServiciosSuperiores: Record<
       { icon: "/img/icons/Icono 3.2.svg", text: "Usa nuestra bodega como si fuera tuya." },
     ],
   },
-  
+
 };
 
 const ServiciosInferiores: Record<
@@ -66,7 +66,7 @@ const ServiciosInferiores: Record<
     bullets: Bullet[];
   }
 > = {
- 
+
   returns: {
     title: "Devoluciones y retornos",
     bullets: [
@@ -118,6 +118,8 @@ export default function Services() {
         <p className="subtitulo-texto font-bold">
           Conoce nuestros principales servicios:
         </p>
+
+        {/* contenedor superior */}
         <div className="contenedor-tarjetas-superior">
           {Object.entries(ServiciosSuperiores).map(([id, service]) => (
             <DivZoom scale={1.03} key={id}>
@@ -127,18 +129,18 @@ export default function Services() {
                 <h2 className="titulo-texto-tarjeta">
                   {service.title}
                 </h2>
-
-                <ul className="flex flex-col gap-3 col-span-4">
+                <div className="linea-horizontal"></div>
+                <ul className="contenedor-descripcion-tarjeta">
                   {service.bullets.map((bullet, index) => (
-                    <li key={index} className="flex items-start gap-3">
+                    <li key={index} className="contenedor-bullet-tarjeta">
                       <Image
                         src={bullet.icon}
-                        alt=""
+                        alt="icono"
                         width={30}
                         height={30}
                         className="icono-tarjeta"
                       />
-                      <span className="text-white">{bullet.text}</span>
+                      <span className="">{bullet.text}</span>
                     </li>
                   ))}
                 </ul>
@@ -147,7 +149,8 @@ export default function Services() {
             </DivZoom>))}
         </div>
 
-        <div className="contenedor-tarjetas-inferior">
+        {/* contenedor inferior */}
+         <div className="contenedor-tarjetas-inferior">
           {Object.entries(ServiciosInferiores).map(([id, service]) => (
             <DivZoom scale={1.03} key={id}>
 
@@ -156,18 +159,18 @@ export default function Services() {
                 <h2 className="titulo-texto-tarjeta">
                   {service.title}
                 </h2>
-
-                <ul className="flex flex-col gap-3 col-span-4">
+                <div className="linea-horizontal"></div>
+                <ul className="contenedor-descripcion-tarjeta">
                   {service.bullets.map((bullet, index) => (
-                    <li key={index} className="flex items-start gap-3">
+                    <li key={index} className="contenedor-bullet-tarjeta">
                       <Image
                         src={bullet.icon}
-                        alt=""
+                        alt="icono"
                         width={30}
                         height={30}
                         className="icono-tarjeta"
                       />
-                      <span className="text-white">{bullet.text}</span>
+                      <span className="">{bullet.text}</span>
                     </li>
                   ))}
                 </ul>

@@ -2,15 +2,13 @@
     @apply py-14 scroll-mt-20 font-[Montserrat] h-full 
 }
 
-
-
 .contenedor-servicios{
     @apply relative 
      w-full h-full
 }
 
 .contenedor-tarjetas-superior{
-    @apply grid grid-cols-3 h-full w-full
+    @apply grid grid-cols-3 h-full w-full 
 }
 
 .contenedor-tarjetas-inferior{
@@ -18,13 +16,10 @@
 }
 
 
-
-
-
 /* #region TEXT */
 
 .texto-titulo{
-    @apply text-center  font-bold text-sky-600 text-[36px] md:text-[42px];
+    @apply text-center font-bold text-sky-600 text-[36px] md:text-[42px];
 }
 
 .subtitulo-texto{
@@ -36,16 +31,29 @@
 
 /* #region TARJETA */
 .div-tarjeta{
-    @apply grid grid-cols-1 md:grid-cols-4 text-center bg-blue-900 m-5
-    h-full rounded-[26px] shadow-[0_18px_48px_rgba(0,0,0,0.2)] text-white p-5
+    @apply flex flex-col items-start text-start bg-[#0b4ba2]  m-5
+    h-full rounded-[26px] shadow-[0_18px_48px_rgba(0,0,0,0.2)] text-white py-5 px-8
 }
 
 .titulo-texto-tarjeta{
-    @apply col-span-4 text-white font-extrabold text-[18px] md:text-[20px] leading-tight mb-4
+    @apply col-span-4 text-white font-bold text-[18px] md:text-[20px] mb-4 text-center
+}
+
+.linea-horizontal {
+    @apply w-full h-[2px] bg-white col-span-4 rounded-xl my-5
+}
+
+.contenedor-descripcion-tarjeta{
+    @apply flex flex-col gap-3 col-span-4 text-justify
+}
+
+.contenedor-bullet-tarjeta{
+    @apply flex items-start gap-5
 }
 
 .icono-tarjeta{
-    @apply invert brightness-0 min-w-[30px]
+    @apply invert brightness-0 w-[30px] 
 }
+
 
 /* #endregion */
