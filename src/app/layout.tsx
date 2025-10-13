@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
     return (
       <html lang="es" className="scroll-smooth">
-        <body className={inter.className + " bg-white text-gray-900"}>
+        <body className={inter.className + "  text-gray-900"}>
           <CalculadoraVisibleProvider>
             <main className="pt-0">{children}</main>
           </CalculadoraVisibleProvider>

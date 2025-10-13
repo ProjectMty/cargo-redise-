@@ -4,9 +4,13 @@
 
 
 .contenedor-titulo {
-    @apply text-center text-blue-800 text-4xl md:text-5xl font-bold mb-12
+    @apply text-center text-blue-800 text-4xl md:text-5xl font-bold mb-6
 }
 
+
+
+
+/* #region TARJETAS */
 
 .contenedor-tarifas {
     @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 max-w-7xl mx-auto
@@ -25,11 +29,13 @@
     @apply text-center font-light text-xs;
 }
 
+.imagen{
+    @apply w-52 mx-auto
+}
+
 .subtitulo-resaltado-tarifas{
     @apply text-center font-bold mb-4 text-xs;
 }
-
-
 
 .precio-tarifa{
     @apply  font-bold text-[30px] 
@@ -39,14 +45,18 @@
     @apply text-xs mt-4 text-justify
 }
 
+/* #endregion */
+
+/* #region ADICIONALES */
 .contenedor-adicionales{
-    @apply rounded-xl p-6 md:px-24 max-w-4xl w-full h-full;
+    @apply rounded-xl p-6 md:p-8 max-w-4xl w-full h-full shadow-xl mt-2
 }
 
 .texto-adicionales{
     @apply space-y-3 text-sm md:text-base text-blue-800 font-semibold
 }
 
-.imagen{
-    @apply w-52 mx-auto
+.titulo-adicionales{
+    @apply text-xl md:text-2xl font-bold  text-blue-800 mb-4 text-center
 }
+/* #endregion */

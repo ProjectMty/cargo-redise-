@@ -22,7 +22,7 @@ export default function Hero() {
 
   return (
 
-    <section className="relative w-full overflow-hidden rounded-b-[60px]  font-[Montserrat]" id="hero">
+    <section className="relative w-full  rounded-b-[60px]  font-[Montserrat]" id="hero">
 
       {/* Imagen de fondo */}
       <div className="relative w-full h-[400px] md:h-[520px] lg:h-[577px]">

@@ -4,26 +4,25 @@
 import AnimatedText from "@/animate/TextAnimate";
 import Image from "next/image";
 import "@/style/Servicios.css";
-import DivZoom from "@/animate/DivZoom";
+import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
+
+import { motion, AnimatePresence } from "framer-motion";
 
 /* ================== TIPOS ================== */
 type Bullet = { icon: string; text: string };
-type ServiceIdSup =
+type ServiceId =
   | "crossborder"
   | "marketplaces"
   | "inventory"
-
-
-
-type ServiceIdInf =
   | "returns"
   | "special";
 
 
 
 /* ================== DATA ================== */
-const ServiciosSuperiores: Record<
-  ServiceIdSup,
+const Servicios: Record<
+  ServiceId,
   {
     title: string;
     bullets: Bullet[];
@@ -56,17 +55,6 @@ const ServiciosSuperiores: Record<
       { icon: "/img/icons/Icono 3.2.svg", text: "Usa nuestra bodega como si fuera tuya." },
     ],
   },
-
-};
-
-const ServiciosInferiores: Record<
-  ServiceIdInf,
-  {
-    title: string;
-    bullets: Bullet[];
-  }
-> = {
-
   returns: {
     title: "Devoluciones y retornos",
     bullets: [
@@ -82,15 +70,15 @@ const ServiciosInferiores: Record<
       { icon: "/img/icons/Icono 5.3.svg", text: "Vuelos internacionales (prioritarios y diferidos)." },
     ],
   },
+
 };
+
 
 
 
 /* ================== PRINCIPAL ================== */
 export default function Services() {
-  // const [active] = useState<ServiceId>("crossborder");
-  // const service = SERVICES[active];
-
+  const [openIndex, setOpenIndex] = useState<null | number>(0);
 
 
 
@@ -120,64 +108,58 @@ export default function Services() {
         </p>
 
         {/* contenedor superior */}
-        <div className="contenedor-tarjetas-superior">
-          {Object.entries(ServiciosSuperiores).map(([id, service]) => (
-            <DivZoom scale={1.03} key={id}>
+        <div className="contenedor-tarjetas">
+          {Object.entries(Servicios).map(([id, service], index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div key={id}>
+                {/* Texto y bullets */}
+                <div className="div-tarjeta">
+                  
+                  <button onClick={() => setOpenIndex(isOpen ? null : index)}
+                    className="">
+                    <div className="titulo-texto-tarjeta"> {service.title}</div>  
+                    <div className="flecha-tarjeta">{isOpen ? <ChevronUp /> : <ChevronDown />}</div>
+                    
+                  </button>
+                  <div className="linea-horizontal"></div>
 
-              {/* Texto y bullets */}
-              <div className="div-tarjeta">
-                <h2 className="titulo-texto-tarjeta">
-                  {service.title}
-                </h2>
-                <div className="linea-horizontal"></div>
-                <ul className="contenedor-descripcion-tarjeta">
-                  {service.bullets.map((bullet, index) => (
-                    <li key={index} className="contenedor-bullet-tarjeta">
-                      <Image
-                        src={bullet.icon}
-                        alt="icono"
-                        width={30}
-                        height={30}
-                        className="icono-tarjeta"
-                      />
-                      <span className="">{bullet.text}</span>
-                    </li>
-                  ))}
-                </ul>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="px-6 pb-4 text-sm "
+                      ><ul className="contenedor-descripcion-tarjeta">
+                          {service.bullets.map((bullet, index) => (
+                            <li key={index} className="contenedor-bullet-tarjeta">
+                              <Image
+                                src={bullet.icon}
+                                alt="icono"
+                                width={30}
+                                height={30}
+                                className="icono-tarjeta"
+                              />
+                              <span className="mt-1.5">{bullet.text}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                </div>
+
               </div>
+            )
+          })}
 
-            </DivZoom>))}
+
         </div>
 
-        {/* contenedor inferior */}
-         <div className="contenedor-tarjetas-inferior">
-          {Object.entries(ServiciosInferiores).map(([id, service]) => (
-            <DivZoom scale={1.03} key={id}>
 
-              {/* Texto y bullets */}
-              <div className="div-tarjeta">
-                <h2 className="titulo-texto-tarjeta">
-                  {service.title}
-                </h2>
-                <div className="linea-horizontal"></div>
-                <ul className="contenedor-descripcion-tarjeta">
-                  {service.bullets.map((bullet, index) => (
-                    <li key={index} className="contenedor-bullet-tarjeta">
-                      <Image
-                        src={bullet.icon}
-                        alt="icono"
-                        width={30}
-                        height={30}
-                        className="icono-tarjeta"
-                      />
-                      <span className="">{bullet.text}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-            </DivZoom>))}
-        </div>
 
 
 

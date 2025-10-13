@@ -3,7 +3,7 @@ import { useContext, useState, createContext, Dispatch, SetStateAction } from "r
 
 interface CalculadoraVisibleContextType {
   visible: boolean;
-  setVisible: Dispatch<SetStateAction<boolean>>; // ✅ tipado correcto
+  setVisible: Dispatch<SetStateAction<boolean>>; 
 }
 
 const CalculadoraVisibleContext = createContext<CalculadoraVisibleContextType>({

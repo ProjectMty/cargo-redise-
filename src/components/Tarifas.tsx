@@ -98,33 +98,33 @@ export default function Tarifas() {
 
       <div className="mt-10 flex justify-center" >
         <DivZoom scale={1.05}>
-          <div className="contenedor-adicionales">
-            <h3 className="contenedor-titulo">
-              Cobros adicionales
-            </h3>
-            <ul className="texto-adicionales">
-              <li>
-                El envío al destino final en México no está incluido y será
-                determinado por separado, según el destino y las características
-                del paquete.
-              </li>
-              <li>
-                <span className="">$3.00 USD</span> por cada bolsa, caja o
-                sobre recibido.
-              </li>
-              <li>
-                <span className="">$10.00 USD</span> por cada tarima descargada.
-              </li>
-              <li>
-                <span className="">$375.00 USD</span> por cada tarima recibida
-                de hasta 500 libras.
-              </li>
-              <li>
-                <span className="">$515.00 USD</span> por cada tarima recibida
-                que supere las 500 libras.
-              </li>
-            </ul>
-          </div>
+        <div className="contenedor-adicionales bg-white">
+          <h3 className="titulo-adicionales">
+            Cobros adicionales
+          </h3>
+          <ul className="space-y-3 text-sm md:text-base text-[#333333]">
+            <li>
+              • El envío al destino final en México no está incluido y será
+              determinado por separado, según el destino y las características
+              del paquete.
+            </li>
+            <li>
+              <span className="font-bold">$3.00 USD</span> por cada bolsa, caja o
+              sobre recibido.
+            </li>
+            <li>
+              <span className="font-bold">$10.00 USD</span> por cada tarima descargada.
+            </li>
+            <li>
+              <span className="font-bold">$375.00 USD</span> por cada tarima recibida
+              de hasta 500 libras.
+            </li>
+            <li>
+              <span className="font-bold">$515.00 USD</span> por cada tarima recibida
+              que supere las 500 libras.
+            </li>
+          </ul>
+        </div>
         </DivZoom>
       </div>
 
