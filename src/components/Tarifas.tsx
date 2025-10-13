@@ -25,47 +25,6 @@ export default function Tarifas() {
 
         </div>
 
-        <div className="contenedor-tarifas">
-          {/* Tarjeta 1 */}
-          <div className="tarjeta-tarifas">
-            <h3 className="titulo-tarifas">COMPRAS PERSONALES</h3>
-            <p className="subtitulo-tarifas">(Menor a $119 USD)</p>
-
-            <Image
-              src="/img/tarifas/tarifa-1.svg"
-              alt="Tarifa 1" className="imagen"
-              width={200}
-              height={200}
-            />
-          </div>
-
-          {/* Tarjeta 2 */}
-          <div className="tarjeta-tarifas">
-            <h3 className="titulo-tarifas">COMPRAS PERSONALES</h3>
-            <p className="subtitulo-tarifas">($120 A $475 USD)</p>
-            <Image src="/img/tarifas/tarifa-2.svg" alt="Tarifa 2" className="imagen"
-              width={200}
-              height={200} />
-          </div>
-
-          {/* Tarjeta 3 */}
-          <div className="tarjeta-tarifas">
-            <h3 className="titulo-tarifas">COMPRAS PERSONALES</h3>
-            <p className="subtitulo-tarifas">($476 a $3000 USD)</p>
-            <Image src="/img/tarifas/tarifa-3.svg" alt="Tarifa 3" className="imagen"
-              width={200}
-              height={200} />
-          </div>
-
-          {/* Tarjeta 4 */}
-          <div className="tarjeta-tarifas">
-            <h3 className="titulo-tarifas">COMPRAS EMPRESARIALES</h3>
-            <p className="subtitulo-tarifas">(A partir de $3000 USD)</p>
-            <Image src="/img/tarifas/tarifa-4.svg" alt="Tarifa 4" className="imagen"
-              width={200}
-              height={200} />
-          </div>
-        </div>
 
         <div className="contenedor-tarifas-informacion">
           {/* Tarjeta 1 */}
@@ -137,7 +96,7 @@ export default function Tarifas() {
       {/* Cobros Adicionales */}
 
 
-      <div className="mt-2 flex justify-center " >
+      <div className="mt-10 flex justify-center" >
         <DivZoom scale={1.05}>
           <div className="contenedor-adicionales">
             <h3 className="contenedor-titulo">

@@ -7,7 +7,7 @@
 /* #region GRAFICOS */
 .linea-Vertical {
     @apply  absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-0
-    w-[6px]  bg-[var(--azul)] h-[82%] mt-16
+    w-[6px]  bg-[var(--azul)] h-[82%] 
 }
 
 /* **************************************LINEA HORIZONTAL ************************************************/
@@ -16,7 +16,7 @@
 }
 
 .linea-horizontal-izquierda {
-    @apply linea-horizontal  -right-1/3 -translate-y-1/3 absolute top-9 -translate-x-3
+    @apply linea-horizontal  -right-1/4 -translate-y-1/4 absolute top-2 -translate-x-1
 }
 
 .linea-horizontal-derecha {
@@ -25,51 +25,51 @@
 
 /* **************************************CUADRADO ************************************************/
 .cuadrado {
-    @apply w-8 h-8 bg-[var(--azul)] absolute
+    @apply w-5 h-5 bg-[var(--azul)] absolute
 }
 
 .cuadrado-izquierda{
-    @apply cuadrado -right-1/3 -translate-y-2/3 top-[27%] -translate-x-2
+    @apply cuadrado -right-1/4 -translate-y-2/3 top-[27%] translate-x-[55%]
 }
 
 .cuadrado-derecha{
-    @apply cuadrado -left-[9%] -translate-y-2/3 top-[25%] translate-x-4
+    @apply cuadrado -left-[3%] -translate-y-2/3 top-[23%] translate-x-1.5
 }
 
 
 .cuadrado-arriba{
-    @apply cuadrado left-1/2 translate-y-1/2 top-10 -translate-x-4 
+    @apply cuadrado left-1/2 translate-y-1/2 -top-5 -translate-x-2.5 
 }
 
 .cuadrado-abajo{
-    @apply cuadrado left-[20%] -top-[20%] translate-x-2.5
+    @apply cuadrado left-[25%] -top-[20%] translate-x-3.5
 }
 /* #endregion */
 
 /* #region IMAGENES */
 
 .imagen-paso-1 {
-    @apply w-44 h-44 absolute -left-16 top-8 -translate-y-1/2
+    @apply w-32 h-32 absolute -left-12 top-4 -translate-y-1/2
 }
 
 .imagen-paso-2 {
-    @apply w-64 h-64 absolute -right-44 top-[30%] -translate-y-1/2
+    @apply w-40 h-40 absolute -right-36 top-[30%] -translate-y-1/2
 }
 
 .imagen-paso-3 {
-    @apply w-72 h-72 absolute -left-20 top-[20%] -translate-y-1/2
+    @apply w-40 h-40 absolute -left-20 top-[20%] -translate-y-1/2
 }
 
 .imagen-paso-4 {
-    @apply w-72 h-72 absolute -right-56 top-[20%] -translate-y-1/2
+    @apply w-36 h-36 absolute -right-32 top-[20%] -translate-y-1/2
 }
 
 .imagen-paso-5 {
-     @apply w-64 h-64 absolute -left-32 top-[28%] -translate-y-1/2
+     @apply w-40 h-40 absolute -left-20 top-[20%] -translate-y-1/2
 }
 
 .imagen-paso-6 {
-     @apply w-48 h-48 absolute -left-16 -top-[23%]
+     @apply w-40 h-40 absolute -left-2 -top-[35%]
 }
 
 /* #endregion */
@@ -77,17 +77,16 @@
 /* #region CONTENEDOR */
 .section {
     @apply relative bg-gradient-to-b from-[#F2F2F2] to-[#F2F2F2] py-28 px-4 md:px-8 scroll-mt-10 font-[Montserrat] 
+    max-h-[1200px]
 }
-
 
 .contenedor-principal {
     @apply relative  mx-10 mb-10 flex flex-col 
 }
 
 .grid-pasos {
-    @apply relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 mx-auto
+    @apply relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 mx-[18%]
 }
-
 
 .div-titulo {
     @apply max-w-6xl mx-auto;
@@ -98,15 +97,15 @@
 }
 
 .contenedor-paso-izquierdo{
-    @apply contenedor-paso w-[80%] 
+    @apply contenedor-paso w-[80%] max-h-20
 }
 
 .contenedor-paso-derecho{
-    @apply contenedor-paso w-[90%]
+    @apply contenedor-paso w-[90%] max-h-20
 }
 
 .contenedor-paso-central{
-    @apply contenedor-paso w-full  mt-32 ml-[28%]
+    @apply contenedor-paso w-full  mt-20 ml-[23%]
 }
 
 .contenedor-informacion{
@@ -117,42 +116,41 @@
 
 /* #region TEXTO */
 .title {
-    @apply text-center text-white  font-bold text-[32px] md:text-[40px] mb-12 bg-[var(--azul)] rounded-3xl py-3
+    @apply text-center text-white  font-semibold text-[30px] md:text-[36px] mb-12 bg-[var(--azul)] rounded-3xl py-3
 }
 
-
 .contenedor-paso-titulo{
-    @apply bg-[var(--azul)] rounded-xl text-white font-bold text-[32px] text-center
+    @apply bg-[var(--azul)] rounded-xl text-white font-bold text-[20px] text-center
 }
 
 .contenedor-paso-titulo-izquierdo{
-    @apply contenedor-paso-titulo  py-5  px-10 w-[90%] ml-auto
+    @apply contenedor-paso-titulo py-2 px-5 w-[90%] 
 }
 
 .contenedor-paso-titulo-central{
-    @apply contenedor-paso-titulo py-5  px-5 pr-10 w-[35%] ml-16
+    @apply contenedor-paso-titulo py-2  px-5 pr-10 w-[40%] ml-20
 }
 
 .contenedor-paso-titulo-derecho{
-    @apply contenedor-paso-titulo  py-2  px-24 w-[80%] ml-auto
+    @apply contenedor-paso-titulo  py-2  px-5 w-[90%] ml-28
 }
 
 
 
 .contenedor-paso-texto{
-    @apply text-[18px] text-blue-600 mt-5 font-light text-center relative
+    @apply text-[14px] text-blue-600 mt-2 font-light text-center relative
 }
 
 .contenedor-paso-texto-izquierdo{
-    @apply contenedor-paso-texto w-[64%] left-[30%] 
+    @apply contenedor-paso-texto w-[70%] left-[10%] ml-3
 }
 
 .contenedor-paso-texto-derecho{
-    @apply contenedor-paso-texto  w-[55%] left-[30%] 
+    @apply contenedor-paso-texto  w-[65%] left-[35%] 
 }
 
 .contenedor-paso-texto-central{
-    @apply contenedor-paso-texto  w-[25%] left-[10%]
+    @apply contenedor-paso-texto  w-[25%] left-[15%]
 }
 
 /* #endregion */

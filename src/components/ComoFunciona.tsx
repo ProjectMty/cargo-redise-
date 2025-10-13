@@ -71,7 +71,7 @@ export default function ComoFunciona() {
           className="linea-Vertical" />
 
         {/* Grid de pasos */}
-        <div className="grid-pasos mt-36">
+        <div className="grid-pasos mt-10">
 
 
           {/* Paso 1 izquierda*/}
@@ -89,9 +89,9 @@ export default function ComoFunciona() {
             <div className="contenedor-paso-titulo-izquierdo">
               <h2>Realiza tus compras</h2>
               <div className="cuadrado-izquierda" />
-              <div className="linea-horizontal-izquierda mt-2"></div>
+              <div className="linea-horizontal-izquierda mt-2.5"></div>
             </div>
-            <p className="contenedor-paso-texto-izquierdo -ml-6">
+            <p className="contenedor-paso-texto-izquierdo ">
               Compra en línea con tu proveedor o en
               páginas reconocidas
             </p>
@@ -137,8 +137,8 @@ export default function ComoFunciona() {
             </div>
             <div className="contenedor-paso-titulo-izquierdo">
               <h2>Comparte tus comprobantes</h2>
-              <div className="cuadrado-izquierda"></div>
-              <div className="linea-horizontal-izquierda mt-3.5"></div>
+              <div className="cuadrado-izquierda mt-1"></div>
+              <div className="linea-horizontal-izquierda mt-3"></div>
             </div>
             <p className="contenedor-paso-texto-izquierdo">
               Envía a tu asesor tu pago y número de rastreo
@@ -185,8 +185,8 @@ export default function ComoFunciona() {
             </div>
             <div className="contenedor-paso-titulo-izquierdo">
               <h2>Pago y entrega</h2>
-              <div className="cuadrado-izquierda"></div>
-              <div className="linea-horizontal-izquierda"></div>
+              <div className="cuadrado-izquierda mt-1"></div>
+              <div className="linea-horizontal-izquierda mt-3"></div>
             </div>
             <p className="contenedor-paso-texto-izquierdo">
               Pagas honorarios e impuestos, y recibes en tu domicilio

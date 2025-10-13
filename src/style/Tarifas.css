@@ -1,9 +1,9 @@
 .section {
-    @apply w-full bg-[#F2F2F2] py-16 scroll-mt-16 font-[Montserrat]
+    @apply w-full  scroll-mt-16 font-[Montserrat]
 }
 
 .contenedor {
-    @apply max-w-7xl mx-auto  py-28 flex flex-col
+    @apply max-w-7xl mx-auto flex flex-col
 }
 
 .contenedor-titulo {
@@ -33,7 +33,7 @@
 }
 
 .contenedor-tarifas-informacion{
-    @apply contenedor-tarifas mt-40
+    @apply contenedor-tarifas mt-5
 }
 
 .precio-tarifa{
