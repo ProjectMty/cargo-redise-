@@ -9,7 +9,7 @@
 }
 /* bg-gradient-to-r from-[#05C2F2] to-[#1B59E1] */
 .fondo-contenedor{
-    @apply  rounded-3xl grid grid-cols-1 lg:grid-cols-4
+    @apply  rounded-3xl grid grid-cols-1 md:grid-cols-4
 }
 
 .encabezado {

@@ -1,12 +1,10 @@
 // import { NextRequest, NextResponse } from "next/server";
-console.log("🔍 RESEND_API_KEY:", process.env.RESEND_API_KEY ? "✅ encontrada" : "❌ NO encontrada");
-
+// SIN USO
 import { Resend } from "resend";
-
+import EmailTemplate from '../../../components/Cotizador/plantillaEmail'
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function GET() {
-
 
     try {
         if (!process.env.RESEND_API_KEY) {
@@ -15,10 +13,10 @@ export async function GET() {
         }
 
         const { data, error } = await resend.emails.send({
-            from: 'Acme <it03@cargomty.com>',
+            from: 'RapidMex <no-reply@rapidmex.com>',
             to: ['it03@cargomty.com'],
-            subject: 'Hello from Next.js',
-            html: '<h1>Hello from GET function</h1>'
+            subject: 'Cotización Prueba 2',
+            react: EmailTemplate({username: "Ailin", company: "CargoMty"})
         });
 
         if (error) {
@@ -33,29 +31,17 @@ export async function GET() {
 
 }
 
-// export async function POST(req: NextRequest) {
-//     try {
-//         const body = await req.json();
+export async function POST(request: Request) {
+  const body = await request.json();
+  const { nombre, compañia } = body;
 
-//         // validacion de datos
-//         if (!body.nombre) {
-//             return NextResponse.json(
-//                 { error: "El campo 'nombre' es obligatorio" },
-//                 { status: 400 }
-//             );
-//         }
+  const { data, error } = await resend.emails.send({
+    from: 'RapidMex <no-reply@rapidmex.com>',
+    to: ['it03@cargomty.com'],
+    subject: `Cotización de ${compañia} prueba 7`,
+    react: EmailTemplate({  username:nombre, company:compañia }),
+  });
 
-//         // respuesta ok
-//         return NextResponse.json({
-//             recibido: body,
-//             mensaje: "Datos Recibidos",
-//         });
-
-//     } catch (error) {
-//         console.error("FATAL ERROR: /hooks/route.ts", error);
-//         return NextResponse.json(
-//             { error: "FATAL SERVER ERROR" },
-//             { status: 500 }
-//         );
-//     }
-// }
+  if (error) return Response.json({ error }, { status: 500 });
+  return Response.json({ success: true, data });
+}

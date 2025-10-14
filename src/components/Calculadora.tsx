@@ -11,8 +11,9 @@ import FadeInOutError from "@/animate/FadeInOut";
 import ReCAPTCHA from "react-google-recaptcha"
 
 // cotizacion pdf
-// import CotizadorPdf from "./Cotizador/cotizadorPdf";
-
+import CotizadorPdf from "./Cotizador/cotizadorPdf";
+import { pdf } from "@react-pdf/renderer";
+import PDF from "././Cotizador/estiloPdf";
 
 export default function Calculadora() {
 
@@ -55,7 +56,8 @@ export default function Calculadora() {
     //booleanos
     const [pallets, setPallets] = useState(false);
     const [asesor, setAsesor] = useState(false);
-    const [captchaValido, setCaptchaValido] = useState(false);
+    // const [captchaValido, setCaptchaValido] = useState(false);
+    const [setCaptchaValido] = useState(false);
 
     // Estructruas de datos
     const tiposCajas = [
@@ -157,7 +159,7 @@ export default function Calculadora() {
 
     }, [opcion]);
 
-    const LimpiarCamposFormulario = useCallback( () => {
+    const LimpiarCamposFormulario = useCallback(() => {
         SetNombre("");
         SetTelefono("");
         SetCorreo("");
@@ -587,8 +589,6 @@ export default function Calculadora() {
         }
     };
 
-
-
     const hanleReCaptcha = () => {
 
         if (!captcha.current) return;
@@ -604,27 +604,63 @@ export default function Calculadora() {
         }
     }
 
-    const sendContact = () => {
+    const sendContact = async () => {
         // validar que no sea vacio
-        // if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "" || tipoSeleccionado === "") {
+        if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "" || tipoSeleccionado === "") {
 
-        //     alert("Por favor llena todos los campos de cotizacion");
-        //     return;
-        // }
-        // if (nombre === "" || telefono === "" || correo === "" || asunto === "") {
-
-        //     alert("Por favor llena todos los campos del formulario");
-        //     return;
-        // }
-        if (captchaValido) {
-            console.log("usuario no robot")
-        } else {
-            alert("robot")
+            alert("Por favor llena todos los campos de cotizacion");
             return;
         }
+        if (nombre === "" || telefono === "" || correo === "" || asunto === "") {
+
+            alert("Por favor llena todos los campos del formulario");
+            return;
+        }
+        // if (captchaValido) {
+        //     console.log("usuario no robot")
+        // } else {
+        //     alert("robot")
+        //     return;
+        // }
+
+      try {
+    // Generar el PDF directamente
+    const blob = await pdf(
+      <PDF
+        tipoSeleccionado={tipoSeleccionado}
+        valor={valor}
+        peso={peso}
+        largo={largo}
+        ancho={ancho}
+        alto={alto}
+        cantidad={cantidad}
+        repetitivo={repetitivo}
+        nombre={nombre}
+        telefono={telefono}
+        correo={correo}
+        asunto={asunto}
+        costoIVA={costoIVA}
+      />
+    ).toBlob();
+
+    // Convertir a base64
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = () => {
+      const base64data = reader.result as string;
+      localStorage.setItem("pdfBase64", base64data);
+      console.log("✅ PDF guardado en localStorage");
+    };
+
+    alert("Información enviada");
+  } catch (error) {
+    console.error("❌ Error generando PDF:", error);
+  }
+
+
 
         alert("Informacion enviada")
-        setAsesor(false);
+        // setAsesor(false);
 
     }
     // #endregion
@@ -910,17 +946,18 @@ export default function Calculadora() {
 
 
                     {/* boton de enviar forms con datos de contacto */}
-                    <div className="contenedor-filas-2 md:mx-10 items-center">
-                        <div className="envio">
+                    <div className="contenedor-filas-2 md:mx-10 items-center ">
+                        <div className={asesor ? "envio" : "hidden"}>
                             <ReCAPTCHA
                                 ref={captcha}
                                 sitekey="6LdS7eYrAAAAAJpMS-V4PIciaJvjv5XWuIaxE9vX"
                                 size="invisible"
                                 onChange={hanleReCaptcha}
-                                // className={asesor ? "" : "hidden"}
+                            // className={asesor ? "" : "hidden"}
                             />
-                            <input type="button" value="Enviar Datos" onClick={sendContact} className={asesor ? "button mt-1 mb-2" : "hidden"} />
-                            <input type="submit" value="Cerrar formulario" className={asesor ? "button mt-2" : "hidden"} onClick={() => setAsesor(false)} />
+                            <input type="button" value="Enviar Datos" onClick={sendContact} className="button mt-1 mb-2" />
+                            <input type="submit" value="Cerrar formulario" className="button mt-2" onClick={() => setAsesor(false)} />
+                            <CotizadorPdf usuario={nombre}/>
                         </div>
                     </div>
 
@@ -989,7 +1026,6 @@ export default function Calculadora() {
                 </div>
             </div>
 
-            {/* <CotizadorPdf/> */}
 
 
         </section>
