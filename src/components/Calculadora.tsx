@@ -56,8 +56,8 @@ export default function Calculadora() {
     //booleanos
     const [pallets, setPallets] = useState(false);
     const [asesor, setAsesor] = useState(false);
-    // const [captchaValido, setCaptchaValido] = useState(false);
-    const [setCaptchaValido] = useState(false);
+    const [captchaValido, setCaptchaValido] = useState(false);
+
 
     // Estructruas de datos
     const tiposCajas = [
@@ -616,12 +616,13 @@ export default function Calculadora() {
             alert("Por favor llena todos los campos del formulario");
             return;
         }
-        // if (captchaValido) {
-        //     console.log("usuario no robot")
-        // } else {
-        //     alert("robot")
-        //     return;
-        // }
+        if (captchaValido) {
+            console.log("usuario no robot")
+        } else {
+            console.log("usuario robot")
+            // alert("robot")
+            // return;
+        }
 
       try {
     // Generar el PDF directamente
