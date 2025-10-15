@@ -27,6 +27,8 @@
 /* #endregion */
 
 /* #region TARJETA */
+
+
 .div-tarjeta{
     @apply flex flex-col items-start text-start bg-[#0b4ba2]  m-5
     h-auto rounded-[26px] shadow-[0_18px_48px_rgba(0,0,0,0.2)] text-white 

@@ -36,6 +36,14 @@ export default function Calculadora() {
     const [correo, SetCorreo] = useState("");
     const [asunto, SetAsunto] = useState("");
 
+    // PDF
+    const [precioSinIVA, setPrecioSinIVA] = useState<number>(0);
+    const [precioConIVA, setPrecioConIVA] = useState<number>(0);
+    const [precioPorPeso, setPrecioPorPeso] = useState<number | "">("");
+   const [precioPorExcesoPeso, setPrecioPorExcesoPeso] = useState<number | "">("");
+  const [precioBase, setPrecioBase] = useState<number | "">("");
+  const [precioPorCantidad, setPrecioPorCantidad] = useState<number | "">("");
+
     // salidas
     const [costoIVA, setCostoIVA] = useState<number>(0);
     const [volumen, setVolumen] = useState<number>(0);
@@ -471,11 +479,15 @@ export default function Calculadora() {
             precioSinIva = (valor / (1 - 0.12));
         }
 
+        setPrecioSinIVA(precioSinIva)
+
         // agregar iva si son mas de 20 articulos
         if (cantidad < 20) {
             precioConIva = precioSinIva
+            setPrecioConIVA(0)
         } else {
             precioConIva = precioSinIva + (valor * 0.16)
+            setPrecioConIVA(precioConIva)
         }
 
         // valor volumetrico dependiendo del tipo de envio
@@ -503,6 +515,11 @@ export default function Calculadora() {
                         message: "El peso ingresado excede el peso maximo. Se cobrara costo de sobrepeso"
                     })
                 }
+
+                setPrecioPorPeso(precioPeso);
+                setPrecioPorExcesoPeso(0);
+                setPrecioBase(0);
+                setPrecioPorCantidad(0);
                 break;
 
             case "Sobres":
@@ -517,17 +534,19 @@ export default function Calculadora() {
                     precioBase = calcularPrecio + (cantidad * 3)
                     pesoKg = Number(peso);
                 }
+                setPrecioPorCantidad(cantidad * 3);
+                setPrecioBase(calcularPrecio);
 
                 if (pesoKg > volumen) {
                     const PrecioExcesoKg = (pesoKg - volumen) * 2
                     precioBase = precioBase + PrecioExcesoKg;
-
+                    setPrecioPorExcesoPeso(PrecioExcesoKg);
                     setErrorCosto({
                         error: false,
                         message: "El peso ingresado excede el peso maximo. Se cobrara costo de sobrepeso"
                     })
                 }
-
+                setPrecioPorPeso(0);
                 break;
 
             case "Cajas":
@@ -543,10 +562,15 @@ export default function Calculadora() {
                     pesoKg = Number(peso);
                 }
 
+                setPrecioBase(calcularPrecio);
+                setPrecioPorCantidad(cantidad * 3);
                 if (pesoKg > volumen) {
                     const PrecioExcesoKg = (pesoKg - volumen) * 2
                     precioBase = precioBase + PrecioExcesoKg;
+                    setPrecioPorExcesoPeso(PrecioExcesoKg);
                 }
+                setPrecioPorPeso(0);
+                
                 break;
 
 
@@ -612,56 +636,57 @@ export default function Calculadora() {
             return;
         }
         if (nombre === "" || telefono === "" || correo === "" || asunto === "") {
-
             alert("Por favor llena todos los campos del formulario");
             return;
         }
         if (captchaValido) {
             console.log("usuario no robot")
         } else {
-            console.log("usuario robot")
+            console.log("🚨​ usuario ROBOT 🚨​")
             // alert("robot")
             // return;
         }
 
-      try {
-    // Generar el PDF directamente
-    const blob = await pdf(
-      <PDF
-        tipoSeleccionado={tipoSeleccionado}
-        valor={valor}
-        peso={peso}
-        largo={largo}
-        ancho={ancho}
-        alto={alto}
-        cantidad={cantidad}
-        repetitivo={repetitivo}
-        nombre={nombre}
-        telefono={telefono}
-        correo={correo}
-        asunto={asunto}
-        costoIVA={costoIVA}
-      />
-    ).toBlob();
+        try {
+            // Generar el PDF directamente
+            const blob = await pdf(
+                <PDF
+                    tipoSeleccionado={tipoSeleccionado}
+                    valor={valor}
+                    peso={peso}
+                    largo={largo}
+                    ancho={ancho}
+                    alto={alto}
+                    cantidad={cantidad}
+                    repetitivo={repetitivo}
+                    nombre={nombre}
+                    telefono={telefono}
+                    correo={correo}
+                    asunto={asunto}
+                    costoIVA={costoIVA}
+                    unidades={opcion}
+                    costoSinIva={precioSinIVA}
+                    constoConIva={precioConIVA}
+                    precioPorPeso={precioPorPeso}
+                    precioPorExcesoPeso={precioPorExcesoPeso}
+                    precioBase={precioBase}
+                    precioCantidad={precioPorCantidad}
+                />
+            ).toBlob();
 
-    // Convertir a base64
-    const reader = new FileReader();
-    reader.readAsDataURL(blob);
-    reader.onloadend = () => {
-      const base64data = reader.result as string;
-      localStorage.setItem("pdfBase64", base64data);
-      console.log("✅ PDF guardado en localStorage");
-    };
+            // Convertir a base64
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => {
+                const base64data = reader.result as string;
+                localStorage.setItem("pdfBase64", base64data);
+                console.log("⭐​ PDF guardado en localStorage ⭐​");
+            };
 
-    alert("Información enviada");
-  } catch (error) {
-    console.error("❌ Error generando PDF:", error);
-  }
-
-
-
-        alert("Informacion enviada")
-        // setAsesor(false);
+            alert("Información enviada");
+        } catch (error) {
+            console.error("☠️ Error generando PDF ☠️: ", error);
+        }
 
     }
     // #endregion
@@ -958,7 +983,7 @@ export default function Calculadora() {
                             />
                             <input type="button" value="Enviar Datos" onClick={sendContact} className="button mt-1 mb-2" />
                             <input type="submit" value="Cerrar formulario" className="button mt-2" onClick={() => setAsesor(false)} />
-                            <CotizadorPdf usuario={nombre}/>
+                            <CotizadorPdf usuario={nombre} />
                         </div>
                     </div>
 

@@ -15,12 +15,12 @@ export async function POST(req: Request) {
 
             from: 'RapidMex <no-reply@rapidmex.com>',
             to: ['it03@cargomty.com'],
-            subject: "Aquí tienes tu PDF Prueba 4 ",
+            subject: "Prueba Estilos Cargo",
             react: EmailTemplate({ username: nombre, company: compañia }),
             text: "Adjunto encontrarás el PDF solicitado.",
             attachments: [
                 {
-                    filename: "archivo.pdf",
+                    filename: "Cotizacion.pdf",
                     content: pdfBase64,
                 },
             ],

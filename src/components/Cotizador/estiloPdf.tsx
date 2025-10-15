@@ -24,7 +24,50 @@ interface PdfProps {
     correo: string;
     asunto: string;
     costoIVA: number | "";
+    unidades: string;
+    costoSinIva: number | "";
+    constoConIva: number | "";
+    precioPorPeso: number | "";
+    precioPorExcesoPeso: number | "";
+    precioBase: number | "";
+    precioCantidad: number | "";
+
 }
+
+const styles = StyleSheet.create({
+    page: {
+        padding: 30,
+        fontSize: 12,
+        fontFamily: "Helvetica",
+        backgroundColor: "#f8f8f8",
+    },
+    header: {
+        fontSize: 40,
+        textAlign: "center",
+        marginBottom: 20,
+        color: "blue",
+        fontWeight: "bold",
+    },
+    title: {
+        fontSize: 20,
+        color: "blue",
+        marginBottom: 20,
+        fontWeight: "semibold"
+    },
+    section: {
+        marginBottom: 10,
+        paddingBottom: 8,
+        borderBottom: "2px solid #1043b2",
+    },
+    label: {
+        fontWeight: "bold",
+        color: "#333",
+    },
+    value: {
+        marginTop: 2,
+        color: "#555",
+    },
+});
 
 export default function PDF({
     tipoSeleccionado,
@@ -39,62 +82,124 @@ export default function PDF({
     telefono,
     correo,
     asunto,
-    costoIVA
+    costoIVA,
+    unidades,
+    costoSinIva,
+    constoConIva,
+    precioPorPeso,
+    precioPorExcesoPeso,
+    precioBase,
+    precioCantidad,
+
 }: PdfProps) {
 
-    const styles = StyleSheet.create({
-        page: {
-            flexDirection: 'row',
-            backgroundColor: '#E4E4E4',
-        },
-        section: {
-            display: "flex",
-            flexDirection: "column",
-            margin: 10,
-            padding: 10,
-            flexGrow: 1,
-            alignItems: "flex-start",
-        },
-        text: {
-            fontSize: 20,
-            marginBottom: 5,
-        }
-    });
+
 
     return (
         <Document>
             <Page style={styles.page}>
+                <Text style={styles.header}>Cotizador</Text>
+
+                <Text style={styles.title}>Datos de contacto</Text>
 
                 <View style={styles.section}>
-                    <Text style={styles.text}>Cotizador</Text>
+                    <Text style={styles.label}>Nombre: </Text>
+                    <Text style={styles.value}>{nombre}</Text>
+                </View>
 
-                    <Text style={styles.text}>Tipo de envio: {tipoSeleccionado}</Text>
+                <View style={styles.section}>
+                    <Text style={styles.label}>Telefono: </Text>
+                    <Text style={styles.value}> +52 {telefono}</Text>
+                </View>
 
-                    <Text style={styles.text}>Valor: {valor}</Text>
+                <View style={styles.section}>
+                    <Text style={styles.label}>Correo: </Text>
+                    <Text style={styles.value}> {correo}</Text>
+                </View>
 
-                    <Text style={styles.text}>Peso: {peso} </Text>
+                <View style={styles.section}>
+                    <Text style={styles.label}>Asunto: </Text>
+                    <Text style={styles.value}> {asunto}</Text>
+                </View>
 
-                    <Text style={styles.text}>Cantidad: {cantidad} </Text>
+                <Text style={styles.title}>Mercancia</Text>
 
-                    <Text style={styles.text}>Alto: {alto} </Text>
 
-                    <Text style={styles.text}>Ancho: {ancho} </Text>
+                <View style={styles.section}>
+                    <Text style={styles.label}>Tipo de paquete:</Text>
+                    <Text style={styles.value}>{tipoSeleccionado}</Text>
+                </View>
 
-                    <Text style={styles.text}>Largo: {largo} </Text>
+                <View style={styles.section}>
+                    <Text style={styles.label}>Valor: </Text>
+                    <Text style={styles.value}>{valor} USD</Text>
+                </View>
 
-                    <Text style={styles.text}>Repetitivo: {repetitivo} </Text>
+                <View style={styles.section}>
+                    <Text style={styles.label}>Peso: </Text>
+                    <Text style={styles.value}>{peso} {unidades === "MXS" ? "kg" : "lb"}</Text>
+                </View>
 
-                    <Text style={styles.text}>Nombre: {nombre} </Text>
 
-                    <Text style={styles.text}>telefono: {telefono} </Text>
+                <View style={styles.section}>
+                    <Text style={styles.label}>Medidas (Lrago x Alto x Ancho): </Text>
+                    <Text style={styles.value}>
+                        {largo} x {alto} x {ancho} {unidades === "MXS" ? "cm" : "in"}
+                    </Text>
+                </View>
 
-                    <Text style={styles.text}>Correo: {correo} </Text>
-
-                    <Text style={styles.text}>Asunto: {asunto} </Text>
-
-                    <Text style={styles.text}>Costo total {costoIVA} </Text>
+                <View style={styles.section}>
+                    <Text style={styles.label}>La mercancia es repetitiva: </Text>
+                    <Text style={styles.value}>{repetitivo || "No"}</Text>
 
                 </View>
+                <View style={styles.section}>
+                    <Text style={styles.label}>Cantidad: </Text>
+                    <Text style={styles.value}>{cantidad} {tipoSeleccionado} </Text>
+                </View>
+
+
+                <Text style={styles.title}>Manejo de precios</Text>
+             
+                <View style={styles.section}>
+                    <Text style={styles.label}>Honoriarios sin iva:
+                        <span style={styles.value}> {costoSinIva} USD</span>
+                    </Text>
+                </View>
+                <View style={styles.section}>
+                    <Text style={styles.label}>Honoriarios con iva:
+                        <span style={styles.value}> {constoConIva === 0 ? "No aplica, cantidad menor a 20 articulos" : constoConIva} USD</span>
+                    </Text>
+                </View>
+                <View style={styles.section}>
+                    <Text style={styles.label}>Precio por peso:
+                        <span style={styles.value}> {precioPorPeso === 0 ? "No aplica" : precioPorPeso} USD</span>
+                    </Text>
+                </View>
+                <View style={styles.section}>
+                    <Text style={styles.label}>Precio por exceso de peso:
+                        <span style={styles.value}> {precioPorExcesoPeso === 0 ? "No aplica" : precioPorExcesoPeso} USD</span>
+                    </Text>
+                </View>
+                <View style={styles.section}>
+
+                    <Text style={styles.label}>Precio base por medidas ((largo * ancho * alto) / 6000) * 3:
+                        <span style={styles.value}> {precioBase === 0 ? "No aplica" : precioBase} USD</span>
+                    </Text>
+                </View>
+                <View style={styles.section}>
+                    <Text style={styles.label}>Precio por cantidad de {tipoSeleccionado}:
+                        <span style={styles.value}> {precioCantidad === 0 ? "No aplica" : precioCantidad} USD</span>
+                    </Text>
+                </View>
+
+                <View style={styles.section}>
+                    <Text style={styles.label}>Costo Cotizado en calculadora: </Text>
+                    <Text style={styles.value}> {costoIVA} USD </Text>
+                </View>
+
+
+
             </Page>
         </Document>
     )
