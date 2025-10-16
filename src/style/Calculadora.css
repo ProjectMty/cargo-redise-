@@ -1,5 +1,6 @@
 
-/* formulario.css */
+
+ /* #region CONTENEDORES */
 .fondo-seccion {
    @apply w-full h-full px-[15%] py-[5%] font-[Montserrat];
 }
@@ -7,11 +8,42 @@
 .contenedor-calculadora {
     @apply shadow-2xl rounded-3xl p-1
 }
-/* bg-gradient-to-r from-[#05C2F2] to-[#1B59E1] */
+
 .fondo-contenedor{
     @apply  rounded-3xl grid grid-cols-1 md:grid-cols-4
 }
 
+.contenedor-2 {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5;
+}
+
+.contenedor-3 {
+  @apply grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5;
+}
+
+.contenedor-4 {
+  @apply grid grid-cols-1 lg:grid-cols-4 gap-5 mt-5;
+}
+
+.contenedor-filas-2 {
+    @apply grid grid-rows-1 lg:grid-rows-2 
+}
+
+.contenedor-filas-4 {
+    @apply grid grid-rows-2 gap-4 
+}
+
+.envio {
+  @apply grid grid-rows-3 gap-2 
+}
+
+.botones-formulario-contacto{
+  @apply contenedor-4 md:mx-10 items-center col-span-4
+}
+
+ /* #endregion */
+
+ /* #region TEXTO */
 .encabezado {
     @apply font-extrabold text-4xl md:text-5xl text-blue-800 text-center mt-5;
 }
@@ -41,37 +73,38 @@
     @apply text-start text-white text-4xl md:text-6xl font-bold pr-20
 }
 
-.contenedor-2 {
-  @apply grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5;
+
+.label {
+  @apply text-base font-light justify-center text-center content-center text-white
 }
 
-.contenedor-3 {
-  @apply grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5;
+.input {
+  @apply w-full h-8 bg-white text-black rounded-lg px-2;
 }
 
-.contenedor-4 {
-  @apply grid grid-cols-1 lg:grid-cols-4 gap-5 mt-5;
-}
-
-.contenedor-filas-2 {
-    @apply grid grid-rows-1 lg:grid-rows-2 
+.p {
+    @apply text-end mt-8 lg:mr-0
 }
 
 
-.contenedor-filas-4 {
-    @apply grid grid-rows-2 gap-4 
+.notas {
+  @apply  text-xs font-light text-gray-200 text-center mt-1
 }
 
-.select {
-    @apply  text-center bg-slate-100 text-2xl text-blue-900 rounded-xl lg:px-10 py-2
+.error {
+  @apply text-xs font-light text-red-500 text-center mt-1
 }
+  /* #endregion */
 
-.tarjeta-notas {
+ /* #region TARJETAS */
+
+
+ .tarjeta-notas {
   @apply grid grid-rows-[1fr_auto]  bg-blue-600 rounded-xl px-2 py-1 ;
 }
 
 .tarjeta-ingreso {
-    @apply grid grid-cols-1 md:grid-cols-2 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
+    @apply grid grid-cols-1 md:grid-cols-4 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
    text-white shadow-xl items-center max-h-20 mt-5;
 }
 
@@ -88,37 +121,28 @@
   @apply grid grid-rows-2 gap-5 rounded-xl text-center text-white 
 }
 
-.label {
-  @apply text-base font-light justify-center text-center content-center text-white
+.tarjeta-asunto {
+    @apply grid  lg:grid-cols-4 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
+   text-white shadow-xl items-center lg:max-h-20 col-span-3 lg:h-20 mt-5;
 }
 
-.input {
-  @apply w-full h-8 bg-white text-black rounded-lg px-2;
+  /* #endregion */
+
+ /* #region BOTONES */
+   .select {
+    @apply  text-center bg-slate-100 text-2xl text-blue-900 rounded-xl lg:px-10 py-2
 }
 
-.p {
-    @apply text-end mt-8 lg:mr-0
-}
 
 .button {
    @apply rounded-xl px-5 xl:px-20 py-3 font-medium hover:bg-blue-600 hover:text-white
     bg-blue-400 text-white transition duration-300 text-center;
 }
 
-.envio {
-  @apply grid grid-rows-3 gap-2 
-}
 
-.notas {
-  @apply  text-xs font-light text-gray-200 text-center mt-1
-}
-
-.error {
-  @apply text-xs font-light text-red-500 text-center mt-1
-}
 
 .input-asesor {
-  @apply bg-white w-full h-7 rounded-md px-3
+  @apply bg-white w-full h-7 rounded-md px-3 col-span-3
   outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black
 }
 
@@ -139,7 +163,5 @@
   @apply bg-slate-500 text-white cursor-not-allowed rounded-xl  lg:px-20 py-3 px-5
 }
 
-.tarjeta-asunto {
-    @apply grid  lg:grid-cols-4 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
-   text-white shadow-xl items-center lg:max-h-20 col-span-3 lg:h-20 mt-5;
-}
+ /* #endregion */
+

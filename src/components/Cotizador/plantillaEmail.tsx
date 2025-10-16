@@ -1,4 +1,4 @@
-import {Head, Body, Container, Heading, Html, Img, Preview, Section, Tailwind, Text, Button } from '@react-email/components';
+import {Head, Body, Container, Heading, Html, Img, Preview, Section, Tailwind, Text } from '@react-email/components';
 
 interface WelcomeEmailProps {
     username?: string;

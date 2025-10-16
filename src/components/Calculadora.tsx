@@ -5,9 +5,8 @@ import AnimatedText from "@/animate/TextAnimate";
 import "@/style/Calculadora.css";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useCalculadoraVisible } from "../context/CalculadoraVisibleContext";
-
+import Swal from 'sweetalert2'
 import FadeInOutError from "@/animate/FadeInOut";
-// import AlertDialog from "@/extras/AlertDialog";
 import ReCAPTCHA from "react-google-recaptcha"
 
 // cotizacion pdf
@@ -40,9 +39,9 @@ export default function Calculadora() {
     const [precioSinIVA, setPrecioSinIVA] = useState<number>(0);
     const [precioConIVA, setPrecioConIVA] = useState<number>(0);
     const [precioPorPeso, setPrecioPorPeso] = useState<number | "">("");
-   const [precioPorExcesoPeso, setPrecioPorExcesoPeso] = useState<number | "">("");
-  const [precioBase, setPrecioBase] = useState<number | "">("");
-  const [precioPorCantidad, setPrecioPorCantidad] = useState<number | "">("");
+    const [precioPorExcesoPeso, setPrecioPorExcesoPeso] = useState<number | "">("");
+    const [precioBase, setPrecioBase] = useState<number | "">("");
+    const [precioPorCantidad, setPrecioPorCantidad] = useState<number | "">("");
 
     // salidas
     const [costoIVA, setCostoIVA] = useState<number>(0);
@@ -454,7 +453,11 @@ export default function Calculadora() {
                 error: true,
                 message: "Debes ingresar todos los campos"
             })
-            // alert("Por favor llena todos los campos");
+               Swal.fire({
+                title: "ERROR",
+                text: "Necesitas llenar todos los campos",
+                icon: "error"
+            });
             return;
         }
 
@@ -479,6 +482,7 @@ export default function Calculadora() {
             precioSinIva = (valor / (1 - 0.12));
         }
 
+        precioSinIva = Math.round((precioSinIva + Number.EPSILON) * 100) / 100;
         setPrecioSinIVA(precioSinIva)
 
         // agregar iva si son mas de 20 articulos
@@ -487,6 +491,7 @@ export default function Calculadora() {
             setPrecioConIVA(0)
         } else {
             precioConIva = precioSinIva + (valor * 0.16)
+            precioConIva = Math.round((precioConIva + Number.EPSILON) * 100) / 100;
             setPrecioConIVA(precioConIva)
         }
 
@@ -535,11 +540,13 @@ export default function Calculadora() {
                     pesoKg = Number(peso);
                 }
                 setPrecioPorCantidad(cantidad * 3);
+                calcularPrecio = Math.round((calcularPrecio + Number.EPSILON) * 100) / 100;
                 setPrecioBase(calcularPrecio);
 
                 if (pesoKg > volumen) {
-                    const PrecioExcesoKg = (pesoKg - volumen) * 2
+                    let PrecioExcesoKg = (pesoKg - volumen) * 2
                     precioBase = precioBase + PrecioExcesoKg;
+                    PrecioExcesoKg = Math.round((PrecioExcesoKg + Number.EPSILON) * 100) / 100;
                     setPrecioPorExcesoPeso(PrecioExcesoKg);
                     setErrorCosto({
                         error: false,
@@ -570,7 +577,7 @@ export default function Calculadora() {
                     setPrecioPorExcesoPeso(PrecioExcesoKg);
                 }
                 setPrecioPorPeso(0);
-                
+
                 break;
 
 
@@ -632,23 +639,34 @@ export default function Calculadora() {
         // validar que no sea vacio
         if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "" || tipoSeleccionado === "") {
 
-            alert("Por favor llena todos los campos de cotizacion");
+            Swal.fire({
+                title: "Cotización",
+                text: "Necesitas llenar todos los campos de cotización",
+                icon: "error"
+            });
             return;
         }
         if (nombre === "" || telefono === "" || correo === "" || asunto === "") {
-            alert("Por favor llena todos los campos del formulario");
+            Swal.fire({
+                title: "Contacto",
+                text: "Necesitas llenar todos los campos de contacto",
+                icon: "error"
+            });
+
             return;
         }
         if (captchaValido) {
             console.log("usuario no robot")
         } else {
-            console.log("🚨​ usuario ROBOT 🚨​")
-            // alert("robot")
-            // return;
+           Swal.fire({
+                title: "ALERTA",
+                text: "🚨​ usuario ROBOT 🚨",
+                icon: "error"
+            });
         }
 
         try {
-            // Generar el PDF directamente
+
             const blob = await pdf(
                 <PDF
                     tipoSeleccionado={tipoSeleccionado}
@@ -683,7 +701,11 @@ export default function Calculadora() {
                 console.log("⭐​ PDF guardado en localStorage ⭐​");
             };
 
-            alert("Información enviada");
+             Swal.fire({
+                title: "Pdf generado",
+                icon: "success",
+                timer: 3000
+            });
         } catch (error) {
             console.error("☠️ Error generando PDF ☠️: ", error);
         }
@@ -956,7 +978,7 @@ export default function Calculadora() {
                     </div>
 
                     {asesor ? (
-                        <div className="col-span-4 md:-mt-16 mt-5">
+                        <div className="col-span-4 md:mt0 mt-5">
                             <AnimatedText
                                 delay={0.2}
                                 lines={[
@@ -971,27 +993,13 @@ export default function Calculadora() {
                     )}
 
 
-                    {/* boton de enviar forms con datos de contacto */}
-                    <div className="contenedor-filas-2 md:mx-10 items-center ">
-                        <div className={asesor ? "envio" : "hidden"}>
-                            <ReCAPTCHA
-                                ref={captcha}
-                                sitekey="6LdS7eYrAAAAAJpMS-V4PIciaJvjv5XWuIaxE9vX"
-                                size="invisible"
-                                onChange={hanleReCaptcha}
-                            // className={asesor ? "" : "hidden"}
-                            />
-                            <input type="button" value="Enviar Datos" onClick={sendContact} className="button mt-1 mb-2" />
-                            <input type="submit" value="Cerrar formulario" className="button mt-2" onClick={() => setAsesor(false)} />
-                            <CotizadorPdf usuario={nombre} />
-                        </div>
-                    </div>
 
+                    {/* boton de enviar forms con datos de contacto */}
 
                     {asesor ? (
-                        <div className="col-span-4 md:col-span-3 md:mr-10 md:ml-7">
+                        <div className="col-span-4 md:col-span-4 md:mr-10 md:ml-7">
 
-                            <div className="lg:contenedor-3 mb-5">
+                            <div className="lg:contenedor-3 mb-1">
                                 <div className="tarjeta-ingreso">
                                     <label htmlFor="ContactName">Nombre: </label>
                                     <input type="text" name="name" id="ContactName" className="input-asesor"
@@ -1037,7 +1045,6 @@ export default function Calculadora() {
                                     </textarea>
                                 </div>
 
-
                             </div>
 
                         </div>
@@ -1047,6 +1054,20 @@ export default function Calculadora() {
                         <div></div>
                     )}
 
+                    <div className={asesor ? "botones-formulario-contacto" : "hidden"}>
+
+                        <input type="submit" value="Cerrar formulario" className="button " onClick={() => setAsesor(false)} />
+                        <input type="button" value="Enviar Datos a PDF" onClick={sendContact} className="button" />
+                        <CotizadorPdf usuario={nombre} />
+
+                        <ReCAPTCHA
+                            ref={captcha}
+                            sitekey="6LdS7eYrAAAAAJpMS-V4PIciaJvjv5XWuIaxE9vX"
+                            // size="invisible"
+                            onChange={hanleReCaptcha}
+                        // className={asesor ? "" : "hidden"}
+                        />
+                    </div>
 
 
                 </div>

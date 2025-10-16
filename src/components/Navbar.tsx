@@ -163,17 +163,20 @@ export default function Navbar() {
           </Transition.Child>
         </Dialog>
       </Transition>
+
       <div className="absolute 
-      top-[1450%] 3xl:top-[2100%]
-      left-[92%]  3xl:left-[94%]">
+      top-[1350%] 3xl:top-[2000%]
+      left-[93%]  3xl:left-[95%]">
         <a href="https://wa.me/5218114123816">
           <div className="w-10 h-10 lg:w-20 lg:h-20 rounded-full bg-green-500 text-white flex items-center justify-center mt-7 lg:mt-6 lg:translate-x-10">
             <FaWhatsapp className="w-10 h-10"></FaWhatsapp>
+          </div>
+        </a>
+        
       </div>
-      </a>
-    </div>
 
-    
+
+
     </header >
   );
 }

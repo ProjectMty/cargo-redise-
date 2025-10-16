@@ -1,8 +1,12 @@
 "use client";
 
 import { FaWhatsapp, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
+import ReCAPTCHA from "react-google-recaptcha"
+import {  useRef } from "react";
 
 export default function Footer(){
+    const captcha = useRef<ReCAPTCHA | null>(null);
+
     return(
          <section className="relative w-full bg-blue-950 py-20">
             <div className="flex justify-center items-center gap-10">
@@ -42,6 +46,13 @@ export default function Footer(){
             
             </div>
         <p className="flex items-center justify-center mt-10 text-white">Copyright © 2025. Cargo Monterrey.</p>
+         <ReCAPTCHA
+                                ref={captcha}
+                                sitekey="6LdS7eYrAAAAAJpMS-V4PIciaJvjv5XWuIaxE9vX"
+                                size="invisible"
+                                // onChange={hanleReCaptcha}
+                            // className={asesor ? "" : "hidden"}
+                            />
         </section>
     )
 }
