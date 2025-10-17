@@ -41,15 +41,16 @@ export default function CotizadorPdf({usuario}: CotizadorProps) {
         const data = await response.json();
            Swal.fire({
                         title: "Correo enviado",
+                        text: data.message,
                         icon: "success",
                         timer: 3000
                     });
-        // alert(data.message);
+
     };
 
     return (
         <div>
-            <div className="">
+            <div className="grid grid-cols-1 lg:grid-cols-4 items-center col-span-4">
                 <button
                     onClick={handleEnviarPDF}
                     className="button"

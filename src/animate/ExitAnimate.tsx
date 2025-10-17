@@ -1,6 +1,6 @@
 import { motion, useAnimation, useInView, Variants } from "framer-motion";
 import { useRef, useEffect } from "react";
-import { circOut, easeIn } from "framer-motion";
+import { circOut, easeIn, easeInOut } from "framer-motion";
 
 interface FadeOutProps{
   children?: React.ReactNode;
@@ -35,15 +35,14 @@ const FadeOut = ({ children, delay = 0}: FadeOutProps) => {
       x: -100,
       transition: {
         duration: 0.5,
-        ease: easeIn,
+        ease: easeInOut,
       },
     },
     exit: {
         opacity: 0,
         x: 100,
         transition:{
-            duration: 0.5,
-            ease: easeIn,
+            duration: 0.5
         },
     },
 

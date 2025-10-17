@@ -55,7 +55,7 @@ export default function Industrias() {
       <div className="relative max-w-6xl mx-auto px-4 md:px-6 mt-20 lg:-mt-20 z-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {industrias.map((item) => (
-            <UpAnimate key={1} move={-10}>
+            <UpAnimate key={item.id} move={-10}>
               <div
                 key={item.id}
                 className="bg-white rounded-[40px] shadow-[0_12px_20px_rgba(0,0,0,0.12)] overflow-hidden h-[350px] lg:h-[300px]"

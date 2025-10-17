@@ -453,7 +453,7 @@ export default function Calculadora() {
                 error: true,
                 message: "Debes ingresar todos los campos"
             })
-               Swal.fire({
+            Swal.fire({
                 title: "ERROR",
                 text: "Necesitas llenar todos los campos",
                 icon: "error"
@@ -635,6 +635,7 @@ export default function Calculadora() {
         }
     }
 
+
     const sendContact = async () => {
         // validar que no sea vacio
         if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "" || tipoSeleccionado === "") {
@@ -658,7 +659,7 @@ export default function Calculadora() {
         if (captchaValido) {
             console.log("usuario no robot")
         } else {
-           Swal.fire({
+            Swal.fire({
                 title: "ALERTA",
                 text: "🚨​ usuario ROBOT 🚨",
                 icon: "error"
@@ -666,6 +667,18 @@ export default function Calculadora() {
         }
 
         try {
+
+            const res = await fetch('/API/folio', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre }),
+            });
+            if (!res.ok) throw new Error('error al crear el folio');
+
+            const data = await res.json();
+            const folio = data?.id;
+            console.log('Folio creado', folio)
+
 
             const blob = await pdf(
                 <PDF
@@ -689,6 +702,7 @@ export default function Calculadora() {
                     precioPorExcesoPeso={precioPorExcesoPeso}
                     precioBase={precioBase}
                     precioCantidad={precioPorCantidad}
+                    folio={folio}
                 />
             ).toBlob();
 
@@ -701,7 +715,7 @@ export default function Calculadora() {
                 console.log("⭐​ PDF guardado en localStorage ⭐​");
             };
 
-             Swal.fire({
+            Swal.fire({
                 title: "Pdf generado",
                 icon: "success",
                 timer: 3000
@@ -938,12 +952,10 @@ export default function Calculadora() {
                     </form>
 
                     {/* boton cotizar y contactar asesor */}
-                    <div className="lg:contenedor-filas-2 lg:mx-10 items-center ">
-                        <div className="envio ">
+                    <div className="botones-formulario-cotizacion">
                             <input type="button" value="Cotizar" onClick={sendForms} className=" button" />
                             <input type="submit" value="Contactar asesor" className={asesor ? "button-disabled" : " button"} onClick={() => setAsesor(true)} />
-                        </div>
-
+                       
                     </div>
 
                     {/* precio calculado */}
@@ -991,8 +1003,6 @@ export default function Calculadora() {
                     ) : (
                         <div></div>
                     )}
-
-
 
                     {/* boton de enviar forms con datos de contacto */}
 

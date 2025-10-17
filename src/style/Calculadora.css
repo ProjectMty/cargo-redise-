@@ -33,12 +33,12 @@
     @apply grid grid-rows-2 gap-4 
 }
 
-.envio {
-  @apply grid grid-rows-3 gap-2 
-}
-
 .botones-formulario-contacto{
   @apply contenedor-4 md:mx-10 items-center col-span-4
+}
+
+.botones-formulario-cotizacion{
+  @apply grid grid-cols-1  md:ml-10  items-center col-span-4 lg:col-span-1 gap-5 xl:gap-0
 }
 
  /* #endregion */
@@ -135,11 +135,9 @@
 
 
 .button {
-   @apply rounded-xl px-5 xl:px-20 py-3 font-medium hover:bg-blue-600 hover:text-white
+   @apply rounded-xl px-5 md:px-1 xl:px-10 2xl:px-10 3xl:px-20 py-3 font-medium hover:bg-blue-600 hover:text-white
     bg-blue-400 text-white transition duration-300 text-center;
 }
-
-
 
 .input-asesor {
   @apply bg-white w-full h-7 rounded-md px-3 col-span-3

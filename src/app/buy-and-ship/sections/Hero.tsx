@@ -14,11 +14,8 @@ export default function BuyAndShipHero() {
   // Cambia valor al hacer scroll
   useEffect(() => {
     const handleScroll = () => {
-      
-     
-      setScrolled(window.scrollY <= 50);
-     
-      
+        setScrolled(window.scrollY > 300);
+   
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -30,7 +27,7 @@ export default function BuyAndShipHero() {
 
       {/* Fondo: imagen principal */}
       <div className="absolute inset-0">
-        
+
         <Image
           src="/img/buyandship/bg1.png"
           alt="Almacén"
@@ -56,9 +53,9 @@ export default function BuyAndShipHero() {
               <Image
                 src="/img/buyandship/LogoB&S.svg"
                 alt="logo"
-                  width={400}
-                  height={150}
-                className="max-w-sm opacity-[0.92] drop-shadow-[0_8px_26px_rgba(0,0,0,0.25)] z-0"
+                width={500}
+                height={150}
+                className="max-w-md opacity-[0.92] drop-shadow-[0_8px_26px_rgba(0,0,0,0.25)] z-0"
                 loading="eager"
               />
             </FadeOut>

@@ -6,8 +6,7 @@ import {
     Text,
     Page,
     View,
-    StyleSheet,
-    Image
+    StyleSheet
 } from '@react-pdf/renderer'
 
 interface PdfProps {
@@ -31,7 +30,7 @@ interface PdfProps {
     precioPorExcesoPeso: number | "";
     precioBase: number | "";
     precioCantidad: number | "";
-
+    folio: number | null;
 }
 
 const styles = StyleSheet.create({
@@ -88,10 +87,10 @@ const styles = StyleSheet.create({
         fontWeight: "normal",
     },
     image: {
-    width: 20,
-    height: 15,
-    marginBottom: 10,
-  },
+        width: 20,
+        height: 15,
+        marginBottom: 10,
+    },
 });
 
 export default function PDF({
@@ -115,7 +114,7 @@ export default function PDF({
     precioPorExcesoPeso,
     precioBase,
     precioCantidad,
-
+    folio
 }: PdfProps) {
 
 
@@ -124,7 +123,10 @@ export default function PDF({
         <Document>
             <Page style={styles.page}>
                 <Text style={styles.header}>Cotizador</Text>
-
+                <View style={styles.section}>
+                    <Text style={styles.label}>Folio: </Text>
+                    <Text style={styles.value}>{folio}</Text>
+                </View>
                 <Text style={styles.title}>Datos de contacto</Text>
 
                 <View style={styles.section}>

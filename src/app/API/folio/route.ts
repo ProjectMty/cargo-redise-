@@ -1,32 +1,44 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises"
+import Database from 'better-sqlite3';
 
-export async function GET() {
-    return new Response("retorna folio", { status: 400 });
+const db = new Database('database.db')
+
+const createTable = () => {
+    const sql = `
+        CREATE TABLE IF NOT EXISTS Cotizacion (
+            id         INTEGER PRIMARY KEY AUTOINCREMENT,
+            usuario    TEXT NOT NULL
+        )
+    `
+    db.prepare(sql).run()
 }
+createTable()
+
+// GET PARA OBTENER ULTIMO ID
+export async function GET() {
+    try {
+        const maxId = db.prepare('SELECT MAX(id) FROM Cotizacion')
+        return NextResponse.json(maxId)
+    } catch (error) {
+        console.error('Error en GET: ', error)
+        return NextResponse.json({ error: 'Error al obtener ultimo Id' }, { status: 500 })
+    }
+}
+
 
 export async function POST(req: Request) {
     try {
+        const { nombre } = await req.json()
+        if (!nombre) {
+            return NextResponse.json({ error: 'Usuario requerido' }, { status: 400 })
+        }
 
-        const { getPdfBase64 } = await req.json();
-        if (!getPdfBase64) throw new Error("No se recibió base64PDF");
-
-        const base64String = getPdfBase64.split(",")[1]; // tomar solo la parte Base64
-        const uint8 = Uint8Array.from(atob(base64String), c => c.charCodeAt(0));
-
-        return new Response(uint8, {
-            status: 200,
-            headers: {
-                "Content-Type": "application/pdf",
-                "Content-Disposition": "attachment; filename=cotizacion.pdf",
-            },
-        });
+        const result = db.prepare(`INSERT INTO Cotizacion (usuario) VALUES (?)`).run(nombre)
+        return NextResponse.json({ id: result.lastInsertRowid})
 
     } catch (error) {
-        console.error("Error en POST /api/descargar-pdf:", error);
-        return new Response("Error al generar PDF", { status: 500 });
+        console.error('Error en POST: ', error)
+        return NextResponse.json({error: 'Error al insertar el usuario'}, {status: 500})
     }
-
-    return new Response("suma folio", { status: 400 });
 
 }
