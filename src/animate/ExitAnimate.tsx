@@ -1,6 +1,6 @@
 import { motion, useAnimation, useInView, Variants } from "framer-motion";
 import { useRef, useEffect } from "react";
-import { circOut, easeIn, easeInOut } from "framer-motion";
+import { circOut, easeInOut } from "framer-motion";
 
 interface FadeOutProps{
   children?: React.ReactNode;
