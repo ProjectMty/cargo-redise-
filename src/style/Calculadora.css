@@ -6,7 +6,7 @@
 }
 
 .contenedor-calculadora {
-    @apply shadow-2xl rounded-3xl p-1
+    @apply shadow-2xl rounded-3xl p-5
 }
 
 .fondo-contenedor{
@@ -38,7 +38,7 @@
 }
 
 .botones-formulario-cotizacion{
-  @apply grid grid-cols-1  md:ml-10  items-center col-span-4 lg:col-span-1 gap-5 xl:gap-0
+  @apply grid grid-cols-1  md:ml-10 col-span-4 lg:col-span-1 gap-5 xl:gap-0 mt-5 xl:mt-0
 }
 
  /* #endregion */
@@ -118,13 +118,19 @@
 }
 
 .tarjeta-forms {
-  @apply grid grid-rows-2 gap-5 rounded-xl text-center text-white 
+  @apply grid grid-rows-2 gap-1 rounded-xl text-center text-white 
 }
 
 .tarjeta-asunto {
     @apply grid  lg:grid-cols-4 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
    text-white shadow-xl items-center lg:max-h-20 col-span-3 lg:h-20 mt-5;
 }
+.tarjeta-boton {
+    @apply  gap-10  text-center
+    items-center  mt-2;
+}
+
+
 
   /* #endregion */
 
@@ -135,7 +141,9 @@
 
 
 .button {
-   @apply rounded-xl px-5 md:px-1 xl:px-10 2xl:px-10 3xl:px-20 py-3 font-medium hover:bg-blue-600 hover:text-white
+   @apply rounded-xl 
+   px-5 md:px-1 xl:px-10 2xl:px-10 3xl:px-20 
+   py-3 font-medium hover:bg-blue-600 hover:text-white
     bg-blue-400 text-white transition duration-300 text-center;
 }
 
@@ -154,7 +162,7 @@
 }
 
 .button-repetitivo {
-  @apply px-4 py-2 rounded-lg font-semibold w-10 xl:w-20
+  @apply px-4 py-2 rounded-lg font-semibold w-10 xl:w-32
 }
 
 .button-disabled{

@@ -50,10 +50,10 @@ export default function CotizadorPdf({usuario}: CotizadorProps) {
 
     return (
         <div>
-            <div className="grid grid-cols-1 lg:grid-cols-4 items-center col-span-4">
+            <div className="grid grid-cols-1 lg:grid-cols-4 items-center ">
                 <button
                     onClick={handleEnviarPDF}
-                    className="button"
+                    className="button col-span-4"
                 >
                     Enviar correo
                 </button>

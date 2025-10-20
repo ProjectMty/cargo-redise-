@@ -31,6 +31,8 @@ interface PdfProps {
     precioBase: number | "";
     precioCantidad: number | "";
     folio: number | null;
+    direccionRecibida: unknown[] | null;
+    entrega: string;
 }
 
 const styles = StyleSheet.create({
@@ -114,7 +116,9 @@ export default function PDF({
     precioPorExcesoPeso,
     precioBase,
     precioCantidad,
-    folio
+    folio,
+    direccionRecibida,
+    entrega
 }: PdfProps) {
 
 
@@ -127,26 +131,79 @@ export default function PDF({
                     <Text style={styles.label}>Folio: </Text>
                     <Text style={styles.value}>{folio}</Text>
                 </View>
-                <Text style={styles.title}>Datos de contacto</Text>
+                <View style={styles.columns}>
+                    <View style={styles.first}>
 
-                <View style={styles.section}>
-                    <Text style={styles.label}>Nombre: </Text>
-                    <Text style={styles.value}>{nombre}</Text>
-                </View>
+                        <Text style={styles.title}>Datos de contacto</Text>
 
-                <View style={styles.section}>
-                    <Text style={styles.label}>Telefono: </Text>
-                    <Text style={styles.value}> +52 {telefono}</Text>
-                </View>
+                        <View style={styles.section}>
+                            <Text style={styles.label}>Nombre: </Text>
+                            <Text style={styles.value}>{nombre}</Text>
+                        </View>
 
-                <View style={styles.section}>
-                    <Text style={styles.label}>Correo: </Text>
-                    <Text style={styles.value}> {correo}</Text>
-                </View>
+                        <View style={styles.section}>
+                            <Text style={styles.label}>Telefono: </Text>
+                            <Text style={styles.value}> +52 {telefono}</Text>
+                        </View>
 
-                <View style={styles.section}>
-                    <Text style={styles.label}>Asunto: </Text>
-                    <Text style={styles.value}> {asunto}</Text>
+                        <View style={styles.section}>
+                            <Text style={styles.label}>Correo: </Text>
+                            <Text style={styles.value}> {correo}</Text>
+                        </View>
+
+                        <View style={styles.section}>
+                            <Text style={styles.label}>Asunto: </Text>
+                            <Text style={styles.value}> {asunto}</Text>
+                        </View>
+
+                    </View>
+
+                    <View style={styles.second}>
+                        <Text style={styles.title}>Envio</Text>
+
+                        {entrega === "Recoge" ? (
+
+                            <View style={styles.section}>
+                                <Text style={styles.label}>Envio: </Text>
+                                <Text style={styles.value}>{entrega}</Text>
+                            </View>
+
+
+                        ) : (
+
+                            <View style={styles.section}>
+                                <View style={styles.section}>
+                                    <Text style={styles.label}>Envio: </Text>
+                                    <Text style={styles.value}>{entrega}</Text>
+                                </View>
+                                <Text style={styles.label}>Direccion: </Text>
+                                <Text style={styles.value}>
+                                    {direccionRecibida && direccionRecibida.length > 0
+                                        ? direccionRecibida[0].country?.name ?? "No disponible"
+                                        : "No disponible"}
+                                </Text>
+                                <Text style={styles.value}>
+                                    {direccionRecibida && direccionRecibida.length > 0
+                                        ? direccionRecibida[0].zip_code ?? "No disponible"
+                                        : "No disponible"}
+                                </Text>
+                                <Text style={styles.value}>
+                                    {direccionRecibida && direccionRecibida.length > 0
+                                        ? direccionRecibida[0].locality ?? "No disponible"
+                                        : "No disponible"}
+                                </Text>
+                                <Text style={styles.value}>
+                                    {direccionRecibida && direccionRecibida.length > 0
+                                        ? direccionRecibida[0].state?.name ?? "No disponible"
+                                        : "No disponible"}
+                                </Text>
+                              
+                            </View>
+                        )}
+
+
+
+                    </View>
                 </View>
 
 
@@ -233,7 +290,6 @@ export default function PDF({
 
                     </View>
                 </View>
-
 
 
 

@@ -34,7 +34,8 @@ export default function Calculadora() {
     const [telefono, SetTelefono] = useState("");
     const [correo, SetCorreo] = useState("");
     const [asunto, SetAsunto] = useState("");
-
+    const [cantidadSeleccion, setCantidadSeleccion] = useState<number | "">("");
+    const [cpDestino, setCpDestino] = useState<number | "">("");
     // PDF
     const [precioSinIVA, setPrecioSinIVA] = useState<number>(0);
     const [precioConIVA, setPrecioConIVA] = useState<number>(0);
@@ -48,7 +49,8 @@ export default function Calculadora() {
     const [volumen, setVolumen] = useState<number>(0);
     const [volumenLb, setVoluenLb] = useState<number>(0);
     const [opcion, setOpcion] = useState("MXS"); // valor inicial
-
+    const [entrega, setEntrega] = useState("Recoge"); // valor inicial
+    const [direccionRecibida, setDireccionRecibida] = useState<unknown[] | null>(null);
     //errores 
     const [errorValor, setErrorValor] = useState<{ error: boolean, message: string | null }>({ error: false, message: "Se utilizan valores en USD" });
     const [errorPeso, setErrorPeso] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Se cobra una comision en caso de sobrepasar el peso maximo permitido" });
@@ -59,6 +61,7 @@ export default function Calculadora() {
     const [errorCosto, setErrorCosto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Costo aproximado" });
     const [errorTelefono, setErrorTelefono] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Telefono con formato internacional" });
     const [errorCorreo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Correo valido" });
+    const [errorDestinatario, setErrorDestinatario] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Ingresa tu codigo postal de destino" });
 
     //booleanos
     const [pallets, setPallets] = useState(false);
@@ -445,9 +448,37 @@ export default function Calculadora() {
 
     // #region Cotizacion
     // manejo de errores al enviar formulario
+    const validarCP = async () => {
+        try {
+            const url = `https://geocodes.envia.com/zipcode/MX/${encodeURIComponent(cpDestino)}`;
+
+            const response = await fetch(url, {
+                method: "GET",
+
+            });
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+            const data = await response.json();
+            setDireccionRecibida(data);
+            console.log(data)
+
+            if (Array.isArray(data) && data.length > 0) {
+                setErrorDestinatario({ error: false, message: "9 USD dentro del area metropolitana" });
+            } else {
+                setErrorDestinatario({ error: true, message: "ingrese codigo postal valido" });
+            }
+
+
+        } catch (error) {
+            console.error("Error validando el cp:", error);
+            setErrorDestinatario({ error: true, message: "Ingrese un codigo postal valido" });
+        }
+    };
+
     const sendForms = () => {
         // validar que no sea vacio
-        if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "" || tipoSeleccionado === "") {
+        if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "" || tipoSeleccionado === "" || cantidadSeleccion === "") {
             //alerta de campos vacios 
             setErrorCosto({
                 error: true,
@@ -460,6 +491,19 @@ export default function Calculadora() {
             });
             return;
         }
+        if (entrega === "Enviar") {
+
+            if (!direccionRecibida || direccionRecibida.length === 0) {
+
+                Swal.fire({
+                    title: "ERROR",
+                    text: "Necesitas llenar direccion de envio",
+                    icon: "error"
+                });
+                return;
+            }
+
+        }
 
         // variables
         let precioSinIva = 0;
@@ -471,9 +515,10 @@ export default function Calculadora() {
         let pesoLb = 0;
         let volumenCm = 0;
 
+
         // honrararios
         if (valor <= 119) {
-            precioSinIva = 17;
+            precioSinIva = (valor + 17);
         } else if (valor >= 120 && valor <= 475) {
             precioSinIva = (valor / (1 - 0.14));
         } else if (valor >= 476 && valor < 3000) {
@@ -508,13 +553,13 @@ export default function Calculadora() {
                 }
 
                 if (pesoLb <= 500) {
-                    precioPeso = 375 + (cantidad * 10);
+                    precioPeso = 375 + (cantidadSeleccion * 10);
                     setErrorCosto({
                         error: false,
                         message: "El peso ingresado entra en el rango"
                     })
                 } else if (pesoLb > 500) {
-                    precioPeso = 515 + (cantidad * 10);
+                    precioPeso = 515 + (cantidadSeleccion * 10);
                     setErrorCosto({
                         error: false,
                         message: "El peso ingresado excede el peso maximo. Se cobrara costo de sobrepeso"
@@ -524,7 +569,7 @@ export default function Calculadora() {
                 setPrecioPorPeso(precioPeso);
                 setPrecioPorExcesoPeso(0);
                 setPrecioBase(0);
-                setPrecioPorCantidad(0);
+                setPrecioPorCantidad(cantidadSeleccion * 10);
                 break;
 
             case "Sobres":
@@ -532,14 +577,14 @@ export default function Calculadora() {
                 if (opcion === "USA") {
                     volumenCm = convertirInToCm()
                     calcularPrecio = ((volumenCm) / 6000) * 3
-                    precioBase = calcularPrecio + (cantidad * 3)
+                    precioBase = calcularPrecio + (cantidadSeleccion * 3)
                     pesoKg = Number(peso) * 0.45359237;
                 } else {
                     calcularPrecio = ((largo * ancho * alto) / 6000) * 3
-                    precioBase = calcularPrecio + (cantidad * 3)
+                    precioBase = calcularPrecio + (cantidadSeleccion * 3)
                     pesoKg = Number(peso);
                 }
-                setPrecioPorCantidad(cantidad * 3);
+                setPrecioPorCantidad(cantidadSeleccion * 3);
                 calcularPrecio = Math.round((calcularPrecio + Number.EPSILON) * 100) / 100;
                 setPrecioBase(calcularPrecio);
 
@@ -561,35 +606,41 @@ export default function Calculadora() {
                 if (opcion === "USA") {
                     volumenCm = convertirInToCm()
                     calcularPrecio = ((volumenCm) / 6000) * 3
-                    precioBase = calcularPrecio + (cantidad * 3)
+                    precioBase = calcularPrecio + (cantidadSeleccion * 3)
                     pesoKg = Number(peso) * 0.45359237;
                 } else {
                     calcularPrecio = ((largo * ancho * alto) / 6000) * 3
-                    precioBase = calcularPrecio + (cantidad * 3)
+                    precioBase = calcularPrecio + (cantidadSeleccion * 3)
                     pesoKg = Number(peso);
                 }
-
+                setPrecioPorCantidad(cantidadSeleccion * 3);
+                calcularPrecio = Math.round((calcularPrecio + Number.EPSILON) * 100) / 100;
                 setPrecioBase(calcularPrecio);
-                setPrecioPorCantidad(cantidad * 3);
+
                 if (pesoKg > volumen) {
-                    const PrecioExcesoKg = (pesoKg - volumen) * 2
+                    let PrecioExcesoKg = (pesoKg - volumen) * 2
                     precioBase = precioBase + PrecioExcesoKg;
+                    PrecioExcesoKg = Math.round((PrecioExcesoKg + Number.EPSILON) * 100) / 100;
                     setPrecioPorExcesoPeso(PrecioExcesoKg);
+                    setErrorCosto({
+                        error: false,
+                        message: "El peso ingresado excede el peso maximo. Se cobrara costo de sobrepeso"
+                    })
                 }
                 setPrecioPorPeso(0);
-
                 break;
-
 
             default:
 
                 break;
         }
 
-
-
         // asignar precio final
+
         precioBase = precioBase + precioConIva + precioPeso;
+        if (entrega === "Envio") {
+            precioBase = precioBase + 9;
+        }
         precioBase = Math.round((precioBase + Number.EPSILON) * 100) / 100;
         setCostoIVA(precioBase);
     }
@@ -638,7 +689,7 @@ export default function Calculadora() {
 
     const sendContact = async () => {
         // validar que no sea vacio
-        if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "" || tipoSeleccionado === "") {
+        if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "" || tipoSeleccionado === "" || cantidadSeleccion === "") {
 
             Swal.fire({
                 title: "Cotización",
@@ -703,6 +754,8 @@ export default function Calculadora() {
                     precioBase={precioBase}
                     precioCantidad={precioPorCantidad}
                     folio={folio}
+                    direccionRecibida={direccionRecibida}
+                    entrega={entrega}
                 />
             ).toBlob();
 
@@ -799,7 +852,7 @@ export default function Calculadora() {
                         <div className="contenedor-filas-2">
 
 
-                            {/* contenedor primera columna */}
+                            {/* contenedor primera fila */}
                             <div className="contenedor-4">
 
                                 {/* Ingreso de valor */}
@@ -837,9 +890,9 @@ export default function Calculadora() {
 
                                 {/* producto repetitivo */}
                                 <div className="tarjeta-notas">
-                                    <div className="tarjeta-salida">
+                                    <div className="tarjeta-forms">
                                         <label htmlFor="repetitivo" className="label">¿Tu producto es repetitivo? </label>
-                                        <div className="md:contenedor-filas-2">
+                                        <div className="tarjeta-boton ">
                                             <button type="button"
                                                 onClick={() => setRepetitivo(true)}
                                                 className={`button-repetitivo
@@ -879,7 +932,92 @@ export default function Calculadora() {
 
                             </div>
 
-                            {/* contenedor segunda columna */}
+                            {/* contenedor segunda fila */}
+                            <div className="contenedor-4">
+
+                                {/* Ingreso de valor */}
+                                <div className="tarjeta-notas">
+                                    <div className="tarjeta-salida">
+                                        <label htmlFor="valorProd" className="label">Cantidad de {tipoSeleccionado}: </label>
+                                        <input type="number" min="0" className="input" value={cantidadSeleccion} onChange={(e) =>
+                                            setCantidadSeleccion(e.target.value === "" ? "" : Number(e.target.value))}
+                                            placeholder="0 piezas"
+                                        />
+
+                                    </div>
+
+                                    <FadeInOutError
+                                        message={errorValor?.message ?? ""}
+                                        error={errorValor?.error}
+                                    />
+                                </div>
+
+                                {/* Ingreso de peso */}
+                                <div className="tarjeta-notas">
+                                    <div className="tarjeta-forms">
+                                        <label htmlFor="Peso" className="label">Destino </label>
+                                        <div className="md:contenedor-filas-2">
+                                            <button type="button"
+                                                onClick={() => setEntrega("Recoge")}
+                                                className={`button-repetitivo
+                                               ${entrega === "Recoge" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
+                                            >
+                                                Recoger
+                                            </button>
+
+                                            <button type="button"
+                                                onClick={() => setEntrega("Enviar")}
+                                                className={`button-repetitivo
+                                                ${entrega === "Enviar" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
+                                            >
+                                                Enviar
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                {entrega === "Recoge" ? (
+                                    <div className="tarjeta-notas col-span-2">
+
+                                        <label htmlFor="valorProd" className="label">No hay costo de envio </label>
+
+
+
+                                    </div>
+                                ) : (
+                                    <div className="tarjeta-notas col-span-2">
+                                        <div className="tarjeta-forms">
+                                            <label htmlFor="valorProd" className="label">Direccion de envio: </label>
+                                            <div className="tarjeta-salida">
+
+                                                <label htmlFor="valorProd" className="label">Codigo Postal: </label>
+                                                <input type="number" min="0" className="input" value={cpDestino}
+                                                    onChange={(e) =>
+                                                        setCpDestino(e.target.value === "" ? "" : Number(e.target.value))}
+                                                    placeholder="cp"
+                                                    onBlur={validarCP}
+                                                />
+
+
+                                            </div>
+                                        </div>
+
+                                        <FadeInOutError
+                                            message={errorDestinatario?.message ?? ""}
+                                            error={errorDestinatario?.error}
+                                        />
+                                    </div>
+                                )}
+
+
+
+
+
+                            </div>
+
+
+                            {/* contenedor tercera columna */}
                             <div className="contenedor-4">
 
                                 {/* largo */}
@@ -953,9 +1091,9 @@ export default function Calculadora() {
 
                     {/* boton cotizar y contactar asesor */}
                     <div className="botones-formulario-cotizacion">
-                            <input type="button" value="Cotizar" onClick={sendForms} className=" button" />
-                            <input type="submit" value="Contactar asesor" className={asesor ? "button-disabled" : " button"} onClick={() => setAsesor(true)} />
-                       
+                        <input type="button" value="Cotizar" onClick={sendForms} className=" button" />
+                        <input type="submit" value="Contactar asesor" className={asesor ? "button-disabled mt-2" : " button mt-2"} onClick={() => setAsesor(true)} />
+
                     </div>
 
                     {/* precio calculado */}
@@ -1015,7 +1153,7 @@ export default function Calculadora() {
                                     <input type="text" name="name" id="ContactName" className="input-asesor"
                                         value={nombre}
                                         placeholder="nombre"
-                                        onChange={(e) => SetNombre(e.target.value.trim())} />
+                                        onChange={(e) => SetNombre(e.target.value)} />
 
                                 </div>
 
@@ -1037,7 +1175,7 @@ export default function Calculadora() {
                                     <input type="text" name="email" id="ContactEmail" className="input-asesor"
                                         value={correo}
                                         placeholder="ejemplo@correo.com"
-                                        onChange={(e) => SetCorreo(e.target.value.trim())} />
+                                        onChange={(e) => SetCorreo(e.target.value)} />
                                     <FadeInOutError
                                         message={errorCorreo?.message ?? ""}
                                         error={errorCorreo?.error}
