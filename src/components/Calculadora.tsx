@@ -17,6 +17,47 @@ import PDF from "././Cotizador/estiloPdf";
 export default function Calculadora() {
 
     // #region Declaraciones
+
+        // Estructruas de datos
+    const tiposCajas = [
+        { name: "Pallets" },
+        { name: "Sobres" },
+        { name: "Cajas" }
+    ];
+
+    interface Direccion {
+        additional_info?: {
+            street?: string | null;
+        };
+        coordinates?: {
+            latitude?: string;
+            longitude?: string;
+        };
+        country?: {
+            name?: string;
+            code?: string;
+        };
+        info?: {
+            stat?: string;
+            stat_8digit?: string;
+            time_zone?: string;
+            utc?: string;
+        };
+        locality?: string;
+        regions?: {
+            region_1?: string;
+            region_2?: string;
+            region_3?: string;
+            region_4?: string;
+        };
+        state?: {
+            name?: string;
+            iso_code?: string;
+        };
+        suburbs?: string[];
+        zip_code?: string;
+    }
+
     // context
     const { visible } = useCalculadoraVisible();
     const captcha = useRef<ReCAPTCHA | null>(null);
@@ -50,7 +91,7 @@ export default function Calculadora() {
     const [volumenLb, setVoluenLb] = useState<number>(0);
     const [opcion, setOpcion] = useState("MXS"); // valor inicial
     const [entrega, setEntrega] = useState("Recoge"); // valor inicial
-    const [direccionRecibida, setDireccionRecibida] = useState<unknown[] | null>(null);
+    const [direccionRecibida, setDireccionRecibida] = useState<Direccion[] | null>(null);
     //errores 
     const [errorValor, setErrorValor] = useState<{ error: boolean, message: string | null }>({ error: false, message: "Se utilizan valores en USD" });
     const [errorPeso, setErrorPeso] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Se cobra una comision en caso de sobrepasar el peso maximo permitido" });
@@ -67,14 +108,10 @@ export default function Calculadora() {
     const [pallets, setPallets] = useState(false);
     const [asesor, setAsesor] = useState(false);
     const [captchaValido, setCaptchaValido] = useState(false);
+    const [exceso, setExceso] = useState(false);
 
 
-    // Estructruas de datos
-    const tiposCajas = [
-        { name: "Pallets" },
-        { name: "Sobres" },
-        { name: "Cajas" }
-    ];
+
 
     // #endregion
 
@@ -138,6 +175,24 @@ export default function Calculadora() {
         setRepetitivo(false);
     };
 
+
+    const LimpiarCamposFormulario = useCallback(() => {
+        SetNombre("");
+        SetTelefono("");
+        SetCorreo("");
+        SetAsunto("");
+    }, []);
+    const LimpiarErrores = useCallback(() => {
+        setErrorValor({ error: false, message: "Se utilizan valores en USD" });
+        setErrorPeso({ error: false, message: "Se cobra una comision en caso de sobrepasar el peso maximo permitido" });
+        setErrorCantidad({ error: false, message: "Mas de 20 articulos se cobra 16% IVA" });
+
+        setErrorCosto({ error: false, message: "Costo aproximado" });
+        setErrorTelefono({ error: false, message: "Telefono con formato internacional" });
+        setErrorDestinatario({ error: false, message: "Ingresa tu codigo postal de destino" });
+
+    }, []);
+
     useEffect(() => {
         if (opcion === "USA") {
             setErrorLargo({
@@ -167,14 +222,7 @@ export default function Calculadora() {
             });
         }
 
-    }, [opcion]);
-
-    const LimpiarCamposFormulario = useCallback(() => {
-        SetNombre("");
-        SetTelefono("");
-        SetCorreo("");
-        SetAsunto("");
-    }, []);
+    }, [opcion, LimpiarErrores]);
 
     const LimpiarCampos = useCallback(() => {
         setPallets(false);
@@ -188,8 +236,14 @@ export default function Calculadora() {
         setCostoIVA(0)
         setCantidad("");
         setRepetitivo(false);
+        setDireccionRecibida(null);
+        setEntrega("Recoge");
+        setExceso(false);
+        setCantidadSeleccion("");
+        setCpDestino("");
         LimpiarCamposFormulario();
-    }, [LimpiarCamposFormulario]);
+        LimpiarErrores();
+    }, [LimpiarCamposFormulario, LimpiarErrores]);
 
 
 
@@ -561,9 +615,10 @@ export default function Calculadora() {
                 } else if (pesoLb > 500) {
                     precioPeso = 515 + (cantidadSeleccion * 10);
                     setErrorCosto({
-                        error: false,
+                        error: true,
                         message: "El peso ingresado excede el peso maximo. Se cobrara costo de sobrepeso"
                     })
+                    setExceso(true);
                 }
 
                 setPrecioPorPeso(precioPeso);
@@ -594,9 +649,10 @@ export default function Calculadora() {
                     PrecioExcesoKg = Math.round((PrecioExcesoKg + Number.EPSILON) * 100) / 100;
                     setPrecioPorExcesoPeso(PrecioExcesoKg);
                     setErrorCosto({
-                        error: false,
-                        message: "El peso ingresado excede el peso maximo. Se cobrara costo de sobrepeso"
+                        error: true,
+                        message: `El peso ingresado excede el peso maximo. Se cobrara ${PrecioExcesoKg} USD por sobrepeso`
                     })
+                    setExceso(true);
                 }
                 setPrecioPorPeso(0);
                 break;
@@ -619,13 +675,15 @@ export default function Calculadora() {
 
                 if (pesoKg > volumen) {
                     let PrecioExcesoKg = (pesoKg - volumen) * 2
+                    setErrorCosto({
+                        error: true,
+                        message: `El peso ingresado excede el peso maximo. Se cobrara ${PrecioExcesoKg} USD por sobrepeso`
+                    })
                     precioBase = precioBase + PrecioExcesoKg;
                     PrecioExcesoKg = Math.round((PrecioExcesoKg + Number.EPSILON) * 100) / 100;
                     setPrecioPorExcesoPeso(PrecioExcesoKg);
-                    setErrorCosto({
-                        error: false,
-                        message: "El peso ingresado excede el peso maximo. Se cobrara costo de sobrepeso"
-                    })
+
+                    setExceso(true);
                 }
                 setPrecioPorPeso(0);
                 break;
@@ -935,7 +993,7 @@ export default function Calculadora() {
                             {/* contenedor segunda fila */}
                             <div className="contenedor-4">
 
-                                {/* Ingreso de valor */}
+                                {/* Ingreso de cantidad */}
                                 <div className="tarjeta-notas">
                                     <div className="tarjeta-salida">
                                         <label htmlFor="valorProd" className="label">Cantidad de {tipoSeleccionado}: </label>
@@ -1113,7 +1171,8 @@ export default function Calculadora() {
                                 </p>
 
                             </div>
-                            <div className="bg-red-700/60 h-7 w-1/2 mt-3 translate-x-1/2 rounded-xl">
+                            <div className={` mt-2 rounded-lg
+                            ${exceso ? " bg-white text-xl" : "bg-blue-400 text-white"}`}>
                                 <FadeInOutError
                                     message={errorCosto?.message ?? ""}
                                     error={errorCosto?.error}
@@ -1188,7 +1247,7 @@ export default function Calculadora() {
                                     <textarea name="email" id="ContactAsunto" rows={4} cols={50} className="input-asunto"
                                         placeholder="Datos adicionales"
                                         value={asunto}
-                                        onChange={(e) => SetAsunto(e.target.value.trim())} >
+                                        onChange={(e) => SetAsunto(e.target.value)} >
 
                                     </textarea>
                                 </div>
