@@ -98,7 +98,6 @@ export default function Ubicaciones() {
                             modules={[Autoplay,Pagination]}
                             spaceBetween={10}
                             slidesPerView={1}
-                            pagination={{ clickable: true }}
                             autoplay={{ delay: 3000}}
                             loop={true}
                             className=" w-[70%] h-[70%] top-9"
@@ -147,8 +146,8 @@ export default function Ubicaciones() {
                             modules={[Autoplay, Pagination]}
                             spaceBetween={20}
                             slidesPerView={1}
-                            autoplay={{ delay: 30000 }}
-                            pagination={{ clickable: true }}
+                            autoplay={{ delay: 300000 }}
+                           
                             loop={true}
                             onSlideChange={(swiper) => {
                                 setCurrentMap(navigation[swiper.realIndex]);
@@ -163,7 +162,8 @@ export default function Ubicaciones() {
                                         alt={img.name}
                                         width={300}
                                         height={300}
-                                        className={fade ? "opacity-30 transition-opacity duration-500 w-full h-[400px]" : "opacity-100 w-full h-[400px]"}
+                                        className={fade ? "opacity-30 duration-300 w-full h-[400px]" : 
+                                            "opacity-100 transition-opacity ease-in-out will-change-transform duration-500 w-full h-[400px]"}
                                     />
                                 </SwiperSlide>
 

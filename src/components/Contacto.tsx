@@ -1,103 +1,137 @@
 "use client";
-import { FaWhatsapp, FaAt , FaPhone, FaLocationArrow} from "react-icons/fa";
-
+import { FaWhatsapp , FaPhoneAlt, FaMapMarked} from "react-icons/fa";
+import { GoMail } from "react-icons/go";
+import "@/style/contacto.css";
 import AnimatedText from "@/animate/TextAnimate";
+import EnvioDatos from "./Cotizador/EnvioEmailContacto";
+import { useState } from "react";
+
 export default function Contacto() {
+    const [nombre, SetNombre] = useState("");
+        const [telefono, SetTelefono] = useState("");
+        const [correo, SetCorreo] = useState("");
+        const [asunto, SetAsunto] = useState("");
 
+    const handleChangeTelefono = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // eliminar todo lo que no sea número
+        let numeros = e.target.value.replace(/\D/g, "").slice(0, 10);
+
+
+        if (numeros.length > 6) {
+            numeros = `(${numeros.slice(0, 3)}) ${numeros.slice(3, 6)}-${numeros.slice(6)}`;
+        } else if (numeros.length > 3) {
+            numeros = `(${numeros.slice(0, 3)}) ${numeros.slice(3)}`;
+        } else if (numeros.length > 0) {
+            numeros = `(${numeros}`;
+        }
+
+        SetTelefono(numeros);
+
+    };
     return (
-        <section id="contacto" className=" z-0 relative w-full flex scroll-mt-20 font-[Montserrat]
-        justify-center items-center py-5 bg-gradient-to-r from-blue-400 to to-blue-900 scroll-smooth text-white">
-
-            <div className="relative w-full z-10">
+        <section id="contacto" className="">
+<div className="section-contactanos">
+            <div className="relative w-full z-10 ">
                 <AnimatedText delay={0.2} lines={[
-                 <h1 key={1} className="font-extrabold text-[40px] lg:text-[55px] text-white text-center relative  mt-5">
+                 <h1 key={1} className="titulo-contatanos">
                     Contáctanos
                 </h1>
                 ]}></AnimatedText>
                
                 {/* inicio de formulario */}
-                <div className="bg-blue-800 z-20 mx-3 mt-10 mb-40 translate-x-1/6 lg:translate-x-1/4 lg:w-2/3 h-1/2 grid lg:grid-cols-2 gap-7 rounded-3xl">
+                <div className="contenedor-formulario">
                     {/* contenedor izquierdo */}
-                    <div className=" mb-10">
-                        <h2 className="mt-6 text-center font-bold text-lg lg:text-2xl ">¡Empieza a importar ya!</h2>
+                    <div className="contenedor-izq">
+                        <h2 className="titulo-izq">¡Empieza a importar ya!</h2>
 
                         {/* inicio de lista  */}
                         {/* Ubicacion  */}
-                        <div className=" px-5  grid grid-cols-4 mt-6 lg:left-20 gap-16">
-                            <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-sky-400 text-white flex items-center justify-center font-bold mt-7 lg:mt-6 text-xl  lg:translate-x-10">
-                               <FaLocationArrow className="w-5 h-5"></FaLocationArrow>
+                        <div className="conteneodr-inf">
+                            <div className="contenedor-icon">
+                               <FaMapMarked className="icon"></FaMapMarked>
                             </div>
-                            <h2 className=" text-md lg:text-sm mt-9 -ml-2.5 col-span-3">Lazaro Cardenas 999 Local 2, Col las Brisas, 74190, Monterrey, Nuevo León</h2>
+                            <a href="https://goo.gl/maps/efSbnm7sufjc6sjG9" className="informacion">
+                              Av Lázaro Cárdenas 999 Local 2, Col. Las Brisas, 64780 Monterrey, Nuevo León
+                                </a>
                         </div>
                         {/* telefono  */}
-                        <div className="px-5 grid grid-cols-4 mt-4 lg:left-20 gap-16">
-                            <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-sky-400 text-white flex items-center justify-center font-bold mt-3 text-xl  lg:translate-x-10">
-                                <FaWhatsapp className="w-5 h-5"></FaWhatsapp>
+                        <div className="conteneodr-inf">
+                            <div className="contenedor-icon">
+                                <FaPhoneAlt className="icon"></FaPhoneAlt>
+                               
                             </div>
-                            <h2 className="text-md lg:text-sm mt-6 -ml-2.5 col-span-3">+52 81 2030 3977</h2>
+                            <a href="https://cargomty.com/tel:+528120903977" className="informacion">+52 81 2090 3977</a>
                         </div>
 
                         {/* Whatsapp  */}
-                        <div className="px-5 grid grid-cols-4 mt-4 lg:left-20 gap-16">
-                            <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-sky-400 text-white flex items-center justify-center font-bold mt-4 lg:mt-4 text-xl lg:translate-x-10">
-                                <FaPhone className="w-5 h-5"></FaPhone>
+                        <div className="conteneodr-inf">
+                            <div className="contenedor-icon">
+                                 <FaWhatsapp className="icon"></FaWhatsapp>
                             </div>
                             <div className="col-span-3">
-                                <div className="grid text-md mt-2 -ml-2.5 ">
-                                    <h2 className="">+52 81 0000 0000</h2>
-                                    <h2 className="">+52 81 1111 1111</h2>
-                                    <h2 className="">+52 81 2222 2222</h2>
+                                <div className="contenedor-numeros">
+                                    <a href="https://wa.me/528116691037" className="hover:underline">+52 81 1669 1037</a>
+                                    <a href="https://wa.me/528181766691" className="hover:underline">+52 81 8176 6691</a>
+                                    <a href="https://wa.me/528114123816" className="hover:underline">+52 81 1412 3816</a>
                                 </div>
                             </div>
 
                         </div>
 
                         {/* gmail  */}
-                        <div className="px-5 grid grid-cols-4 mt-4 lg:left-20 gap-16">
-                            <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-sky-400 text-white flex items-center justify-center font-bold mt-3 lg:mt-4 text-xl  lg:translate-x-10">
-                                <FaAt className="w-5 h-5"></FaAt>
+                        <div className="conteneodr-inf">
+                            <div className="contenedor-icon">
+                                <GoMail className="icon"></GoMail>
                             </div>
-                            <h2 className="text-md mt-6 -ml-2.5 col-span-3">correo@gmail.com</h2>
+                            <a href="mailto:info@cargomty.com" className="informacion">info@cargomty.com</a>
                         </div>
 
 
                     </div>
 
                     {/* contenedor derecho */}
-                    <div className="bg-blue-700 relative items-center w-full h-full text-sm rounded-3xl">
-                        <form action="/action.php" className="w-full mt-3 px-6 ">
+                    <div className="contenedor-der">
+                        <div  className="contenedor-forms">
 
 
                             <label htmlFor="ContactName">Nombre: </label>
-                            <input type="text" name="name" id="ContactName" className="bg-white w-full mt-2 mb-3 h-7 rounded-md
-                            outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black" />
+                            <input type="text" name="name" id="ContactName" className="contenedor-input" 
+                            value={nombre}
+                            placeholder="nombre"
+                            onChange={(e) => SetNombre(e.target.value)}/>
 
                             <label htmlFor="ContactPhone">Teléfono: </label>
-                            <input type="text" name="phone" id="ContactPhone" className="bg-white w-full mt-2 mb-3 h-7 rounded-md
-                            outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black" />
+                            <input type="text" name="phone" id="ContactPhone" className="contenedor-input"
+                            value={telefono}
+                            placeholder="(123) 456-7890"
+                            onChange={handleChangeTelefono} />
 
                             <label htmlFor="ContactEmail">Correo: </label>
-                            <input type="text" name="email" id="ContactEmail" className="bg-white w-full mt-2 mb-3 h-7 rounded-md
-                            outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black" />
+                            <input type="text" name="email" id="ContactEmail" className="contenedor-input"
+                            value={correo}
+                            placeholder="ejemplo@correo.com"
+                            onChange={(e) => SetCorreo(e.target.value)} />
 
                             <label htmlFor="ContactAsunto">Asunto: </label>
 
-                            <textarea name="email" id="ContactAsunto" rows={4} cols={50} className="bg-white w-full mt-2 mb-3 rounded-md
-                            outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black" >
+                            <textarea name="asunto" id="ContactAsunto" rows={4} cols={50} className="contenedor-input-asunto"
+                            value={asunto}
+                            placeholder="datos adicionales"
+                            onChange={(e) => SetAsunto(e.target.value)} >
 
                             </textarea>
-                            <div className="bg-blue-400 rounded-xl text-center w-1/2 h-10 font-bold translate-x-1/2 mb-5 hover:bg-blue-800 transition duration-300">
-                                <input type="submit" value={"Enviar"} className="mt-3 " />
-                            </div>
+                       
+                            <EnvioDatos nombre={nombre} telefono={telefono} correo={correo} asunto={asunto} />
+                            
 
-                        </form>
+                        </div>
 
                     </div>
 
                 </div>
 
             </div>
-
+</div>
         </section>
     )
 }

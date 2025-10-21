@@ -22,7 +22,7 @@ export default function Partnership() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 <AnimatedText delay={0.2}
 lines={[
- <h2 key={1} className="text-center text-3xl md:text-5xl font-bold text-color text-blue-800 mb-12">
+ <h2 key={1} className="text-center text-[36px] md:text-[42px] font-bold text-color text-[#0b4ba2] mb-12">
           Partnerships
         </h2>
 ]}>

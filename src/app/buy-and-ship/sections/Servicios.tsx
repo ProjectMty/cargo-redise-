@@ -32,7 +32,7 @@ export default function ServiciosBuyAndShip() {
       <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
         {/* Título */}
         <AnimatedText delay={0.2} lines={[
-          <h2 key={1} className="text-center font-[Montserrat] font-extrabold text-[40px] md:text-[50px] text-white mb-8">
+          <h2 key={1} className="text-center font-[Montserrat] font-bold text-[36px] md:text-[42px] text-white mb-8">
             Nuestros servicios
           </h2>
         ]}></AnimatedText>
@@ -42,7 +42,7 @@ export default function ServiciosBuyAndShip() {
         <div
           className="
             rounded-[22px] md:rounded-[28px]
-            bg-[linear-gradient(90deg,_#1E51D2_0%,_#2CD0F6_100%)]
+            bg-[linear-gradient(90deg,_#0b4ba2_0%,_#2CD0F6_100%)]
             p-3 md:p-4
             shadow-[0_30px_50px_rgba(0,0,0,0.18)]
           "
@@ -86,7 +86,7 @@ export default function ServiciosBuyAndShip() {
 
                   {/* Texto */}
                   <div className="leading-snug">
-                    <h3 className="font-[Montserrat] font-extrabold text-sky-600 text-[18px] md:text-[20px]">
+                    <h3 className="font-[Montserrat] font-extrabold text-[#0b4ba2] text-[18px] md:text-[20px]">
                       {s.title}
                     </h3>
                     <p className="text-[#333] text-[14px] md:text-[15px] mt-1">

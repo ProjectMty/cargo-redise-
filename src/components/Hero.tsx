@@ -170,14 +170,14 @@ export default function Hero() {
       </SectionDefault>
 
       {/* ===== Sección inferior (después de la caja de servicios) ===== */}
-      <section className="relative bg-[oklch(42.4%_0.199_265.638)] text-white">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-16 md:py-20">
+      <section className="relative bg-[#0b4ba2] text-white">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-16">
 
           {/* Título principal */}
           <TextDownAnimate
             delay={1}
             lines={[
-              <h2 key={1} className="text-center font-extrabold leading-tight text-[26px] md:text-4xl">
+              <h2 key={1} className="text-center font-bold leading-tight text-[36px] md:text-[42px]">
                 ¡Somos la mejor solución <span className="font-bold">para</span>,
                 <br className="hidden md:block" />
                 envíos y fletes de <span className="text-white">USA a México!</span>

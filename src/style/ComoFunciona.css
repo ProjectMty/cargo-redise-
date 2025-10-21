@@ -149,8 +149,8 @@
 
 /* #region TEXTO */
 .title {
-    @apply text-center text-blue-800  font-semibold  mb-5 rounded-3xl py-1
-    text-4xl md:text-5xl
+    @apply text-center text-[#0b4ba2]  font-bold  mb-5 rounded-3xl py-1
+    text-[36px] md:text-[42px]
 }
 
 .subtitulo-texto{

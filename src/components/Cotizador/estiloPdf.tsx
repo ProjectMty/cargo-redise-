@@ -63,7 +63,7 @@ interface PdfProps {
     precioPorExcesoPeso: number | "";
     precioBase: number | "";
     precioCantidad: number | "";
-    folio: number | null;
+    
     direccionRecibida: Direccion[] | null;
     entrega: string;
 }
@@ -149,7 +149,7 @@ export default function PDF({
     precioPorExcesoPeso,
     precioBase,
     precioCantidad,
-    folio,
+  
     direccionRecibida,
     entrega
 }: PdfProps) {
@@ -160,10 +160,7 @@ export default function PDF({
         <Document>
             <Page style={styles.page}>
                 <Text style={styles.header}>Cotizador</Text>
-                <View style={styles.section}>
-                    <Text style={styles.label}>Folio: </Text>
-                    <Text style={styles.value}>{folio}</Text>
-                </View>
+              
                 <View style={styles.columns}>
                     <View style={styles.first}>
 

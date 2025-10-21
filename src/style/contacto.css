@@ -1,0 +1,64 @@
+.section-contactanos {
+    @apply z-0 relative w-full flex scroll-mt-20 font-[Montserrat]
+        justify-center items-center py-5 bg-gradient-to-r from-blue-400
+         to-blue-900 scroll-smooth text-white
+}
+
+.titulo-contatanos{
+    @apply font-bold text-[36px] md:text-[42px] text-center relative mt-5
+}
+
+.contenedor-formulario{
+    @apply bg-[#0b4ba2] z-20 mx-3 mt-10 mb-40 translate-x-1/3 
+    lg:translate-x-1/4 lg:w-2/3 h-1/2 grid lg:grid-cols-2 gap-7 rounded-3xl
+}
+
+.contenedor-izq{
+    @apply  mb-10
+}
+
+.titulo-izq{
+    @apply mt-6 text-center font-bold text-lg lg:text-[25px]
+}
+
+.conteneodr-inf{
+    @apply  px-5 grid grid-cols-4 mt-6 lg:left-20 gap-16 text-start items-center
+}
+
+.contenedor-icon{
+    @apply w-10 h-10 lg:w-16 lg:h-16 rounded-full bg-[#5b9ef2]
+     text-white flex items-center justify-center font-bold mt-7 
+     lg:mt-6 text-xl  lg:translate-x-10
+}
+.icon{
+    @apply w-10 h-10
+}
+
+.contenedor-numeros{
+    @apply grid text-[20px] lg:text-lg mt-2 -ml-2.5 
+}
+
+.informacion{
+    @apply text-[20px] lg:text-lg mt-6 -ml-2.5 col-span-3 hover:underline
+}
+
+.contenedor-der{
+    @apply bg-[#5b9ef2] justify-center items-center w-full h-full text-[20px] rounded-3xl
+}
+
+.contenedor-forms{
+    @apply w-full mt-3 px-6 
+}
+
+.contenedor-input{
+    @apply bg-white w-full mt-2 mb-3 h-7 rounded-md
+    outline-none focus:ring-2 focus:ring-blue-300 transition-all 
+    duration-300 text-black
+}
+
+.contenedor-input-asunto{
+    @apply bg-white w-full mt-2 mb-3 rounded-md
+    outline-none focus:ring-2 focus:ring-blue-300 transition-all 
+    duration-300 text-black resize-none
+}
+

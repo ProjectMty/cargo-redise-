@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import ShowUp from "@/animate/PASOS/ShowUp";
 import ShowRight from "@/animate/PASOS/ShowRight";
+import "./style/pasos.css"
 
 export default function Pasos() {
   const ContainerSteps = {
@@ -19,7 +20,7 @@ export default function Pasos() {
   return (
     <motion.section
       id="comofunciona"
-      className="relative bg-white py-16 px-4 md:px-8 font-[Montserrat]"
+      className="conetenedor-section"
       variants={ContainerSteps}
       initial="hidden"
       whileInView="show"
@@ -29,7 +30,7 @@ export default function Pasos() {
 
       <div className="max-w-6xl mx-auto">
         {/* Título */}
-        <h2 className="text-center text-blue-400  font-bold text-[32px] md:text-[40px] mb-12">
+        <h2 className="contenedor-titulo">
           ¡Sigue estos pasos para comprar hoy!
         </h2>
 
@@ -51,7 +52,7 @@ export default function Pasos() {
             <ShowUp delay={0} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
-                <div className="w-24 h-24 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
+                <div className="circulo-paso">
                   1
                 </div>
 
@@ -72,7 +73,7 @@ export default function Pasos() {
             <ShowUp delay={1} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
-                <div className="w-24 h-24 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
+                <div className="circulo-paso">
                   2
                 </div>
 
@@ -93,7 +94,7 @@ export default function Pasos() {
             <ShowUp delay={2} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
-                <div className="w-24 h-24 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
+                <div className="circulo-paso">
                   3
                 </div>
 
@@ -126,7 +127,7 @@ export default function Pasos() {
             <ShowUp delay={2.5} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
-                <div className="w-24 h-24 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
+                <div className="circulo-paso">
                   4
                 </div>
 
@@ -141,7 +142,7 @@ export default function Pasos() {
             <ShowUp delay={3.5} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
-                <div className="w-24 h-24 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
+                <div className="circulo-paso">
                   5
                 </div>
                 {/* Texto */}
@@ -156,7 +157,7 @@ export default function Pasos() {
             <ShowUp delay={4.5} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
-                <div className="w-24 h-24 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
+                <div className="circulo-paso">
                   6
                 </div>
 
@@ -188,7 +189,7 @@ export default function Pasos() {
             <ShowUp delay={5} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
-                <div className="w-24 h-24 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
+                <div className="circulo-paso">
                   7
                 </div>
 
@@ -205,7 +206,7 @@ export default function Pasos() {
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
 
                 {/* numero de paso */}
-                <div className="w-24 h-24 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
+                <div className="circulo-paso">
                   8
                 </div>
 
@@ -221,7 +222,7 @@ export default function Pasos() {
             <ShowUp delay={7} duration={0.8} >
               <div className="flex flex-col items-center text-center mt-10 -mx-2 ">
                 {/* numero de paso */}
-                <div className="w-24 h-24 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl">
+                <div className="circulo-paso">
                   9
                 </div>
 

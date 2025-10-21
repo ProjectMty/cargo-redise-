@@ -16,7 +16,7 @@
 /* #region TEXT */
 
 .texto-titulo{
-    @apply text-center font-bold text-blue-800 text-[36px] md:text-[42px] -mt-20;
+    @apply text-center font-bold text-[#0b4ba2] text-[36px] md:text-[42px] -mt-20;
 }
 
 .subtitulo-texto{

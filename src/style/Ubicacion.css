@@ -1,61 +1,105 @@
-
 .fondo-seccion {
-     @apply h-full w-full relative flex justify-center items-center  font-[Montserrat] scroll-smooth
+    @apply h-full w-full relative flex justify-center items-center font-[Montserrat] scroll-smooth
 }
 
 .titulo-texto {
-    @apply font-extrabold text-[40px] lg:text-[55px] text-blue-950 text-center absolute top-10 
+    @apply font-bold text-[36px] md:text-[42px] text-[#0b4ba2] text-center absolute top-10
 }
 
 .contenedor {
-    @apply w-full h-[600px] rounded-[28px] justify-center items-center mt-5 relative max-w-5xl flex 
+    @apply w-full h-[600px] rounded-[28px] justify-center items-center mt-5 relative max-w-5xl flex
 }
 
-.fondo-ubicacion{
+.fondo-ubicacion {
     @apply absolute top-0 left-0 object-cover z-0;
 }
 
 .contenedor-carrusel {
-    @apply relative flex flex-col justify-center w-full h-full
-    left-1/2  -translate-x-1/2 items-center z-50 mt-20;
+    @apply relative flex flex-col justify-center w-full h-full left-1/2 -translate-x-1/2 items-center z-50 mt-20;
 }
 
 .carrusel-desktop {
-    @apply relative w-full max-w-xl mx-auto p-10 hidden lg:block mb-10
+    @apply relative w-full max-w-[90%] mx-[10%] p-10 hidden lg:block mb-10
 }
 
 .carrusel-movil {
-    @apply relative max-h-[220px] w-full lg:hidden block overflow-hidden z-50 
+    @apply relative max-h-[600px] w-full lg:hidden block overflow-hidden z-50
 }
 
 .estado-resaltado {
-    @apply transition-transform duration-300 ease-in-out will-change-transform
-     hover:scale-125 origin-center opacity-0 hover:opacity-100;
+    @apply transition-opacity duration-300 ease-in-out will-change-transform scale-100 opacity-0;
+}
+
+.estado-resaltado:hover {
+    @apply scale-100 opacity-100 duration-100;
 }
 
 
 .img-nl {
-    @apply absolute top-[180px] left-[270px] xl:left-[340px] z-40 max-w-[130px] hidden lg:block; 
+    @apply absolute top-[150px] xl:left-[330px] z-40 max-w-[200px] hidden lg:block;
 }
 
 .img-laredo {
-    @apply absolute top-[175px] left-[300px] xl:left-[370px] z-40 max-w-[150px] hidden lg:block; 
+    @apply absolute top-[165px] xl:left-[370px] z-40 max-w-[180px] hidden lg:block;
 }
 
 .img-cdmx {
-    @apply absolute top-[300px] left-[230px] xl:left-[300px] z-40 max-w-[100px] hover:scale-x-150 hidden lg:block;
-    ; 
+    @apply absolute top-[300px] xl:left-[270px] z-40 max-w-[140px] scale-100 hidden lg:block;
+    ;
 }
 
 .img-texas {
-    @apply absolute top-[260px]  xl:left-[140px] z-40 max-w-[230px] hidden lg:block;
+    @apply absolute top-[270px] xl:left-[90px] z-40 max-w-[300px] hidden lg:block;
 }
 
 .img-ny {
-    @apply absolute top-[110px] xl:left-[450px] z-40 max-w-[150px] hidden lg:block;
+    @apply absolute top-[110px] xl:left-[490px] z-40 max-w-[180px] hidden lg:block;
 }
 
-.img-catharines{
-    @apply  absolute top-[290px] xl:left-[200px] z-40 max-w-[250px] hidden lg:block;
+.img-catharines {
+    @apply absolute top-[280px] xl:left-[180px] z-40 max-w-[290px] hidden lg:block;
 }
 
+@media (min-width: 900px) and (max-width: 1420px) {
+    .img-nl {
+        @apply left-[260px];
+    }
+
+    .img-laredo {
+        @apply top-[160px] left-[300px] max-w-[200px];
+    }
+
+    .img-cdmx {
+        @apply left-[200px];
+
+    }
+
+    .img-texas {
+        @apply top-[270px] left-[50px];
+    }
+
+    .img-ny {
+        @apply top-[110px] left-[390px];
+    }
+
+    .img-catharines {
+        @apply top-[280px] left-[120px];
+    }
+
+    .carrusel-desktop {
+        @apply max-w-[70%]
+    }
+
+    .contenedor-carrusel {
+        @apply mt-0;
+    }
+}
+
+@media (max-width: 900px){
+    .contenedor-carrusel{
+        @apply -translate-y-[30%]
+    }
+    .contenedor{
+        @apply  translate-y-[20%]
+    }
+}

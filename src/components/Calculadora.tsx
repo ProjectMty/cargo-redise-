@@ -777,17 +777,7 @@ export default function Calculadora() {
 
         try {
 
-            const res = await fetch('/API/folio', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nombre }),
-            });
-            if (!res.ok) throw new Error('error al crear el folio');
-
-            const data = await res.json();
-            const folio = data?.id;
-            console.log('Folio creado', folio)
-
+     
 
             const blob = await pdf(
                 <PDF
@@ -811,7 +801,7 @@ export default function Calculadora() {
                     precioPorExcesoPeso={precioPorExcesoPeso}
                     precioBase={precioBase}
                     precioCantidad={precioPorCantidad}
-                    folio={folio}
+                  
                     direccionRecibida={direccionRecibida}
                     entrega={entrega}
                 />

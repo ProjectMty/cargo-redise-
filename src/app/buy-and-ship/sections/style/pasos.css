@@ -1,0 +1,11 @@
+.contenedor-titulo{
+    @apply text-center text-[#0b4ba2]  font-bold text-[36px] md:text-[42px] mb-12 
+}
+
+.conetenedor-section{
+    @apply relative bg-white py-16 px-4 md:px-8 font-[Montserrat]
+}
+
+.circulo-paso{
+    @apply w-24 h-24 rounded-full bg-[#0b4ba2] text-white flex items-center justify-center font-bold -mt-5 mb-2 text-5xl
+}

@@ -4,7 +4,7 @@
 
 
 .contenedor-titulo {
-    @apply text-center text-blue-800 text-4xl md:text-5xl font-bold mb-6
+    @apply text-center text-[#0b4ba2] text-[36px] md:text-[42px] font-bold mb-6
 }
 
 
