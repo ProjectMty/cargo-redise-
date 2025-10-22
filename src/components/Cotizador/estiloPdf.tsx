@@ -63,7 +63,7 @@ interface PdfProps {
     precioPorExcesoPeso: number | "";
     precioBase: number | "";
     precioCantidad: number | "";
-    
+    cantidadSeleccion: number | "";
     direccionRecibida: Direccion[] | null;
     entrega: string;
 }
@@ -149,7 +149,7 @@ export default function PDF({
     precioPorExcesoPeso,
     precioBase,
     precioCantidad,
-  
+  cantidadSeleccion,
     direccionRecibida,
     entrega
 }: PdfProps) {
@@ -258,7 +258,7 @@ export default function PDF({
 
 
                         <View style={styles.section}>
-                            <Text style={styles.label}>Medidas (Lrago x Alto x Ancho): </Text>
+                            <Text style={styles.label}>Medidas (Largo x Alto x Ancho): </Text>
                             <Text style={styles.value}>
                                 {largo} x {alto} x {ancho} {unidades === "MXS" ? "cm" : "in"}
                             </Text>
@@ -270,8 +270,12 @@ export default function PDF({
 
                         </View>
                         <View style={styles.section}>
-                            <Text style={styles.label}>Cantidad: </Text>
-                            <Text style={styles.value}>{cantidad} {tipoSeleccionado} </Text>
+                            <Text style={styles.label}>Cantidad de articulos: </Text>
+                            <Text style={styles.value}>{cantidad} piezas </Text>
+                        </View>
+                             <View style={styles.section}>
+                            <Text style={styles.label}>Cantidad de {tipoSeleccionado}: </Text>
+                            <Text style={styles.value}>{cantidadSeleccion} {tipoSeleccionado} </Text>
                         </View>
 
                     </View>

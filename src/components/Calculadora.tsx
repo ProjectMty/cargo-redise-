@@ -10,7 +10,7 @@ import FadeInOutError from "@/animate/FadeInOut";
 import ReCAPTCHA from "react-google-recaptcha"
 
 // cotizacion pdf
-import CotizadorPdf from "./Cotizador/cotizadorPdf";
+
 import { pdf } from "@react-pdf/renderer";
 import PDF from "././Cotizador/estiloPdf";
 
@@ -18,7 +18,7 @@ export default function Calculadora() {
 
     // #region Declaraciones
 
-        // Estructruas de datos
+    // Estructruas de datos
     const tiposCajas = [
         { name: "Pallets" },
         { name: "Sobres" },
@@ -518,7 +518,7 @@ export default function Calculadora() {
             console.log(data)
 
             if (Array.isArray(data) && data.length > 0) {
-                setErrorDestinatario({ error: false, message: "9 USD dentro del area metropolitana" });
+                setErrorDestinatario({ error: false, message: "9.50 USD dentro del area metropolitana" });
             } else {
                 setErrorDestinatario({ error: true, message: "ingrese codigo postal valido" });
             }
@@ -653,7 +653,14 @@ export default function Calculadora() {
                         message: `El peso ingresado excede el peso maximo. Se cobrara ${PrecioExcesoKg} USD por sobrepeso`
                     })
                     setExceso(true);
+                } else {
+                    setErrorCosto({
+                        error: false,
+                        message: "Costo de cotizacion aproximado"
+                    })
+                    setExceso(false);
                 }
+
                 setPrecioPorPeso(0);
                 break;
 
@@ -675,16 +682,20 @@ export default function Calculadora() {
 
                 if (pesoKg > volumen) {
                     let PrecioExcesoKg = (pesoKg - volumen) * 2
+                    precioBase = precioBase + PrecioExcesoKg;
+                    PrecioExcesoKg = Math.round((PrecioExcesoKg + Number.EPSILON) * 100) / 100;
+                    setPrecioPorExcesoPeso(PrecioExcesoKg);
                     setErrorCosto({
                         error: true,
                         message: `El peso ingresado excede el peso maximo. Se cobrara ${PrecioExcesoKg} USD por sobrepeso`
                     })
-                    precioBase = precioBase + PrecioExcesoKg;
-                    PrecioExcesoKg = Math.round((PrecioExcesoKg + Number.EPSILON) * 100) / 100;
-                    setPrecioPorExcesoPeso(PrecioExcesoKg);
-
                     setExceso(true);
                 }
+                setErrorCosto({
+                    error: false,
+                    message: "Costo de cotizacion aproximado"
+                })
+                setExceso(false);
                 setPrecioPorPeso(0);
                 break;
 
@@ -697,7 +708,7 @@ export default function Calculadora() {
 
         precioBase = precioBase + precioConIva + precioPeso;
         if (entrega === "Envio") {
-            precioBase = precioBase + 9;
+            precioBase = precioBase + 9.5;
         }
         precioBase = Math.round((precioBase + Number.EPSILON) * 100) / 100;
         setCostoIVA(precioBase);
@@ -744,6 +755,44 @@ export default function Calculadora() {
         }
     }
 
+    const handleEnviarPDF = async () => {
+
+
+        let pdfBase64 = localStorage.getItem("pdfBase64");
+
+        if (!pdfBase64) {
+            Swal.fire({
+                title: "ERROR",
+                text: "no hay pdf disponible",
+                icon: "error"
+            });
+            return;
+        }
+        pdfBase64 = pdfBase64.includes(",") ? pdfBase64.split(",")[1] : pdfBase64;
+
+        const body = {
+            nombre: nombre,
+            compañia: "CargoMty",
+            pdfBase64: pdfBase64
+        };
+        // Enviar al backend
+        const response = await fetch("/API/enviarEmail", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        });
+
+        const data = await response.json();
+        Swal.fire({
+            title: "Correo enviado",
+            text: data.message,
+            icon: "success",
+            timer: 3000
+        });
+
+    };
 
     const sendContact = async () => {
         // validar que no sea vacio
@@ -768,16 +817,17 @@ export default function Calculadora() {
         if (captchaValido) {
             console.log("usuario no robot")
         } else {
-            Swal.fire({
-                title: "ALERTA",
-                text: "🚨​ usuario ROBOT 🚨",
-                icon: "error"
-            });
+            // Swal.fire({
+            //     title: "ALERTA",
+            //     text: "🚨​ usuario ROBOT 🚨",
+            //     icon: "error"
+            // });
+            console.log("🚨​ usuario ROBOT 🚨")
         }
 
         try {
 
-     
+
 
             const blob = await pdf(
                 <PDF
@@ -801,7 +851,7 @@ export default function Calculadora() {
                     precioPorExcesoPeso={precioPorExcesoPeso}
                     precioBase={precioBase}
                     precioCantidad={precioPorCantidad}
-                  
+                    cantidadSeleccion={cantidadSeleccion}
                     direccionRecibida={direccionRecibida}
                     entrega={entrega}
                 />
@@ -816,11 +866,17 @@ export default function Calculadora() {
                 console.log("⭐​ PDF guardado en localStorage ⭐​");
             };
 
-            Swal.fire({
-                title: "Pdf generado",
-                icon: "success",
-                timer: 3000
-            });
+            // Swal.fire({
+            //     title: "Pdf generado",
+            //     icon: "success",
+            //     timer: 3000
+            // });
+
+            handleEnviarPDF();
+            LimpiarCampos();
+            setAsesor(false);
+            setTipoSeleccionado("");
+
         } catch (error) {
             console.error("☠️ Error generando PDF ☠️: ", error);
         }
@@ -1254,8 +1310,8 @@ export default function Calculadora() {
                     <div className={asesor ? "botones-formulario-contacto" : "hidden"}>
 
                         <input type="submit" value="Cerrar formulario" className="button " onClick={() => setAsesor(false)} />
-                        <input type="button" value="Enviar Datos a PDF" onClick={sendContact} className="button" />
-                        <CotizadorPdf usuario={nombre} />
+                        <input type="button" value="Enviar Datos" onClick={sendContact} className="button col-span-2" />
+
 
                         <ReCAPTCHA
                             ref={captcha}
