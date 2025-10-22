@@ -743,13 +743,14 @@ export default function Calculadora() {
     const hanleReCaptcha = () => {
 
         if (!captcha.current) return;
-        captcha.current.reset();
+
 
         const value = captcha.current.getValue();
-
+ console.log( value);
         if (value) {
             setCaptchaValido(true);
             console.log("usuario no robot")
+       
         } else {
             setCaptchaValido(false);
         }
@@ -791,6 +792,9 @@ export default function Calculadora() {
             icon: "success",
             timer: 3000
         });
+           LimpiarCampos();
+            setAsesor(false);
+            setTipoSeleccionado("");
 
     };
 
@@ -817,12 +821,12 @@ export default function Calculadora() {
         if (captchaValido) {
             console.log("usuario no robot")
         } else {
-            // Swal.fire({
-            //     title: "ALERTA",
-            //     text: "🚨​ usuario ROBOT 🚨",
-            //     icon: "error"
-            // });
-            console.log("🚨​ usuario ROBOT 🚨")
+            Swal.fire({
+                title: "ALERTA",
+                text: "Debes contestar el reCAPTCHA",
+                icon: "error"
+            });
+     
         }
 
         try {
@@ -866,16 +870,15 @@ export default function Calculadora() {
                 console.log("⭐​ PDF guardado en localStorage ⭐​");
             };
 
-            // Swal.fire({
-            //     title: "Pdf generado",
-            //     icon: "success",
-            //     timer: 3000
-            // });
+            Swal.fire({
+                title: "Cargando Datos",
+                
+                timer: 1000,
+                timerProgressBar: true,
+            });
 
             handleEnviarPDF();
-            LimpiarCampos();
-            setAsesor(false);
-            setTipoSeleccionado("");
+         
 
         } catch (error) {
             console.error("☠️ Error generando PDF ☠️: ", error);
@@ -1315,7 +1318,7 @@ export default function Calculadora() {
 
                         <ReCAPTCHA
                             ref={captcha}
-                            sitekey="6LdS7eYrAAAAAJpMS-V4PIciaJvjv5XWuIaxE9vX"
+                            sitekey="6LdDRfMrAAAAACKCL_jQ4WKKUvbIpS1ny78v-bNE"
                             // size="invisible"
                             onChange={hanleReCaptcha}
                         // className={asesor ? "" : "hidden"}
