@@ -71,11 +71,11 @@ export default function ServiciosMxUsa() {
 
   // estilos de botones
   const baseBtn =
-    "rounded-[17px] px-6 py-4 text-[20px] font-medium font-[Montserrat] transition-colors duration-200";
+    "rounded-[17pt] border px-4 md:px-5 py-2 font-[Montserrat] text-[14px] md:text-[15px] font-medium transition";
   const selectedBtn =
-    "bg-sky-600 text-[#F2F2F2] shadow-[0_8px_20px_rgba(2,132,199,0.35)]";
+    "bg-sky-600 text-[#F3F7FE] border-sky-600 shadow-sm";
   const unselectedBtn =
-    "border border-[#F2F2F2] text-[#F2F2F2] bg-transparent hover:bg-white/10";
+    "bg-transparent text-sky-600 border-sky-600 hover:bg-sky-50";
 
   return (
     <section className="w-full bg-[#2E47A1] text-white scroll-mt-20" id="serviciosUSA">

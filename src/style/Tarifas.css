@@ -53,10 +53,10 @@
 }
 
 .texto-adicionales{
-    @apply space-y-3 text-sm md:text-base text-blue-800 font-semibold
+    @apply space-y-3 text-sm md:text-base text-[#0b4ba2] font-semibold
 }
 
 .titulo-adicionales{
-    @apply text-xl md:text-2xl font-bold  text-blue-800 mb-4 text-center
+    @apply text-xl md:text-2xl font-bold  text-[#0b4ba2] mb-4 text-center
 }
 /* #endregion */

@@ -53,12 +53,12 @@
 .contenedor-input{
     @apply bg-white w-full mt-2 mb-3 h-7 rounded-md
     outline-none focus:ring-2 focus:ring-blue-300 transition-all 
-    duration-300 text-black
+    duration-300 text-black text-[16px]
 }
 
 .contenedor-input-asunto{
     @apply bg-white w-full mt-2 mb-3 rounded-md
     outline-none focus:ring-2 focus:ring-blue-300 transition-all 
-    duration-300 text-black resize-none
+    duration-300 text-black resize-none text-[16px]
 }
 
