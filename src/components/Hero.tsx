@@ -25,14 +25,14 @@ export default function Hero() {
     <section className="relative w-full  rounded-b-[60px]  font-[Montserrat]" id="hero">
 
       {/* Imagen de fondo */}
-      <div className="relative w-full h-[400px] md:h-[520px] lg:h-[577px]">
+      <div className="relative lg:h-[577px]">
         <Image
           src="/img/banner1.png"
           alt="Camioneta Cargo Monterrey"
           width={1920}
           height={600}
-          className="w-full h-full object-cover object-left-top"
-          loading="lazy"
+          className="fill object-cover object-left-top"
+        
         />
 
         {/* Texto sobrepuesto centrado */}
