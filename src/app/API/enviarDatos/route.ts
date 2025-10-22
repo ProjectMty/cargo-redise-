@@ -10,11 +10,16 @@ export async function POST(req: Request) {
 
         const body = await req.json();
         const { nombre, telefono, correo, asunto } = body;
+    const destinatarios = [
+            "info@cargomty.com",
+            "Nancy@cargomty.com",
+            "Montserrat@cargomty.com",
+        ];
 
         const email = await resend.emails.send({
 
-            from: 'RapidMex <no-reply@rapidmex.com>',
-            to: ['it03@cargomty.com'],
+            from: 'CargoMty <no-reply@cargomty.com>',
+            to: destinatarios,
             subject: nombre + " Datos para contacto",
             react: EmailTemplate({ nombre: nombre, telefono: telefono, correo: correo, asunto: asunto }),
            

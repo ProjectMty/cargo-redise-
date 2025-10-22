@@ -10,11 +10,16 @@ export async function POST(req: Request) {
 
         const body = await req.json();
         const { nombre, compañia, pdfBase64 } = body;
+        const destinatarios = [
+            "info@cargomty.com",
+            "Nancy@cargomty.com",
+            "Montserrat@cargomty.com",
+        ];
 
         const email = await resend.emails.send({
 
-            from: 'RapidMex <no-reply@rapidmex.com>',
-            to: ['it03@cargomty.com'],
+            from: 'CargoMty <no-reply@cargomty.com>',
+            to: destinatarios,
             subject: nombre + " cotizacion",
             react: EmailTemplate({ username: nombre, company: compañia }),
             text: "Adjunto encontrarás el PDF solicitado.",
