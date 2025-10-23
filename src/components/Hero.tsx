@@ -25,15 +25,15 @@ export default function Hero() {
     <section className="relative w-full  rounded-b-[60px]  font-[Montserrat]" id="hero">
 
       {/* Imagen de fondo */}
-      <div className="relative lg:h-[577px]">
-        <Image
-          src="/img/BannerE1.png"
-          alt="Camioneta Cargo Monterrey"
-          width={1920}
-          height={600}
-          className="fill object-cover object-left-top"
-        
-        />
+     <div className="relative w-full h-[55vh] md:h-[65vh] lg:h-[577px] overflow-hidden rounded-b-[36px]">
+  <Image
+    src="/img/BannerE1.png"
+    alt="Camioneta Cargo Monterrey"
+    fill                   // ocupa todo el contenedor
+    priority               // precarga (opcional para el hero)
+    sizes="100vw"
+    className="object-cover object-left-top"
+  />
 
         {/* Texto sobrepuesto centrado */}
 
