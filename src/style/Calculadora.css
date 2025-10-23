@@ -1,173 +1,140 @@
 
 
- /* #region CONTENEDORES */
+/* #region GLOBAL */
 .fondo-seccion {
-   @apply w-full h-full px-[15%] py-[5%] font-[Montserrat];
+  @apply w-full h-full px-[10%] py-[5%] font-[Montserrat];
+}
+
+.contenedor {
+  @apply block
 }
 
 .contenedor-calculadora {
-    @apply shadow-2xl rounded-3xl p-5
+  @apply shadow-2xl rounded-[50px] bg-[#0B4BA2] px-[65px] py-[45px]
+}
+/* #endregion*/
+
+/* #region TITULO */
+.contenedor-titulo {
+  @apply mt-1 mb-10
 }
 
-.fondo-contenedor{
-    @apply  rounded-3xl grid grid-cols-1 md:grid-cols-4
-}
-
-.contenedor-2 {
-  @apply grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5;
-}
-
-.contenedor-3 {
-  @apply grid grid-cols-1 lg:grid-cols-3 gap-5 mt-5;
-}
-
-.contenedor-4 {
-  @apply grid grid-cols-1 lg:grid-cols-4 gap-5 mt-5;
-}
-
-.contenedor-filas-2 {
-    @apply grid grid-rows-1 lg:grid-rows-2 
-}
-
-.contenedor-filas-4 {
-    @apply grid grid-rows-2 gap-4 
-}
-
-.botones-formulario-contacto{
-  @apply contenedor-4 md:mx-10 items-center col-span-4
-}
-
-.botones-formulario-cotizacion{
-  @apply grid grid-cols-1  md:ml-10 col-span-4 lg:col-span-1 gap-5 xl:gap-0 mt-5 xl:mt-0
-}
-
- /* #endregion */
-
- /* #region TEXTO */
 .encabezado {
-    @apply font-extrabold text-4xl md:text-5xl text-blue-800 text-center mt-5;
+  @apply font-extrabold text-4xl md:text-5xl text-blue-800 text-center mt-5;
 }
 
 .subtitulo {
-    @apply text-center text-blue-800 text-lg font-medium mt-2
+  @apply text-center text-blue-800 text-lg font-medium mt-2 tracking-widest
 }
 
-.tipo {
-    @apply text-center text-blue-800 text-4xl md:text-5xl font-bold xl:pr-20
+/* #endregion */
+
+/* #region CALCULADORA */
+
+
+/* #region contenedores */
+.fondo-contenedor {
+  @apply grid grid-cols-1 md:grid-cols-5 gap-[30px]
 }
 
-.precio-resultado {
-    @apply text-white text-4xl md:text-5xl font-bold lg:text-end mt-2 lg:mt-0
+.contenedor-filas-2 {
+  @apply grid grid-rows-1 lg:grid-rows-2
 }
 
-.precio-texto{
-    @apply text-start text-white text-4xl md:text-2xl font-bold 
+.contenedor-3-col {
+  @apply grid grid-cols-3 col-span-2 gap-[24px]
 }
 
-.volumen {
-    @apply text-end text-white text-2xl font-bold mb-1
+.contenedor-precio {
+  @apply contenedor-filas-2 col-span-2
 }
 
+/* #endregion */
 
-.precio {
-    @apply text-start text-white text-4xl md:text-6xl font-bold pr-20
-}
-
-
+/* #region imputs */
 .label {
-  @apply text-base font-light justify-center text-center content-center text-white
+  @apply text-[16px] font-medium text-start content-start text-white
+}
+
+.select {
+  @apply text-start bg-[#FFFFFF] text-[16px] text-[#000000]/75 rounded-[4px] h-[40px] w-[100%]
 }
 
 .input {
-  @apply w-full h-8 bg-white text-black rounded-lg px-2;
-}
-
-.p {
-    @apply text-end mt-8 lg:mr-0
-}
-
-
-.notas {
-  @apply  text-xs font-light text-gray-200 text-center mt-1
-}
-
-.error {
-  @apply text-xs font-light text-red-500 text-center mt-1
-}
-  /* #endregion */
-
- /* #region TARJETAS */
-
-
- .tarjeta-notas {
-  @apply grid grid-rows-[1fr_auto]  bg-blue-600 rounded-xl px-2 py-1 ;
-}
-
-.tarjeta-ingreso {
-    @apply grid grid-cols-1 md:grid-cols-4 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
-   text-white shadow-xl items-center max-h-20 mt-5;
-}
-
-.tarjeta-salida {
-    @apply grid lg:grid-cols-2 gap-1
-   text-white place-items-center;
-}
-
-.tarjeta-costo {
-  @apply grid grid-cols-1 lg:grid-cols-3 gap-5 bg-blue-600 p-6 rounded-xl text-center text-white shadow-lg 
-}
-
-.tarjeta-forms {
-  @apply grid grid-rows-2 gap-1 rounded-xl text-center text-white 
-}
-
-.tarjeta-asunto {
-    @apply grid  lg:grid-cols-4 gap-1 bg-blue-600 px-3 py-2.5 rounded-xl text-center
-   text-white shadow-xl items-center lg:max-h-20 col-span-3 lg:h-20 mt-5;
-}
-.tarjeta-boton {
-    @apply  gap-10  text-center
-    items-center  mt-2;
-}
-
-
-
-  /* #endregion */
-
- /* #region BOTONES */
-   .select {
-    @apply  text-center bg-slate-100 text-2xl text-blue-900 rounded-xl lg:px-10 py-2
-}
-
-
-.button {
-   @apply rounded-xl 
-   px-5 md:px-1 xl:px-10 2xl:px-10 3xl:px-20 
-   py-3 font-medium hover:bg-blue-600 hover:text-white
-    bg-blue-400 text-white transition duration-300 text-center;
-}
-
-.input-asesor {
-  @apply bg-white w-full h-7 rounded-md px-3 col-span-3
-  outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black
-}
-
-.input-asunto {
-  @apply bg-white w-full max-h-16 rounded-md col-span-3 px-3
-  outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black
+  @apply bg-[#FFFFFF] text-[16px] text-black rounded-[4px] w-[100%] h-[40px];
 }
 
 .input:focus {
   @apply ring-2 ring-blue-300 outline-none transition-all duration-300
 }
 
-.button-repetitivo {
-  @apply px-4 py-2 rounded-lg font-semibold w-10 xl:w-32
+.input-units {
+  @apply bg-[#FFFFFF] text-[16px] text-black rounded-l-[4px] w-[100%] h-[40px];
 }
 
-.button-disabled{
-  @apply bg-slate-500 text-white cursor-not-allowed rounded-xl  lg:px-20 py-3 px-5
+.input-units:focus {
+  @apply ring-2 ring-blue-300 outline-none transition-all duration-300
 }
 
- /* #endregion */
+.units {
+  @apply flex bg-[#FFFFFF] w-[40%] h-[40px] rounded-r-[4px] items-center justify-center border-l-2 border-l-[#BCBCBC] text-[#000000]/35
+}
 
+.switch-opciones {
+  @apply rounded-[4px] font-normal text-[16px] w-[100%]
+}
+
+.output-precio {
+  @apply bg-[#FFFFFF] text-[30px] text-[#000000] rounded-l-[4px] w-[100%] h-[40px] text-end;
+}
+
+.units-precio {
+  @apply flex bg-[#FFFFFF] w-[40%] h-[40px] rounded-r-[4px] items-center justify-center  text-[#000000]/35
+}
+/* #endregion  */
+
+/* #region botones */
+
+.button {
+  @apply rounded-[4px] w-[100%] h-[40px] font-medium hover:bg-blue-600 hover:text-white bg-blue-400 text-white transition duration-300 text-center;
+}
+
+
+.button-disabled {
+  @apply bg-slate-500 text-white cursor-not-allowed rounded-[4px] w-[100%] h-[40px];
+}
+
+/* #endregion */
+
+/* #region errores */
+.notas {
+  @apply flex text-[16px] font-light text-gray-200 text-center items-center justify-center
+}
+
+.error {
+  @apply text-[16px] font-light text-red-500 text-center items-center justify-center
+}
+
+/* #endregion */
+
+
+/* #endregion */
+
+/* #region ASESOR */
+.subtitulo-asesor {
+  @apply text-center text-white text-[18px] font-normal tracking-widest mt-[30px]
+}
+
+
+.input-asunto {
+  @apply bg-white w-full max-h-16 rounded-md  outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black
+
+}
+
+/* #endregion */
+
+/* #region ALERTAS */
+.mensaje {
+  @apply  top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-red-500 text-white text-sm rounded px-2 py-1
+}
+/* #endregion */

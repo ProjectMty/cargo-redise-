@@ -13,6 +13,7 @@ import Footer from "@/components/Footer";
 import Calculadora from "@/components/Calculadora";
 import { CalculadoraVisibleProvider } from "@/context/CalculadoraVisibleContext";
 
+
 export default function Home() {
 
 
@@ -30,6 +31,7 @@ export default function Home() {
         <Ubicaciones />
         <Contacto />
         <Footer />
+
       </main>
     </CalculadoraVisibleProvider>
   );

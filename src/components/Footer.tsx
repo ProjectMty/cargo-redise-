@@ -48,7 +48,7 @@ export default function Footer(){
         <p className="flex items-center justify-center mt-10 text-white">Copyright © 2025. Cargo Monterrey.</p>
          <ReCAPTCHA
                                 ref={captcha}
-                                sitekey="6LdS7eYrAAAAAJpMS-V4PIciaJvjv5XWuIaxE9vX"
+                                 sitekey="6LfumfMrAAAAALIHxEE2b90vhHNebxCmKFS3wVIL"
                                 size="invisible"
                                 // onChange={hanleReCaptcha}
                             // className={asesor ? "" : "hidden"}
