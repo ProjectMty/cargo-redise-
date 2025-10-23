@@ -27,7 +27,7 @@ export default function Hero() {
       {/* Imagen de fondo */}
       <div className="relative lg:h-[577px]">
         <Image
-          src="/img/Banner 1 .webp"
+          src="/img/BannerE1.png"
           alt="Camioneta Cargo Monterrey"
           width={1920}
           height={600}
