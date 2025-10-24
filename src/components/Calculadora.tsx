@@ -25,6 +25,10 @@ export default function Calculadora() {
         { name: "Cajas" }
     ];
 
+    const tiposDestino = [
+        { id: "Recoge", name: "Recoger en monterrey" },
+        { id: "Envia", name: "Enviar a casa o negocio" }
+    ];
     interface Direccion {
         additional_info?: {
             street?: string | null;
@@ -96,13 +100,13 @@ export default function Calculadora() {
     const [errorValor, setErrorValor] = useState<{ error: boolean, message: string | null }>({ error: false, message: "Se utilizan valores en USD" });
     const [errorPeso, setErrorPeso] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Se cobra una comision en caso de sobrepasar el peso maximo permitido" });
     const [errorCantidad, setErrorCantidad] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Mas de 20 articulos se cobra 16% IVA" });
-    const [errorLargo, setErrorLargo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
-    const [errorAncho, setErrorAncho] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
-    const [errorAlto, setErrorAlto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
+    const [errorLargo, setErrorLargo] = useState<{ error: boolean, message: string } | null>({ error: false, message:  "Si pasa 60 cm se cobra exceso de dimensiones" });
+    const [errorAncho, setErrorAncho] = useState<{ error: boolean, message: string } | null>({ error: false, message:  "Si pasa 60 cm se cobra exceso de dimensiones" });
+    const [errorAlto, setErrorAlto] = useState<{ error: boolean, message: string } | null>({ error: false, message:  "Si pasa 60 cm se cobra exceso de dimensiones" });
     const [errorCosto, setErrorCosto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Costo aproximado" });
     const [errorTelefono, setErrorTelefono] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Telefono con formato internacional" });
     const [errorCorreo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Correo valido" });
-    const [errorDestinatario, setErrorDestinatario] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Ingresa tu codigo postal de destino" });
+    const [errorDestinatario, setErrorDestinatario] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Por favor, proporciona el código postal del destino del paquete." });
 
     //booleanos
     const [pallets, setPallets] = useState(false);
@@ -155,8 +159,8 @@ export default function Calculadora() {
         pesoMaxLb = pesoMaxKg * 2.20462
         pesoMaxLb = Math.round((pesoMaxLb + Number.EPSILON) * 100) / 100;
         setVoluenLb(pesoMaxLb);
-
-    }, [largo, ancho, alto, opcion, convertirInToCm]);
+        console.log(volumenLb);
+    }, [largo, ancho, alto, opcion, convertirInToCm, volumenLb]);
 
     // #endregion
 
@@ -189,7 +193,7 @@ export default function Calculadora() {
 
         setErrorCosto({ error: false, message: "Costo aproximado" });
         setErrorTelefono({ error: false, message: "Telefono con formato internacional" });
-        setErrorDestinatario({ error: false, message: "Ingresa tu codigo postal de destino" });
+        setErrorDestinatario({ error: false, message: "Por favor, proporciona el código postal del destino del paquete." });
 
     }, []);
 
@@ -515,18 +519,18 @@ export default function Calculadora() {
             }
             const data = await response.json();
             setDireccionRecibida(data);
-            console.log(data)
+        
 
             if (Array.isArray(data) && data.length > 0) {
-                setErrorDestinatario({ error: false, message: "9.50 USD dentro del area metropolitana" });
+                setErrorDestinatario({ error: false, message: "Si tu envío se encuentra dentro del área metropolitana, se aplicará una tarifa de 9.50 USD" });
             } else {
-                setErrorDestinatario({ error: true, message: "ingrese codigo postal valido" });
+                setErrorDestinatario({ error: true, message: "Por favor, proporciona el código postal del destino del paquete." });
             }
 
 
         } catch (error) {
             console.error("Error validando el cp:", error);
-            setErrorDestinatario({ error: true, message: "Ingrese un codigo postal valido" });
+            setErrorDestinatario({ error: true, message: "Por favor, proporciona un código postal valido del destino del paquete." });
         }
     };
 
@@ -746,11 +750,8 @@ export default function Calculadora() {
 
 
         const value = captcha.current.getValue();
- console.log( value);
         if (value) {
             setCaptchaValido(true);
-            console.log("usuario no robot")
-       
         } else {
             setCaptchaValido(false);
         }
@@ -792,9 +793,9 @@ export default function Calculadora() {
             icon: "success",
             timer: 3000
         });
-           LimpiarCampos();
-            setAsesor(false);
-            setTipoSeleccionado("");
+        LimpiarCampos();
+        setAsesor(false);
+        setTipoSeleccionado("");
 
     };
 
@@ -826,13 +827,10 @@ export default function Calculadora() {
                 text: "Debes contestar el reCAPTCHA",
                 icon: "error"
             });
-     
+
         }
 
         try {
-
-
-
             const blob = await pdf(
                 <PDF
                     tipoSeleccionado={tipoSeleccionado}
@@ -867,18 +865,17 @@ export default function Calculadora() {
             reader.onloadend = () => {
                 const base64data = reader.result as string;
                 localStorage.setItem("pdfBase64", base64data);
-                console.log("⭐​ PDF guardado en localStorage ⭐​");
             };
 
             Swal.fire({
                 title: "Cargando Datos",
-                
+
                 timer: 1000,
                 timerProgressBar: true,
             });
 
             handleEnviarPDF();
-         
+
 
         } catch (error) {
             console.error("☠️ Error generando PDF ☠️: ", error);
@@ -891,444 +888,394 @@ export default function Calculadora() {
 
     return (
         <section id="calculadora" className="fondo-seccion">
+            {/* texto de titulo animado */}
 
-            <div className="contenedor-calculadora">
-                {/* texto de titulo animado */}
-                <AnimatedText
-                    delay={0.2}
-                    lines={[
-                        < h2 key={1} className="encabezado">
-                            Calculadora
-                        </h2>,
-                        < h2 key={2} className="subtitulo">
-                            Esta calculadora es un aproximado, para una cotizacion completa contacte con un asesor
-                        </h2>
+            <div className="block">
+                <div className="contenedor-titulo">
+                    <AnimatedText
+                        delay={0.2}
+                        lines={[
+                            < h2 key={1} className="encabezado ">
+                                Calculadora
+                            </h2>,
+                            < h2 key={2} className="subtitulo ">
+                                Esta calculadora es un aproximado, para una cotizacion completa contacte con un asesor
+                            </h2>
 
-                    ]}>
-                </AnimatedText>
+                        ]}>
+                    </AnimatedText>
+                </div>
 
-                {/* contenedor de calculadora */}
-                <div className="fondo-contenedor">
 
-                    <form action="/action_page.php" className="lg:px-10 pb-5 col-span-4">
-                        {/* Seleccion tipo de contenedor */}
-                        <div className="contenedor-4">
-                            <div className="contenedor-filas-2">
-                                <label className="label">Tipo de Envío</label>
-                                <select name="TipoContenedor" id="TipoContenedor" className="select"
-                                    value={tipoSeleccionado} onChange={handleChangeSelect}
-                                >
-                                    <option value="">--Selecciona--</option>
-                                    {tiposCajas.map((tipo) => (
-                                        <option key={tipo.name} value={tipo.name}>
-                                            {tipo.name}
-                                        </option>
-                                    ))}
-                                </select>
+                <div className="contenedor-calculadora">
 
-                            </div>
+                    {/* contenedor de calculadora */}
+                    <div className="fondo-contenedor">
 
-                            <div className="md:mt-28 xl:mt-10 mt-3 text-center col-span-2">
-                                < h2 className="tipo">
-                                    {tipoSeleccionado}
-                                </h2>
-                            </div>
+{/* ESPACIADO */}
+                        <div className="col-span-4">
+                        </div>
 
-                            <div className="grid-cols-2 text-center ">
+{/* UNIDADES */}
+                        <div className="contenedor-filas-2">
+                            <div className="flex input p-1">
                                 <button type="button"
                                     onClick={() => setOpcion("MXS")}
-                                    className={`px-4 py-2 rounded-lg font-semibold md:mt-10 w-28 mr-1
-                                    ${opcion === "MXS" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
+                                    className={`switch-opciones
+                                    ${opcion === "MXS" ? "bg-blue-400 text-white" : " text-[#000000]/35"}`}
                                 >
-                                    cm/kg
+                                    KG/CM
                                 </button>
                                 <button type="button"
                                     onClick={() => setOpcion("USA")}
-                                    className={`px-4 py-2 rounded-lg font-semibold md:mt-10 w-28
-                                    ${opcion === "USA" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
+                                    className={`switch-opciones
+                                    ${opcion === "USA" ? "bg-blue-400 text-white" : " text-[#000000]/35"}`}
                                 >
-                                    in/lb
+                                    LB/IN
                                 </button>
                             </div>
 
+                        </div>
+
+{/* TIPO DE ENVIO */}
+                        <div className="contenedor-filas-2">
+                            <label className="label">Tipo de Envío</label>
+                            <select name="TipoContenedor" id="TipoContenedor" className="select"
+                                value={tipoSeleccionado} onChange={handleChangeSelect}
+                            >
+                                <option value="">--Selecciona--</option>
+                                {tiposCajas.map((tipo) => (
+                                    <option key={tipo.name} value={tipo.name}>
+                                        {tipo.name}
+                                    </option>
+                                ))}
+                            </select>
+                            <FadeInOutError
+                                message="Selecciona tipo de envio"
+                                error={false}
+                            />
+                        </div>
+
+{/* CANTIDAD */}
+                        <div className="contenedor-filas-2 group">
+                            {/* Ingreso de cantidad */}
+
+                            <label htmlFor="valorProd" className="label">Cantidad de {tipoSeleccionado} </label>
+
+                            <input type="number" min="0" className="input" value={cantidadSeleccion} onChange={(e) =>
+                                setCantidadSeleccion(e.target.value === "" ? "" : Number(e.target.value))}
+                                placeholder="0 piezas"
+                            />
+
+
+                            <FadeInOutError
+                                message="Número total"
+                                error={false}
+                            />
+
+                        </div>
+
+{/* VALOR */}
+                        <div className="contenedor-filas-2">
+                            <label htmlFor="valorProd" className="label">Valor producto </label>
+                            <div className=" flex">
+
+                                <input type="number" min="0" className=" input-units" value={valor} onChange={(e) =>
+                                    SetValor(e.target.value === "" ? "" : Number(e.target.value))}
+                                    onBlur={handleValor}
+
+                                    id="valorProd" />
+                                <div className="units">USD</div>
+                            </div>
+
+
+                            <FadeInOutError
+                                message={errorValor?.message ?? ""}
+                                error={errorValor?.error}
+                            />
+                        </div>
+
+{/* PRODUCTO REPETITIVO */}
+                        <div className="contenedor-filas-2">
+
+                            <label htmlFor="repetitivo" className="label">¿Tu producto es repetitivo?</label>
+                            <div className="flex input p-1">
+                                <button type="button"
+                                    onClick={() => setRepetitivo(true)}
+                                    className={`switch-opciones
+                                                ${repetitivo ? "bg-blue-400 text-white" : " text-[#000000]/35"}`}
+                                >
+                                    SI
+                                </button>
+
+                                <button type="button"
+                                    onClick={() => setRepetitivo(false)}
+                                    className={`switch-opciones
+                                                ${!repetitivo ? "bg-blue-400 text-white" : " text-[#000000]/35"}`}
+                                >
+                                    NO
+                                </button>
+                            </div>
+    <FadeInOutError
+                                message="Son de la misma naturaleza"
+                                error={false}
+                            />
 
 
                         </div>
 
-                        {/* contenedor de inputs */}
+{/* CANTIDAD UNIDADES */}
                         <div className="contenedor-filas-2">
 
+                            <label htmlFor="cantidad" className="label"> Cantidad de unidades</label>
+                            <input type="number" min="0" className="input" value={cantidad} onChange={(e) =>
+                                setCantidad(e.target.value === "" ? "" : Number(e.target.value))}
+                                onBlur={handleCantidad}
+                                placeholder="0 piezas" />
 
-                            {/* contenedor primera fila */}
-                            <div className="contenedor-4">
 
-                                {/* Ingreso de valor */}
-                                <div className="tarjeta-notas">
-                                    <div className="tarjeta-salida">
-                                        <label htmlFor="valorProd" className="label">Valor producto: </label>
-                                        <input type="number" min="0" className=" input" value={valor} onChange={(e) =>
-                                            SetValor(e.target.value === "" ? "" : Number(e.target.value))}
-                                            onBlur={handleValor}
-                                            placeholder="USD"
-                                            id="valorProd" />
+                            <FadeInOutError
+                                message={errorCantidad?.message ?? ""}
+                                error={errorCantidad?.error}
+                            />
+                        </div>
 
-                                    </div>
+{/* LARGO X ANCHO X ALTO */}
+                        <div className="contenedor-3-col">
+                            <div className="contenedor-filas-2">
 
-                                    <FadeInOutError
-                                        message={errorValor?.message ?? ""}
-                                        error={errorValor?.error}
-                                    />
+                                <label htmlFor="largo" className="label"> Largo:</label>
+                                <div className="flex">
+                                    <input type="number" min="0" className="input-units" value={largo} disabled={pallets}
+                                        onChange={(e) => setLargo(e.target.value === "" ? "" : Number(e.target.value))}
+                                        onBlur={handleLargo}
+                                        placeholder="0" />
+                                    <div className="units">{opcion === "USA" ? "in" : "cm"}</div>
                                 </div>
 
-                                {/* Ingreso de peso */}
-                                <div className="tarjeta-notas">
-                                    <div className="tarjeta-salida">
-                                        <label htmlFor="Peso" className="label">Peso: </label>
-                                        <input type="number" min="0" className="input" value={peso} onChange={(e) =>
-                                            setPeso(e.target.value === "" ? "" : Number(e.target.value))}
-                                            onBlur={handleBlurPeso} placeholder={opcion === "USA" ? "lb" : "kg"} />
-                                    </div>
-
-                                    <FadeInOutError
-                                        message={errorPeso?.message ?? ""}
-                                        error={errorPeso?.error}
-                                    />
-                                </div>
-
-                                {/* producto repetitivo */}
-                                <div className="tarjeta-notas">
-                                    <div className="tarjeta-forms">
-                                        <label htmlFor="repetitivo" className="label">¿Tu producto es repetitivo? </label>
-                                        <div className="tarjeta-boton ">
-                                            <button type="button"
-                                                onClick={() => setRepetitivo(true)}
-                                                className={`button-repetitivo
-                                                ${repetitivo ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
-                                            >
-                                                Si
-                                            </button>
-
-                                            <button type="button"
-                                                onClick={() => setRepetitivo(false)}
-                                                className={`button-repetitivo
-                                                ${!repetitivo ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
-                                            >
-                                                No
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <label className="notas">Es de la misma naturaleza</label>
-
-                                </div>
-
-                                {/* cantidad de articulos */}
-                                <div className="tarjeta-notas">
-                                    <div className="tarjeta-salida">
-                                        <label htmlFor="cantidad" className="label"> Cantidad de articulos:</label>
-                                        <input type="number" min="0" className="input" value={cantidad} onChange={(e) =>
-                                            setCantidad(e.target.value === "" ? "" : Number(e.target.value))}
-                                            onBlur={handleCantidad}
-                                            placeholder="0 piezas" />
-                                    </div>
-
-                                    <FadeInOutError
-                                        message={errorCantidad?.message ?? ""}
-                                        error={errorCantidad?.error}
-                                    />
-                                </div>
-
+                                <FadeInOutError
+                                    message={errorLargo?.message ?? ""}
+                                    error={errorLargo?.error}
+                                />
                             </div>
 
-                            {/* contenedor segunda fila */}
-                            <div className="contenedor-4">
+                            {/* ancho */}
+                            <div className="contenedor-filas-2" >
 
-                                {/* Ingreso de cantidad */}
-                                <div className="tarjeta-notas">
-                                    <div className="tarjeta-salida">
-                                        <label htmlFor="valorProd" className="label">Cantidad de {tipoSeleccionado}: </label>
-                                        <input type="number" min="0" className="input" value={cantidadSeleccion} onChange={(e) =>
-                                            setCantidadSeleccion(e.target.value === "" ? "" : Number(e.target.value))}
-                                            placeholder="0 piezas"
-                                        />
-
-                                    </div>
-
-                                    <FadeInOutError
-                                        message={errorValor?.message ?? ""}
-                                        error={errorValor?.error}
-                                    />
+                                <label htmlFor="ancho" className="label"> Ancho:</label>
+                                <div className="flex">
+                                    <input type="number" min="0" className="input-units" value={ancho} disabled={pallets}
+                                        onChange={(e) => setAncho(e.target.value === "" ? "" : Number(e.target.value))}
+                                        onBlur={handleAncho}
+                                        placeholder="0" />
+                                    <div className="units">{opcion === "USA" ? "in" : "cm"}</div>
                                 </div>
 
-                                {/* Ingreso de peso */}
-                                <div className="tarjeta-notas">
-                                    <div className="tarjeta-forms">
-                                        <label htmlFor="Peso" className="label">Destino </label>
-                                        <div className="md:contenedor-filas-2">
-                                            <button type="button"
-                                                onClick={() => setEntrega("Recoge")}
-                                                className={`button-repetitivo
-                                               ${entrega === "Recoge" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
-                                            >
-                                                Recoger
-                                            </button>
-
-                                            <button type="button"
-                                                onClick={() => setEntrega("Enviar")}
-                                                className={`button-repetitivo
-                                                ${entrega === "Enviar" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
-                                            >
-                                                Enviar
-                                            </button>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                {entrega === "Recoge" ? (
-                                    <div className="tarjeta-notas col-span-2">
-
-                                        <label htmlFor="valorProd" className="label">No hay costo de envio </label>
-
-
-
-                                    </div>
-                                ) : (
-                                    <div className="tarjeta-notas col-span-2">
-                                        <div className="tarjeta-forms">
-                                            <label htmlFor="valorProd" className="label">Direccion de envio: </label>
-                                            <div className="tarjeta-salida">
-
-                                                <label htmlFor="valorProd" className="label">Codigo Postal: </label>
-                                                <input type="number" min="0" className="input" value={cpDestino}
-                                                    onChange={(e) =>
-                                                        setCpDestino(e.target.value === "" ? "" : Number(e.target.value))}
-                                                    placeholder="cp"
-                                                    onBlur={validarCP}
-                                                />
-
-
-                                            </div>
-                                        </div>
-
-                                        <FadeInOutError
-                                            message={errorDestinatario?.message ?? ""}
-                                            error={errorDestinatario?.error}
-                                        />
-                                    </div>
-                                )}
-
-
-
-
-
+                                <FadeInOutError
+                                    message={errorAncho?.message ?? ""}
+                                    error={errorAncho?.error}
+                                />
                             </div>
 
+                            {/*alto  */}
+                            <div className="contenedor-filas-2">
 
-                            {/* contenedor tercera columna */}
-                            <div className="contenedor-4">
+                                <label htmlFor="alto" className="label"> Alto:</label>
+                                <div className="flex">
 
-                                {/* largo */}
-                                <div className="tarjeta-notas">
-                                    <div className="tarjeta-salida">
-                                        <label htmlFor="largo" className="label"> Largo:</label>
-                                        <input type="number" min="0" className="input" value={largo} disabled={pallets}
-                                            onChange={(e) => setLargo(e.target.value === "" ? "" : Number(e.target.value))}
-                                            onBlur={handleLargo}
-                                            placeholder={opcion === "USA" ? "0 in" : "0 cm"} />
-                                    </div>
 
-                                    <FadeInOutError
-                                        message={errorLargo?.message ?? ""}
-                                        error={errorLargo?.error}
-                                    />
+                                    <input type="number" min="0" className="input-units" value={alto} disabled={pallets}
+                                        onChange={(e) => setAlto(e.target.value === "" ? "" : Number(e.target.value))}
+                                        onBlur={handleAlto}
+                                        placeholder="0" />
+                                    <div className="units">{opcion === "USA" ? "in" : "cm"}</div>
                                 </div>
-
-                                {/* ancho */}
-                                <div className="tarjeta-notas" >
-                                    <div className="tarjeta-salida">
-                                        <label htmlFor="ancho" className="label"> Ancho:</label>
-                                        <input type="number" min="0" className="input" value={ancho} disabled={pallets}
-                                            onChange={(e) => setAncho(e.target.value === "" ? "" : Number(e.target.value))}
-                                            onBlur={handleAncho}
-                                            placeholder={opcion === "USA" ? "0 in" : "0 cm"} />
-                                    </div>
-
-                                    <FadeInOutError
-                                        message={errorAncho?.message ?? ""}
-                                        error={errorAncho?.error}
-                                    />
-                                </div>
-
-                                {/*alto  */}
-                                <div className="tarjeta-notas">
-                                    <div className="tarjeta-salida">
-                                        <label htmlFor="alto" className="label"> Alto:</label>
-                                        <input type="number" min="0" className="input" value={alto} disabled={pallets}
-                                            onChange={(e) => setAlto(e.target.value === "" ? "" : Number(e.target.value))}
-                                            onBlur={handleAlto}
-                                            placeholder={opcion === "USA" ? "0 in" : "0 cm"} />
-                                    </div>
-
+                                <div>
                                     <FadeInOutError
                                         message={errorAlto?.message ?? ""}
                                         error={errorAlto?.error}
                                     />
-
                                 </div>
 
-                                {/* peso maximo por volumen */}
-                                <div className="tarjeta-notas">
-                                    <div className="tarjeta-salida">
-                                        <label className=""> Peso maximo: </label>
-                                        <h2 className="volumen">
-                                            {opcion === "USA" ? volumenLb : volumen}
-                                        </h2>
-                                    </div>
-                                    <label className="notas"> En base al volumen proporcionado</label>
-                                </div>
 
                             </div>
                         </div>
 
-                        {/* envio de formulario */}
-
-
-
-                    </form>
-
-                    {/* boton cotizar y contactar asesor */}
-                    <div className="botones-formulario-cotizacion">
-                        <input type="button" value="Cotizar" onClick={sendForms} className=" button" />
-                        <input type="submit" value="Contactar asesor" className={asesor ? "button-disabled mt-2" : " button mt-2"} onClick={() => setAsesor(true)} />
-
-                    </div>
-
-                    {/* precio calculado */}
-                    <div className="col-span-4 lg:col-span-3 lg:mr-10 lg:ml-7 mt-10 md:mt-5 xl:mt-0">
+{/* PESO */}
                         <div className="contenedor-filas-2">
-                            <div className="tarjeta-costo">
-                                <h2 className="precio-texto">
-                                    Costo:
-                                </h2>
-                                <h2 className="precio-resultado">
-                                    {costoIVA}
-                                </h2>
+                            <label htmlFor="Peso" className="label">Peso: </label>
+                            <div className="flex">
+                                <input type="number" min="0" className="input-units" value={peso} onChange={(e) =>
+                                    setPeso(e.target.value === "" ? "" : Number(e.target.value))}
+                                    onBlur={handleBlurPeso} placeholder="0" />
 
-                                {/* moneda  */}
-                                <p className="p">
-                                    USD
-                                </p>
-
+                                <div className="units">{opcion === "USA" ? "lb" : "kg"}</div>
                             </div>
-                            <div className={` mt-2 rounded-lg
-                            ${exceso ? " bg-white text-xl" : "bg-blue-400 text-white"}`}>
+                            <FadeInOutError
+                                            message={errorPeso?.message ?? ""}
+                                            error={errorPeso?.error}
+                                        />
+                        </div>
+
+{/* DESTINO */}
+                        <div className="contenedor-filas-2">
+                            <label htmlFor="Peso" className="label">Destino </label>
+                            <select name="TipoDestino" id="TipoDestino" className="select"
+                                value={entrega} onChange={(e) => setEntrega(e.target.value)}
+                            >
+                                <option value="">Selecciona un destino</option>
+                                {tiposDestino.map((tipo) => (
+                                    <option key={tipo.id} value={tipo.id}>
+                                        {tipo.name}
+                                    </option>
+                                ))}
+                            </select>
+                            <FadeInOutError
+                                message="Cuéntanos, ¿a qué destino deseas enviar tu paquete?"
+                                error={false}
+                            />
+                        </div>
+
+{/* CODIGO POSDTAL */}
+                        {entrega === "Envia" ? (
+                            <div className="contenedor-filas-2">
+                                <label htmlFor="valorProd" className="label">Codigo Postal: </label>
+                                <div className="flex">
+                                    <input type="number" min="0" className="input-units" value={cpDestino}
+                                        onChange={(e) =>
+                                            setCpDestino(e.target.value === "" ? "" : Number(e.target.value))}
+
+                                        onBlur={validarCP}
+                                    />
+                                    <div className="units">CP</div>
+                                </div>
+
+
                                 <FadeInOutError
-                                    message={errorCosto?.message ?? ""}
-                                    error={errorCosto?.error}
+                                    message={errorDestinatario?.message ?? ""}
+                                    error={errorDestinatario?.error}
                                 />
                             </div>
+                        ) : (
+                            <div className="flex items-center justify-center">
+                                <label htmlFor="valorProd" className="label">No hay costo de envio </label>
+                            </div>
+                        )}
 
+{/* BOTON COTIZAR */}
+                        <div className="contenedor-filas-2">
+                            <div></div>
+                            <input type="button" value="Cotizar" onClick={sendForms} className=" button" />
+                        </div>
 
+{/* BOTON CONTACTAR */}
+                        <div className="contenedor-filas-2">
+                            <div></div>
+                            <input type="submit" value="Contactar asesor" className={asesor ? "button-disabled" : " button"} onClick={() => setAsesor(true)} />
 
                         </div>
 
-
-                    </div>
-
-                    {asesor ? (
-                        <div className="col-span-4 md:mt0 mt-5">
-                            <AnimatedText
-                                delay={0.2}
-                                lines={[
-                                    < h2 key={2} className="subtitulo">
-                                        Ingrese sus datos para una cotizacion
-                                    </h2>
-                                ]}>
-                            </AnimatedText>
-                        </div>
-                    ) : (
-                        <div></div>
-                    )}
-
-                    {/* boton de enviar forms con datos de contacto */}
-
-                    {asesor ? (
-                        <div className="col-span-4 md:col-span-4 md:mr-10 md:ml-7">
-
-                            <div className="lg:contenedor-3 mb-1">
-                                <div className="tarjeta-ingreso">
-                                    <label htmlFor="ContactName">Nombre: </label>
-                                    <input type="text" name="name" id="ContactName" className="input-asesor"
-                                        value={nombre}
-                                        placeholder="nombre"
-                                        onChange={(e) => SetNombre(e.target.value)} />
-
-                                </div>
-
-                                <div className="tarjeta-ingreso">
-                                    <label htmlFor="ContactPhone">Teléfono: </label>
-                                    <input type="tel" name="phone" id="ContactPhone" className="input-asesor"
-                                        value={telefono}
-                                        placeholder="(123) 456-7890"
-                                        onChange={handleChangeTelefono} />
-                                    <FadeInOutError
-                                        message={errorTelefono?.message ?? ""}
-                                        error={errorTelefono?.error}
-                                    />
-                                </div>
-
-                                <div className="tarjeta-ingreso">
-
-                                    <label htmlFor="ContactEmail">Correo: </label>
-                                    <input type="text" name="email" id="ContactEmail" className="input-asesor"
-                                        value={correo}
-                                        placeholder="ejemplo@correo.com"
-                                        onChange={(e) => SetCorreo(e.target.value)} />
-                                    <FadeInOutError
-                                        message={errorCorreo?.message ?? ""}
-                                        error={errorCorreo?.error}
-                                    />
-                                </div>
-
-                                <div className="tarjeta-asunto">
-                                    <label htmlFor="ContactAsunto">Asunto: </label>
-
-                                    <textarea name="email" id="ContactAsunto" rows={4} cols={50} className="input-asunto"
-                                        placeholder="Datos adicionales"
-                                        value={asunto}
-                                        onChange={(e) => SetAsunto(e.target.value)} >
-
-                                    </textarea>
-                                </div>
-
+{/* PRECIO */}
+                        <div className="contenedor-precio">
+                            <label htmlFor="costo" className="label">Costo </label>
+                            <div className="flex">
+                                <h2 className="output-precio">
+                                    {costoIVA}
+                                </h2>
+                                <div className="units-precio">USD</div>
                             </div>
 
                         </div>
+                        <div className={`rounded-[4px]
+                            ${exceso ? "error" : "bg-blue-400 text-white"}`}>
+                           {errorCosto?.message ?? ""}
+                        </div>
 
 
-                    ) : (
+                        {asesor ? (
+                            <div className="col-span-5 ">
+                                <AnimatedText
+                                    delay={0.2}
+                                    lines={[
+                                        < h2 key={2} className="subtitulo-asesor">
+                                            Ingrese sus datos para una cotizacion
+                                        </h2>
+                                    ]}>
+                                </AnimatedText>
+                            </div>
+                        ) : (
+                            <div></div>
+                        )}
+
+                        <div className={asesor ? "contenedor-filas-2" : "hidden"}>
+                            <label htmlFor="ContactName" className="label">Nombre: </label>
+                            <input type="text" name="name" id="ContactName" className="input"
+                                value={nombre}
+                                onChange={(e) => SetNombre(e.target.value)} />
+  <FadeInOutError
+                                            message="¿Cómo te llamas?"
+                                            error={false}
+                                        />
+                        </div>
+
+                        <div className={asesor ? "contenedor-filas-2" : "hidden"}>
+                            <label htmlFor="ContactPhone" className="label">Teléfono: </label>
+                            <input type="tel" name="phone" id="ContactPhone" className="input"
+                                value={telefono}
+                                placeholder="(123) 456-7890"
+                                onChange={handleChangeTelefono} />
+                            <FadeInOutError
+                                            message={errorTelefono?.message ?? ""}
+                                            error={errorTelefono?.error}
+                                        />
+                        </div>
+
+                        <div className={asesor ? "contenedor-filas-2" : "hidden"}>
+
+                            <label htmlFor="ContactEmail" className="label">Correo: </label>
+                            <input type="text" name="email" id="ContactEmail" className="input"
+                                value={correo}
+                                placeholder="ejemplo@correo.com"
+                                onChange={(e) => SetCorreo(e.target.value)} />
+                            <FadeInOutError
+                                            message={errorCorreo?.message ?? ""}
+                                            error={errorCorreo?.error}
+                                        />
+                        </div>
+
+                        <div className={asesor ? " col-span-2" : "hidden"}>
+                            <label htmlFor="ContactAsunto" className="label">Asunto: </label>
+
+                            <textarea name="email" id="ContactAsunto" rows={4} cols={50} className="input-asunto"
+                                placeholder="Datos adicionales"
+                                value={asunto}
+                                onChange={(e) => SetAsunto(e.target.value)} >
+
+                            </textarea>
+                        </div>
+                        {/* boton de enviar forms con datos de contacto */}
+
                         <div></div>
-                    )}
 
-                    <div className={asesor ? "botones-formulario-contacto" : "hidden"}>
+                        <div className={asesor ? "flex" : "hidden"}>
+                            <input type="submit" value="Cerrar formulario" className="button " onClick={() => setAsesor(false)} />
+                        </div>
 
-                        <input type="submit" value="Cerrar formulario" className="button " onClick={() => setAsesor(false)} />
-                        <input type="button" value="Enviar Datos" onClick={sendContact} className="button col-span-2" />
-
+                        <div className={asesor ? "flex" : "hidden"}>
+                            <input type="button" value="Enviar Datos" onClick={sendContact} className="button" />
+                        </div>
 
                         <ReCAPTCHA
                             ref={captcha}
                             sitekey="6LdDRfMrAAAAACKCL_jQ4WKKUvbIpS1ny78v-bNE"
                             // size="invisible"
                             onChange={hanleReCaptcha}
-                        // className={asesor ? "" : "hidden"}
+                            className={asesor ? "" : "hidden"}
                         />
+
                     </div>
-
-
                 </div>
             </div>
-
 
 
         </section>

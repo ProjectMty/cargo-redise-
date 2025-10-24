@@ -1,3 +1,6 @@
+
+
+/* #region CONTENEDORES */
 .section {
     @apply py-14 scroll-mt-20 font-[Montserrat] h-auto overflow-visible
 }
@@ -10,41 +13,40 @@
 .contenedor-tarjetas{
     @apply h-full w-full 
 }
-
-
+/* #endregion */
 
 /* #region TEXT */
 
 .texto-titulo{
-    @apply text-center font-bold text-[#0b4ba2] text-[36px] md:text-[42px] -mt-20;
+    @apply text-center font-bold text-[var(--primary-blue)] text-[36px]  -mt-20;
 }
 
 .subtitulo-texto{
-    @apply mt-3 text-center text-[#333333]  text-[16px] md:text-[18px] max-w-4xl mx-auto mb-10
+    @apply mt-3 text-center text-[#333333]  text-[16px] max-w-4xl mx-auto mb-10
 }
-
-
 /* #endregion */
 
 /* #region TARJETA */
 
-
 .div-tarjeta{
-    @apply flex flex-col items-start text-start bg-[#0b4ba2]  m-5
+    @apply flex flex-col items-start text-start bg-[var(--primary-blue)]  m-5
     h-auto rounded-[26px] shadow-[0_18px_48px_rgba(0,0,0,0.2)] text-white 
-    py-5 px-8
+    py-5 px-8 
+}
+.button-tarjeta-servicios{
+    @apply w-[100%] 
 }
 
 .titulo-texto-tarjeta{
-    @apply  text-white font-bold text-[18px] md:text-[20px] text-center ml-10
+    @apply  text-white font-bold text-[18px] text-start ml-10
 }
 
-.linea-horizontal {
-    @apply w-full h-[2px] bg-white col-span-4 rounded-xl my-5
+.linea-horizontal-servicios {
+    @apply w-full h-[2px] bg-white col-span-4 rounded-xl my-3
 }
 
 .contenedor-descripcion-tarjeta{
-    @apply flex flex-col gap-3 col-span-4 text-justify
+    @apply flex flex-col gap-3 col-span-4 text-start
 }
 
 .contenedor-bullet-tarjeta{
@@ -60,3 +62,39 @@
 }
 
 /* #endregion */
+
+@media (min-width: 500px){
+/* #region TEXT */
+
+.texto-titulo{
+    @apply text-[42px] 
+}
+
+.subtitulo-texto{
+    @apply text-[18px] 
+}
+/* #endregion */
+
+/* #region TARJETA */
+.titulo-texto-tarjeta{
+    @apply  text-[20px]
+}
+
+.linea-horizontal-servicios {
+    @apply  h-[2px] my-5
+}
+
+.contenedor-descripcion-tarjeta{
+    @apply  text-justify
+}
+/* #endregion */
+
+}
+
+@media (min-width: 1024px){
+
+}
+
+@media (min-width: 1536px) {
+
+}

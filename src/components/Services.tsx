@@ -1,6 +1,4 @@
 "use client";
-
-
 import AnimatedText from "@/animate/TextAnimate";
 import Image from "next/image";
 import "@/style/Servicios.css";
@@ -16,7 +14,10 @@ type ServiceId =
   | "marketplaces"
   | "inventory"
   | "returns"
-  | "special";
+  | "special"
+  | "fulfillment"
+  | "buyShip"
+  | "cargo";
 
 
 
@@ -28,15 +29,24 @@ const Servicios: Record<
     bullets: Bullet[];
   }
 > = {
+  // crossborder: {
+  //   title: "Servicios de transporte y entrega transfronteriza",
+  //   bullets: [
+  //     { icon: "/img/icons/Icono 1.1.svg", text: "Envíos sin problemas entre USA, Canadá y México." },
+  //     { icon: "/img/icons/Icono 1.2.svg", text: "Tarifas competitivas en envíos dentro y fuera de Canadá y México." },
+  //     { icon: "/img/icons/Icono 1.3.svg", text: "Nuestros camiones cruzan ambas fronteras cada día." },
+  //     { icon: "/img/icons/Icono 1.4.svg", text: "Podemos recoger su mercancía en la puerta de su casa en los USA y entregarla en cualquier dirección en México." },
+  //     { icon: "/img/icons/Icono 1.5.svg", text: "Servicio de importación a México." },
+  //     { icon: "/img/icons/Icono 1.6.svg", text: "Servicio de consolidados." },
+  //   ],
+  // },
   crossborder: {
     title: "Servicios de transporte y entrega transfronteriza",
     bullets: [
-      { icon: "/img/icons/Icono 1.1.svg", text: "Envíos sin problemas entre USA, Canadá y México." },
-      { icon: "/img/icons/Icono 1.2.svg", text: "Tarifas competitivas en envíos dentro y fuera de Canadá y México." },
-      { icon: "/img/icons/Icono 1.3.svg", text: "Nuestros camiones cruzan ambas fronteras cada día." },
-      { icon: "/img/icons/Icono 1.4.svg", text: "Podemos recoger su mercancía en la puerta de su casa en los USA y entregarla en cualquier dirección en México." },
-      { icon: "/img/icons/Icono 1.5.svg", text: "Servicio de importación a México." },
-      { icon: "/img/icons/Icono 1.6.svg", text: "Servicio de consolidados." },
+      { icon: "/img/icons/Icono 1.1.svg", text: "Recepcion de mercancia en USA" },
+      { icon: "/img/icons/Icono 1.2.svg", text: "Preparacion de documentacion y tramites de importacion" },
+      { icon: "/img/icons/Icono 1.3.svg", text: "Servicio de transfer/cross border logistics" },
+      { icon: "/img/icons/Icono 1.4.svg", text: "Integracion de mercancia a Mexico para tus ventas en fisico, Amazon FBA, Mercado Libre, o Walmart FS." },
     ],
   },
   marketplaces: {
@@ -56,10 +66,12 @@ const Servicios: Record<
     ],
   },
   returns: {
-    title: "Devoluciones y retornos",
+    title: "Devoluciones y Reverse Logistics",
     bullets: [
-      { icon: "/img/icons/Icono 4.1.svg", text: "Realiza devoluciones de tus compras sin problema." },
-      { icon: "/img/icons/Icono 4.2.svg", text: "Envía a nuestra bodega en México y nosotros lo llevamos a USA para devolver a tu proveedor." },
+      { icon: "/img/icons/Icono 4.1.svg", text: "Recepción, clasificación y retorno de productos desde México a USA o Canadá." },
+      { icon: "/img/icons/Icono 4.2.svg", text: "Devoluciones FBA / FBM / Retail." },
+       { icon: "/img/icons/Icono 4.2.svg", text: "Opciones de reempaque." },
+        { icon: "/img/icons/Icono 4.2.svg", text: "Control total de inventarios y reportes detallados." },
     ],
   },
   special: {
@@ -70,6 +82,35 @@ const Servicios: Record<
       { icon: "/img/icons/Icono 5.3.svg", text: "Vuelos internacionales (prioritarios y diferidos)." },
     ],
   },
+  fulfillment: {
+    title: "Fulfillment y Distribución ",
+    bullets: [
+      { icon: "/img/icons/Icono 5.1.svg", text: "Almacenamiento seguro en bodegas estratégicas." },
+      { icon: "/img/icons/Icono 5.2.svg", text: "Gestión de inventario y control de stock en tiempo real." },
+      { icon: "/img/icons/Icono 5.3.svg", text: "Preparación de órdenes (Pick & Pack) y etiquetado para marketplaces.  tus productos, facilitando tus ventas en línea." },
+      { icon: "/img/icons/Icono 5.2.svg", text: "Distribución nacional a clientes o centros de distribución de Amazon, Mercado Libre y Walmart." },
+      { icon: "/img/icons/Icono 5.2.svg", text: "Integración con tus plataformas de eCommerce." },
+      { icon: "/img/icons/Icono 5.2.svg", text: "Traducción y adaptación de etiquetas al español." },
+    ],
+  },
+  buyShip: {
+    title: "Buy & Ship USA a México",
+    bullets: [
+      { icon: "/img/icons/Icono 5.1.svg", text: "Gestionamos el envío de muestras hasta tu puerta en México." },
+      { icon: "/img/icons/Icono 5.2.svg", text: "Realizamos pagos internacionales y nos encargamos de toda la comunicación y logística hasta que tu mercancía llegue segura a tu negocio o domicilio." },
+      { icon: "/img/icons/Icono 5.3.svg", text: "Ofrecemos servicio de importer of record, sales tax permit, y mas." },
+    ],
+  },
+  cargo: {
+     title: "¿Por qué elegir Cargo Monterrey?",
+    bullets: [
+      { icon: "/img/icons/Icono 5.1.svg", text: "Más de 10 años de experiencia en logística internacional." },
+      { icon: "/img/icons/Icono 5.2.svg", text: "Cruces fronterizos diarios y cobertura total en México, EE.UU. y Canadá." },
+      { icon: "/img/icons/Icono 5.3.svg", text: "Soporte en inglés y español." },
+      { icon: "/img/icons/Icono 5.3.svg", text: "Soluciones personalizadas según tu tipo de producto y destino." },
+      { icon: "/img/icons/Icono 5.3.svg", text: "Tarifas competitivas." },
+    ],
+  }
 
 };
 
@@ -91,7 +132,7 @@ export default function Services() {
           delay={0.2}
           lines={[
             <h2 key={1} className="texto-titulo">
-              Nuestros Servicios
+              Servicios Principales de Cargo Monterrey
             </h2>
           ]}>
 
@@ -112,17 +153,12 @@ export default function Services() {
           {Object.entries(Servicios).map(([id, service], index) => {
             const isOpen = openIndex === index;
             return (
-              <div key={id}>
+              <div key={id} className="div-tarjeta">
                 {/* Texto y bullets */}
-                <div className="div-tarjeta">
-                  
-                  <button onClick={() => setOpenIndex(isOpen ? null : index)}
-                    className="">
-                    <div className="titulo-texto-tarjeta"> {service.title}</div>  
-                    <div className="flecha-tarjeta">{isOpen ? <ChevronUp /> : <ChevronDown />}</div>
-                    
-                  </button>
-                  <div className="linea-horizontal"></div>
+                <button className="button-tarjeta-servicios" onClick={() => setOpenIndex(isOpen ? null : index)} >
+                  <div className="titulo-texto-tarjeta"> {service.title}</div>
+                  <div className="flecha-tarjeta">{isOpen ? <ChevronUp /> : <ChevronDown />}</div>
+                  <div className="linea-horizontal-servicios"></div>
 
                   <AnimatePresence initial={false}>
                     {isOpen && (
@@ -149,20 +185,12 @@ export default function Services() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-
-                </div>
-
+                </button>
               </div>
             )
           })}
 
-
         </div>
-
-
-
-
-
       </div>
     </section>
   );
