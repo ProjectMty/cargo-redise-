@@ -100,13 +100,13 @@ export default function Calculadora() {
     const [errorValor, setErrorValor] = useState<{ error: boolean, message: string | null }>({ error: false, message: "Se utilizan valores en USD" });
     const [errorPeso, setErrorPeso] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Se cobra una comision en caso de sobrepasar el peso maximo permitido" });
     const [errorCantidad, setErrorCantidad] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Mas de 20 articulos se cobra 16% IVA" });
-    const [errorLargo, setErrorLargo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
-    const [errorAncho, setErrorAncho] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
-    const [errorAlto, setErrorAlto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
+    const [errorLargo, setErrorLargo] = useState<{ error: boolean, message: string } | null>({ error: false, message:  "Si pasa 60 cm se cobra exceso de dimensiones" });
+    const [errorAncho, setErrorAncho] = useState<{ error: boolean, message: string } | null>({ error: false, message:  "Si pasa 60 cm se cobra exceso de dimensiones" });
+    const [errorAlto, setErrorAlto] = useState<{ error: boolean, message: string } | null>({ error: false, message:  "Si pasa 60 cm se cobra exceso de dimensiones" });
     const [errorCosto, setErrorCosto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Costo aproximado" });
     const [errorTelefono, setErrorTelefono] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Telefono con formato internacional" });
     const [errorCorreo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Correo valido" });
-    const [errorDestinatario, setErrorDestinatario] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Ingresa tu codigo postal de destino" });
+    const [errorDestinatario, setErrorDestinatario] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Por favor, proporciona el código postal del destino del paquete." });
 
     //booleanos
     const [pallets, setPallets] = useState(false);
@@ -159,8 +159,8 @@ export default function Calculadora() {
         pesoMaxLb = pesoMaxKg * 2.20462
         pesoMaxLb = Math.round((pesoMaxLb + Number.EPSILON) * 100) / 100;
         setVoluenLb(pesoMaxLb);
-
-    }, [largo, ancho, alto, opcion, convertirInToCm]);
+        console.log(volumenLb);
+    }, [largo, ancho, alto, opcion, convertirInToCm, volumenLb]);
 
     // #endregion
 
@@ -193,7 +193,7 @@ export default function Calculadora() {
 
         setErrorCosto({ error: false, message: "Costo aproximado" });
         setErrorTelefono({ error: false, message: "Telefono con formato internacional" });
-        setErrorDestinatario({ error: false, message: "Ingresa tu codigo postal de destino" });
+        setErrorDestinatario({ error: false, message: "Por favor, proporciona el código postal del destino del paquete." });
 
     }, []);
 
@@ -519,18 +519,18 @@ export default function Calculadora() {
             }
             const data = await response.json();
             setDireccionRecibida(data);
-            console.log(data)
+        
 
             if (Array.isArray(data) && data.length > 0) {
-                setErrorDestinatario({ error: false, message: "9.50 USD dentro del area metropolitana" });
+                setErrorDestinatario({ error: false, message: "Si tu envío se encuentra dentro del área metropolitana, se aplicará una tarifa de 9.50 USD" });
             } else {
-                setErrorDestinatario({ error: true, message: "ingrese codigo postal valido" });
+                setErrorDestinatario({ error: true, message: "Por favor, proporciona el código postal del destino del paquete." });
             }
 
 
         } catch (error) {
             console.error("Error validando el cp:", error);
-            setErrorDestinatario({ error: true, message: "Ingrese un codigo postal valido" });
+            setErrorDestinatario({ error: true, message: "Por favor, proporciona un código postal valido del destino del paquete." });
         }
     };
 
@@ -750,11 +750,8 @@ export default function Calculadora() {
 
 
         const value = captcha.current.getValue();
-        console.log(value);
         if (value) {
             setCaptchaValido(true);
-            console.log("usuario no robot")
-
         } else {
             setCaptchaValido(false);
         }
@@ -834,9 +831,6 @@ export default function Calculadora() {
         }
 
         try {
-
-
-
             const blob = await pdf(
                 <PDF
                     tipoSeleccionado={tipoSeleccionado}
@@ -871,7 +865,6 @@ export default function Calculadora() {
             reader.onloadend = () => {
                 const base64data = reader.result as string;
                 localStorage.setItem("pdfBase64", base64data);
-                console.log("⭐​ PDF guardado en localStorage ⭐​");
             };
 
             Swal.fire({
@@ -919,22 +912,24 @@ export default function Calculadora() {
                     {/* contenedor de calculadora */}
                     <div className="fondo-contenedor">
 
+{/* ESPACIADO */}
                         <div className="col-span-4">
                         </div>
 
+{/* UNIDADES */}
                         <div className="contenedor-filas-2">
                             <div className="flex input p-1">
                                 <button type="button"
                                     onClick={() => setOpcion("MXS")}
                                     className={`switch-opciones
-                                    ${opcion === "MXS" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
+                                    ${opcion === "MXS" ? "bg-blue-400 text-white" : " text-[#000000]/35"}`}
                                 >
                                     KG/CM
                                 </button>
                                 <button type="button"
                                     onClick={() => setOpcion("USA")}
                                     className={`switch-opciones
-                                    ${opcion === "USA" ? "bg-blue-400 text-white" : "bg-gray-200 text-black"}`}
+                                    ${opcion === "USA" ? "bg-blue-400 text-white" : " text-[#000000]/35"}`}
                                 >
                                     LB/IN
                                 </button>
@@ -942,6 +937,7 @@ export default function Calculadora() {
 
                         </div>
 
+{/* TIPO DE ENVIO */}
                         <div className="contenedor-filas-2">
                             <label className="label">Tipo de Envío</label>
                             <select name="TipoContenedor" id="TipoContenedor" className="select"
@@ -954,26 +950,32 @@ export default function Calculadora() {
                                     </option>
                                 ))}
                             </select>
+                            <FadeInOutError
+                                message="Selecciona tipo de envio"
+                                error={false}
+                            />
                         </div>
 
+{/* CANTIDAD */}
                         <div className="contenedor-filas-2 group">
                             {/* Ingreso de cantidad */}
-                         
-                                <label htmlFor="valorProd" className="label">Cantidad de {tipoSeleccionado} </label>
- 
+
+                            <label htmlFor="valorProd" className="label">Cantidad de {tipoSeleccionado} </label>
+
                             <input type="number" min="0" className="input" value={cantidadSeleccion} onChange={(e) =>
                                 setCantidadSeleccion(e.target.value === "" ? "" : Number(e.target.value))}
                                 placeholder="0 piezas"
                             />
 
-                            {/* 
-                                        <FadeInOutError
-                                            message={errorValor?.message ?? ""}
-                                            error={errorValor?.error}
-                                        /> */}
+
+                            <FadeInOutError
+                                message="Número total"
+                                error={false}
+                            />
 
                         </div>
 
+{/* VALOR */}
                         <div className="contenedor-filas-2">
                             <label htmlFor="valorProd" className="label">Valor producto </label>
                             <div className=" flex">
@@ -987,12 +989,13 @@ export default function Calculadora() {
                             </div>
 
 
-                            {/* <FadeInOutError
-                                            message={errorValor?.message ?? ""}
-                                            error={errorValor?.error}
-                                        /> */}
+                            <FadeInOutError
+                                message={errorValor?.message ?? ""}
+                                error={errorValor?.error}
+                            />
                         </div>
 
+{/* PRODUCTO REPETITIVO */}
                         <div className="contenedor-filas-2">
 
                             <label htmlFor="repetitivo" className="label">¿Tu producto es repetitivo?</label>
@@ -1013,11 +1016,15 @@ export default function Calculadora() {
                                     NO
                                 </button>
                             </div>
-
+    <FadeInOutError
+                                message="Son de la misma naturaleza"
+                                error={false}
+                            />
 
 
                         </div>
 
+{/* CANTIDAD UNIDADES */}
                         <div className="contenedor-filas-2">
 
                             <label htmlFor="cantidad" className="label"> Cantidad de unidades</label>
@@ -1027,12 +1034,13 @@ export default function Calculadora() {
                                 placeholder="0 piezas" />
 
 
-                            {/* <FadeInOutError
-                                            message={errorCantidad?.message ?? ""}
-                                            error={errorCantidad?.error}
-                                        /> */}
+                            <FadeInOutError
+                                message={errorCantidad?.message ?? ""}
+                                error={errorCantidad?.error}
+                            />
                         </div>
 
+{/* LARGO X ANCHO X ALTO */}
                         <div className="contenedor-3-col">
                             <div className="contenedor-filas-2">
 
@@ -1045,10 +1053,10 @@ export default function Calculadora() {
                                     <div className="units">{opcion === "USA" ? "in" : "cm"}</div>
                                 </div>
 
-                                {/* <FadeInOutError
+                                <FadeInOutError
                                     message={errorLargo?.message ?? ""}
                                     error={errorLargo?.error}
-                                /> */}
+                                />
                             </div>
 
                             {/* ancho */}
@@ -1062,11 +1070,11 @@ export default function Calculadora() {
                                         placeholder="0" />
                                     <div className="units">{opcion === "USA" ? "in" : "cm"}</div>
                                 </div>
-                                {/* 
+
                                 <FadeInOutError
                                     message={errorAncho?.message ?? ""}
                                     error={errorAncho?.error}
-                                /> */}
+                                />
                             </div>
 
                             {/*alto  */}
@@ -1082,14 +1090,18 @@ export default function Calculadora() {
                                         placeholder="0" />
                                     <div className="units">{opcion === "USA" ? "in" : "cm"}</div>
                                 </div>
-                                {/* <FadeInOutError
-                                    message={errorAlto?.message ?? ""}
-                                    error={errorAlto?.error}
-                                /> */}
+                                <div>
+                                    <FadeInOutError
+                                        message={errorAlto?.message ?? ""}
+                                        error={errorAlto?.error}
+                                    />
+                                </div>
+
 
                             </div>
                         </div>
 
+{/* PESO */}
                         <div className="contenedor-filas-2">
                             <label htmlFor="Peso" className="label">Peso: </label>
                             <div className="flex">
@@ -1099,12 +1111,13 @@ export default function Calculadora() {
 
                                 <div className="units">{opcion === "USA" ? "lb" : "kg"}</div>
                             </div>
-                            {/* <FadeInOutError
+                            <FadeInOutError
                                             message={errorPeso?.message ?? ""}
                                             error={errorPeso?.error}
-                                        /> */}
+                                        />
                         </div>
 
+{/* DESTINO */}
                         <div className="contenedor-filas-2">
                             <label htmlFor="Peso" className="label">Destino </label>
                             <select name="TipoDestino" id="TipoDestino" className="select"
@@ -1117,8 +1130,13 @@ export default function Calculadora() {
                                     </option>
                                 ))}
                             </select>
+                            <FadeInOutError
+                                message="Cuéntanos, ¿a qué destino deseas enviar tu paquete?"
+                                error={false}
+                            />
                         </div>
 
+{/* CODIGO POSDTAL */}
                         {entrega === "Envia" ? (
                             <div className="contenedor-filas-2">
                                 <label htmlFor="valorProd" className="label">Codigo Postal: </label>
@@ -1132,29 +1150,32 @@ export default function Calculadora() {
                                     <div className="units">CP</div>
                                 </div>
 
-                                {/* 
+
                                 <FadeInOutError
                                     message={errorDestinatario?.message ?? ""}
                                     error={errorDestinatario?.error}
-                                /> */}
+                                />
                             </div>
                         ) : (
                             <div className="flex items-center justify-center">
                                 <label htmlFor="valorProd" className="label">No hay costo de envio </label>
                             </div>
                         )}
+
+{/* BOTON COTIZAR */}
                         <div className="contenedor-filas-2">
                             <div></div>
                             <input type="button" value="Cotizar" onClick={sendForms} className=" button" />
                         </div>
 
+{/* BOTON CONTACTAR */}
                         <div className="contenedor-filas-2">
                             <div></div>
                             <input type="submit" value="Contactar asesor" className={asesor ? "button-disabled" : " button"} onClick={() => setAsesor(true)} />
 
                         </div>
 
-
+{/* PRECIO */}
                         <div className="contenedor-precio">
                             <label htmlFor="costo" className="label">Costo </label>
                             <div className="flex">
@@ -1166,11 +1187,8 @@ export default function Calculadora() {
 
                         </div>
                         <div className={`rounded-[4px]
-                            ${exceso ? " bg-white" : "bg-blue-400 text-white"}`}>
-                            <FadeInOutError
-                                message={errorCosto?.message ?? ""}
-                                error={errorCosto?.error}
-                            />
+                            ${exceso ? "error" : "bg-blue-400 text-white"}`}>
+                           {errorCosto?.message ?? ""}
                         </div>
 
 
@@ -1193,9 +1211,11 @@ export default function Calculadora() {
                             <label htmlFor="ContactName" className="label">Nombre: </label>
                             <input type="text" name="name" id="ContactName" className="input"
                                 value={nombre}
-                                placeholder="nombre"
                                 onChange={(e) => SetNombre(e.target.value)} />
-
+  <FadeInOutError
+                                            message="¿Cómo te llamas?"
+                                            error={false}
+                                        />
                         </div>
 
                         <div className={asesor ? "contenedor-filas-2" : "hidden"}>
@@ -1204,10 +1224,10 @@ export default function Calculadora() {
                                 value={telefono}
                                 placeholder="(123) 456-7890"
                                 onChange={handleChangeTelefono} />
-                            {/* <FadeInOutError
+                            <FadeInOutError
                                             message={errorTelefono?.message ?? ""}
                                             error={errorTelefono?.error}
-                                        /> */}
+                                        />
                         </div>
 
                         <div className={asesor ? "contenedor-filas-2" : "hidden"}>
@@ -1217,10 +1237,10 @@ export default function Calculadora() {
                                 value={correo}
                                 placeholder="ejemplo@correo.com"
                                 onChange={(e) => SetCorreo(e.target.value)} />
-                            {/* <FadeInOutError
+                            <FadeInOutError
                                             message={errorCorreo?.message ?? ""}
                                             error={errorCorreo?.error}
-                                        /> */}
+                                        />
                         </div>
 
                         <div className={asesor ? " col-span-2" : "hidden"}>

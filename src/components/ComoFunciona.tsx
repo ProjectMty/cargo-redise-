@@ -16,8 +16,6 @@ const ContainerSteps = {
   },
 };
 
-
-
 const AnimationShow = {
   hidden: { opacity: 0 },
   show: {
@@ -29,15 +27,10 @@ const AnimationShow = {
   },
 };
 
-
-
-
 // #endregion
 
 export default function ComoFunciona() {
   // const isMobile = useIsMobile();
-
- 
 
   return (
     <motion.section
@@ -65,6 +58,7 @@ export default function ComoFunciona() {
           
         </p>
       </div>
+
       {/* Contenedor principal con fondo blanco */}
       <div className="contenedor-principal">
         <motion.div
@@ -76,7 +70,6 @@ export default function ComoFunciona() {
 
         {/* Grid de pasos */}
         <div className="grid-pasos mt-10">
-
 
           {/* Paso 1 izquierda*/}
           <motion.div
@@ -93,7 +86,7 @@ export default function ComoFunciona() {
             <div className="contenedor-paso-titulo-izquierdo">
               <h2>Realiza tus compras</h2>
               <div className="cuadrado-izquierda" />
-              <div className="linea-horizontal-izquierda mt-2.5"></div>
+              <div className="linea-horizontal-izquierda"></div>
             </div>
             <p className="contenedor-paso-texto-izquierdo ">
               Compra en línea con tu proveedor o en
@@ -110,17 +103,17 @@ export default function ComoFunciona() {
           <motion.div
           variants={AnimationShow}
             className="contenedor-paso-derecho">
-            <div className="imagen-paso-2">
+          
+            <div className="contenedor-paso-titulo-derecho">
+              <h2>Dirección en Laredo, TX</h2>
+              <div className="cuadrado-derecha"></div>
+              <div className="linea-horizontal-derecha"></div>
+            </div>  <div className="imagen-paso-2">
               <Image
                 src="/img/funciona/Paso-2.png"
                 alt="paso 2"
                 width={350}
                 height={350} />
-            </div>
-            <div className="contenedor-paso-titulo-derecho">
-              <h2>Dirección en Laredo, TX</h2>
-              <div className="cuadrado-derecha"></div>
-              <div className="linea-horizontal-derecha"></div>
             </div>
             <p className="contenedor-paso-texto-derecho">
               Asigna la dirección de nuestro almacén en Estados Unidos
@@ -141,8 +134,8 @@ export default function ComoFunciona() {
             </div>
             <div className="contenedor-paso-titulo-izquierdo">
               <h2>Comparte tus comprobantes</h2>
-              <div className="cuadrado-izquierda mt-1"></div>
-              <div className="linea-horizontal-izquierda mt-3"></div>
+              <div className="cuadrado-izquierda"></div>
+              <div className="linea-horizontal-izquierda"></div>
             </div>
             <p className="contenedor-paso-texto-izquierdo">
               Envía a tu asesor tu pago y número de rastreo
@@ -158,17 +151,18 @@ export default function ComoFunciona() {
           <motion.div
           variants={AnimationShow}
             className="contenedor-paso-derecho">
+            
+            <div className="contenedor-paso-titulo-derecho">
+              <h2 className="px-5">Trámite aduanal</h2>
+              <div className="cuadrado-derecha"></div>
+              <div className="linea-horizontal-derecha"></div>
+            </div>
             <div className="imagen-paso-4">
               <Image
                 src="/img/funciona/Paso-4.png"
                 alt="paso 4"
                 width={400}
                 height={400} />
-            </div>
-            <div className="contenedor-paso-titulo-derecho">
-              <h2 className="px-5">Trámite aduanal</h2>
-              <div className="cuadrado-derecha"></div>
-              <div className="linea-horizontal-derecha"></div>
             </div>
             <p className="contenedor-paso-texto-derecho">
               Nosotros nos encargamos de cruzar tu mercancía a México
@@ -189,8 +183,8 @@ export default function ComoFunciona() {
             </div>
             <div className="contenedor-paso-titulo-izquierdo">
               <h2>Pago y entrega</h2>
-              <div className="cuadrado-izquierda mt-1"></div>
-              <div className="linea-horizontal-izquierda mt-3"></div>
+              <div className="cuadrado-izquierda"></div>
+              <div className="linea-horizontal-izquierda"></div>
             </div>
             <p className="contenedor-paso-texto-izquierdo">
               Pagas honorarios e impuestos, y recibes en tu domicilio
@@ -200,10 +194,8 @@ export default function ComoFunciona() {
           {/* Paso 6 abajo-central */}
           <motion.div
           variants={AnimationShow}
-            className="contenedor-paso-central col-span-2">
-            <div>
-
-
+            className="contenedor-paso-central ">
+           
               <div className="imagen-paso-6">
                 <Image
                   src="/img/funciona/Paso-6.png"
@@ -219,7 +211,7 @@ export default function ComoFunciona() {
                 Te generamos factura por servicios o productos
 
               </p>
-            </div>
+           
           </motion.div>
 
         </div>

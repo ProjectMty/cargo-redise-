@@ -112,7 +112,15 @@
 }
 
 .error {
-  @apply text-[16px] font-light text-red-500 text-center items-center justify-center
+  @apply text-[16px] font-light text-red-500 text-center items-center justify-center bg-white
+}
+
+.mensaje-def{
+  @apply flex text-[10px] font-light text-gray-200 text-center items-center justify-center 
+}
+
+.mensaje-error {
+  @apply text-[10px] font-light text-red-500 text-center items-center justify-center
 }
 
 /* #endregion */

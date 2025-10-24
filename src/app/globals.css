@@ -15,7 +15,7 @@
   --primary-light: #00aeef;                 /* Azul claro para resaltes/links */
   --secondary: #f3f4f6;                     /* Gris claro para bloques si se usa */
   --highlight: oklch(42.4% 0.199 265.638);  /* Azul para headers o secciones */
-
+  --primary-blue: #0B4BA2;
 }
 
 /* =========================

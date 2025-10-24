@@ -1,0 +1,176 @@
+.section-hero {
+    @apply relative w-full rounded-b-[60px] font-[Montserrat]
+}
+
+/* #region TITULO */
+.Img-fondo-hero {
+    @apply relative w-full h-[55vh] rounded-b-[36px]
+}
+
+.Contenedor-titulo-hero {
+    @apply absolute inset-0 flex items-center justify-center text-center px-4 z-10
+}
+
+.Titulo-hero {
+    @apply text-white font-normal leading-tight drop-shadow-lg text-[25px] max-w-3xl mx-auto
+}
+
+/* #endregion*/
+
+/* #region SERVICIOS */
+
+.Contenedor-servicios-hero {
+    @apply relative z-20 flex justify-center -mt-20 px-4 mb-20
+}
+
+.contenedor-informacion-hero {
+    @apply w-full max-w-6xl bg-white rounded-[40px] shadow-xl p-6 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-8
+}
+
+.servicio-hero {
+    @apply flex items-start space-x-4
+}
+
+.servicio-titulo-hero {
+    @apply text-[#061349] font-bold text-lg
+}
+
+.servicio-texto-hero {
+    @apply text-gray-600 text-sm
+}
+
+/* #endregion*/
+
+/* #region ABOUT */
+.contenedor-section-about-hero {
+    @apply relative bg-[var(--primary-blue)] text-white
+}
+
+.contenedor-about-hero {
+    @apply max-w-6xl mx-auto px-4 py-16 md:px-8
+}
+
+.titulo-about-hero {
+    @apply text-center font-bold leading-tight text-[36px] md:text-[42px]
+}
+
+.parrafo-about-hero {
+    @apply text-white/90 text-sm
+}
+
+.contenedor-inferior-about-hero {
+    @apply mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-8
+}
+
+.img-izq-about-hero {
+    @apply w-full max-w-[560px] h-auto rounded-2xl object-cover shadow-lg
+}
+
+.div-der-about-hero {
+    @apply bg-white text-[var(--primary-blue)] rounded-3xl shadow-xl p-6  relative z-10  text-right
+}
+
+.titulo-der-about-hero{
+    @apply font-extrabold text-lg 
+}
+
+.parrafo-der-about-hero{
+    @apply mt-3 text-sm text-gray-700 leading-relaxed
+}
+
+/* #endregion*/
+
+
+@media (min-width: 500px) {
+
+    /* #region TITULO */
+    .img-fondo-hero {
+        @apply h-[65vh]
+    }
+
+    .Contenedor-titulo-hero {
+        @apply px-6
+    }
+
+    .Titulo-hero {
+        @apply text-[36px]
+    }
+
+    /* #endregion*/
+
+    /* #region SERVICIOS */
+    .Contenedor-servicios-hero {
+        @apply -mt-32 px-8
+    }
+
+    .contenedor-informacion-hero {
+        @apply p-10 grid-cols-2
+    }
+
+    /* #endregion*/
+
+    /* #region ABOUT */
+    .contenedor-about-hero {
+        @apply px-8
+    }
+
+    .titulo-about-hero {
+        @apply text-[42px]
+    }
+
+    .parrafo-about-hero {
+        @apply text-base
+    }
+
+    .contenedor-inferior-about-hero {
+        @apply mt-12 grid-cols-2 gap-8
+    }
+
+    .div-der-about-hero {
+        @apply p-8 -ml-16
+    }
+    .titulo-der-about-hero{
+    @apply text-xl
+}
+.parrafo-der-about-hero{
+    @apply text-base 
+}
+
+
+    /* #endregion*/
+}
+
+@media (min-width: 1024px) {
+
+    /* #region TITULO */
+    .img-fondo-hero {
+        @apply h-[577px] overflow-hidden
+    }
+
+    .Titulo-hero {
+        @apply text-[48px]
+    }
+
+    /* #endregion*/
+
+    /* #region ABOUT */
+    .div-der-about-hero {
+        @apply -ml-24
+    }
+
+    /* #endregion*/
+}
+
+@media (min-width: 1536px) {
+
+    /* #region TITULO */
+    .img-fondo-hero {
+        @apply h-[65vh]
+    }
+
+    .Titulo-hero {
+        @apply text-[48px]
+    }
+    /* #endregion*/
+
+}
