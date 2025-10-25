@@ -6,7 +6,6 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useCalculadoraVisible } from "../context/CalculadoraVisibleContext";
-import { FaWhatsapp } from "react-icons/fa";
 
 const navigation = [
   { name: "Inicio", href: "/#hero" },
@@ -164,16 +163,7 @@ export default function Navbar() {
         </Dialog>
       </Transition>
 
-      <div className="absolute 
-      top-[1300%] 3xl:top-[2000%]
-      left-[90%]  3xl:left-[95%]">
-        <a href="https://wa.me/5218114123816">
-          <div className="w-10 h-10 lg:w-20 lg:h-20 rounded-full bg-green-500 text-white flex items-center justify-center mt-7 lg:mt-5 ">
-            <FaWhatsapp className="w-10 h-10"></FaWhatsapp>
-          </div>
-        </a>
-        
-      </div>
+
 
 
 

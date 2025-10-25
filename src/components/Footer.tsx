@@ -53,6 +53,16 @@ export default function Footer() {
       // onChange={hanleReCaptcha}
       // className={asesor ? "" : "hidden"}
       />
+      <div className=" fixed
+      top-[83%] md:top-[86%] lg:top-[80%]
+      left-[85%] md:left-[92%] lg:left-[94%] xl:left-[95%]">
+        <a href="https://wa.me/5218114123816">
+          <div className="w-14 h-14 lg:w-18 lg:h-18 xl:w-20 xl:h-20 rounded-full bg-green-500 text-white flex items-center justify-center mt-7 lg:mt-5 ">
+            <FaWhatsapp className="w-10 h-10"></FaWhatsapp>
+          </div>
+        </a>
+
+      </div>
     </section>
   )
 }

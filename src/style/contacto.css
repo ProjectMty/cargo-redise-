@@ -1,3 +1,5 @@
+/* #region CONTENEDOR */
+
 .section-contactanos {
     @apply z-0 relative w-full flex scroll-mt-20 font-[Montserrat]
         justify-center items-center py-5 bg-gradient-to-r from-blue-400
@@ -5,43 +7,196 @@
 }
 
 .titulo-contatanos{
-    @apply font-bold text-[36px] md:text-[42px] text-center relative mt-5
+    @apply font-semibold text-[36px] text-center relative mt-5
 }
 
 .contenedor-formulario{
-    @apply bg-[#0b4ba2] z-20 mx-3 mt-10 mb-40 
-    lg:translate-x-1/4 lg:w-2/3 h-1/2 grid lg:grid-cols-2 gap-7 rounded-3xl
+    @apply  z-20 mx-8 mt-5 mb-10 
+      h-1/2 grid gap-7 rounded-3xl
+}
+/* #endregion */
+
+/* #region CONTENEDOR-IZQ */
+.contenedor-izq{
+    @apply mb-10
 }
 
+.titulo-izq{
+    @apply mt-10 text-center font-semibold text-[20px] 
+}
+
+.conteneodr-inf{
+    @apply  px-1 grid grid-cols-4 mt-6 gap-16 text-start items-center
+}
+
+.contenedor-icon{
+    @apply w-16 h-16 rounded-full bg-[var(--primary-blue)]
+     text-white flex items-center justify-center font-bold mt-7 
+      text-xl
+}
+.icon{
+    @apply w-8 h-8
+}
+
+.contenedor-numeros{
+    @apply grid text-[16px] mt-7 -ml-2.5 
+}
+
+.informacion{
+    @apply text-[16px]  mt-6 -ml-2.5 col-span-3 hover:underline
+}
+/* #endregion */
+
+/* #region CONTENEDOR-DER */
+.contenedor-der{
+    @apply bg-[var(--primary-blue)] justify-center items-center w-full h-full text-[16px] rounded-3xl
+}
+
+.contenedor-forms{
+    @apply w-full mt-5 px-8 
+}
+
+.contenedor-input{
+    @apply bg-white w-full mt-1 mb-5 h-10 rounded-[4px]
+    outline-none focus:ring-2 focus:ring-blue-300 transition-all 
+    duration-300 text-black text-[14px]
+}
+
+.contenedor-input-asunto{
+    @apply bg-white w-full mt-1 mb-5 rounded-[4px]
+    outline-none focus:ring-2 focus:ring-blue-300 transition-all 
+    duration-300 text-black resize-none text-[14px]
+}
+
+.boton-formulario-der{
+    @apply flex hover:bg-white hover:text-[#0b4ba2] rounded-[4px] text-center 
+            justify-center items-center w-full h-10 font-semibold text-[20px]
+         bg-blue-300 text-white transition duration-300 mb-5
+}
+
+/* #endregion */
+
+@media (min-width: 500px){
+/* #region CONTENEDOR */
+
+.section-contactanos {
+    @apply z-0 relative w-full flex scroll-mt-20 font-[Montserrat]
+        justify-center items-center py-5 bg-gradient-to-r from-blue-400
+         to-blue-900 scroll-smooth text-white
+}
+
+.titulo-contatanos{
+    @apply font-semibold text-[42px] text-center relative mt-5
+}
+
+.contenedor-formulario{
+    @apply bg-[var(--primary-blue)] z-20 mx-2 mt-5 mb-10 
+      h-1/2 grid gap-7 rounded-3xl
+}
+/* #endregion */
+
+/* #region CONTENEDOR-IZQ */
+.contenedor-izq{
+    @apply  mb-8 
+}
+
+.titulo-izq{
+    @apply mt-8 text-center  text-[20px]
+}
+
+.conteneodr-inf{
+    @apply  px-5 grid grid-cols-4 mt-6 gap-16 text-start items-center
+}
+
+.contenedor-icon{
+    @apply w-16 h-16 rounded-full bg-[#5b9ef2]
+     text-white flex items-center justify-center font-bold mt-7 
+      translate-x-16
+}
+.icon{
+    @apply w-8 h-8
+}
+
+.contenedor-numeros{
+    @apply grid text-[18px]  mt-2 -ml-2.5 
+}
+
+.informacion{
+    @apply text-[18px]  mt-6 -ml-2.5 col-span-3 hover:underline
+}
+/* #endregion */
+
+/* #region CONTENEDOR-DER */
+.contenedor-der{
+    @apply bg-[#5b9ef2] justify-center items-center w-full h-full text-[20px] rounded-3xl
+}
+
+.contenedor-forms{
+    @apply w-full mt-5 px-12 
+}
+
+.contenedor-input{
+    @apply bg-white w-full mt-2 mb-6 h-10 
+    outline-none focus:ring-2 focus:ring-blue-300 transition-all 
+    duration-300 text-black text-[14px]
+}
+
+.contenedor-input-asunto{
+    @apply bg-white w-full mt-2 mb-6 
+    outline-none focus:ring-2 focus:ring-blue-300 transition-all 
+    duration-300 text-black resize-none text-[14px]
+}
+
+.boton-formulario-der{
+    @apply flex  text-center justify-center items-center w-full h-16 font-bold text-[20px]
+ bg-[#0b4ba2] text-white transition duration-300
+}
+
+/* #endregion */
+
+}
+
+@media (min-width: 1024px){
+    /* #region CONTENEDOR */
+
+
+.contenedor-formulario{
+    @apply  z-20  mt-10 mb-20 
+    translate-x-[10%] w-[85%] h-1/2 grid grid-cols-2 gap-7 rounded-3xl
+}
+/* #endregion */
+
+/* #region CONTENEDOR-IZQ */
 .contenedor-izq{
     @apply  mb-10
 }
 
 .titulo-izq{
-    @apply mt-6 text-center font-bold text-lg lg:text-[25px]
+    @apply mt-6 text-center font-bold text-[25px]
 }
 
 .conteneodr-inf{
-    @apply  px-5 grid grid-cols-4 mt-6 lg:left-20 gap-16 text-start items-center
+    @apply  px-5 grid grid-cols-4 mt-6 left-20 gap-16 text-start items-center
 }
 
 .contenedor-icon{
-    @apply w-10 h-10 lg:w-16 lg:h-16 rounded-full bg-[#5b9ef2]
-     text-white flex items-center justify-center font-bold mt-7 
-     lg:mt-6 text-xl  lg:translate-x-10
+    @apply  w-16 h-16 rounded-full bg-[#5b9ef2]
+     text-white flex items-center justify-center font-bold mt-6 text-xl translate-x-10
 }
 .icon{
     @apply w-10 h-10
 }
 
 .contenedor-numeros{
-    @apply grid text-[20px] lg:text-lg mt-2 -ml-2.5 
+    @apply grid text-[20px] text-lg mt-2 -ml-2.5 
 }
 
 .informacion{
-    @apply text-[20px] lg:text-lg mt-6 -ml-2.5 col-span-3 hover:underline
+    @apply text-[20px] text-lg mt-6 -ml-2.5 col-span-3 hover:underline
 }
+/* #endregion */
 
+/* #region CONTENEDOR-DER */
 .contenedor-der{
     @apply bg-[#5b9ef2] justify-center items-center w-full h-full text-[20px] rounded-3xl
 }
@@ -62,3 +217,81 @@
     duration-300 text-black resize-none text-[16px]
 }
 
+/* #endregion */
+
+}
+
+
+@media (min-width: 2000px){
+    /* #region CONTENEDOR */
+
+.section-contactanos {
+    @apply z-0 relative w-full flex scroll-mt-20 font-[Montserrat]
+        justify-center items-center py-5 bg-gradient-to-r from-blue-400
+         to-blue-900 scroll-smooth text-white
+}
+
+.titulo-contatanos{
+    @apply font-bold text-[42px] text-center relative mt-5
+}   
+
+.contenedor-formulario{
+    @apply  z-20 mx-3 mt-10 mb-20 
+    translate-x-1/4 w-2/3 h-1/2 grid grid-cols-2 gap-7 rounded-3xl
+}
+/* #endregion */
+
+/* #region CONTENEDOR-IZQ */
+.contenedor-izq{
+    @apply  mb-10
+}
+
+.titulo-izq{
+    @apply mt-6 text-center font-bold text-[25px]
+}
+
+.conteneodr-inf{
+    @apply  px-5 grid grid-cols-4 mt-6 left-20 gap-16 text-start items-center
+}
+
+.contenedor-icon{
+    @apply  w-16 h-16 rounded-full bg-[#5b9ef2]
+     text-white flex items-center justify-center font-bold mt-6 text-xl translate-x-10
+}
+.icon{
+    @apply w-10 h-10
+}
+
+.contenedor-numeros{
+    @apply grid text-[20px] text-lg mt-2 -ml-2.5 
+}
+
+.informacion{
+    @apply text-[20px] text-lg mt-6 -ml-2.5 col-span-3 hover:underline
+}
+/* #endregion */
+
+/* #region CONTENEDOR-DER */
+.contenedor-der{
+    @apply bg-[#5b9ef2] justify-center items-center w-full h-full text-[20px] rounded-3xl
+}
+
+.contenedor-forms{
+    @apply w-full mt-3 px-6 
+}
+
+.contenedor-input{
+    @apply bg-white w-full mt-2 mb-3 h-7 rounded-md
+    outline-none focus:ring-2 focus:ring-blue-300 transition-all 
+    duration-300 text-black text-[16px]
+}
+
+.contenedor-input-asunto{
+    @apply bg-white w-full mt-2 mb-3 rounded-md
+    outline-none focus:ring-2 focus:ring-blue-300 transition-all 
+    duration-300 text-black resize-none text-[16px]
+}
+
+/* #endregion */
+
+}

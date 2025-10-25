@@ -6,10 +6,10 @@ import Link from "next/link";
 import TextShow from "@/animate/TextShow";
 import DivZoom from "@/animate/DivZoom";
 import TimeZoom from "@/animate/TimeZoom";
-
+import "@/style/buy&ship.css"
 export default function BuyAndShipCTA() {
   return (
-    <section id="buyandship" className="relative w-full flex justify-center items-center py-20 bg-gradient-to-r from-blue-400 to to-blue-900 font-[Montserrat] scroll-smooth">
+    <section id="buyandship" className="section-buyShip">
 
 
       <div className="relative w-full max-w-4xl">
@@ -19,32 +19,30 @@ export default function BuyAndShipCTA() {
           alt="Buy & Ship"
           width={1200}
           height={600}
-          className="w-full h-auto rounded-[28px] object-cover z-10"
+          className="img-fondo-buyShip"
           priority
         />
 
-
-
-        <div className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] lg:-translate-y-[60%] w-[88vw] max-w-[500px] text-center text-white">
+        <div className="contenedor-texto-buyShip">
           <TextShow delay={0.2} lines={[
-            <h1 key={1} className="font-extrabold lg:text-[35px] mb-3 lg:mb-10">
+            <h1 key={1} className="titulo-buyShip">
               ¿Buscas proveedores para surtir tu negocio?
             </h1>
           ]}>
 
           </TextShow>
           <TimeZoom delay={0.5}>
-          <DivZoom scale={1.2}>
-            <Image
-              src="/img/buyandship/buyShipLogo.svg"
-              alt="logo buy and ship"
-              width={500}
-              height={200}
-              className="mb-3 lg:mb-10" />
-          </DivZoom>
-</TimeZoom>
+            <DivZoom scale={1.2}>
+              <Image
+                src="/img/buyandship/buyShipLogo.svg"
+                alt="logo buy and ship"
+                width={500}
+                height={200}
+                className="logo-buyShip" />
+            </DivZoom>
+          </TimeZoom>
           <TextShow delay={0.7} lines={[
-            <div key={1} className=" text-[10px] lg:text-[25px]">
+            <div key={1} className="subtitulo-buyShip">
               <span className="font-bold">Cargo Monterrey</span>  te ayuda con su nuevo servicio {" "}
               <span className="font-bold">Buy and Ship</span>.
             </div>
@@ -58,14 +56,14 @@ export default function BuyAndShipCTA() {
         </div>
 
         {/* Botón (sólo navega a la PÁGINA buy-and-ship) */}
-        <div className="absolute bottom-6 lg:bottom-16 w-full flex justify-center ">
+        <div className="contenedor-boton-buyShip">
           <DivZoom scale={1.2}>
-          <Link
-            href="/buy-and-ship"
-            className="text-sm lg:text-lg px-2 lg:px-6 py-0.5 lg:py-2 bg-white text-blue-800 font-semibold rounded-full shadow-md hover:bg-blue-800 hover:text-white  transition duration-350 z-50"
-          >
-            Visita aquí
-          </Link>
+            <Link
+              href="/buy-and-ship"
+              className="boton-buyShip"
+            >
+              Visita aquí
+            </Link>
           </DivZoom>
         </div>
       </div>

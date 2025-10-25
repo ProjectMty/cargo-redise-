@@ -66,9 +66,9 @@ export default function Contacto() {
 
 
     return (
-        <section id="contacto" className="">
+        <section id="contacto" className="w-full  h-full ">
             <div className="section-contactanos">
-                <div className="relative w-full z-10 ">
+                <div className="  z-10 ">
                     <AnimatedText delay={0.2} lines={[
                         <h1 key={1} className="titulo-contatanos">
                             Contáctanos
@@ -158,9 +158,7 @@ export default function Contacto() {
 
                                 </textarea>
 
-                                <button className="flex hover:bg-white hover:text-[#0b4ba2] rounded-xl text-center 
-                                    justify-center items-center w-full h-20 font-bold text-[25px]
-                                    bg-[#0b4ba2] text-white transition duration-300" onClick={handleEnvioDatos}>
+                                <button className="boton-formulario-der" onClick={handleEnvioDatos}>
                                     Enviar Datos
                                 </button>
 

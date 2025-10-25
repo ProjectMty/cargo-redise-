@@ -1,0 +1,93 @@
+.section-buyShip{
+    @apply relative w-full flex justify-center items-center py-20 
+    bg-gradient-to-r from-blue-400 to-blue-900 font-[Montserrat] scroll-smooth
+}
+
+.img-fondo-buyShip{
+    @apply w-full h-auto rounded-[28px] object-cover z-10
+}
+
+/* #region TEXTO */
+.contenedor-texto-buyShip{
+    @apply  absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] 
+     w-[88vw] max-w-[500px] text-center text-white
+}
+
+.titulo-buyShip{
+    @apply font-extrabold mb-3
+}
+.logo-buyShip{
+    @apply mb-3 
+}
+.subtitulo-buyShip{
+@apply  text-[10px] mt-5
+}
+/* #endregion */
+
+/* #region BOTON */
+.contenedor-boton-buyShip{
+    @apply absolute bottom-8 w-full flex justify-center
+}
+.boton-buyShip{
+    @apply text-sm px-2 py-1 bg-white
+     text-blue-800 font-semibold rounded-full shadow-md hover:bg-blue-800 hover:text-white  
+     transition duration-300 z-50
+}
+/* #endregion */
+
+@media (min-width: 500px) {
+    /* #region TEXTO */
+
+.titulo-buyShip{
+    @apply font-extrabold mb-8 text-[35px]
+}
+.logo-buyShip{
+    @apply mb-10 w-[100%] 
+}
+.subtitulo-buyShip{
+@apply  text-[20px] 
+}
+/* #endregion */
+
+/* #region BOTON */
+.contenedor-boton-buyShip{
+    @apply absolute bottom-16 w-[100%] justify-center
+}
+.boton-buyShip{
+    @apply text-[23px] px-6 py-3  
+}
+/* #endregion */
+
+}
+
+@media (min-width: 1024px) {
+    /* #region TEXTO */
+.contenedor-texto-buyShip{
+    @apply  absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[60%]
+     w-[88vw] max-w-[500px] text-center text-white
+}
+.titulo-buyShip{
+    @apply font-extrabold text-[35px] mb-10
+}
+.logo-buyShip{
+    @apply mb-10
+}
+.subtitulo-buyShip{
+@apply text-[25px]
+}
+/* #endregion */
+
+/* #region BOTON */
+.contenedor-boton-buyShip{
+    @apply absolute bottom-20 w-full flex justify-center
+}
+
+.boton-buyShip{
+    @apply text-lg px-6 py-2 font-semibold
+}
+/* #endregion */
+}
+
+@media (min-width: 2000px) {
+    
+}
