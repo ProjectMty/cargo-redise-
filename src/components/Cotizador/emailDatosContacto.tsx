@@ -26,7 +26,7 @@ const EmailTemplate = ({
                         {/* logo */}
                         <Section className=" text-center mb-6">
                             <Img
-                                src="https://cargomty.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-cargomty.ad406cb4.webp&w=3840&q=75"
+                                src="https://cargomonterrey.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-cargomty.126063b2.webp&w=3840&q=75"
                                 width="200"
                                 height="60"
                                 alt="Cargo logo"
