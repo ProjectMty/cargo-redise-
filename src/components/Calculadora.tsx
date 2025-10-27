@@ -85,7 +85,7 @@ export default function Calculadora() {
     const [precioSinIVA, setPrecioSinIVA] = useState<number>(0);
     const [precioConIVA, setPrecioConIVA] = useState<number>(0);
     const [precioPorPeso, setPrecioPorPeso] = useState<number | "">("");
-    const [precioPorExcesoPeso, setPrecioPorExcesoPeso] = useState<number | "">("");
+    const [precioPorExcesoPeso, setPrecioPorExcesoPeso] = useState<number | "">(0);
     const [precioBase, setPrecioBase] = useState<number | "">("");
     const [precioPorCantidad, setPrecioPorCantidad] = useState<number | "">("");
 
@@ -96,13 +96,16 @@ export default function Calculadora() {
     const [opcion, setOpcion] = useState("MXS"); // valor inicial
     const [entrega, setEntrega] = useState("Recoge"); // valor inicial
     const [direccionRecibida, setDireccionRecibida] = useState<Direccion[] | null>(null);
+    const [precioMostrar, setPrecioMostrar] = useState<number>(0);
+    const [precioIvaMostrar, setPrecioIvaMostrar] = useState<number>(0);
+
     //errores 
     const [errorValor, setErrorValor] = useState<{ error: boolean, message: string | null }>({ error: false, message: "Se utilizan valores en USD" });
     const [errorPeso, setErrorPeso] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Se cobra una comision en caso de sobrepasar el peso maximo permitido" });
     const [errorCantidad, setErrorCantidad] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Mas de 20 articulos se cobra 16% IVA" });
-    const [errorLargo, setErrorLargo] = useState<{ error: boolean, message: string } | null>({ error: false, message:  "Si pasa 60 cm se cobra exceso de dimensiones" });
-    const [errorAncho, setErrorAncho] = useState<{ error: boolean, message: string } | null>({ error: false, message:  "Si pasa 60 cm se cobra exceso de dimensiones" });
-    const [errorAlto, setErrorAlto] = useState<{ error: boolean, message: string } | null>({ error: false, message:  "Si pasa 60 cm se cobra exceso de dimensiones" });
+    const [errorLargo, setErrorLargo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
+    const [errorAncho, setErrorAncho] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
+    const [errorAlto, setErrorAlto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
     const [errorCosto, setErrorCosto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Costo aproximado" });
     const [errorTelefono, setErrorTelefono] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Telefono con formato internacional" });
     const [errorCorreo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Correo valido" });
@@ -245,6 +248,9 @@ export default function Calculadora() {
         setExceso(false);
         setCantidadSeleccion("");
         setCpDestino("");
+        setPrecioMostrar(0);
+        setPrecioIvaMostrar(0);
+setPrecioPorExcesoPeso(0);
         LimpiarCamposFormulario();
         LimpiarErrores();
     }, [LimpiarCamposFormulario, LimpiarErrores]);
@@ -519,7 +525,7 @@ export default function Calculadora() {
             }
             const data = await response.json();
             setDireccionRecibida(data);
-        
+
 
             if (Array.isArray(data) && data.length > 0) {
                 setErrorDestinatario({ error: false, message: "Si tu envío se encuentra dentro del área metropolitana, se aplicará una tarifa de 9.50 USD" });
@@ -572,30 +578,41 @@ export default function Calculadora() {
         let pesoKg = 0;
         let pesoLb = 0;
         let volumenCm = 0;
-
+        let precioAmostrar = 0;
+        let precioIvaAMostrar = 0;
 
         // honrararios
         if (valor <= 119) {
-            precioSinIva = (valor + 17);
+            precioSinIva = 17;
+            precioAmostrar = 17
         } else if (valor >= 120 && valor <= 475) {
+            precioAmostrar = ((valor / (1 - 0.14)) - valor)
             precioSinIva = (valor / (1 - 0.14));
         } else if (valor >= 476 && valor < 3000) {
+            precioAmostrar = ((valor / (1 - 0.13)) - valor)
             precioSinIva = (valor / (1 - 0.13));
         } else if (valor >= 3000) {
+            precioAmostrar = ((valor / (1 - 0.12)) - valor)
             precioSinIva = (valor / (1 - 0.12));
         }
 
         precioSinIva = Math.round((precioSinIva + Number.EPSILON) * 100) / 100;
+        precioAmostrar = Math.round((precioAmostrar + Number.EPSILON) * 100) / 100;
         setPrecioSinIVA(precioSinIva)
+        setPrecioMostrar(precioAmostrar);
 
         // agregar iva si son mas de 20 articulos
         if (cantidad < 20) {
             precioConIva = precioSinIva
             setPrecioConIVA(0)
+            precioIvaAMostrar = 0;
         } else {
+            precioIvaAMostrar = valor * 0.16
             precioConIva = precioSinIva + (valor * 0.16)
             precioConIva = Math.round((precioConIva + Number.EPSILON) * 100) / 100;
+            precioIvaAMostrar = Math.round((precioIvaAMostrar + Number.EPSILON) * 100) / 100;
             setPrecioConIVA(precioConIva)
+            setPrecioIvaMostrar(precioIvaAMostrar)
         }
 
         // valor volumetrico dependiendo del tipo de envio
@@ -662,6 +679,7 @@ export default function Calculadora() {
                         error: false,
                         message: "Costo de cotizacion aproximado"
                     })
+                    setPrecioPorExcesoPeso(0);
                     setExceso(false);
                 }
 
@@ -694,15 +712,17 @@ export default function Calculadora() {
                         message: `El peso ingresado excede el peso maximo. Se cobrara ${PrecioExcesoKg} USD por sobrepeso`
                     })
                     setExceso(true);
+                } else {
+                    setErrorCosto({
+                        error: false,
+                        message: "Costo de cotizacion aproximado"
+                    })
+                    setPrecioPorExcesoPeso(0);
+                    setExceso(false);
                 }
-                setErrorCosto({
-                    error: false,
-                    message: "Costo de cotizacion aproximado"
-                })
-                setExceso(false);
+
                 setPrecioPorPeso(0);
                 break;
-
             default:
 
                 break;
@@ -912,11 +932,11 @@ export default function Calculadora() {
                     {/* contenedor de calculadora */}
                     <div className="fondo-contenedor">
 
-{/* ESPACIADO */}
+                        {/* ESPACIADO */}
                         <div className="col-span-4">
                         </div>
 
-{/* UNIDADES */}
+                        {/* UNIDADES */}
                         <div className="contenedor-filas-2">
                             <div className="flex input p-1">
                                 <button type="button"
@@ -937,7 +957,7 @@ export default function Calculadora() {
 
                         </div>
 
-{/* TIPO DE ENVIO */}
+                        {/* TIPO DE ENVIO */}
                         <div className="contenedor-filas-2">
                             <label className="label">Tipo de Envío</label>
                             <select name="TipoContenedor" id="TipoContenedor" className="select"
@@ -956,7 +976,7 @@ export default function Calculadora() {
                             />
                         </div>
 
-{/* CANTIDAD */}
+                        {/* CANTIDAD */}
                         <div className="contenedor-filas-2 group">
                             {/* Ingreso de cantidad */}
 
@@ -975,7 +995,7 @@ export default function Calculadora() {
 
                         </div>
 
-{/* VALOR */}
+                        {/* VALOR */}
                         <div className="contenedor-filas-2">
                             <label htmlFor="valorProd" className="label">Valor producto </label>
                             <div className=" flex">
@@ -995,7 +1015,7 @@ export default function Calculadora() {
                             />
                         </div>
 
-{/* PRODUCTO REPETITIVO */}
+                        {/* PRODUCTO REPETITIVO */}
                         <div className="contenedor-filas-2">
 
                             <label htmlFor="repetitivo" className="label">¿Tu producto es repetitivo?</label>
@@ -1016,7 +1036,7 @@ export default function Calculadora() {
                                     NO
                                 </button>
                             </div>
-    <FadeInOutError
+                            <FadeInOutError
                                 message="Son de la misma naturaleza"
                                 error={false}
                             />
@@ -1024,7 +1044,7 @@ export default function Calculadora() {
 
                         </div>
 
-{/* CANTIDAD UNIDADES */}
+                        {/* CANTIDAD UNIDADES */}
                         <div className="contenedor-filas-2">
 
                             <label htmlFor="cantidad" className="label"> Cantidad de unidades</label>
@@ -1040,7 +1060,7 @@ export default function Calculadora() {
                             />
                         </div>
 
-{/* LARGO X ANCHO X ALTO */}
+                        {/* LARGO X ANCHO X ALTO */}
                         <div className="contenedor-3-col">
                             <div className="contenedor-filas-2">
 
@@ -1101,7 +1121,7 @@ export default function Calculadora() {
                             </div>
                         </div>
 
-{/* PESO */}
+                        {/* PESO */}
                         <div className="contenedor-filas-2">
                             <label htmlFor="Peso" className="label">Peso: </label>
                             <div className="flex">
@@ -1112,12 +1132,12 @@ export default function Calculadora() {
                                 <div className="units">{opcion === "USA" ? "lb" : "kg"}</div>
                             </div>
                             <FadeInOutError
-                                            message={errorPeso?.message ?? ""}
-                                            error={errorPeso?.error}
-                                        />
+                                message={errorPeso?.message ?? ""}
+                                error={errorPeso?.error}
+                            />
                         </div>
 
-{/* DESTINO */}
+                        {/* DESTINO */}
                         <div className="contenedor-filas-2">
                             <label htmlFor="Peso" className="label">Destino </label>
                             <select name="TipoDestino" id="TipoDestino" className="select"
@@ -1136,7 +1156,7 @@ export default function Calculadora() {
                             />
                         </div>
 
-{/* CODIGO POSDTAL */}
+                        {/* CODIGO POSDTAL */}
                         {entrega === "Envia" ? (
                             <div className="contenedor-filas-2">
                                 <label htmlFor="valorProd" className="label">Codigo Postal: </label>
@@ -1157,25 +1177,25 @@ export default function Calculadora() {
                                 />
                             </div>
                         ) : (
-                            <div className="flex items-center justify-center">
+                            <div className="contenedor-imput-envio">
                                 <label htmlFor="valorProd" className="label">No hay costo de envio </label>
                             </div>
                         )}
 
-{/* BOTON COTIZAR */}
+                        {/* BOTON COTIZAR */}
                         <div className="contenedor-filas-2">
                             <div></div>
                             <input type="button" value="Cotizar" onClick={sendForms} className=" button" />
                         </div>
 
-{/* BOTON CONTACTAR */}
+                        {/* BOTON CONTACTAR */}
                         <div className="contenedor-filas-2">
                             <div></div>
                             <input type="submit" value="Contactar asesor" className={asesor ? "button-disabled" : " button"} onClick={() => setAsesor(true)} />
 
                         </div>
 
-{/* PRECIO */}
+                        {/* PRECIO */}
                         <div className="contenedor-precio">
                             <label htmlFor="costo" className="label">Costo </label>
                             <div className="flex">
@@ -1184,11 +1204,16 @@ export default function Calculadora() {
                                 </h2>
                                 <div className="units-precio">USD</div>
                             </div>
-
-                        </div>
-                        <div className={`rounded-[4px]
+                            <div className={`rounded-b-[4px]
                             ${exceso ? "error" : "bg-blue-400 text-white"}`}>
-                           {errorCosto?.message ?? ""}
+                                {errorCosto?.message ?? ""}
+                            </div>
+                        </div>
+
+                        <div className="contenedor-desgloce-precios">
+                            <p className="text-center">Honorarios: <span className="font-bold"> {precioMostrar}</span> USD</p>
+                            <p className="text-center"> IVA: <span className="font-bold">{precioIvaMostrar}</span> USD</p>
+                            <p className="text-center">Sobrepeso: <span className="font-bold">{precioPorExcesoPeso}</span> USD</p>
                         </div>
 
 
@@ -1212,10 +1237,10 @@ export default function Calculadora() {
                             <input type="text" name="name" id="ContactName" className="input"
                                 value={nombre}
                                 onChange={(e) => SetNombre(e.target.value)} />
-  <FadeInOutError
-                                            message="¿Cómo te llamas?"
-                                            error={false}
-                                        />
+                            <FadeInOutError
+                                message="¿Cómo te llamas?"
+                                error={false}
+                            />
                         </div>
 
                         <div className={asesor ? "contenedor-filas-2" : "hidden"}>
@@ -1225,9 +1250,9 @@ export default function Calculadora() {
                                 placeholder="(123) 456-7890"
                                 onChange={handleChangeTelefono} />
                             <FadeInOutError
-                                            message={errorTelefono?.message ?? ""}
-                                            error={errorTelefono?.error}
-                                        />
+                                message={errorTelefono?.message ?? ""}
+                                error={errorTelefono?.error}
+                            />
                         </div>
 
                         <div className={asesor ? "contenedor-filas-2" : "hidden"}>
@@ -1238,9 +1263,9 @@ export default function Calculadora() {
                                 placeholder="ejemplo@correo.com"
                                 onChange={(e) => SetCorreo(e.target.value)} />
                             <FadeInOutError
-                                            message={errorCorreo?.message ?? ""}
-                                            error={errorCorreo?.error}
-                                        />
+                                message={errorCorreo?.message ?? ""}
+                                error={errorCorreo?.error}
+                            />
                         </div>
 
                         <div className={asesor ? " col-span-2" : "hidden"}>
@@ -1258,11 +1283,11 @@ export default function Calculadora() {
                         <div></div>
 
                         <div className={asesor ? "flex" : "hidden"}>
-                            <input type="submit" value="Cerrar formulario" className="button " onClick={() => setAsesor(false)} />
+                            <input type="submit" value="Cerrar formulario" className="button mt-5 " onClick={() => setAsesor(false)} />
                         </div>
 
                         <div className={asesor ? "flex" : "hidden"}>
-                            <input type="button" value="Enviar Datos" onClick={sendContact} className="button" />
+                            <input type="button" value="Enviar Datos" onClick={sendContact} className="button mt-5" />
                         </div>
 
                         <ReCAPTCHA
@@ -1270,7 +1295,7 @@ export default function Calculadora() {
                             sitekey="6LdDRfMrAAAAACKCL_jQ4WKKUvbIpS1ny78v-bNE"
                             // size="invisible"
                             onChange={hanleReCaptcha}
-                            className={asesor ? "" : "hidden"}
+                            className={asesor ? "mt-5" : "hidden"}
                         />
 
                     </div>

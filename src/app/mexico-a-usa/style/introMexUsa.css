@@ -1,0 +1,103 @@
+/* #region INTRO */
+.section-intro-mu{
+    @apply w-full scroll-mt-20 font-[Montserrat]
+}
+
+.contenedor-titulo-intro-mu{
+    @apply max-w-6xl mx-auto px-4  pt-10 
+}
+
+.titulo-intro-mu{
+    @apply text-center font-extrabold text-[30px] leading-tight text-[var(--primary-blue)]
+}
+
+.contenedor-inf-intro-mu{
+    @apply max-w-6xl mx-auto px-4 pb-14
+      relative mt-4 grid items-center gap-2
+}
+
+.contenedor-izq-intro-mu{
+    @apply relative z-20 overflow-hidden
+}
+
+.img-izq-intro-mu{
+    @apply block object-cover 
+}
+
+.contenedor-inf-der-intro-mu{
+    @apply relative z-10 -ml-1 bg-white 
+    rounded-2xl shadow-[0_18px_50px_rgba(0,0,0,0.12)] p-5 h-[355px]
+}
+
+.texto-der-intro-mu{
+    @apply mt-3 text-[17px] leading-relaxed text-[#0f172a] 
+}
+/* #endregion */
+
+@media (min-width: 500px) {
+/* #region INTRO */
+.contenedor-titulo-intro-mu{
+    @apply max-w-6xl mx-auto px-6 pt-14
+}
+
+.titulo-intro-mu{
+    @apply text-center font-extrabold text-[44px] leading-tight 
+}
+
+.contenedor-inf-intro-mu{
+    @apply max-w-6xl mx-auto px-1 pb-10
+      relative mt-5 grid gap-2
+}
+
+.contenedor-izq-intro-mu{
+    @apply relative z-10 overflow-hidden mx-[15%]
+}
+.img-izq-intro-mu{
+    @apply block object-cover
+}
+.contenedor-inf-der-intro-mu{
+    @apply relative z-10 mx-16 bg-white 
+    rounded-2xl shadow-[0_18px_50px_rgba(0,0,0,0.12)] p-7 h-[400px]
+}
+
+.texto-der-intro-mu{
+    @apply mt-3 text-[22px] leading-relaxed text-[#0f172a] 
+}
+/* #endregion */
+}
+
+@media (min-width: 1024px) {
+    /* #region INTRO */
+
+.contenedor-titulo-intro-mu{
+    @apply max-w-6xl mx-auto px-6 pt-14
+}
+
+.titulo-intro-mu{
+    @apply text-center font-extrabold text-[42px] leading-tight 
+}
+
+.contenedor-inf-intro-mu{
+    @apply max-w-6xl mx-auto px-6 pb-14
+      relative  mt-10 grid grid-cols-[608px_1fr] items-center gap-6
+}
+
+.contenedor-izq-intro-mu{
+    @apply relative z-20 rounded-[26px] ml-5 overflow-hidden mx-0
+}
+
+.img-izq-intro-mu{
+    @apply block w-[608px] h-[476px] object-cover
+}
+
+.contenedor-inf-der-intro-mu{
+    @apply relative z-10 -ml-12 mx-0 bg-white 
+    rounded-2xl shadow-[0_18px_50px_rgba(0,0,0,0.12)] p-7 h-[375px]
+}
+
+.texto-der-intro-mu{
+    @apply mt-3 text-[20px] leading-relaxed text-[#0f172a] 
+}
+/* #endregion */
+}
+

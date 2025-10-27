@@ -2,18 +2,18 @@
 import Image from "next/image";
 import AnimatedText from "@/animate/TextAnimate";
 import DivZoom from "@/animate/DivZoom";
-
+import "@/app/mexico-a-usa/style/servicios2MexUsa.css"
 export default function Servicios2() {
   return (
-    <section className="w-full bg-[#F2F2F2] py-16 scroll-mt-10" id="personalizadoUSA">
-      <div className="max-w-6xl mx-auto px-4 md:px-6">
+    <section className="section-servicios2-mu" id="personalizadoUSA">
+      <div className="contenedor-servicios2-mu">
         {/* Tarjeta grande con doble sombra (similar a tu referencia) */}
-        <div className="relative rounded-[32px] bg-gradient-to-b from-[#2C69B3] to-[#1F51A6] p-1">
+        <div className="contenedor-fondo-servicios2-mu">
           {/* Capa interior */}
-          <div className="rounded-[30px] bg-[#2C59A7] p-6 md:p-10">
+          
             {/* Título */}
             <AnimatedText delay={0.2} lines={[
-              <h2 key={1} className="text-white font-[Montserrat] font-extrabold text-2xl md:text-4xl text-center">
+              <h2 key={1} className="titulo-servicios2-mu">
                 Servicios Personalizados
               </h2>
             ]}>
@@ -22,16 +22,16 @@ export default function Servicios2() {
 
 
             {/* Primer bloque: texto + imagen derecha */}
-            <div className="mt-8 grid md:grid-cols-2 gap-8 items-center">
+            <div className="contenedor-primero-servicios2-mu">
               <div className="text-white">
                 <AnimatedText delay={0.6} lines={[
-                  <h3 key={1} className="font-[Montserrat] font-extrabold text-xl md:text-2xl text-center md:text-left">
+                  <h3 key={1} className="titulo-inf-servicios2-mu">
                     Recibir pagos de tus clientes extranjeros
                   </h3>
                 ]}>
 
                 </AnimatedText>
-                <p className="mt-3 font-[Montserrat] text-white/90 text-base md:text-lg text-center md:text-left">
+                <p className="sub-inf-servicios2-mu">
                   Si vendes a empresas extranjeras y no tienes la forma de
                   cómo recibir sus pagos, te apoyamos con cuentas receptoras
                   en USA y nosotros te pagamos en México.
@@ -39,7 +39,7 @@ export default function Servicios2() {
               </div>
 
               <DivZoom scale={1.05}>
-                <div className="relative w-full h-[260px] md:h-[300px] rounded-2xl overflow-hidden">
+                <div className="contenedor-img-servicios2-mu">
                   <Image
                     src="/img/mexausa/servicios2/imagen 1.png" // <-- usa la ruta real de tu imagen
                     alt="Pagos desde el extranjero"
@@ -53,9 +53,9 @@ export default function Servicios2() {
             </div>
 
             {/* Segundo bloque: imagen izquierda + texto derecha */}
-            <div className="mt-10 grid md:grid-cols-2 gap-8 items-center">
+            <div className="contenedor-primero-servicios2-mu">
               <DivZoom scale={1.05}>
-                <div className="hidden lg:block relative w-full h-[220px] md:h-[260px] rounded-2xl overflow-hidden">
+                <div className="hidden lg:block contenedor-img-servicios2-mu">
                   <Image
                     src="/img/mexausa/servicios2/imagen 2.png" // <-- usa la ruta real de tu imagen
                     alt="Paquetes y preparación"
@@ -67,21 +67,21 @@ export default function Servicios2() {
               </DivZoom>
               <div className="text-white ">
                 <AnimatedText delay={0.8} lines={[
-                  <h3 key={1} className="font-[Montserrat] font-extrabold text-xl md:text-2xl">
+                  <h3 key={1} className="titulo-inf-servicios2-mu">
                     FBA prep
                   </h3>
                 ]}>
 
                 </AnimatedText>
 
-                <p className="mt-3 font-[Montserrat] text-white/90 text-base md:text-lg ">
+                <p className="sub-inf-servicios2-mu">
                   Realizamos todas las etiquetas y embalaje requerido para
                   que tu mercancía ingrese a Amazon FBA en Estados Unidos.
                 </p>
               </div>
 
                <DivZoom scale={1.05}>
-                <div className="lg:hidden block relative w-full h-[220px] md:h-[260px] rounded-2xl overflow-hidden">
+                <div className="lg:hidden block contenedor-img-servicios2-mu">
                   <Image
                     src="/img/mexausa/servicios2/imagen 2.png" // <-- usa la ruta real de tu imagen
                     alt="Paquetes y preparación"
@@ -92,11 +92,11 @@ export default function Servicios2() {
                 </div>
               </DivZoom>
             </div>
-          </div>
+          
         </div>
 
         {/* Sombra externa suave */}
-        <div className="mx-auto mt-6 h-6 w-[95%] rounded-full bg-black/10 blur-xl opacity-30" />
+       
       </div>
     </section>
   );

@@ -51,11 +51,11 @@ export default function Footer() {
         sitekey="6LfumfMrAAAAALIHxEE2b90vhHNebxCmKFS3wVIL"
         size="invisible"
       // onChange={hanleReCaptcha}
-      // className={asesor ? "" : "hidden"}
+      className="z-50"
       />
-      <div className=" fixed
-      top-[83%] md:top-[86%] lg:top-[80%]
-      left-[85%] md:left-[92%] lg:left-[94%] xl:left-[95%]">
+      <div className=" fixed z-50
+      top-[83%] md:top-[86%] lg:top-[80%] 2xl:top-[81%] 3xl:top-[86%]
+      left-[85%] md:left-[92%] lg:left-[94%] xl:left-[95%] 2xl:left-[96%]">
         <a href="https://wa.me/5218114123816">
           <div className="w-14 h-14 lg:w-18 lg:h-18 xl:w-20 xl:h-20 rounded-full bg-green-500 text-white flex items-center justify-center mt-7 lg:mt-5 ">
             <FaWhatsapp className="w-10 h-10"></FaWhatsapp>

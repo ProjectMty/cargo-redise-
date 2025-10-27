@@ -1,0 +1,155 @@
+/* #region PRIMERO */
+.section-costos-mu{
+    @apply w-full  scroll-mt-20 font-[Montserrat]
+}
+
+.contenedor-fondo-costos-mu{
+    @apply relative w-full h-[270px] overflow-hidden
+}
+.img-fondo-costos-mu{
+    @apply object-cover object-center opacity-90
+}
+
+.contenedor-titulo-costos-mu{
+    @apply relative z-10 h-full flex items-start justify-center mt-10
+}
+
+.titulo-costo-mu{
+    @apply text-white drop-shadow-md text-[36px] font-bold 
+}
+
+/* #endregion */
+
+/* #region SEGUNDO */
+.contenedor-tarjetas-costos-mu{
+    @apply max-w-6xl mx-auto px-4 -mt-32 pb-16 grid grid-cols-1 gap-10
+}
+
+.contenedor-costo-mu{
+    @apply relative bg-white rounded-[25px] shadow-[0_18px_50px_rgba(0,0,0,0.10)]
+                pt-16 pb-10 px-6 text-center h-[300px]
+}
+
+.icono-tarjeta-costo-mu{
+    @apply absolute -top-7 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-[0_10px_25px_rgba(0,0,0,0.12)]
+     border border-white/60 w-[58px] h-[58px] flex items-center justify-center
+                
+}
+
+.titulo-tarjeta-costo-mu{
+    @apply  font-extrabold text-[var(--primary-blue)] text-[25px]
+}
+
+.subtitulo-tarjeta-costo-mu{
+    @apply mt-2 text-[14px] font-semibold text-[#0f172a]
+}
+
+.texto-tarjeta-costo-mu{
+    @apply mt-3 text-[14px] leading-relaxed text-[#374151] text-justify
+}
+/* #endregion */
+
+@media (min-width: 500px){
+/* #region PRIMERO */
+.section-costos-mu{
+    @apply w-full  scroll-mt-20 font-[Montserrat]
+}
+
+.contenedor-fondo-costos-mu{
+    @apply relative w-full h-[270px] overflow-hidden
+}
+.img-fondo-costos-mu{
+    @apply object-cover object-center opacity-90
+}
+
+.contenedor-titulo-costos-mu{
+    @apply relative z-10 h-full flex items-start justify-center mt-10
+}
+
+.titulo-costo-mu{
+    @apply text-white drop-shadow-md text-[44px] font-bold 
+}
+
+/* #endregion */
+
+/* #region SEGUNDO */
+.contenedor-tarjetas-costos-mu{
+    @apply max-w-6xl  px-16 -mt-32 pb-10 grid grid-cols-3 gap-6
+}
+
+.contenedor-costo-mu{
+    @apply relative bg-white rounded-[25px] shadow-[0_18px_50px_rgba(0,0,0,0.10)]
+    pt-12 pb-6 px-6 text-center h-[400px]
+}
+
+.icono-tarjeta-costo-mu{
+    @apply absolute -top-7 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-[0_10px_25px_rgba(0,0,0,0.12)]
+     border border-white/60 w-[58px] h-[58px] flex items-center justify-center           
+}
+
+.titulo-tarjeta-costo-mu{
+    @apply  font-extrabold text-[var(--primary-blue)] text-[20px]
+}
+
+.subtitulo-tarjeta-costo-mu{
+    @apply mt-2 text-[12.5px] font-semibold text-[#0f172a]
+}
+
+.texto-tarjeta-costo-mu{
+    @apply mt-3 text-[12.5px] leading-relaxed text-[#374151]
+}
+/* #endregion */
+
+}
+
+@media (min-width: 1024px){
+/* #region PRIMERO */
+
+
+.contenedor-fondo-costos-mu{
+    @apply relative w-full h-[270px] overflow-hidden
+}
+.img-fondo-costos-mu{
+    @apply object-cover object-center opacity-90
+}
+
+.contenedor-titulo-costos-mu{
+    @apply relative z-10 h-full flex items-start justify-center mt-10
+}
+
+.titulo-costo-mu{
+    @apply text-white drop-shadow-md text-[44px] font-bold 
+}
+
+/* #endregion */
+
+/* #region SEGUNDO */
+.contenedor-tarjetas-costos-mu{
+    @apply max-w-6xl mx-auto px-28 -mt-32 pb-16 grid grid-cols-3 gap-6
+}
+
+.contenedor-costo-mu{
+    @apply relative bg-white rounded-[25px] shadow-[0_18px_50px_rgba(0,0,0,0.10)]
+    pt-12 pb-6 px-6 text-center h-[300px]
+}
+
+.icono-tarjeta-costo-mu{
+    @apply absolute -top-7 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-[0_10px_25px_rgba(0,0,0,0.12)]
+     border border-white/60 w-[58px] h-[58px] flex items-center justify-center
+                
+}
+
+.titulo-tarjeta-costo-mu{
+    @apply  font-extrabold text-[var(--primary-blue)] text-[20px]
+}
+
+.subtitulo-tarjeta-costo-mu{
+    @apply mt-2 text-[12.5px] font-semibold text-[#0f172a]
+}
+
+.texto-tarjeta-costo-mu{
+    @apply mt-3 text-[12.5px] leading-relaxed text-[#374151]
+}
+/* #endregion */
+
+}

@@ -2,6 +2,317 @@
 
 /* #region GLOBAL */
 .fondo-seccion {
+  @apply w-full h-full px-[5%] py-[5%] font-[Montserrat];
+}
+
+.contenedor {
+  @apply block
+}
+
+.contenedor-calculadora {
+  @apply shadow-2xl rounded-[50px] bg-[var(--primary-blue)] px-[25px] py-[45px]
+}
+/* #endregion*/
+
+/* #region TITULO */
+.contenedor-titulo {
+  @apply mt-1 mb-10
+}
+
+.encabezado {
+  @apply font-extrabold text-4xl  text-blue-800 text-center mt-5;
+}
+
+.subtitulo {
+  @apply text-center text-blue-800 text-lg font-medium mt-2 tracking-widest
+}
+
+/* #endregion */
+
+/* #region CALCULADORA */
+
+
+/* #region contenedores */
+.fondo-contenedor {
+  @apply  gap-[30px] 
+}
+
+.contenedor-filas-2 {
+  @apply grid grid-rows-1 mt-5
+}
+
+.contenedor-3-col {
+  @apply grid grid-cols-1 
+}
+
+.contenedor-precio {
+  @apply contenedor-filas-2 col-span-2 mt-5
+}
+
+.contenedor-imput-envio{
+  @apply flex items-center justify-center mt-5
+}
+
+.contenedor-desgloce-precios{
+  @apply label contenedor-filas-2 
+}
+/* #endregion */
+
+/* #region imputs */
+.label {
+  @apply text-[16px] font-medium text-start content-start text-white
+}
+
+.select {
+  @apply text-start bg-[#FFFFFF] text-[16px] text-[#000000]/75 rounded-[4px] h-[40px] w-[100%]
+}
+
+.input {
+  @apply bg-[#FFFFFF] text-[16px] text-black rounded-[4px] w-[100%] h-[40px];
+}
+
+.input:focus {
+  @apply ring-2 ring-blue-300 outline-none transition-all duration-300
+}
+
+.input-units {
+  @apply bg-[#FFFFFF] text-[16px] text-black rounded-l-[4px] w-[100%] h-[40px];
+}
+
+.input-units:focus {
+  @apply ring-2 ring-blue-300 outline-none transition-all duration-300
+}
+
+.units {
+  @apply flex bg-[#FFFFFF] w-[40%] h-[40px] rounded-r-[4px] items-center justify-center border-l-2 border-l-[#BCBCBC] text-[#000000]/35
+}
+
+.switch-opciones {
+  @apply rounded-[4px] font-normal text-[16px] w-[100%]
+}
+
+.output-precio {
+  @apply bg-[#FFFFFF] text-[30px] text-[#000000] rounded-l-[4px] w-[100%] h-[40px] text-end;
+}
+
+.units-precio {
+  @apply flex bg-[#FFFFFF] w-[40%] h-[40px] rounded-r-[4px] items-center justify-center  text-[#000000]/35
+}
+/* #endregion  */
+
+/* #region botones */
+
+.button {
+  @apply rounded-[4px] w-[100%] h-[40px] font-medium hover:bg-blue-600 hover:text-white bg-blue-400 text-white transition duration-300 text-center;
+}
+
+
+.button-disabled {
+  @apply bg-slate-500 text-white cursor-not-allowed rounded-[4px] w-[100%] h-[40px];
+}
+
+/* #endregion */
+
+/* #region errores */
+.notas {
+  @apply flex text-[16px] font-light text-gray-200 text-center items-center justify-center
+}
+
+.error {
+  @apply text-[16px] font-light text-red-500 text-center items-center justify-center bg-white
+}
+
+.mensaje-def{
+  @apply flex text-[10px] font-light text-gray-200 text-center items-center justify-center 
+}
+
+.mensaje-error {
+  @apply text-[10px] font-light text-red-500 text-center items-center justify-center
+}
+
+/* #endregion */
+
+/* #endregion */
+
+/* #region ASESOR */
+.subtitulo-asesor {
+  @apply text-center text-white text-[18px] font-normal tracking-widest mt-[30px]
+}
+
+
+.input-asunto {
+  @apply bg-white w-full max-h-16 rounded-md  outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black
+
+}
+
+/* #endregion */
+
+/* #region ALERTAS */
+.mensaje {
+  @apply  top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-red-500 text-white text-sm rounded px-2 py-1
+}
+/* #endregion */
+
+@media (min-width: 500px){
+  
+/* #region GLOBAL */
+.fondo-seccion {
+  @apply w-full h-full px-[5%] py-[5%] font-[Montserrat];
+}
+
+.contenedor {
+  @apply block
+}
+
+.contenedor-calculadora {
+  @apply shadow-2xl rounded-[50px]  px-[35px] py-[45px]
+}
+/* #endregion*/
+
+/* #region TITULO */
+.contenedor-titulo {
+  @apply mt-1 mb-10
+}
+
+.encabezado {
+  @apply font-extrabold  text-5xl text-blue-800 text-center mt-5;
+}
+
+.subtitulo {
+  @apply text-center text-blue-800 text-lg font-medium mt-2 tracking-widest
+}
+
+/* #endregion */
+
+/* #region CALCULADORA */
+
+
+/* #region contenedores */
+.fondo-contenedor {
+  @apply  gap-[30px]
+}
+
+.contenedor-filas-2 {
+  @apply grid grid-rows-1 
+}
+
+.contenedor-3-col {
+  @apply grid grid-cols-3 col-span-2 gap-[24px]
+}
+
+.contenedor-precio {
+  @apply contenedor-filas-2 col-span-2
+}
+.contenedor-imput-envio{
+  @apply flex items-center justify-center
+}
+.contenedor-desgloce-precios{
+  @apply label contenedor-filas-2
+}
+/* #endregion */
+
+/* #region imputs */
+.label {
+  @apply text-[16px] font-medium text-start content-start text-white
+}
+
+.select {
+  @apply text-start bg-[#FFFFFF] text-[16px] text-[#000000]/75 rounded-[4px] h-[40px] w-[100%]
+}
+
+.input {
+  @apply bg-[#FFFFFF] text-[16px] text-black rounded-[4px] w-[100%] h-[40px];
+}
+
+.input:focus {
+  @apply ring-2 ring-blue-300 outline-none transition-all duration-300
+}
+
+.input-units {
+  @apply bg-[#FFFFFF] text-[16px] text-black rounded-l-[4px] w-[100%] h-[40px];
+}
+
+.input-units:focus {
+  @apply ring-2 ring-blue-300 outline-none transition-all duration-300
+}
+
+.units {
+  @apply flex bg-[#FFFFFF] w-[40%] h-[40px] rounded-r-[4px] items-center justify-center border-l-2 border-l-[#BCBCBC] text-[#000000]/35
+}
+
+.switch-opciones {
+  @apply rounded-[4px] font-normal text-[16px] w-[100%]
+}
+
+.output-precio {
+  @apply bg-[#FFFFFF] text-[30px] text-[#000000] rounded-l-[4px] w-[100%] h-[40px] text-end;
+}
+
+.units-precio {
+  @apply flex bg-[#FFFFFF] w-[40%] h-[40px] rounded-r-[4px] items-center justify-center  text-[#000000]/35
+}
+/* #endregion  */
+
+/* #region botones */
+
+.button {
+  @apply rounded-[4px] w-[100%] h-[40px] font-medium hover:bg-blue-600 hover:text-white bg-blue-400 text-white transition duration-300 text-center;
+}
+
+
+.button-disabled {
+  @apply bg-slate-500 text-white cursor-not-allowed rounded-[4px] w-[100%] h-[40px];
+}
+
+/* #endregion */
+
+/* #region errores */
+.notas {
+  @apply flex text-[16px] font-light text-gray-200 text-center items-center justify-center
+}
+
+.error {
+  @apply text-[16px] font-light text-red-500 text-center items-center justify-center bg-white
+}
+
+.mensaje-def{
+  @apply flex text-[10px] font-light text-gray-200 text-center items-center justify-center 
+}
+
+.mensaje-error {
+  @apply text-[10px] font-light text-red-500 text-center items-center justify-center
+}
+
+/* #endregion */
+
+
+/* #endregion */
+
+/* #region ASESOR */
+.subtitulo-asesor {
+  @apply  text-center text-white text-[18px] font-normal tracking-widest mt-[30px]
+}
+
+
+.input-asunto {
+  @apply bg-white w-full max-h-16 rounded-md  outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black
+
+}
+
+/* #endregion */
+
+/* #region ALERTAS */
+.mensaje {
+  @apply  top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-red-500 text-white text-sm rounded px-2 py-1
+}
+/* #endregion */
+
+}
+
+@media (min-width: 1024px){
+  
+/* #region GLOBAL */
+.fondo-seccion {
   @apply w-full h-full px-[10%] py-[5%] font-[Montserrat];
 }
 
@@ -10,7 +321,7 @@
 }
 
 .contenedor-calculadora {
-  @apply shadow-2xl rounded-[50px] bg-[#0B4BA2] px-[65px] py-[45px]
+  @apply shadow-2xl rounded-[50px]  px-[65px] py-[45px]
 }
 /* #endregion*/
 
@@ -34,11 +345,11 @@
 
 /* #region contenedores */
 .fondo-contenedor {
-  @apply grid grid-cols-1 md:grid-cols-5 gap-[30px]
+  @apply grid grid-cols-5 gap-[30px]
 }
 
 .contenedor-filas-2 {
-  @apply grid grid-rows-1 lg:grid-rows-2
+  @apply grid grid-rows-2
 }
 
 .contenedor-3-col {
@@ -48,7 +359,9 @@
 .contenedor-precio {
   @apply contenedor-filas-2 col-span-2
 }
-
+.contenedor-desgloce-precios{
+  @apply label contenedor-filas-2
+}
 /* #endregion */
 
 /* #region imputs */
@@ -135,7 +448,7 @@
 
 
 .input-asunto {
-  @apply bg-white w-full max-h-16 rounded-md  outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black
+  @apply bg-white w-full max-h-20 rounded-md  outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black
 
 }
 
@@ -146,3 +459,5 @@
   @apply  top-full left-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-red-500 text-white text-sm rounded px-2 py-1
 }
 /* #endregion */
+
+}
