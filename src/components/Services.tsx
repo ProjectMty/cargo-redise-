@@ -41,12 +41,12 @@ const Servicios: Record<
   //   ],
   // },
   crossborder: {
-    title: "Servicios de transporte y entrega transfronteriza",
+    title: "Importacion y transporte fronterizo para tu mercancia desde USA a Mexico",
     bullets: [
-      { icon: "/img/icons/Icono 1.1.svg", text: "Recepcion de mercancia en USA" },
-      { icon: "/img/icons/Icono 1.2.svg", text: "Preparacion de documentacion y tramites de importacion" },
-      { icon: "/img/icons/Icono 1.3.svg", text: "Servicio de transfer/cross border logistics" },
-      { icon: "/img/icons/Icono 1.4.svg", text: "Integracion de mercancia a Mexico para tus ventas en fisico, Amazon FBA, Mercado Libre, o Walmart FS." },
+      { icon: "/img/icons/servicios/Servicio 1/1.svg", text: "Recepcion de mercancia en USA" },
+      { icon: "/img/icons/servicios/Servicio 1/2.svg", text: "Preparacion de documentación y tramites de importación" },
+      { icon: "/img/icons/servicios/Servicio 1/3.svg", text: "Servicio de transfer/cross border logistics" },
+      { icon: "/img/icons/servicios/Servicio 1/4.svg", text: "Integracion de mercancia a México para tus ventas en fisico, Amazon FBA, Mercado Libre, o Walmart FS." },
     ],
   },
   marketplaces: {
@@ -68,10 +68,10 @@ const Servicios: Record<
   returns: {
     title: "Devoluciones y Reverse Logistics",
     bullets: [
-      { icon: "/img/icons/Icono 4.1.svg", text: "Recepción, clasificación y retorno de productos desde México a USA o Canadá." },
-      { icon: "/img/icons/Icono 4.2.svg", text: "Devoluciones FBA / FBM / Retail." },
-       { icon: "/img/icons/Icono 4.2.svg", text: "Opciones de reempaque." },
-        { icon: "/img/icons/Icono 4.2.svg", text: "Control total de inventarios y reportes detallados." },
+      { icon: "/img/icons/servicios/Servicio 3/1_2.svg", text: "Recepción, clasificación y retorno de productos desde México a USA o Canadá." },
+      { icon: "/img/icons/servicios/Servicio 3/2_2.svg", text: "Devoluciones FBA / FBM / Retail." },
+       { icon: "/img/icons/servicios/Servicio 3/3_2.svg", text: "Opciones de reempaque." },
+        { icon: "/img/icons/servicios/Servicio 3/4_2.svg", text: "Control total de inventarios y reportes detallados." },
     ],
   },
   special: {
@@ -85,30 +85,31 @@ const Servicios: Record<
   fulfillment: {
     title: "Fulfillment y Distribución ",
     bullets: [
-      { icon: "/img/icons/Icono 5.1.svg", text: "Almacenamiento seguro en bodegas estratégicas." },
-      { icon: "/img/icons/Icono 5.2.svg", text: "Gestión de inventario y control de stock en tiempo real." },
-      { icon: "/img/icons/Icono 5.3.svg", text: "Preparación de órdenes (Pick & Pack) y etiquetado para marketplaces.  tus productos, facilitando tus ventas en línea." },
-      { icon: "/img/icons/Icono 5.2.svg", text: "Distribución nacional a clientes o centros de distribución de Amazon, Mercado Libre y Walmart." },
-      { icon: "/img/icons/Icono 5.2.svg", text: "Integración con tus plataformas de eCommerce." },
-      { icon: "/img/icons/Icono 5.2.svg", text: "Traducción y adaptación de etiquetas al español." },
+       { icon: "/img/icons/servicios/Servicio 2/1_1.svg", text: "Nos encargamos de todos los trámites y la gestión aduanal necesaria para el despacho de tus productos, facilitando tus ventas en línea." },
+       { icon: "/img/icons/servicios/Servicio 2/2_1.svg", text: "Almacenamiento seguro en bodegas estratégicas." },
+       { icon: "/img/icons/servicios/Servicio 2/3_1.svg", text: "Gestión de inventario y control de stock en tiempo real." },
+      { icon: "/img/icons/servicios/Servicio 2/4_1.svg", text: "Preparación de órdenes (Pick & Pack) y etiquetado para marketplaces.  tus productos, facilitando tus ventas en línea." },
+      { icon: "/img/icons/servicios/Servicio 2/5.svg", text: "Distribución nacional a clientes o centros de distribución de Amazon, Mercado Libre y Walmart." },
+      { icon: "/img/icons/servicios/Servicio 2/6.svg", text: "Integración con tus plataformas de eCommerce." },
+      { icon: "/img/icons/servicios/Servicio 2/7.svg", text: "Traducción y adaptación de etiquetas al español." },
     ],
   },
   buyShip: {
     title: "Buy & Ship USA a México",
     bullets: [
-      { icon: "/img/icons/Icono 5.1.svg", text: "Gestionamos el envío de muestras hasta tu puerta en México." },
-      { icon: "/img/icons/Icono 5.2.svg", text: "Realizamos pagos internacionales y nos encargamos de toda la comunicación y logística hasta que tu mercancía llegue segura a tu negocio o domicilio." },
-      { icon: "/img/icons/Icono 5.3.svg", text: "Ofrecemos servicio de importer of record, sales tax permit, y mas." },
+      { icon: "/img/icons/servicios/Servicio 4/1_3.svg", text: "Gestionamos el envío de muestras hasta tu puerta en México." },
+      { icon: "/img/icons/servicios/Servicio 4/2_3.svg", text: "Realizamos pagos internacionales y nos encargamos de toda la comunicación y logística hasta que tu mercancía llegue segura a tu negocio o domicilio." },
+      { icon: "/img/icons/servicios/Servicio 4/3_3.svg", text: "Ofrecemos servicio de importer of record, sales tax permit, y mas." },
     ],
   },
   cargo: {
      title: "¿Por qué elegir Cargo Monterrey?",
     bullets: [
-      { icon: "/img/icons/Icono 5.1.svg", text: "Más de 10 años de experiencia en logística internacional." },
-      { icon: "/img/icons/Icono 5.2.svg", text: "Cruces fronterizos diarios y cobertura total en México, EE.UU. y Canadá." },
-      { icon: "/img/icons/Icono 5.3.svg", text: "Soporte en inglés y español." },
-      { icon: "/img/icons/Icono 5.3.svg", text: "Soluciones personalizadas según tu tipo de producto y destino." },
-      { icon: "/img/icons/Icono 5.3.svg", text: "Tarifas competitivas." },
+      { icon: "/img/icons/servicios/Servicio 5/1_4.svg", text: "Más de 10 años de experiencia en logística internacional." },
+      { icon: "/img/icons/servicios/Servicio 5/2_4.svg", text: "Cruces fronterizos diarios y cobertura total en México, EE.UU. y Canadá." },
+      { icon: "/img/icons/servicios/Servicio 5/3_4.svg", text: "Soporte en inglés y español." },
+      { icon: "/img/icons/servicios/Servicio 5/4_3.svg", text: "Soluciones personalizadas según tu tipo de producto y destino." },
+      { icon: "/img/icons/servicios/Servicio 5/5_1.svg", text: "Tarifas competitivas." },
     ],
   }
 

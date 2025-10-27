@@ -1,0 +1,67 @@
+.section-hero-bs{
+    @apply relative w-full min-h-[350px]  
+    rounded-b-[40px] overflow-hidden bg-[#F2F2F2]
+}
+
+.shadow-hero-bs{
+    @apply absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.14)_0%,rgba(0,0,0,0.18)_60%,rgba(0,0,0,0.32)_100%)] mix-blend-multiply pointer-events-none
+}
+
+.contenedor-logo-hero-bs{
+    @apply pointer-events-none relative mx-[15%]  translate-y-[100%] w-[10%] 
+}
+
+.logo-hero-bs{
+    @apply max-w-[300px] opacity-[0.92] drop-shadow-[0_8px_26px_rgba(0,0,0,0.25)] z-0 
+}
+
+@media (min-width: 500px) {
+    .section-hero-bs{
+    @apply relative w-full min-h-[520px]
+    rounded-b-[40px] overflow-hidden 
+}
+
+.contenedor-logo-hero-bs{
+    @apply pointer-events-none relative  mx-[25%] translate-y-[80%]
+      w-[30%] 
+}
+
+.logo-hero-bs{
+    @apply max-w-[450px] opacity-[0.92] drop-shadow-[0_8px_26px_rgba(0,0,0,0.25)] z-0
+}
+
+}
+
+@media (min-width: 1024px) {
+    .section-hero-bs{
+    @apply relative w-full min-h-[500px] 
+    rounded-b-[40px] overflow-hidden 
+}
+
+
+.contenedor-logo-hero-bs{
+    @apply pointer-events-none relative mx-[30%] translate-y-[70%] 
+           w-[50%] 
+}
+
+.logo-hero-bs{
+    @apply max-w-[500px] opacity-[0.92] drop-shadow-[0_8px_26px_rgba(0,0,0,0.25)] z-0
+}
+
+}
+
+@media (min-width: 1500px) {
+.contenedor-logo-hero-bs{
+    @apply pointer-events-none relative mx-[37%] translate-y-[70%] 
+           w-[50%] 
+}
+
+}
+
+@media (min-width: 2000px) {
+.contenedor-logo-hero-bs{
+    @apply pointer-events-none relative mx-[39%] translate-y-[70%] 
+           w-[50%] 
+}
+
+}

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import FadeOut from "@/animate/ExitAnimate";
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import "@/app/buy-and-ship/sections/style/hero-bs.css"
 
 export default function BuyAndShipHero() {
   const [scrolled, setScrolled] = useState(true);
@@ -23,7 +24,7 @@ export default function BuyAndShipHero() {
 
   return (
     // Dentro de tu componente HeroBuyAndShip (sólo el bloque visual del hero)
-    <section className="relative w-full min-h-[420px] md:min-h-[520px] lg:min-h-[500px] rounded-b-[40px] overflow-hidden bg-[#F2F2F2]">
+    <section className="section-hero-bs">
 
       {/* Fondo: imagen principal */}
       <div className="absolute inset-0">
@@ -37,13 +38,12 @@ export default function BuyAndShipHero() {
           loading="eager"
         />
         {/* Vignette opcional (muy sutil) */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.14)_0%,rgba(0,0,0,0.18)_60%,rgba(0,0,0,0.32)_100%)] mix-blend-multiply pointer-events-none" />
+        <div className="shadow-hero-bs" />
       </div>
 
       {/* Overlay letras: centrado y dimensionado estable*/}
       <div
-        className="pointer-events-none relative left-[49%] translate-x-[-19%] translate-y-[50%] mt-10
-             w-[96vw] max-w-[1100px] lg:w-[74vw] lg:max-w-[1280px]"
+        className="contenedor-logo-hero-bs"
 
         aria-hidden="true"
       >
@@ -54,8 +54,8 @@ export default function BuyAndShipHero() {
                 src="/img/buyandship/LogoB&S.svg"
                 alt="logo"
                 width={500}
-                height={150}
-                className="max-w-md opacity-[0.92] drop-shadow-[0_8px_26px_rgba(0,0,0,0.25)] z-0"
+                height={200}
+                className="logo-hero-bs"
                 loading="eager"
               />
             </FadeOut>
@@ -64,9 +64,6 @@ export default function BuyAndShipHero() {
 
         </AnimatePresence>
       </div>
-
-      {/* Espaciado superior para no tapar la navbar */}
-      <div className="h-[88px]" />
     </section>
 
   );

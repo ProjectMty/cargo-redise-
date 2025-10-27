@@ -4,13 +4,13 @@ import AnimatedText from "@/animate/TextAnimate";
 export default function Intro() {
   return (
     <section
-      className="w-full bg-[#F2F2F2] py-14 md:py-16"
+      className="w-full  py-14 md:py-16"
       aria-labelledby="intro-buyship-title"
     >
       <div className="max-w-5xl mx-auto px-5 text-center font-[Montserrat]">
         {/* Título principal */}
         <h2  id="intro-buyship-title"
-              className="text-[36px] md:text-[42px] leading-tight  font-extrabold text-[#0b4ba2]"
+              className="text-[36px] md:text-[44px] leading-tight  font-bold text-[var(--primary-blue)]"
             >
         <AnimatedText delay={0.6}
           lines={[

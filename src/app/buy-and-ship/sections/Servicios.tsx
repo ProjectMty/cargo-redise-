@@ -32,7 +32,7 @@ export default function ServiciosBuyAndShip() {
       <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
         {/* Título */}
         <AnimatedText delay={0.2} lines={[
-          <h2 key={1} className="text-center font-[Montserrat] font-bold text-[36px] md:text-[42px] text-white mb-8">
+          <h2 key={1} className="text-center font-[Montserrat] font-bold text-[36px] md:text-[44px] text-white mb-8">
             Nuestros servicios
           </h2>
         ]}></AnimatedText>

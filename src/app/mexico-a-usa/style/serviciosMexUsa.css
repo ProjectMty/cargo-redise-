@@ -1,0 +1,173 @@
+/* #region BOTONES */
+.section-servicios-mu {
+    @apply w-full bg-[var(--primary-blue)] text-white scroll-mt-20 font-[Montserrat]
+}
+
+.contenedor-servicios-mu {
+    @apply max-w-7xl mx-auto px-4 py-10
+}
+
+.titulo-servicios-mu {
+    @apply text-center text-white font-bold text-[36px] leading-tight mb-6
+}
+
+.boton-base-servicios-mu {
+    @apply rounded-[17pt] border px-4 py-2 text-[12px] font-medium transition
+}
+
+.boton-select-servicios-mu {
+    @apply bg-sky-600 text-[#F3F7FE] border-sky-600 shadow-sm
+}
+
+.boton-unselect-servicios-mu {
+    @apply bg-transparent text-sky-600 border-sky-600 hover:bg-sky-50
+}
+
+.boton-tamaño-servicios-mu {
+    @apply w-full max-w-[320px] text-center
+}
+
+.contenedor-botones-arriba-servicios-mu {
+    @apply grid grid-cols-2 gap-4 justify-items-center
+}
+
+.contenedor-botones-abajo-servicios-mu {
+    @apply mt-4 grid grid-cols-2 gap-4 max-w-3xl mx-auto justify-items-center
+}
+
+/* #endregion */
+/* #region INFORMACION */
+.contenedor-inf-servicio-mu {
+    @apply relative rounded-[30px] bg-white text-[#333333] px-6 py-8 shadow-lg  flex flex-col items-center gap-1 mb-10
+}
+
+.img-inf-servicio-mu {
+    @apply block rounded-[30px] shadow-sm max-w-[50%] h-auto mx-[25%]
+}
+
+.icon-inf-servicio-mu {
+    @apply w-[84px] h-[84px] hidden
+}
+
+.titulo-inf-servicio-mu {
+    @apply font-extrabold text-[25px] leading-tight mb-1 text-[var(--primary-blue)] text-center
+}
+
+.texto-inf-servicio-mu {
+    @apply whitespace-pre-line text-[15px] leading-[1.35] text-justify
+}
+
+/* #endregion */
+
+@media (min-width: 500px) {
+    /* #region BOTONES */
+
+
+    .contenedor-servicios-mu {
+        @apply max-w-7xl mx-auto px-8 py-10
+    }
+
+    .titulo-servicios-mu {
+        @apply text-center text-white text-[44px] leading-tight mb-6
+    }
+
+    .boton-base-servicios-mu {
+        @apply rounded-[17pt] border px-5 py-2 text-[15px] font-medium transition
+    }
+
+    .boton-select-servicios-mu {
+        @apply bg-sky-600 text-[#F3F7FE] border-sky-600 shadow-sm
+    }
+
+    .boton-unselect-servicios-mu {
+        @apply bg-transparent text-sky-600 border-sky-600 hover:bg-sky-50
+    }
+
+    .contenedor-botones-arriba-servicios-mu {
+        @apply grid grid-cols-2 gap-4 justify-items-center
+    }
+
+    .contenedor-botones-abajo-servicios-mu {
+        @apply mt-4 grid grid-cols-2 gap-4 justify-items-center
+    }
+
+    /* #endregion */
+    /* #region INFORMACION */
+    .contenedor-inf-servicio-mu {
+        @apply relative  bg-white text-[#333333] px-10 py-8  flex flex-col items-center gap-8 mb-10
+    }
+
+    .img-inf-servicio-mu {
+        @apply block max-w-full h-auto mx-[5%]
+    }
+
+    .titulo-inf-servicio-mu {
+        @apply font-extrabold text-[32px] leading-tight mb-4 text-[var(--primary-blue)]
+    }
+
+    .texto-inf-servicio-mu {
+        @apply whitespace-pre-line text-[25px] leading-[1.35]
+    }
+
+    /* #endregion */
+}
+
+@media (min-width: 1024px) {
+    /* #region BOTONES */
+    .contenedor-servicios-mu {
+        @apply max-w-7xl mx-auto px-8 py-10
+    }
+
+    .titulo-servicios-mu {
+        @apply text-center text-white font-bold text-[44px] leading-tight mb-6
+    }
+
+    .boton-base-servicios-mu {
+        @apply rounded-[17pt] border px-5 py-2 text-[15px] font-medium transition
+    }
+
+    .boton-select-servicios-mu {
+        @apply bg-sky-600 text-[#F3F7FE] border-sky-600 shadow-sm
+    }
+
+    .boton-unselect-servicios-mu {
+        @apply bg-transparent text-sky-600 border-sky-600 hover:bg-sky-50
+    }
+
+    .contenedor-botones-arriba-servicios-mu {
+        @apply grid grid-cols-4 gap-4 justify-items-center
+    }
+
+    .contenedor-botones-abajo-servicios-mu {
+        @apply mt-4 grid grid-cols-2 gap-4 max-w-3xl mx-auto justify-items-center
+    }
+
+    .boton-tamaño-servicios-mu {
+        @apply w-full max-w-[420px] text-center
+    }
+
+    /* #endregion */
+    /* #region INFORMACION */
+    .contenedor-inf-servicio-mu {
+        @apply relative  bg-white text-[#333333] px-10 py-8  flex flex-row items-center gap-8 mb-10
+    }
+
+    .img-inf-servicio-mu {
+        @apply block  max-w-full h-auto
+    }
+
+    .icon-inf-servicio-mu {
+        @apply w-[84px] h-[84px] block
+    }
+
+    .titulo-inf-servicio-mu {
+        @apply font-extrabold text-[30px] leading-tight mb-4 text-[var(--primary-blue)] text-start
+    }
+
+    .texto-inf-servicio-mu {
+        @apply whitespace-pre-line text-[22px] leading-[1.35]
+    }
+
+    /* #endregion */
+
+}

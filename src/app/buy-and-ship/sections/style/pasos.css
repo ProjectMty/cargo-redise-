@@ -1,5 +1,5 @@
 .contenedor-titulo{
-    @apply text-center text-[#0b4ba2]  font-bold text-[36px] md:text-[42px] mb-12 
+    @apply text-center text-[var(--primary-blue)]  font-bold text-[36px] md:text-[44px] mb-12 
 }
 
 .conetenedor-section{

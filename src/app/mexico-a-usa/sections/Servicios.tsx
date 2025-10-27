@@ -5,7 +5,7 @@ import AnimatedText from "@/animate/TextAnimate";
 import { AnimatePresence } from "framer-motion";
 import FadeInFromLeft from "@/animate/FadeInFromLeft";
 import DivZoom from "@/animate/DivZoom";
-
+import "@/app/mexico-a-usa/style/serviciosMexUsa.css"
 // === TUS DATOS (rutas respetadas) ===
 const services = [
   {
@@ -70,33 +70,25 @@ export default function ServiciosMxUsa() {
   const [showComponent] = useState(true); // <-- Aquí defines 'showComponent'
 
   // estilos de botones
-  const baseBtn =
-    "rounded-[17pt] border px-4 md:px-5 py-2 font-[Montserrat] text-[14px] md:text-[15px] font-medium transition";
-  const selectedBtn =
-    "bg-sky-600 text-[#F3F7FE] border-sky-600 shadow-sm";
-  const unselectedBtn =
-    "bg-transparent text-sky-600 border-sky-600 hover:bg-sky-50";
 
   return (
-    <section className="w-full bg-[#2E47A1] text-white scroll-mt-20" id="serviciosUSA">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-10">
+    <section className="section-servicios-mu" id="serviciosUSA">
+      <div className="contenedor-servicios-mu">
 
         {/* Título */}
         <AnimatedText delay={0.2} lines={[
-          <h2 key={1} className="text-center text-white font-[Montserrat] font-extrabold text-[34px] md:text-[44px] leading-tight mb-6">
+          <h2 key={1} className="titulo-servicios-mu">
             Nuestros Servicios
           </h2>
         ]}></AnimatedText>
 
-
-
         {/* FILA 1: Botones 1–4 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
+        <div className="contenedor-botones-arriba-servicios-mu">
           {services.slice(0, 4).map((s) => (
             <button
               key={s.id}
               onClick={() => setActiveId(s.id)}
-              className={`${baseBtn} ${activeId === s.id ? selectedBtn : unselectedBtn
+              className={`boton-base-servicios-mu ${activeId === s.id ? "boton-select-servicios-mu" : "boton-unselect-servicios-mu"
                 } w-full max-w-[320px] text-center`}
             >
               {s.title}
@@ -105,13 +97,13 @@ export default function ServiciosMxUsa() {
         </div>
 
         {/* FILA 2: Botones 5–6 centrados */}
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto justify-items-center">
+        <div className="contenedor-botones-abajo-servicios-mu">
           {services.slice(4, 6).map((s) => (
             <button
               key={s.id}
               onClick={() => setActiveId(s.id)}
-              className={`${baseBtn} ${activeId === s.id ? selectedBtn : unselectedBtn
-                } w-full text-center`}
+              className={`boton-base-servicios-mu ${activeId === s.id ? "boton-select-servicios-mu" : "boton-unselect-servicios-mu"
+                } boton-tamaño-servicios-mu `}
             >
               {s.title}
             </button>
@@ -120,14 +112,10 @@ export default function ServiciosMxUsa() {
 
         {/* CONTENIDO (doble recuadro) */}
         <div className="relative mt-10">
-          {/* capa “sombra” (doble recuadro) */}
-          <div className="pointer-events-none absolute -right-4 -bottom-4 left-4 top-4 rounded-[34px] bg-black/10 blur-[2px] opacity-20"></div>
-
+        
           {/* tarjeta principal */}
-          <div className="relative rounded-[30px] bg-white text-[#333333] px-6 md:px-10 py-8 shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
-            <div className="flex flex-col lg:flex-row items-center gap-8">
-
-              {/* Imagen a la medida original (no forzar) */}
+          <div className="contenedor-inf-servicio-mu">
+            {/* Imagen a la medida original (no forzar) */}
 
               <DivZoom scale={1.1}>
                 <div className="shrink-0">
@@ -136,7 +124,7 @@ export default function ServiciosMxUsa() {
                     alt={active.title}
                     width={400} 
                     height={300} 
-                    className="block rounded-[22px] shadow-[0_12px_30px_rgba(0,0,0,0.18)] max-w-full h-auto"
+                    className="img-inf-servicio-mu"
                   />
                 </div>
               </DivZoom>
@@ -152,17 +140,17 @@ export default function ServiciosMxUsa() {
                           alt=""
                           width={96}
                           height={96}
-                          className="w-[84px] h-[84px]"
+                          className="icon-inf-servicio-mu"
                         />
                       </div>
 
                       {/* Título (30px) */}
-                      <h3 className="font-[Montserrat] font-extrabold text-[30px] leading-tight mb-4 text-[#1E3A8A]">
+                      <h3 className="titulo-inf-servicio-mu">
                         {active.title}
                       </h3>
 
                       {/* Párrafo (25px, #333333) */}
-                      <p className="whitespace-pre-line font-[Montserrat] text-[25px] leading-[1.35]">
+                      <p className="texto-inf-servicio-mu">
                         {active.description}
                       </p>
                     </div>
@@ -171,12 +159,10 @@ export default function ServiciosMxUsa() {
 
 
               </AnimatePresence>
-            </div>
+            
           </div>
         </div>
-
-        {/* margen inferior para “respirar” */}
-        <div className="h-10" />
+ 
       </div>
     </section>
   );
