@@ -78,7 +78,7 @@ export default function Calculadora() {
     const [nombre, SetNombre] = useState("");
     const [telefono, SetTelefono] = useState("");
     const [correo, SetCorreo] = useState("");
-    const [asunto, SetAsunto] = useState("");
+
     const [cantidadSeleccion, setCantidadSeleccion] = useState<number | "">("");
     const [cpDestino, setCpDestino] = useState<number | "">("");
     // PDF
@@ -91,6 +91,7 @@ export default function Calculadora() {
 
     // salidas
     const [costoIVA, setCostoIVA] = useState<number>(0);
+    const [costoSinValor, setCostoSinValor] = useState<number>(0);
     const [volumen, setVolumen] = useState<number>(0);
     const [volumenLb, setVoluenLb] = useState<number>(0);
     const [opcion, setOpcion] = useState("MXS"); // valor inicial
@@ -106,7 +107,6 @@ export default function Calculadora() {
     const [errorLargo, setErrorLargo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
     const [errorAncho, setErrorAncho] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
     const [errorAlto, setErrorAlto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Si pasa 60 cm se cobra exceso de dimensiones" });
-    const [errorCosto, setErrorCosto] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Costo aproximado" });
     const [errorTelefono, setErrorTelefono] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Telefono con formato internacional" });
     const [errorCorreo] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Correo valido" });
     const [errorDestinatario, setErrorDestinatario] = useState<{ error: boolean, message: string } | null>({ error: false, message: "Por favor, proporciona el código postal del destino del paquete." });
@@ -187,14 +187,12 @@ export default function Calculadora() {
         SetNombre("");
         SetTelefono("");
         SetCorreo("");
-        SetAsunto("");
     }, []);
     const LimpiarErrores = useCallback(() => {
         setErrorValor({ error: false, message: "Se utilizan valores en USD" });
         setErrorPeso({ error: false, message: "Se cobra una comision en caso de sobrepasar el peso maximo permitido" });
         setErrorCantidad({ error: false, message: "Mas de 20 articulos se cobra 16% IVA" });
 
-        setErrorCosto({ error: false, message: "Costo aproximado" });
         setErrorTelefono({ error: false, message: "Telefono con formato internacional" });
         setErrorDestinatario({ error: false, message: "Por favor, proporciona el código postal del destino del paquete." });
 
@@ -250,7 +248,8 @@ export default function Calculadora() {
         setCpDestino("");
         setPrecioMostrar(0);
         setPrecioIvaMostrar(0);
-setPrecioPorExcesoPeso(0);
+        setPrecioPorExcesoPeso(0);
+        setCostoSinValor(0);
         LimpiarCamposFormulario();
         LimpiarErrores();
     }, [LimpiarCamposFormulario, LimpiarErrores]);
@@ -544,10 +543,7 @@ setPrecioPorExcesoPeso(0);
         // validar que no sea vacio
         if (valor === "" || peso === "" || cantidad === "" || largo === "" || ancho === "" || alto === "" || tipoSeleccionado === "" || cantidadSeleccion === "") {
             //alerta de campos vacios 
-            setErrorCosto({
-                error: true,
-                message: "Debes ingresar todos los campos"
-            })
+
             Swal.fire({
                 title: "ERROR",
                 text: "Necesitas llenar todos los campos",
@@ -580,6 +576,7 @@ setPrecioPorExcesoPeso(0);
         let volumenCm = 0;
         let precioAmostrar = 0;
         let precioIvaAMostrar = 0;
+        let precioSinValor = 0;
 
         // honrararios
         if (valor <= 119) {
@@ -629,16 +626,10 @@ setPrecioPorExcesoPeso(0);
 
                 if (pesoLb <= 500) {
                     precioPeso = 375 + (cantidadSeleccion * 10);
-                    setErrorCosto({
-                        error: false,
-                        message: "El peso ingresado entra en el rango"
-                    })
+
                 } else if (pesoLb > 500) {
                     precioPeso = 515 + (cantidadSeleccion * 10);
-                    setErrorCosto({
-                        error: true,
-                        message: "El peso ingresado excede el peso maximo. Se cobrara costo de sobrepeso"
-                    })
+
                     setExceso(true);
                 }
 
@@ -669,16 +660,9 @@ setPrecioPorExcesoPeso(0);
                     precioBase = precioBase + PrecioExcesoKg;
                     PrecioExcesoKg = Math.round((PrecioExcesoKg + Number.EPSILON) * 100) / 100;
                     setPrecioPorExcesoPeso(PrecioExcesoKg);
-                    setErrorCosto({
-                        error: true,
-                        message: `El peso ingresado excede el peso maximo. Se cobrara ${PrecioExcesoKg} USD por sobrepeso`
-                    })
+
                     setExceso(true);
                 } else {
-                    setErrorCosto({
-                        error: false,
-                        message: "Costo de cotizacion aproximado"
-                    })
                     setPrecioPorExcesoPeso(0);
                     setExceso(false);
                 }
@@ -707,16 +691,9 @@ setPrecioPorExcesoPeso(0);
                     precioBase = precioBase + PrecioExcesoKg;
                     PrecioExcesoKg = Math.round((PrecioExcesoKg + Number.EPSILON) * 100) / 100;
                     setPrecioPorExcesoPeso(PrecioExcesoKg);
-                    setErrorCosto({
-                        error: true,
-                        message: `El peso ingresado excede el peso maximo. Se cobrara ${PrecioExcesoKg} USD por sobrepeso`
-                    })
+
                     setExceso(true);
                 } else {
-                    setErrorCosto({
-                        error: false,
-                        message: "Costo de cotizacion aproximado"
-                    })
                     setPrecioPorExcesoPeso(0);
                     setExceso(false);
                 }
@@ -736,6 +713,9 @@ setPrecioPorExcesoPeso(0);
         }
         precioBase = Math.round((precioBase + Number.EPSILON) * 100) / 100;
         setCostoIVA(precioBase);
+        precioSinValor = precioBase - valor;
+        precioSinValor = Math.round((precioSinValor + Number.EPSILON) * 100) / 100;
+        setCostoSinValor(precioSinValor);
     }
     // #endregion
 
@@ -830,7 +810,7 @@ setPrecioPorExcesoPeso(0);
             });
             return;
         }
-        if (nombre === "" || telefono === "" || correo === "" || asunto === "") {
+        if (nombre === "" || telefono === "" || correo === "") {
             Swal.fire({
                 title: "Contacto",
                 text: "Necesitas llenar todos los campos de contacto",
@@ -864,7 +844,6 @@ setPrecioPorExcesoPeso(0);
                     nombre={nombre}
                     telefono={telefono}
                     correo={correo}
-                    asunto={asunto}
                     costoIVA={costoIVA}
                     unidades={opcion}
                     costoSinIva={precioSinIVA}
@@ -1196,24 +1175,35 @@ setPrecioPorExcesoPeso(0);
                         </div>
 
                         {/* PRECIO */}
-                        <div className="contenedor-precio">
+                        <div className="contenedor-filas-2">
                             <label htmlFor="costo" className="label">Costo </label>
+                            <div className="flex">
+                                <h2 className="output-precio">
+                                    {costoSinValor}
+                                </h2>
+                                <div className="units-precio">USD</div>
+                            </div>
+                            {/* <div className={`rounded-b-[4px]
+                            ${exceso ? "error" : "bg-blue-400 text-white"}`}>
+                                {errorCosto?.message ?? ""}
+                            </div> */}
+                        </div>
+                        {/* PRECIO COMPLETO */}
+                        <div className="contenedor-filas-2">
+                            <label htmlFor="costo" className="label">Costo Completo </label>
                             <div className="flex">
                                 <h2 className="output-precio">
                                     {costoIVA}
                                 </h2>
                                 <div className="units-precio">USD</div>
                             </div>
-                            <div className={`rounded-b-[4px]
-                            ${exceso ? "error" : "bg-blue-400 text-white"}`}>
-                                {errorCosto?.message ?? ""}
-                            </div>
+
                         </div>
 
                         <div className="contenedor-desgloce-precios">
                             <p className="text-center">Honorarios: <span className="font-bold"> {precioMostrar}</span> USD</p>
                             <p className="text-center"> IVA: <span className="font-bold">{precioIvaMostrar}</span> USD</p>
-                            <p className="text-center">Sobrepeso: <span className="font-bold">{precioPorExcesoPeso}</span> USD</p>
+                            <p className={exceso ? "text-center text-red-500": "text-center"}>Sobrepeso: <span className="font-bold">{precioPorExcesoPeso}</span> USD</p>
                         </div>
 
 
@@ -1231,57 +1221,45 @@ setPrecioPorExcesoPeso(0);
                         ) : (
                             <div></div>
                         )}
+                        <div className="contenedor-3-inputs">
+                            <div className={asesor ? "contenedor-filas-2" : "hidden"}>
+                                <label htmlFor="ContactName" className="label">Nombre: </label>
+                                <input type="text" name="name" id="ContactName" className="input"
+                                    placeholder="Nombre Completo"
+                                    value={nombre}
+                                    onChange={(e) => SetNombre(e.target.value)} />
+                                <div className="h-3"></div>
+                            </div>
 
-                        <div className={asesor ? "contenedor-filas-2" : "hidden"}>
-                            <label htmlFor="ContactName" className="label">Nombre: </label>
-                            <input type="text" name="name" id="ContactName" className="input"
-                                value={nombre}
-                                onChange={(e) => SetNombre(e.target.value)} />
-                            <FadeInOutError
-                                message="¿Cómo te llamas?"
-                                error={false}
-                            />
+                            <div className={asesor ? "contenedor-filas-2" : "hidden"}>
+                                <label htmlFor="ContactPhone" className="label">Teléfono: </label>
+                                <input type="tel" name="phone" id="ContactPhone" className="input"
+                                    value={telefono}
+                                    placeholder="(123) 456-7890"
+                                    onChange={handleChangeTelefono} />
+                                <FadeInOutError
+                                    message={errorTelefono?.message ?? ""}
+                                    error={errorTelefono?.error}
+                                />
+                            </div>
+
+                            <div className={asesor ? "contenedor-filas-2" : "hidden"}>
+
+                                <label htmlFor="ContactEmail" className="label">Correo: </label>
+                                <input type="text" name="email" id="ContactEmail" className="input"
+                                    value={correo}
+                                    placeholder="Ejemplo@correo.com"
+                                    onChange={(e) => SetCorreo(e.target.value)} />
+                                <FadeInOutError
+                                    message={errorCorreo?.message ?? ""}
+                                    error={errorCorreo?.error}
+                                />
+                            </div>
+
                         </div>
 
-                        <div className={asesor ? "contenedor-filas-2" : "hidden"}>
-                            <label htmlFor="ContactPhone" className="label">Teléfono: </label>
-                            <input type="tel" name="phone" id="ContactPhone" className="input"
-                                value={telefono}
-                                placeholder="(123) 456-7890"
-                                onChange={handleChangeTelefono} />
-                            <FadeInOutError
-                                message={errorTelefono?.message ?? ""}
-                                error={errorTelefono?.error}
-                            />
-                        </div>
-
-                        <div className={asesor ? "contenedor-filas-2" : "hidden"}>
-
-                            <label htmlFor="ContactEmail" className="label">Correo: </label>
-                            <input type="text" name="email" id="ContactEmail" className="input"
-                                value={correo}
-                                placeholder="ejemplo@correo.com"
-                                onChange={(e) => SetCorreo(e.target.value)} />
-                            <FadeInOutError
-                                message={errorCorreo?.message ?? ""}
-                                error={errorCorreo?.error}
-                            />
-                        </div>
-
-                        <div className={asesor ? " col-span-2" : "hidden"}>
-                            <label htmlFor="ContactAsunto" className="label">Asunto: </label>
-
-                            <textarea name="email" id="ContactAsunto" rows={4} cols={50} className="input-asunto"
-                                placeholder="Datos adicionales"
-                                value={asunto}
-                                onChange={(e) => SetAsunto(e.target.value)} >
-
-                            </textarea>
-                        </div>
                         {/* boton de enviar forms con datos de contacto */}
-
                         <div></div>
-
                         <div className={asesor ? "flex" : "hidden"}>
                             <input type="submit" value="Cerrar formulario" className="button mt-5 " onClick={() => setAsesor(false)} />
                         </div>

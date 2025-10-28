@@ -10,7 +10,18 @@ export default function Contacto() {
     const [nombre, SetNombre] = useState("");
     const [telefono, SetTelefono] = useState("");
     const [correo, SetCorreo] = useState("");
-    const [asunto, SetAsunto] = useState("");
+   
+    const [largo, setLargo] = useState<number | "">("");
+    const [ancho, setAncho] = useState<number | "">("");
+    const [alto, setAlto] = useState<number | "">("");
+    const [valor, SetValor] = useState<number | "">("");
+    const [tipoSeleccionado, setTipoSeleccionado] = useState("");
+
+    const tiposCajas = [
+        { name: "Pallets" },
+        { name: "Sobres" },
+        { name: "Cajas" }
+    ];
 
     const handleChangeTelefono = (e: React.ChangeEvent<HTMLInputElement>) => {
         // eliminar todo lo que no sea número
@@ -31,14 +42,16 @@ export default function Contacto() {
 
     const handleEnvioDatos = async () => {
 
-
         const body = {
             nombre: nombre,
             telefono: telefono,
             correo: correo,
-            asunto: asunto
+            valor: valor,
+            tipo: tipoSeleccionado,
+            largo: largo,
+            ancho: ancho,
+            alto: alto
         };
-        console.log(body)
         // Enviar al backend
         const response = await fetch("/API/enviarDatos", {
             method: "POST",
@@ -59,11 +72,13 @@ export default function Contacto() {
         SetNombre("");
         SetTelefono("");
         SetCorreo("");
-        SetAsunto("");
+        SetValor("");
+        setTipoSeleccionado("");
+        setLargo("");
+        setAncho("");
+        setAlto("");
 
     };
-
-
 
     return (
         <section id="contacto" className="w-full  h-full ">
@@ -130,33 +145,108 @@ export default function Contacto() {
                         <div className="contenedor-der">
                             <div className="contenedor-forms">
 
+                                <div className="contenedor-filas-2">
+                                    <label htmlFor="ContactName" className="label">Nombre: </label>
+                                    <input type="text" name="name" id="ContactName" className="input"
+                                        value={nombre}
+                                        placeholder="Nombre"
+                                        onChange={(e) => SetNombre(e.target.value)} />
+                                </div>
 
-                                <label htmlFor="ContactName">Nombre: </label>
-                                <input type="text" name="name" id="ContactName" className="contenedor-input"
-                                    value={nombre}
-                                    placeholder="nombre"
-                                    onChange={(e) => SetNombre(e.target.value)} />
+                                <div className="contenedor-filas-2">
+                                    <label htmlFor="ContactPhone" className="label">Teléfono: </label>
+                                    <input type="text" name="phone" id="ContactPhone" className="input"
+                                        value={telefono}
+                                        placeholder="(123) 456-7890"
+                                        onChange={handleChangeTelefono} />
+                                </div>
 
-                                <label htmlFor="ContactPhone">Teléfono: </label>
-                                <input type="text" name="phone" id="ContactPhone" className="contenedor-input"
-                                    value={telefono}
-                                    placeholder="(123) 456-7890"
-                                    onChange={handleChangeTelefono} />
+                                <div className="contenedor-filas-2">
 
-                                <label htmlFor="ContactEmail">Correo: </label>
-                                <input type="text" name="email" id="ContactEmail" className="contenedor-input"
-                                    value={correo}
-                                    placeholder="ejemplo@correo.com"
-                                    onChange={(e) => SetCorreo(e.target.value)} />
+                                    <label htmlFor="ContactEmail" className="label">Correo: </label>
+                                    <input type="text" name="email" id="ContactEmail" className="input"
+                                        value={correo}
+                                        placeholder="Ejemplo@correo.com"
+                                        onChange={(e) => SetCorreo(e.target.value)} />
+                                </div>
 
-                                <label htmlFor="ContactAsunto">Asunto: </label>
+                                <div className="contenedor-forms-2">
+                                    {/* VALOR */}
+                                    <div className="contenedor-filas-2">
+                                        <label htmlFor="valorProd" className="label">Valor producto </label>
+                                        <div className=" flex">
+                                            <input type="number" min="0" className=" input-units" value={valor} onChange={(e) =>
+                                                SetValor(e.target.value === "" ? "" : Number(e.target.value))}
+                                                id="valorProd" />
+                                            <div className="units">USD</div>
+                                        </div>
 
-                                <textarea name="asunto" id="ContactAsunto" rows={4} cols={50} className="contenedor-input-asunto"
-                                    value={asunto}
-                                    placeholder="datos adicionales"
-                                    onChange={(e) => SetAsunto(e.target.value)} >
 
-                                </textarea>
+
+                                    </div>
+
+                                    {/* TIPO DE ENVIO */}
+                                    <div className="contenedor-filas-2">
+                                        <label className="label">Tipo de Envío</label>
+                                        <select name="TipoContenedor" id="TipoContenedor" className="select"
+                                            value={tipoSeleccionado} onChange={(e) =>
+                                                setTipoSeleccionado(e.target.value === "" ? "" : (e.target.value))}
+                                        >
+                                            <option value="">--Selecciona--</option>
+                                            {tiposCajas.map((tipo) => (
+                                                <option key={tipo.name} value={tipo.name}>
+                                                    {tipo.name}
+                                                </option>
+                                            ))}
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                {/* LARGO X ANCHO X ALTO */}
+                                <div className="contenedor-filas-2">
+
+                                    <label htmlFor="largo" className="label"> Largo:</label>
+                                    <div className="flex">
+                                        <input type="number" min="0" className="input-units" value={largo}
+                                            onChange={(e) => setLargo(e.target.value === "" ? "" : Number(e.target.value))}
+
+                                            placeholder="0" />
+                                        <div className="units">CM</div>
+                                    </div>
+
+
+                                </div>
+
+                                <div className="contenedor-filas-2" >
+
+                                    <label htmlFor="ancho" className="label"> Ancho:</label>
+                                    <div className="flex">
+                                        <input type="number" min="0" className="input-units" value={ancho}
+                                            onChange={(e) => setAncho(e.target.value === "" ? "" : Number(e.target.value))}
+
+                                            placeholder="0" />
+                                        <div className="units">CM</div>
+                                    </div>
+
+
+                                </div>
+                                <div className="contenedor-filas-2">
+
+                                    <label htmlFor="alto" className="label"> Alto:</label>
+                                    <div className="flex">
+                                        <input type="number" min="0" className="input-units" value={alto}
+                                            onChange={(e) => setAlto(e.target.value === "" ? "" : Number(e.target.value))}
+                                            placeholder="0" />
+                                        <div className="units">CM</div>
+                                    </div>
+                                    <div>
+
+                                    </div>
+
+
+                                </div>
+
 
                                 <button className="boton-formulario-der" onClick={handleEnvioDatos}>
                                     Enviar Datos

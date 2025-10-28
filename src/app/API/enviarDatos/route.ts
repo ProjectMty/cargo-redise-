@@ -9,12 +9,13 @@ export async function POST(req: Request) {
 
 
         const body = await req.json();
-        const { nombre, telefono, correo, asunto } = body;
+        const { nombre, telefono, correo, valor, tipo, largo, ancho, alto } = body;
     const destinatarios = [
             "info@cargomty.com",
             "Nancy@cargomty.com",
             "Montserrat@cargomty.com",
             "issac@cargomty.com"
+            // "it03@cargomty.com"
         ];
 
         const email = await resend.emails.send({
@@ -22,7 +23,9 @@ export async function POST(req: Request) {
             from: 'CargoMty <no-reply@cargomty.com>',
             to: destinatarios,
             subject: nombre + " Datos para contacto",
-            react: EmailTemplate({ nombre: nombre, telefono: telefono, correo: correo, asunto: asunto }),
+            react: EmailTemplate({ nombre: nombre, telefono: telefono, correo: correo, valor: valor, tipo: tipo, 
+                largo: largo, ancho: ancho, alto:alto
+             }),
            
         });
         return NextResponse.json({ message: "Correo enviado correctamente", email });

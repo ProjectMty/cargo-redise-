@@ -53,7 +53,10 @@
 }
 
 .contenedor-forms{
-    @apply w-full mt-5 px-8 
+    @apply w-full mt-5 px-8  grid-cols-1 gap-[30px]
+}
+.contenedor-forms-2{
+    @apply col-span-3 gap-8
 }
 
 .contenedor-input{
@@ -71,7 +74,7 @@
 .boton-formulario-der{
     @apply flex hover:bg-white hover:text-[#0b4ba2] rounded-[4px] text-center 
             justify-center items-center w-full h-10 font-semibold text-[20px]
-         bg-blue-300 text-white transition duration-300 mb-5
+         bg-blue-300 text-white transition duration-300 mb-5 mt-5 col-span-3
 }
 
 /* #endregion */
@@ -202,7 +205,10 @@
 }
 
 .contenedor-forms{
-    @apply w-full mt-3 px-6 
+    @apply w-full mt-3 px-6 grid grid-cols-3 gap-[30px]
+}
+.contenedor-forms-2{
+    @apply col-span-3 grid grid-cols-2 gap-8
 }
 
 .contenedor-input{
