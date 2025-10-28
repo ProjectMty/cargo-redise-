@@ -4,14 +4,24 @@ interface EmailProps {
     nombre?: string;
     telefono?: string;
     correo?: string;
-    asunto?: string;
+
+    valor?: number;
+    tipo?: string;
+    largo?: number;
+    ancho?: number;
+    alto?: number;
 }
 
 const EmailTemplate = ({
     nombre = 'usuario',
     telefono = '123 456 7890',
     correo = 'asunto@gmail.com',
-    asunto = 'cotizacion',
+    valor = 0,
+    tipo = 'envio',
+    largo = 0,
+    ancho = 0,
+    alto = 0
+
 }: EmailProps) => {
     const previewText = `Datos de contacto para cotizacion, de ${nombre}!`;
 
@@ -59,12 +69,23 @@ const EmailTemplate = ({
                         </Text>
 
                         <Text className="text-gray-700 text-base leading-relaxed mb-4">
-                            Asunto:{" "}
-                            <span className="font-bold text-blue-900">{asunto}</span>.
+                            Valor:{" "}
+                            <span className="font-bold text-blue-900">{valor} usd</span>.
 
                         </Text>
+                        <Text className="text-gray-700 text-base leading-relaxed mb-4">
+                            Tipo de envío:{" "}
+                            <span className="font-bold text-blue-900">{tipo}</span>.
 
+                        </Text>
+                        <Text className="text-gray-700 text-base leading-relaxed mb-4">
+                            Largo X Ancho X Alto:{" "}
+                            <span className="font-bold text-blue-900">
+                                {largo}cm X {ancho}cm X {alto}cm
+                                </span>.
 
+                        </Text>
+                       
                         {/* Footer */}
                         <Text className="text-sm text-gray-500 text-center">
                             Saludos cordiales,

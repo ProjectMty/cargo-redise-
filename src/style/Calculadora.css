@@ -451,7 +451,9 @@
   @apply bg-white w-full max-h-20 rounded-md  outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300 text-black
 
 }
-
+.contenedor-3-inputs {
+  @apply grid grid-cols-3 col-span-5 gap-[24px]
+}
 /* #endregion */
 
 /* #region ALERTAS */

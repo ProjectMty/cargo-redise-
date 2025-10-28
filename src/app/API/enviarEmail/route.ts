@@ -15,6 +15,7 @@ export async function POST(req: Request) {
             "Nancy@cargomty.com",
             "Montserrat@cargomty.com",
             "issac@cargomty.com"
+            // "it03@cargomty.com"
         ];
 
         const email = await resend.emails.send({

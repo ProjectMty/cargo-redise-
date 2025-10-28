@@ -54,7 +54,6 @@ interface PdfProps {
     nombre: string;
     telefono: string;
     correo: string;
-    asunto: string;
     costoIVA: number | "";
     unidades: string;
     costoSinIva: number | "";
@@ -140,7 +139,7 @@ export default function PDF({
     nombre,
     telefono,
     correo,
-    asunto,
+    
     costoIVA,
     unidades,
     costoSinIva,
@@ -181,10 +180,6 @@ export default function PDF({
                             <Text style={styles.value}> {correo}</Text>
                         </View>
 
-                        <View style={styles.section}>
-                            <Text style={styles.label}>Asunto: </Text>
-                            <Text style={styles.value}> {asunto}</Text>
-                        </View>
 
                     </View>
 
