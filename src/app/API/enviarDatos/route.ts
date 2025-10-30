@@ -14,7 +14,8 @@ export async function POST(req: Request) {
             "info@cargomty.com",
             "Nancy@cargomty.com",
             "Montserrat@cargomty.com",
-            "issac@cargomty.com"
+            "issac@cargomty.com",
+            "contacto@cargomty.com"
             // "it03@cargomty.com"
         ];
 
