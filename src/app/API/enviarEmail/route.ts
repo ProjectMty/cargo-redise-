@@ -11,11 +11,11 @@ export async function POST(req: Request) {
         const body = await req.json();
         const { nombre, compañia, pdfBase64 } = body;
         const destinatarios = [
-            // "info@cargomty.com",
-            // "Nancy@cargomty.com",
-            // "Montserrat@cargomty.com",
-            // "issac@cargomty.com"
-            "it03@cargomty.com"
+            "info@cargomty.com",
+            "Nancy@cargomty.com",
+            "Montserrat@cargomty.com",
+            "issac@cargomty.com"
+            // "it03@cargomty.com"
         ];
 
         const email = await resend.emails.send({
