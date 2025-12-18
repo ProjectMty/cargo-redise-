@@ -13,7 +13,7 @@ export async function GET() {
         }
 
         const { data, error } = await resend.emails.send({
-            from: 'RapidMex <no-reply@rapidmex.com>',
+            from: 'RapidMex <no-reply@cargomty.com>',
             to: ['it03@cargomty.com'],
             subject: 'Cotización Prueba 2',
             react: EmailTemplate({username: "Ailin", company: "CargoMty"})

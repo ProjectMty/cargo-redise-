@@ -9,38 +9,38 @@ import {
     StyleSheet
 } from '@react-pdf/renderer'
 
-    interface Direccion {
-        additional_info?: {
-            street?: string | null;
-        };
-        coordinates?: {
-            latitude?: string;
-            longitude?: string;
-        };
-        country?: {
-            name?: string;
-            code?: string;
-        };
-        info?: {
-            stat?: string;
-            stat_8digit?: string;
-            time_zone?: string;
-            utc?: string;
-        };
-        locality?: string;
-        regions?: {
-            region_1?: string;
-            region_2?: string;
-            region_3?: string;
-            region_4?: string;
-        };
-        state?: {
-            name?: string;
-            iso_code?: string;
-        };
-        suburbs?: string[];
-        zip_code?: string;
-    }
+interface Direccion {
+    additional_info?: {
+        street?: string | null;
+    };
+    coordinates?: {
+        latitude?: string;
+        longitude?: string;
+    };
+    country?: {
+        name?: string;
+        code?: string;
+    };
+    info?: {
+        stat?: string;
+        stat_8digit?: string;
+        time_zone?: string;
+        utc?: string;
+    };
+    locality?: string;
+    regions?: {
+        region_1?: string;
+        region_2?: string;
+        region_3?: string;
+        region_4?: string;
+    };
+    state?: {
+        name?: string;
+        iso_code?: string;
+    };
+    suburbs?: string[];
+    zip_code?: string;
+}
 
 interface PdfProps {
     tipoSeleccionado: string;
@@ -65,6 +65,8 @@ interface PdfProps {
     cantidadSeleccion: number | "";
     direccionRecibida: Direccion[] | null;
     entrega: string;
+    costoSinValor: number | "";
+    precioMostrar: number | "";
 }
 
 const styles = StyleSheet.create({
@@ -139,7 +141,7 @@ export default function PDF({
     nombre,
     telefono,
     correo,
-    
+
     costoIVA,
     unidades,
     costoSinIva,
@@ -148,9 +150,11 @@ export default function PDF({
     precioPorExcesoPeso,
     precioBase,
     precioCantidad,
-  cantidadSeleccion,
+    cantidadSeleccion,
     direccionRecibida,
-    entrega
+    entrega,
+    costoSinValor,
+    precioMostrar
 }: PdfProps) {
 
 
@@ -159,7 +163,7 @@ export default function PDF({
         <Document>
             <Page style={styles.page}>
                 <Text style={styles.header}>Cotizador</Text>
-              
+
                 <View style={styles.columns}>
                     <View style={styles.first}>
 
@@ -222,7 +226,7 @@ export default function PDF({
                                         ? direccionRecibida[0].state?.name ?? "No disponible"
                                         : "No disponible"}
                                 </Text>
-                              
+
                             </View>
                         )}
 
@@ -268,7 +272,7 @@ export default function PDF({
                             <Text style={styles.label}>Cantidad de articulos: </Text>
                             <Text style={styles.value}>{cantidad} piezas </Text>
                         </View>
-                             <View style={styles.section}>
+                        <View style={styles.section}>
                             <Text style={styles.label}>Cantidad de {tipoSeleccionado}: </Text>
                             <Text style={styles.value}>{cantidadSeleccion} {tipoSeleccionado} </Text>
                         </View>
@@ -282,7 +286,7 @@ export default function PDF({
                             {/* TEXT DENTRO DE TEXT */}
                             <Text style={styles.label}>Honoriarios sin IVA (en base al valor ingresado):
                             </Text>
-                            <Text style={styles.value}>{costoSinIva} USD </Text>
+                            <Text style={styles.value}>{precioMostrar} USD </Text>
                         </View>
                         <View style={styles.section}>
                             <Text style={styles.label}>Honoriarios con IVA (cantidad mayor a 20):
@@ -312,11 +316,13 @@ export default function PDF({
                         </View>
 
                         <View style={styles.section}>
-                            <Text style={styles.label}>Costo Cotizado en calculadora: </Text>
+                            <Text style={styles.label}>Costo Cotizado con valor del paquete: </Text>
                             <Text style={styles.value}> {costoIVA} USD </Text>
-
                         </View>
-
+                        <View style={styles.section}>
+                            <Text style={styles.label}>Costo Cotizado sin valor del paquete: </Text>
+                            <Text style={styles.value}> {costoSinValor} USD </Text>
+                        </View>
                     </View>
                 </View>
 
