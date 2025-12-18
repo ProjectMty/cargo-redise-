@@ -144,7 +144,6 @@ export default function PDF({
 
     costoIVA,
     unidades,
-    costoSinIva,
     constoConIva,
     precioPorPeso,
     precioPorExcesoPeso,
