@@ -10,7 +10,7 @@ export default function Contacto() {
     const [nombre, SetNombre] = useState("");
     const [telefono, SetTelefono] = useState("");
     const [correo, SetCorreo] = useState("");
-   
+
     const [largo, setLargo] = useState<number | "">("");
     const [ancho, setAncho] = useState<number | "">("");
     const [alto, setAlto] = useState<number | "">("");

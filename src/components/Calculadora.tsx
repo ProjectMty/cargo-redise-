@@ -162,7 +162,6 @@ export default function Calculadora() {
         pesoMaxLb = pesoMaxKg * 2.20462
         pesoMaxLb = Math.round((pesoMaxLb + Number.EPSILON) * 100) / 100;
         setVoluenLb(pesoMaxLb);
-        console.log(volumenLb);
     }, [largo, ancho, alto, opcion, convertirInToCm, volumenLb]);
 
     // #endregion
@@ -595,7 +594,7 @@ export default function Calculadora() {
 
         precioSinIva = Math.round((precioSinIva + Number.EPSILON) * 100) / 100;
         precioAmostrar = Math.round((precioAmostrar + Number.EPSILON) * 100) / 100;
-        setPrecioSinIVA(precioSinIva)
+        setPrecioSinIVA(precioSinIva);
         setPrecioMostrar(precioAmostrar);
 
         // agregar iva si son mas de 20 articulos
@@ -855,6 +854,8 @@ export default function Calculadora() {
                     cantidadSeleccion={cantidadSeleccion}
                     direccionRecibida={direccionRecibida}
                     entrega={entrega}
+                    costoSinValor={costoSinValor}
+                    precioMostrar={precioMostrar}
                 />
             ).toBlob();
 
@@ -1203,7 +1204,7 @@ export default function Calculadora() {
                         <div className="contenedor-desgloce-precios">
                             <p className="text-center">Honorarios: <span className="font-bold"> {precioMostrar}</span> USD</p>
                             <p className="text-center"> IVA: <span className="font-bold">{precioIvaMostrar}</span> USD</p>
-                            <p className={exceso ? "text-center text-red-500": "text-center"}>Sobrepeso: <span className="font-bold">{precioPorExcesoPeso}</span> USD</p>
+                            <p className={exceso ? "text-center text-red-500" : "text-center"}>Sobrepeso: <span className="font-bold">{precioPorExcesoPeso}</span> USD</p>
                         </div>
 
 
